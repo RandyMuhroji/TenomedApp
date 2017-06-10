@@ -8,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Larashop Admin Login</title>
-    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
+    <link rel="shortcut icon" type="image/png" href="{{asset('tenomed/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
-    <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{asset('admin/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{asset('admin/css/nprogress.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/nprogress.css')}}" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="{{asset('admin/css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/animate.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{asset('admin/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/custom.min.css')}}" rel="stylesheet">
 </head>
 
 <body class="login">
@@ -56,7 +56,7 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Larashop Admin Panel</h1>
+                                <h1><i class="fa fa-paw"></i> Tenomed Admin Panel</h1>
                                 <p>©2017 All Rights Reserved. Brough to you by <a href="https://tutorials.kode-blog.com" target="_blank">Kode Blog Tutorials</a></p>
                             </div>
                         </div>
