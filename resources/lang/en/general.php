@@ -21,7 +21,7 @@ return [
         'lost_your_password'    => 'Lost your password?',
     ],
         'logout' => [
-        'logout' => 'Cerrar sesión',
+        'logout' => 'Logout',
     ],
     'passwords' => [
         'title'                 => 'Reset Password',

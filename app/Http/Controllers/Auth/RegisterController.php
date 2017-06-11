@@ -2,7 +2,8 @@
 
 namespace Tenomed\Http\Controllers\Auth;
 
-use Tenomed\User;
+use Tenomed\Models\User;
+use Tenomed\Models\Role;
 use Validator;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,10 +63,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+        $role = Role::find($data['role_id']);
+        $user->attachRole($role);
+
+        return $user;
     }
 }

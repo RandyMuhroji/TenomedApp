@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Tenomed User Login</title>
+    <title>Tenomed User Register</title>
     <link rel="shortcut icon" type="image/png" href="{{asset('tenomed/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
@@ -28,25 +28,40 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form role="form" method="post" action="{{ route('login') }}">
-                        <h1>@lang('general.login.title')</h1>
+                    <form role="form" method="post" action="{{ route('register') }}">
+                        <h1>Register</h1>
                         {{ csrf_field() }}
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            @if ($errors->has('name'))
+                            <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
+                            @endif
+                            <input type="text" class="form-control" id="name" name="name" placeholder="@lang('users.name')" value="{{ Request::old('name') ?: '' }}" required autofocus />
+                        </div>
+                        
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             @if ($errors->has('email'))
                             <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                             @endif
-                            <input type="email" class="form-control" id="email" name="email" placeholder="@lang('general.login.email')" required autofocus />
+                            <input type="text" class="form-control" id="email" name="email" placeholder="@lang('users.email')" value="{{ Request::old('email') ?: '' }}" required/>
                         </div>
+                        
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             @if ($errors->has('password'))
                             <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                             @endif
-                            <input type="password" class="form-control" id="password" name="password" placeholder="@lang('general.login.password')" required/>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="@lang('users.password')" required/>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            @if ($errors->has('password_confirmation'))
+                            <span class="help-block"><strong>{{ $errors->first('password_confirmation') }}</strong></span>
+                            @endif
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="@lang('users.confirm_password')" required/>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default submit">@lang('general.login.login')</button>
-                            <a class="reset_pass" href="{{route('register')}}">Register</a>
-                            <a class="reset_pass" href="{{route('password.reset')}}">@lang('general.login.lost_your_password')</a>
+                            <input type="hidden" name="role_id" value="3">
+                            <button type="submit" class="btn btn-default submit">Register</button>
+                            <a class="reset_pass" href="{{route('login')}}">@lang('general.login.login')</a>
                         </div>
 
                         <div class="clearfix"></div>

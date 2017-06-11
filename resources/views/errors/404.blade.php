@@ -10,14 +10,14 @@
     <title>Requested resource not found</title>
 
     <!-- Bootstrap -->
-    <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{asset('admin/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{asset('admin/css/nprogress.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/nprogress.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{asset('admin/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{asset('tenomed/css/custom.min.css')}}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -52,15 +52,15 @@
     </div>
 
     <!-- jQuery -->
-    <script src="{{asset('admin/js/jquery.min.js')}}"></script>
+    <script src="{{asset('tenomed/js/jquery.min.js')}}"></script>
     <!-- Bootstrap -->
-    <script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('tenomed/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
-    <script src="{{asset('admin/js/fastclick.js')}}"></script>
+    <script src="{{asset('tenomed/js/fastclick.js')}}"></script>
     <!-- NProgress -->
-    <script src="{{asset('admin/js/nprogress.js')}}"></script>
+    <script src="{{asset('tenomed/js/nprogress.js')}}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('admin/js/custom.min.js')}}"></script>
+    <script src="{{asset('tenomed/js/custom.min.js')}}"></script>
   </body>
 </html>

@@ -18,6 +18,7 @@
                                 <th>@lang('users.name')</th>
                                 <th>@lang('users.email')</th>
                                 <th>@lang('users.roles')</th>
+                                <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                                 <th>@lang('users.name')</th>
                                 <th>@lang('users.email')</th>
                                 <th>@lang('users.roles')</th>
+                                <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
@@ -39,6 +41,13 @@
                                 @foreach($row->roles as $r)
                                     <button title="{{$r->description}}" type="button" class="btn btn-success btn-xs">{{$r->display_name}}</button>
                                 @endforeach
+                                </td>
+                                <td>
+                                @if($row->status == 1)
+                                     <button title="{{$r->description}}" type="button" class="btn btn-primary btn-xs">Activated</button>
+                                @else
+                                     <button title="{{$r->description}}" type="button" class="btn btn-warning btn-xs">Suspended</button>
+                                @endif
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
