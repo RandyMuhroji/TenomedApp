@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Larashop Admin Panel</title>
+        <title>Tenomed Home</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -67,11 +67,20 @@
     <body>
         <div class="flex-center position-ref full-height">
             @if (Auth::check())
-                @permission(('admin'))
                 <div class="top-right links">
+                @permission(('admin'))
                     <a href="{{ route('admin') }}">Admin</a>
-                </div>
                 @endpermission
+                <a href="{{route('logout')}}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+                </div>
             @else
                 <div class="top-right links">
                     <a href="{{ route('login') }}">Login</a>
@@ -80,11 +89,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Larashop Admin Panel
-                </div>
-
-                <div class="links">
-                    <a href="https://tutorials.kode-blog.com/laravel-5-admin-panel" target="_blank">Read Tutorial Series</a>
+                    Tenomed
                 </div>
             </div>
         </div>

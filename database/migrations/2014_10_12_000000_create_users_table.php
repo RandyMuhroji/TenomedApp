@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('bio')->nullable();
             $table->string('contact')->nullable();
             $table->string('desc')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

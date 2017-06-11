@@ -80,7 +80,7 @@
                                 @endpermission
                                 <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">@lang('general.nav.brands_list')</a></li>
+                                        <li><a href="#">Add Admin</a></li>
                                         <li><a href="#">@lang('general.nav.categories_list')</a></li>
                                         <li><a href="#">@lang('general.nav.products_list')</a></li>
                                     </ul>
@@ -135,17 +135,15 @@
                                         {{ csrf_field() }}
                                     </form>
 
-                                </li>
+                                    </li>
 
-                            </ul>
-                        </li>
-
-
-                    </ul>
-                </nav>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
-        <!-- /top navigation -->
+            <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
