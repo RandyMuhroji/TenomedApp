@@ -4,7 +4,7 @@ namespace Tenomed\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cafe extends Model
+class Review extends Model
 {
-    protected $table = 'cafes';
+   protected $table = 'reviews';
 }

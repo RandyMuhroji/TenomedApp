@@ -36,6 +36,16 @@ Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin']
         'as' => 'orders.index',
         ]);
 });
+
+Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],function(){
+    Route::resource('profile', 'ProfileController');
+    Route::resource('notification', 'NotaficationController');
+    Route::resource('bookmarks', 'BookmarksController');
+    Route::resource('review', 'ReviewController');
+    Route::resource('setting', 'SettingController');
+});
+
+
 //Auth::routes();
 //Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -54,4 +64,8 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::get('/home', 'HomeController@index');
-
+Route::get('/detail/{id}', 'cafes@detail');
+Route::get('/bookmarks/{id}', 'cafes@bookmarks');
+Route::get('/cafeList', 'cafes@lists');
+Route::post('/sendReview', 'cafes@sendReview');
+Route::post('/cari', 'cafes@cari');
