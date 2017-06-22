@@ -65,7 +65,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/detail/{id}', 'cafes@detail');
-Route::get('/bookmarks/{id}', 'cafes@bookmarks');
+Route::get('/bookmarks', 'cafes@bookmarks');
 Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
-Route::post('/cari', 'cafes@cari');
+Route::get('/cari', 'cafes@cari');

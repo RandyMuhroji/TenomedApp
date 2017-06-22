@@ -170,8 +170,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
-                        <form method="post" action="/cari">
-                        {{ csrf_field() }}
+                        <form method="get" action="/cari">
+                       <!--  {{ csrf_field() }} -->
                             <h2>Start Searching</h2>
 
                             <div class="hero-image-keyword form-group">
@@ -180,7 +180,7 @@
 
                             <div class="hero-image-location form-group">
                                 <select class="form-control" title="Location" name="location" id="location">
-                                    <option>Medan Kota</option>
+                                    <option selected="">Medan Kota</option>
                                     <option>Medan Tuntungan</option>
                                     <option>Medan Timur</option>
                                     <option>Medan Tembung</option>
@@ -199,18 +199,18 @@
 
                             <div class="hero-image-category form-group">
                                 <select class="form-control" title="Category" id="category" name="kategory">
-                                    <option value="">Coffe</option>
+                                    <option value="" selected="">Coffe</option>
                                     <option value="">Dessert And Bake</option>
                                     <option value="">dinner</option>
                                     <option value="">lunch</option>
                                     <option value="">Drink</option>
                                 </select>
-                            </div><!-- /.form-group -->
+                            </div><!-- /.form-group --><!-- 
             <input type="hidden" name="_method" value="POST">
-            <input type="hidden" name="_token" value="{{ Session::token() }}">
+            <input type="hidden" name="_token" value="{{ Session::token() }}"> -->
 
                             <div class="hero-image-price form-group">
-                                <input type="text" class="form-control" placeholder="Min. Price" name="price">
+                                <input type="text" class="form-control" placeholder="Min. Price" name="price" value="0">
                             </div><!-- /.form-group -->
 
                             <button type="submit" class="btn btn-primary btn-block">Search</button>

@@ -238,15 +238,20 @@
                 </div><!-- /.card-row-image -->
 
                 <div class="card-row-body">
-                    <h2 class="card-row-title"><a href="detail/{{ $datas->id}}">{{ $datas->name}}</a></h2>
-                    
+                @if(Auth::check())
+                    <h2 class="card-row-title"><a href="detail/{{ $datas->id}}?id={{Auth::user()->id}}">{{ $datas->name}}</a></h2>
+                @else
+                <h2 class="card-row-title"><a href="detail/{{ $datas->id}}">{{ $datas->name}}</a></h2>
+
+                @endif
+
                     <div class="card-row-content"><p>{{ substr($datas->desc,1, 100) }}...</p></div><!-- /.card-row-content -->
                 </div><!-- /.card-row-body -->
 
                 <div class="card-row-properties">
                     <dl>
                         
-                            <dd>Seat</dd><dt>{{ $datas->seat}}</dt>
+                            <dd>Seat</dd><dt>{{ $datas->seat}} Persons</dt>
                         
                             <dd>Rating</dd><dt><div class="detail-overview-rating">
                 <i class="fa fa-star" style="background-color: gold;"></i> <strong>{{ round($rates->rank / $rates->jumlah,2)}} / 5 </strong>
@@ -266,16 +271,9 @@
 </div><!-- /.cards-row -->
 <br>
 @endforeach
-<div class="pager">
-    <ul>
-        <li><a href="#">Prev</a></li>
-        <li><a href="#">5</a></li>
-        <li class="active"><a>6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-</div><!-- /.pagination -->
-
+{{ $data->links() }}
+<br>
+<br>
 
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->

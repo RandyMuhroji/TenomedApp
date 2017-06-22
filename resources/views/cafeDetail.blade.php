@@ -29,7 +29,12 @@
 
                             @permission(('user'))
 
-                           <li><input type="hidden" name="idUser" value="{{Auth::user()->id}}">
+                           <li><input type="hidden" name="idUser" id="idUser" value="{{Auth::user()->id}}">
+                           <input type="hidden" name="status" id="status" value="">
+                           @if($bookmarks != "")
+                           <input type="hidden" name="bokk" id="bokk" value="{{$bookmarks->status}}">
+                           @endif
+                           
                                 <a href="#">
                                 @if(Auth::user()->avatar=="")
                                 <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
@@ -169,6 +174,7 @@
             </h1>
             <div class="detail-banner-address" style="color: white;">
                 <i class="fa fa-map-o"></i> {{ $detail->address }}
+                <input type="hidden" name="kafe" id="kafe" value="{{ $detail->id }}">
             </div><!-- /.detail-banner-address -->
             		<div class="detail-banner-rating">
                 <i class="fa fa-star"></i>
@@ -177,14 +183,22 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-half-o"></i>
             </div><!-- /.detail-banner-rating -->
-
-            <div class="detail-banner-btn bookmark" id="bookmarks">
-                <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
-            </div><!-- /.detail-claim -->
-
-            <div class="detail-banner-btn heart">
-                <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
-            </div><!-- /.detail-claim -->
+                 @if(Auth::check())
+                    <div class="detail-banner-btn bookmark {{ $test }}" id="bookmarks">
+                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
+                    </div><!-- /.detail-claim -->
+                    <div class="detail-banner-btn heart">
+                        <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
+                    </div><!-- /.detail-claim -->
+                @else
+                    <div class="detail-banner-btn bookmark" id="bookmarks" onclick="window.open('/login');">
+                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
+                    </div><!-- /.detail-claim -->
+                    <div class="detail-banner-btn heart" onclick="window.open('/login');">
+                       <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
+                    </div><!-- /.detail-claim -->
+                @endif
+            
                
             </div><!-- /.container -->
         </div><!-- /.hero-image-content -->
@@ -423,15 +437,15 @@
 
                     <div class="rating-title">Rate This Cafe</div>
 
-                    <input value="1" name="rate" id="rating-food-1" type="radio">
+                    <input value="1" name="rate" id="rating-food-1" type="radio" required="">
                     <label for="rating-food-1"></label>
-                    <input value="2" name="rate" id="rating-food-2" type="radio">
+                    <input value="2" name="rate" id="rating-food-2" type="radio" required="">
                     <label for="rating-food-2"></label>
-                    <input value="3" name="rate" id="rating-food-3" type="radio">
+                    <input value="3" name="rate" id="rating-food-3" type="radio" required="">
                     <label for="rating-food-3"></label>
-                    <input value="4" name="rate" id="rating-food-4" type="radio">
+                    <input value="4" name="rate" id="rating-food-4" type="radio" required="">
                     <label for="rating-food-4"></label>
-                    <input value="5" name="rate" id="rating-food-5" type="radio">
+                    <input value="5" name="rate" id="rating-food-5" type="radio" required="">
                     <label for="rating-food-5"></label>
 
                 </div><!-- /.col-sm-3 -->
@@ -444,7 +458,7 @@
             <div class="row">
                 <div class="form-group col-sm-12">
                     <label for="">Review Description</label>
-                    <textarea class="form-control" rows="5" id="desc" name="desc"></textarea><div class="textarea-resize"></div>
+                    <textarea class="form-control" rows="5" id="desc" name="desc" required=""></textarea><div class="textarea-resize"></div>
                 </div><!-- /.col-sm-6 -->
 
                 <div class="col-sm-8">
@@ -465,6 +479,17 @@
 
 @endif
 
+    
+
+</div>
+                                </div>
+                            </div>
+
+            <!-- Nav tabs -->
+            
+        </div>
+
+        <div id="loadReview">
 @foreach($review as $reviews)
     <div class="review">
         <div class="review-image">
@@ -506,17 +531,9 @@
     </div><!-- /.review -->
 
     @endforeach
-    
+    </div>
+    {{ $review->links() }}
 
-</div>
-                                </div>
-                            </div>
-
-            <!-- Nav tabs -->
-            
-        </div>
-
-        
 
         
         
