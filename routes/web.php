@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin']
 
 Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],function(){
     Route::resource('profile', 'ProfileController');
-    Route::resource('notification', 'NotaficationController');
+    Route::resource('notification', 'NotificationController');
     Route::resource('bookmarks', 'BookmarksController');
     Route::resource('review', 'ReviewController');
     Route::resource('setting', 'SettingController');

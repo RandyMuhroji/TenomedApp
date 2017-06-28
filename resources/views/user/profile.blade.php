@@ -40,11 +40,11 @@
                                 @endif
 
                                 <ul class="sub-menu">
-                                    <li><a href="user/profile">Profile</a></li>
-                                    <li><a href="user/profile">Notifications</a></li>
-                                    <li><a href="user/profile">Bookmarks</a></li>
-                                    <li><a href="user/profile">Review</a></li>
-                                    <li><a href="user/profile">Setting</a></li>
+                                    <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                    <li><a href="{{url('user/notification')}}">Notifications</a></li>
+                                    <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
+                                    <li><a href="{{url('user/review')}}">Review</a></li>
+                                    <li><a href="{{url('user/setting')}}">Setting</a></li>
                                     <li>
                                         <a href="{{route('logout')}}"
                                         onclick="event.preventDefault();
@@ -110,10 +110,13 @@
                             <div class="widget">
 
     <ul class="menu-advanced">
-        <li><a href="listing-submit.html"><i class="fa fa-pencil"></i> Submit Listing</a></li>
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Edit Profile</a></li>
-        <li><a href="#"><i class="fa fa-key"></i> Password</a></li>
-        <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+        <li class="active"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+        <li ><a href="{{url('user/notification')}}"><i class="fa fa-envelope-o"></i> Notification</a></li>
+        <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
+        <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
+        <li><a href="{{url('user/setting')}}"><i class="fa fa-pencil"></i> Setting</a></li>
+        <li><a href="{{url('logout')}}"  onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a></li>
     </ul>
 </div><!-- /.widget -->
 
@@ -130,7 +133,10 @@
     <h3 class="page-title">
         Contact Information
 
-        <a href="#" class="btn btn-primary btn-xs pull-right">Save</a>
+
+
+        <a href="#" class="btn btn-primary btn-xs pull-right" >Change Password</a>
+        <a href="#" class="btn btn-primary btn-xs pull-right" style="margin-right:3px;">Save</a>
     </h3>
 
     <div class="row">
@@ -156,55 +162,7 @@
     </div><!-- /.row -->
 </div>
 
-<div class="background-white p20 mb30">
-    <h3 class="page-title">
-        Social Connections
 
-        <a href="#" class="btn btn-primary btn-xs pull-right">Save</a>
-    </h3>
-
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Facebook</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="http://facebook.com/">
-            </div><!-- /.col-* -->
-        </div><!-- /.form-group -->
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Twitter</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="http://twitter.com/">
-            </div><!-- /.col-* -->
-        </div><!-- /.form-group -->
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Linkedin</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="http://linkedin.com/">
-            </div><!-- /.col-* -->
-        </div><!-- /.form-group -->
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Dribbble</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="http://dribbble.com/">
-            </div><!-- /.col-* -->
-        </div><!-- /.form-group -->
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Instagram</label>
-
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="http://instagram.com/">
-            </div><!-- /.col-* -->
-        </div><!-- /.form-group -->
-    </div><!-- /.form-inline -->
-</div><!-- /.background-white -->
 
 <div class="background-white p20 mb30">
     <h3 class="page-title">

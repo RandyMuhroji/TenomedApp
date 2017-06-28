@@ -93,6 +93,25 @@
    //  }
 
    // });
+
+
+$(function(){
+     
+    $('#tmbPass').click(function(){
+      document.getElementById("editProfile").style.display='none';
+       document.getElementById("editPassword").style.display='inherit';
+
+  });
+});
+$(function(){
+     
+    $('#tmbProfile').click(function(){
+      document.getElementById("editProfile").style.display='inherit';
+       document.getElementById("editPassword").style.display='none';
+
+  });
+});
+
   
   $(function(){
      
