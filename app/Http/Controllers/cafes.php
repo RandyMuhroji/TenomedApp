@@ -28,7 +28,7 @@ class cafes extends Controller
              DB::table('bookmarks')->insert(
                 ['idUser' => $id,'idCafe' => $kafe,'status' => $status]
             );
-            
+
 	}
 
 	public function detail($id)
@@ -67,7 +67,7 @@ class cafes extends Controller
                 }
                 if ($bookmarks!="") {
                     if($bookmarks->status==0){$test="";}
-                    
+
                 }
         return view('cafeDetail')->with(['detail'=>$detail, 'review'=>$Reviews, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
     }
@@ -102,14 +102,14 @@ class cafes extends Controller
             ->where('cafes.name','like','%'.$_GET['kata'].'%')
             ->orWhere('menu_cafe.name', 'like','%'. $_GET['kata'].'%')
             ->orWhere('address', 'like','%'. $_GET['location'].'%')
-            ->orWhere('price', '>', $_GET['price'])
+            //->orWhere('price', '>', $_GET['price'])
             ->orderBy('id', 'desc')
             ->distinct()->Paginate(5);
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
                 ->select('idCafe', DB::raw('SUM(rate) as rank'), DB::raw('count(idCafe) as jumlah'))
                 ->groupBy('idCafe')
-                ->get()->first();    
+                ->get()->first();
         if($data=="")
         {
             $data=="";
