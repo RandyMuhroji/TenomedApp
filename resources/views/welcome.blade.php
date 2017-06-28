@@ -1,228 +1,253 @@
 @extends('layouts.intro')
 
 @section('content')
+    <style>
+      @media (max-width: 767px) {
+        .hero-image-content {
+            display: block !important;
+        }
+      }
+
+      .hero-image-form-wrapper form [class^="hero-image-"]{
+        margin-bottom: 10px;
+      }
+
+      .hero-image-form-wrapper form {
+        padding-bottom: 10px;
+      }
+
+      .hero-image-inner {
+        height: 345px;
+        margin-top:59px;
+      }
+    </style>
     <div class="page-wrapper">
-    
-    <header class="header header-transparent">
-    <div class="header-wrapper">
-        <div class="container">
-            <div class="header-inner">
-                <div class="header-logo">
-                    <a href="index-2.html">
-                        <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
-                        <span>Superlist</span>
-                    </a>
-                </div><!-- /.header-logo -->
 
-                <div class="header-content">
-                    <div class="header-bottom">
-                        <!-- /.header-action -->
+    <header class="header">
+        <div class="header-wrapper">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="header-logo">
+                        <a href="index-2.html">
+                            <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
+                            <span>Tenomed</span>
+                        </a>
+                    </div><!-- /.header-logo -->
 
-                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
+                    <div class="header-content">
+                        <div class="header-bottom">
+                            <!-- /.header-action -->
 
-                            <li class="active" >
-                                <a href="/">Home </a>
+                            <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
-                            </li>
-                        @if(Auth::check())
+                                <li class="active" >
+                                    <a href="/">Home </a>
 
-                            @permission(('user'))
+                                </li>
+                            @if(Auth::check())
 
-                           <li>
-                                <a href="#">
-                                @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @else
-                                <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @endif
+                                @permission(('user'))
 
-                                <ul class="sub-menu">
-                                    <li><a href="user/profile">Profile</a></li>
-                                    <li><a href="user/profile">Notifications</a></li>
-                                    <li><a href="user/profile">Bookmarks</a></li>
-                                    <li><a href="user/profile">Review</a></li>
-                                    <li><a href="user/profile">Setting</a></li>
-                                    <li>
-                                        <a href="{{route('logout')}}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
-                                    </a>
+                               <li>
+                                    <a href="#">
+                                    @if(Auth::user()->avatar=="")
+                                      <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                    @else
+                                      <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                    @endif
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                    <ul class="sub-menu">
+                                        <li><a href="user/profile">Profile</a></li>
+                                        <li><a href="user/profile">Notifications</a></li>
+                                        <li><a href="user/profile">Bookmarks</a></li>
+                                        <li><a href="user/profile">Review</a></li>
+                                        <li><a href="user/profile">Setting</a></li>
+                                        <li>
+                                            <a href="{{route('logout')}}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
+                                        </a>
 
-                                    </li>
-                                </ul>
-                            </li>
-                            @endpermission
-                            
-                        @else
-                            <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
 
-                            </li>
-                            <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endpermission
 
-                            </li>
-                        @endif
+                            @else
+                                <li class="active" >
+                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
 
-                        </ul>
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
 
-                        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                                </li>
+                            @endif
 
-                    </div><!-- /.header-bottom -->
-                </div><!-- /.header-content -->
-            </div><!-- /.header-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.header-wrapper -->
-</header><!-- /.header -->
+                            </ul>
 
- <div class="modal fade login" id="loginModal">
-              <div class="modal-dialog login animated">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Login with</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="box">
-                             <div class="content">
-                                <div class="social">
-                                    <a class="circle github" href="#">
-                                        <i class="fa fa-github fa-fw"></i>
-                                    </a>
-                                    <a id="google_login" class="circle google" href="#">
-                                        <i class="fa fa-google-plus fa-fw"></i>
-                                    </a>
-                                    <a id="facebook_login" class="circle facebook" href="#">
-                                        <i class="fa fa-facebook fa-fw"></i>
-                                    </a>
-                                </div>
-                                <div class="division">
-                                    <div class="line l"></div>
-                                      <span>or</span>
-                                    <div class="line r"></div>
-                                </div>
-                                <div class="error"></div>
-                                <div class="form loginBox">
-                                    <form method="" action="#" accept-charset="UTF-8">
-                                    <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
-                                    </form>
-                                </div>
-                             </div>
-                        </div>
-                        <div class="box">
-                            <div class="content registerBox" style="display:none;">
-                             <div class="form">
-                                <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
-                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-                                <input class="btn btn-default btn-register" type="button" value="Create account" name="commit">
-                                </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>Looking to
-                                 <a href="javascript: showRegisterForm();">create an account</a>
-                            ?</span>
-                        </div>
-                        <div class="forgot register-footer" style="display:none">
-                             <span>Already have an account?</span>
-                             <a href="javascript: showLoginForm();">Login</a>
-                        </div>
-                    </div>
+                            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div><!-- /.header-bottom -->
+                    </div><!-- /.header-content -->
+                </div><!-- /.header-inner -->
+            </div><!-- /.container -->
+        </div><!-- /.header-wrapper -->
+    </header><!-- /.header -->
+
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Login with</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="box">
+                       <div class="content">
+                          <div class="social">
+                              <a class="circle github" href="#">
+                                  <i class="fa fa-github fa-fw"></i>
+                              </a>
+                              <a id="google_login" class="circle google" href="#">
+                                  <i class="fa fa-google-plus fa-fw"></i>
+                              </a>
+                              <a id="facebook_login" class="circle facebook" href="#">
+                                  <i class="fa fa-facebook fa-fw"></i>
+                              </a>
+                          </div>
+                          <div class="division">
+                              <div class="line l"></div>
+                                <span>or</span>
+                              <div class="line r"></div>
+                          </div>
+                          <div class="error"></div>
+                          <div class="form loginBox">
+                              <form method="" action="#" accept-charset="UTF-8">
+                              <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                              <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                              <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                              </form>
+                          </div>
+                       </div>
+                  </div>
+                  <div class="box">
+                      <div class="content registerBox" style="display:none;">
+                       <div class="form">
+                          <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
+                          <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                          <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                          <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                          <input class="btn btn-default btn-register" type="button" value="Create account" name="commit">
+                          </form>
+                          </div>
+                      </div>
                   </div>
               </div>
-          </div>
-
+              <div class="modal-footer">
+                  <div class="forgot login-footer">
+                      <span>Looking to
+                           <a href="javascript: showRegisterForm();">create an account</a>
+                      ?</span>
+                  </div>
+                  <div class="forgot register-footer" style="display:none">
+                       <span>Already have an account?</span>
+                       <a href="javascript: showLoginForm();">Login</a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
 
     <div class="main">
         <div class="main-inner">
             <div class="content">
                 <div class="mt-150">
-    <div class="hero-image">
-    <div class="hero-image-inner" style="background-image: url('{{ asset('') }}assets/img/pizza3.jpg');">
-        <div class="hero-image-content">
-            <div class="container">
-                <h1>Tenomed</h1>
+                    <div class="hero-image">
+                        <div class="hero-image-inner" style="background-image: url('{{ asset('') }}assets/img/pizza3.jpg');">
+                            <!-- <div class="hero-image-content">
+                                <div class="container">
+                                    <h1>Tenomed</h1>
 
-                <p>Find your favorite cafe and resto. Invite your friend and do an awesome hangout.</p>
+                                    <p>Find your favorite cafe and resto. Invite your friend and do an awesome hangout.</p>
 
-               
-            </div><!-- /.container -->
-        </div><!-- /.hero-image-content -->
+                                </div>--><!-- /.container -->
+                            <!--</div>--><!-- /.hero-image-content -->
 
-        <div class="hero-image-form-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-8 col-lg-4 col-lg-offset-7">
-                        <form method="get" action="/cari">
-                       <!--  {{ csrf_field() }} -->
-                            <h2>Start Searching</h2>
+                            <div class="hero-image-content">
+                              <div class=" hero-image-form-wrapper" style="position:relative">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-12">
+                                            <form method="get" action="/cari">
+                                           <!--  {{ csrf_field() }} -->
 
-                            <div class="hero-image-keyword form-group">
-                                <input type="text" class="form-control" placeholder="Keyword" name="kata">
-                            </div><!-- /.form-group -->
+                                              <div class="form-group row">
 
-                            <div class="hero-image-location form-group">
-                                <select class="form-control" title="Location" name="location" id="location">
-                                    <option selected="">Medan Kota</option>
-                                    <option>Medan Tuntungan</option>
-                                    <option>Medan Timur</option>
-                                    <option>Medan Tembung</option>
-                                    <option>Medan Sunggal</option>
-                                    <option>Medan Selayang</option>
-                                    <option>Medan Polonia</option>
-                                    <option>Medan Petisah</option>
-                                    <option>Medan Perjuangan</option>
-                                    <option>Medan Marelan</option>
-                                    <option>Medan Maimun</option>
-                                    <option>Medan Labuhan</option>
-                                    <option>Medan Petisah</option>
-                                    <option>Medan Perjuangan</option>
-                                </select>
-                            </div><!-- /.form-group -->
+                                                 <div class="hero-image-location col-xs-12 col-sm-4">
+                                                    <select class="form-control" title="Location" name="location" id="location">
+                                                        <option selected="">Medan Kota</option>
+                                                        <option>Medan Tuntungan</option>
+                                                        <option>Medan Timur</option>
+                                                        <option>Medan Tembung</option>
+                                                        <option>Medan Sunggal</option>
+                                                        <option>Medan Selayang</option>
+                                                        <option>Medan Polonia</option>
+                                                        <option>Medan Petisah</option>
+                                                        <option>Medan Perjuangan</option>
+                                                        <option>Medan Marelan</option>
+                                                        <option>Medan Maimun</option>
+                                                        <option>Medan Labuhan</option>
+                                                        <option>Medan Petisah</option>
+                                                        <option>Medan Perjuangan</option>
+                                                    </select>
+                                                 </div>
 
-                            <div class="hero-image-category form-group">
-                                <select class="form-control" title="Category" id="category" name="kategory">
-                                    <option value="" selected="">Coffe</option>
-                                    <option value="">Dessert And Bake</option>
-                                    <option value="">dinner</option>
-                                    <option value="">lunch</option>
-                                    <option value="">Drink</option>
-                                </select>
-                            </div><!-- /.form-group --><!-- 
-            <input type="hidden" name="_method" value="POST">
-            <input type="hidden" name="_token" value="{{ Session::token() }}"> -->
+                                                  <div class="hero-image-keyword col-xs-12 col-sm-6">
+                                                      <input type="text" class="form-control" placeholder="Keyword" name="kata">
+                                                  </div>
 
-                            <div class="hero-image-price form-group">
-                                <input type="text" class="form-control" placeholder="Min. Price" name="price" value="0">
-                            </div><!-- /.form-group -->
+                                                  <div class=" col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-0">
+                                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                                  </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Search</button>
-                        </form>
-                    </div><!-- /.col-* -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.hero-image-form-wrapper -->
-    </div><!-- /.hero-image-inner -->
-</div><!-- /.hero-image -->
+                                              </div><!-- /.form-group -->
 
-</div>
+                                                <!-- <div class="hero-image-category form-group">
+                                                    <select class="form-control" title="Category" id="category" name="kategory">
+                                                        <option value="" selected="">Coffe</option>
+                                                        <option value="">Dessert And Bake</option>
+                                                        <option value="">dinner</option>
+                                                        <option value="">lunch</option>
+                                                        <option value="">Drink</option>
+                                                    </select>
+                                                </div> --><!-- /.form-group --><!--
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ Session::token() }}"> -->
+
+                                                <!-- <div class="hero-image-price form-group">
+                                                    <input type="text" class="form-control" placeholder="Min. Price" name="price" value="0">
+                                                </div> --><!-- /.form-group -->
+
+                                            </form>
+                                        </div><!-- /.col-* -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.container -->
+                              </div>
+                            </div><!-- /.hero-image-form-wrapper -->
+                        </div><!-- /.hero-image-inner -->
+                    </div><!-- /.hero-image -->
+                </div>
 
 <div class="container">
     <div class="block background-white fullwidth pt0 pb0">
@@ -259,10 +284,10 @@
 
 <div class="cards-simple-wrapper">
     <div class="row">
-        
 
-        
-            
+
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-2.jpg">
@@ -285,12 +310,12 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Coffee</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-3.jpg">
@@ -313,14 +338,14 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Food</div>
-                        
+
                             <div class="card-simple-price">$12 / person</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-4.jpg">
@@ -343,12 +368,12 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Restaurant</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-5.jpg">
@@ -371,12 +396,12 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Vacation</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-6.jpg">
@@ -399,14 +424,14 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Restaurant</div>
-                        
+
                             <div class="card-simple-price">$28 / person</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-7.jpg">
@@ -429,12 +454,12 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Pub</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-8.jpg">
@@ -457,14 +482,14 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Shop</div>
-                        
+
                             <div class="card-simple-price">$3 / cup</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
-            
+
+
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-9.jpg">
@@ -487,22 +512,22 @@
                         </div><!-- /.card-simple-content -->
 
                         <div class="card-simple-label">Event</div>
-                        
+
                             <div class="card-simple-price">$13 / ticket</div>
-                        
+
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->
             </div><!-- /.col-* -->
-        
+
     </div><!-- /.row -->
 </div><!-- /.cards-simple-wrapper -->
-    
+
 
     <div class="block background-white fullwidth mt80">
         <div class="row">
             <div class="col-sm-6">
                 <div class="posts">
-    
+
 
     <div class="post">
         <div class="post-image">
@@ -518,7 +543,7 @@
         </div><!-- /.post-content -->
     </div><!-- /.post -->
 
-    
+
 
     <div class="post">
         <div class="post-image">
@@ -534,7 +559,7 @@
         </div><!-- /.post-content -->
     </div><!-- /.post -->
 
-    
+
 
     <div class="post">
         <div class="post-image">
