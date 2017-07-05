@@ -15,13 +15,20 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idUser');
-            $table->integer('idCafe');
+
+            $table->integer('user_id')->unsigned();
+            $table->integer('cafe_id')->unsigned();
+
             $table->integer('rate')->nullable();
             $table->string('comment')->nullable();
             $table->string('desc')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cafe_id')->references('id')->on('cafes');
+
         });
     }
 

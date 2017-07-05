@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "Tenomed",
+    "description": "Tempat Nongkrong Medan",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",

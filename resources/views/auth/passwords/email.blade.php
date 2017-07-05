@@ -7,20 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Larashop Admin Login</title>
-    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
+    <title>Tenomed Admin Login</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset('tenomed/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
-    <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{asset('admin/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{asset('admin/css/nprogress.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="{{asset('admin/css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{asset('admin/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="login">
@@ -45,7 +46,7 @@
                             @if ($errors->has('email'))
                             <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                             @endif
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email" required autofocus />
                         </div>
 
                         <div>
@@ -61,7 +62,7 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Larashop Admin Panel</h1>
+                                <h1><i class="fa fa-paw"></i> Tenomed Admin Panel</h1>
                                 <p>©2017 All Rights Reserved.</p>
                             </div>
                         </div>

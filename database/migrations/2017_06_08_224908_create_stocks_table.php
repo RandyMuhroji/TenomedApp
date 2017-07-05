@@ -15,10 +15,14 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('idMenuCafe');
+            $table->integer('menu_cafe_id')->unsigned();
             $table->integer('stock');
             $table->string('desc');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('menu_cafe_id')->references('id')->on('menu_cafe');
+
         });
     }
 

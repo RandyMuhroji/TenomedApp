@@ -15,11 +15,14 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idReservation');
+            $table->integer('reservation_id')->unsigned();
             $table->integer('status');
             $table->string('valid');
             $table->string('desc');
             $table->timestamps();
+            $table->softDeletes();
+            
+            $table->foreign('reservation_id')->references('id')->on('reservations');
         });
     }
 

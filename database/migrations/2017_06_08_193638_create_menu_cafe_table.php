@@ -15,15 +15,18 @@ class CreateMenuCafeTable extends Migration
     {
         Schema::create('menu_cafe', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idCafe');
+            $table->integer('cafe_id')->unsigned();
             $table->string('name');
             $table->string('price');
             $table->string('images')->nullable();
             $table->string('tag')->nullable();
             $table->string('category')->nullable();
             $table->integer('status')->nullable();
-            $table->integer('desc')->nullable();
+            $table->string('desc')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('cafe_id')->references('id')->on('cafes');
         });
     }
 

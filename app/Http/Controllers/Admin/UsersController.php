@@ -7,6 +7,7 @@ use Tenomed\Models\Role;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -31,7 +32,6 @@ class UsersController extends Controller
             'title' => 'Users Listing',
             'users' => $users,
         ];
-
         return view('admin.users.users_list')->with($params);
     }
 
@@ -122,6 +122,9 @@ class UsersController extends Controller
 
             $roles = Role::all();
 
+            if ($user->id != Auth::user()->id) {
+                return response()->view('errors.'.'403');
+            }
             $params = [
                 'title' => 'Edit User',
                 'user' => $user,

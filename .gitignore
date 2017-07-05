@@ -3,5 +3,6 @@
 /storage/debugbar
 /vendor
 /.idea
+/.env
 Homestead.json
 Homestead.yaml

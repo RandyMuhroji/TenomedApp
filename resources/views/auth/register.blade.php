@@ -10,17 +10,17 @@
     <title>Tenomed User Register</title>
     <link rel="shortcut icon" type="image/png" href="{{asset('tenomed/images/favicon.png')}}"/>
 
-    <!-- Bootstrap -->
-    <link href="{{asset('tenomed/css/bootstrap.min.css')}}" rel="stylesheet">
+   <!-- Bootstrap -->
+    <link href="{{asset('gantella/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{asset('tenomed/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{asset('tenomed/css/nprogress.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="{{asset('tenomed/css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{asset('tenomed/css/custom.min.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
 </head>
 
 <body class="login">

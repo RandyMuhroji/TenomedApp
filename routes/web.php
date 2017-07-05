@@ -24,17 +24,21 @@ Route::get('/', [
 
 Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin'],function(){
     Route::get('/',"DashboardController@index")->name('admin');
-    Route::resource('customers', 'CustomersController');
-    Route::resource('brands', 'BrandsController');
-    Route::resource('product-categories', 'ProductCategoriesController');
-    Route::resource('products', 'ProductsController');
     Route::resource('users', 'UsersController');
     Route::resource('cafes', 'CafesController');
+    Route::resource('sponsors', 'SponsorsController');
+    Route::resource('messages', 'MessageController');
+});
 
-    Route::get('orders',[
-        'uses' => 'OrdersController@index',
-        'as' => 'orders.index',
-        ]);
+Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'Owner'],function(){
+    Route::get('/',"DashboardController@index")->name('owner');
+    Route::resource('menus',"MenuController");
+    Route::resource('gallery',"GalleryController");
+    Route::resource('reviews',"ReviewController");
+    Route::resource('messages', 'MessageController');
+    Route::get('/settings',function(){
+        return view('owner.settings.settings_view');
+    });
 });
 
 Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],function(){
@@ -66,8 +70,16 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::post('user/user/update/{id}', 'user\SettingController@update');
 Route::get('/home', 'HomeController@index');
+
+
+Route::get('/basicemail','MailController@basic_email');
+Route::get('/htmlemail','MailController@html_email');
+Route::get('/attachmentemail','MailController@attachment_email');
+
+
 Route::get('/detail/{id}', 'cafes@detail');
 Route::get('/bookmarks', 'cafes@bookmarks');
 Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
 Route::get('/cari', 'cafes@cari');
+

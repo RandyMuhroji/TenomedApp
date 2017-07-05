@@ -1,3 +1,4 @@
+
 @extends('layouts.intro')
 
 @section('content')
@@ -1225,4 +1226,3 @@
 </footer><!-- /.footer -->
 
 </div><!-- /.page-wrapper -->
-@endsection

@@ -2,11 +2,18 @@
 
 namespace Tenomed\Http\Controllers\Admin;
 
+
+use Illuminate\Support\Facades\DB;
 use Tenomed\Models\User;
 use Tenomed\Models\Role;
+use Tenomed\Models\Cafe;
+use Tenomed\Models\RoleUser;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+use Mail;
+
 class CafesController extends Controller
 {
     /**
@@ -18,15 +25,17 @@ class CafesController extends Controller
     {
         $this->middleware('permission:admin');
     }
+
+
     public function index()
     {
-        $users = User::all();
+        $cafes = DB::select('select c.id, c.name as name, u.name as owner, c.address, c.status  from cafes c inner join users u on c.user_id = u.id');
+
 
         $params = [
             'title' => 'Cafes Listing',
-            'users' => $users,
+            'cafes' => $cafes,
         ];
-
         return view('admin.cafes.cafes_list')->with($params);
     }
 
@@ -37,11 +46,11 @@ class CafesController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $owners = DB::select('select * from role_user r inner join users u on r.user_id = u.id where role_id = 2');
 
         $params = [
             'title' => 'Create Cafe',
-            'roles' => $roles,
+            'users' => $owners,
         ];
         return view('admin.cafes.cafes_create')->with($params);
     }
@@ -54,9 +63,46 @@ class CafesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, [
+            'email' => 'required|unique:users',
+        ]);
 
+        $user = User::create([
+            'name' => $request->input('user_name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        $role = Role::find($request->input('role_id'));
+
+        $user->attachRole($role);
+
+        DB::table('cafes')->insert(
+            [
+                'user_id' => $user->id,
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'phone' => $request->input('phone'),
+                'lat' => $request->input('lat'),
+                'long' => $request->input('lng')
+            ]
+        );
+
+        $data = [
+                 'name'      => $request->input('user_name'),
+                 'password'  => $request->input('password'),
+                 'cafe_name' => $request->input('name'),
+                 'email' => $request->input('email')
+                ];
+        
+        Mail::send(['html' => 'mail.new_cafe'], $data, function($message){
+             $message->to($request->input('email'), $request->input('user_name'))->subject('can view HTML');
+             $message->from('tenomed@gmail.com','Tenomed');
+        });
+
+        return redirect()->route('cafes.index')->with('success', trans('general.form.flash.created_cafe',['name'  => $request->input('name'),
+                                              'email' => $request->input('email')]));
+    }
     /**
      * Display the specified resource.
      *
@@ -65,7 +111,24 @@ class CafesController extends Controller
      */
     public function show($id)
     {
-        //
+        try
+        {
+            $cafe = Cafe::findOrFail($id);
+
+            $params = [
+                'title' => 'Delete Cafe',
+                'cafe' => $cafe,
+            ];
+
+            return view('admin.cafes.cafes_delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -76,7 +139,27 @@ class CafesController extends Controller
      */
     public function edit($id)
     {
-        //
+        try
+        {
+            $cafe = Cafe::findOrFail($id);
+
+            $user = User::findOrFail($cafe->user_id);
+
+            $params = [
+                'title' => 'Edit Cafe',
+                'user' => $user,
+                'cafe' => $cafe,
+            ];
+
+            return view('admin.cafes.cafes_edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -88,7 +171,27 @@ class CafesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try
+        {
+            $cafe = Cafe::findOrFail($id);
+
+            $cafe->name  = $request->input('name');
+            $cafe->email = $request->input('email');
+            $cafe->phone = $request->input('phone');
+            $cafe->lat   = $request->input('lat');
+            $cafe->long  = $request->input('lng');
+
+            $cafe->save();
+
+            return redirect()->route('cafes.index')->with('success', trans('general.form.flash.updated',['name' => $cafe->name]));
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -99,6 +202,20 @@ class CafesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $cafe = Cafe::findOrFail($id);
+
+            $cafe->delete();
+
+            return redirect()->route('cafes.index')->with('success', trans('general.form.flash.deleted',['name' => $cafe->name]));
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }
