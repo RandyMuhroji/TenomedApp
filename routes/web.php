@@ -43,6 +43,7 @@ Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],f
     Route::resource('bookmarks', 'BookmarksController');
     Route::resource('review', 'ReviewController');
     Route::resource('setting', 'SettingController');
+
 });
 
 
@@ -63,6 +64,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
+Route::post('user/user/update/{id}', 'user\SettingController@update');
 Route::get('/home', 'HomeController@index');
 Route::get('/detail/{id}', 'cafes@detail');
 Route::get('/bookmarks', 'cafes@bookmarks');

@@ -126,7 +126,7 @@
                     <div class="col-sm-8 col-lg-9">
                         <div class="content">
                             <div class="page-title">
-    <h1>Your Profile</h1>
+    <h1>Edit Your Profile</h1>
 </div><!-- /.page-title -->
 
 <div class="background-white p20 mb30">
@@ -136,60 +136,90 @@
         <a href="#" class="btn btn-primary btn-xs pull-right" style="margin-right:3px;" id="tmbProfile">Profile Edit</a>
     </h3>
 <div id="editProfile">
-    <div class="row">
-        <div class="form-group col-sm-6">
-            <label>Name</label>
-            <input type="text" class="form-control" value="{{Auth::user()->name}}" name="name" id="name">
-        </div><!-- /.form-group -->
-
-        <div class="form-group col-sm-6">
-            <label>E-mail</label>
-            <input type="text" class="form-control" value="{{Auth::user()->email}}" name="email" id="email">
-        </div><!-- /.form-group -->
-
-        <div class="form-group col-sm-6">
-            <label>Phone</label>
-            <input type="text" class="form-control" value="{{Auth::user()->phone}}" name="phone" id="phone">
-        </div>
-        <div class="form-group col-sm-6">
-            <label>Address</label>
-            <input type="text" class="form-control" value="{{Auth::user()->address}}" name="address" id="address">
-        </div><!-- /.form-group -->
-    </div><!-- /.row -->
-
-
-    <textarea class="form-control" rows="7"  name="bio" id="bio">{{Auth::user()->bio}}</textarea>
-    <br>
-    
-    <div class="center">
-    <button type="submit" class="btn btn-primary btn-xl">Submit </button>
-</div>
-  </div>
-  <div id="editPassword" style="display: none;">
-  <div class="row " >
-          <div class="form-group col-sm-7">
-            <label>Old Password</label>
-            <input type="password" class="form-control"  name="password" id="password">
-        </div>
-        <div class="form-group col-sm-7">
-            <label>New Password</label>
-            <input type="password" class="form-control"  name="name" id="name">
-        </div>
-        <div class="form-group col-sm-7">
-            <label>Re-password</label>
-            <input type="password" class="form-control"  name="name" id="name">
-        </div>
-        </div>
-        <div class="center">
-    <button type="submit" class="btn btn-primary btn-xl">Submit </button>
-</div>
-  </div>
-</div>
 
 
 
+                            <div id="kv-avatar-errors-2" class="center-block" style="width:800px;display:none"></div>
+                            <form class="form form-vertical" action="user/update/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="kv-avatar center-block text-center" style="width:200px">
+
+                                            <label for="avatar-2">Avatar</label>
+                                            <input id="avatar-2" name="avatar" type="file" class="file-loading" value="{{Auth::user()->avatar}}" required>
+                                        </div>
+                                    </div>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                    <div class="col-sm-8">
+                                              <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="email">Email Address<span class="kv-reqd">*</span></label>
+                                            <input type="email" class="form-control" id="email" onchange="check_email(jQuery('#email').val());" name="email" value="{{Auth::user()->email}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="name">Name<span class="kv-reqd">*</span></label>
+                                            <input type="text" class="form-control" id="name" name="name" onchange="check_name();"  value="{{Auth::user()->name}}" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                          <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="form-control" id="address" name="address" value="{{Auth::user()->address}}" required>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <div class="form-group">
+                                            <label for="bio">Bio</label>
+                                             <textarea class="form-control" rows="7"  name="bio" id="bio">{{Auth::user()->bio}}</textarea>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <hr>
+                                        <div class="text-right"> 
+                                          <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+
+                            <div id="editPassword" style="display: none;">
+                              <div class="row " >
+                                      <div class="form-group col-sm-7">
+                                        <label>Old Password</label>
+                                        <input type="password" class="form-control" onchange="check_password(jQuery('#email').val());" name="password" id="password">
+                                    </div>
+                                    <div class="form-group col-sm-7">
+                                        <label>New Password</label>
+                                        <input type="password" class="form-control"  name="name" id="name">
+                                    </div>
+                                    <div class="form-group col-sm-7">
+                                        <label>Re-password</label>
+                                        <input type="password" class="form-control"  name="name" id="name">
+                                    </div>
+                                    <div class="center col-sm-7">
+                                        <button type="submit" class="btn btn-primary btn-xl">Submit </button>
+                                    </div>
+                              </div>
+                            </div>
+                            </div>
 
 
+                              
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->
                 </div><!-- /.row -->

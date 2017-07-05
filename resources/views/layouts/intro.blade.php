@@ -22,6 +22,7 @@
     <script src="{{ asset('') }}assets/js/jquery.min.js" type="text/javascript"></script>
     <script src="{{ asset('') }}assets/js/bootstrap.js" type="text/javascript"></script>
     <script src="{{ asset('') }}assets/js/login-register.js" type="text/javascript"></script>
+    <script src="{{ asset('') }}assets/js/bootbox.min.js" type="text/javascript"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
 
@@ -35,6 +36,23 @@
       .hero-image-location:before, .hero-image-category:before, .hero-image-price:before, .hero-image-keyword:before {
         padding-left: 25px;
       }
+      .kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    }
+    .kv-avatar .file-input {
+        display: table-cell;
+        max-width: 220px;
+    }
+    .when-error{border-color: pink;}
+    .kv-reqd {
+        color: red;
+        font-family: monospace;
+        font-weight: normal;
+    }
     </style>
 
 
@@ -44,7 +62,7 @@
         right: 0;
         left: 0;
         top: 0;
-        z-index: 99999;
+        z-index: 99;
       }
 
       .header .header-wrapper {
@@ -151,6 +169,28 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script>
 
+
+var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
+    'onclick="alert(\'Call your custom code here.\')">' +
+    '<i class="glyphicon glyphicon-tag"></i>' +
+    '</button>'; 
+$("#avatar-2").fileinput({
+    overwriteInitial: true,
+    maxFileSize: 1500,
+    showClose: false,
+    showCaption: false,
+    showBrowse: false,
+    browseOnZoneClick: true,
+    removeLabel: '',
+    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+    removeTitle: 'Cancel or reset changes',
+    elErrorContainer: '#kv-avatar-errors-2',
+    msgErrorClass: 'alert alert-block alert-danger',
+    defaultPreviewContent: '<img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
+    layoutTemplates: {main2: '{preview}  {remove} {browse}'},
+    allowedFileExtensions: ["jpg", "png", "gif"]
+});
+
    // $(function(){
    //  if($('#bokk').val()==1){
    //    $('#bookmarks').addClass('marked');
@@ -158,7 +198,38 @@
 
    // });
 
-
+function check_email(email){
+        email = email.replace(/ /g,'');
+//        $('#email_add').val(email);
+        if(email !== ""){
+            var x=email;
+            var atpos=x.indexOf("@"); var sppos=x.indexOf(" "); 
+            var tdpos=x.indexOf(":"); var dotpos=x.lastIndexOf(".");
+            if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length || sppos>=0 || tdpos>=0) {
+                bootbox.alert("<strong>ERR001</strong> - not a valid e-mail address example: user@yahoo.com");
+                $('#email').addClass('when-error');
+                $('#email').focus();
+                return false;
+            }
+            else{
+              bootbox.alert("<strong>ERR002</strong> - not a valid name mustbe entereds");
+                $('#email').removeClass('when-error');
+                check_username(email);
+            }
+        }
+    };
+    function check_name(){
+        if($('#name').val() === ""){
+          bootbox.alert("<strong>ERR002</strong> - not a valid name must be entered!");
+           $('#name').addClass('when-error');
+                $('#name').focus();
+                return false;
+        }
+        else{
+                $('#name').removeClass('when-error');
+                check_username(email);
+            }
+    };
 $(function(){
      
     $('#tmbPass').click(function(){
