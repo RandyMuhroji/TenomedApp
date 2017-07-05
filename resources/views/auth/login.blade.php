@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/png" href="{{asset('tenomed/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
+    
     <link href="{{asset('gantella/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{asset('gantella/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">

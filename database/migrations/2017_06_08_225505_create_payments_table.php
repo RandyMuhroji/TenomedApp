@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->string('desc');
             $table->timestamps();
             $table->softDeletes();
-
+            
             $table->foreign('reservation_id')->references('id')->on('reservations');
         });
     }

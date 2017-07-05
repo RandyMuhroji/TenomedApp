@@ -40,6 +40,16 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
         return view('owner.settings.settings_view');
     });
 });
+
+Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],function(){
+    Route::resource('profile', 'ProfileController');
+    Route::resource('notification', 'NotificationController');
+    Route::resource('bookmarks', 'BookmarksController');
+    Route::resource('review', 'ReviewController');
+    Route::resource('setting', 'SettingController');
+});
+
+
 //Auth::routes();
 //Authentication Routes...
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -59,7 +69,15 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index');
 
+
 Route::get('/basicemail','MailController@basic_email');
 Route::get('/htmlemail','MailController@html_email');
 Route::get('/attachmentemail','MailController@attachment_email');
+
+
+Route::get('/detail/{id}', 'cafes@detail');
+Route::get('/bookmarks', 'cafes@bookmarks');
+Route::get('/cafeList', 'cafes@lists');
+Route::post('/sendReview', 'cafes@sendReview');
+Route::get('/cari', 'cafes@cari');
 

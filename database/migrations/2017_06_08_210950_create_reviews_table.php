@@ -15,8 +15,10 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('user_id')->unsigned();
             $table->integer('cafe_id')->unsigned();
+
             $table->integer('rate')->nullable();
             $table->string('comment')->nullable();
             $table->string('desc')->nullable();
@@ -26,6 +28,7 @@ class CreateReviewsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cafe_id')->references('id')->on('cafes');
+
         });
     }
 

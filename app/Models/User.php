@@ -7,7 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Tenomed\Notifications\TenomedResetPassword as ResetPasswordNotification;
+
 
 class User extends Authenticatable
 {

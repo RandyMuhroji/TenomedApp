@@ -2,6 +2,7 @@
 
 namespace Tenomed\Http\Controllers\Admin;
 
+
 use Illuminate\Support\Facades\DB;
 use Tenomed\Models\User;
 use Tenomed\Models\Role;
@@ -24,6 +25,7 @@ class CafesController extends Controller
     {
         $this->middleware('permission:admin');
     }
+
 
     public function index()
     {
@@ -52,7 +54,6 @@ class CafesController extends Controller
         ];
         return view('admin.cafes.cafes_create')->with($params);
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -102,8 +103,6 @@ class CafesController extends Controller
         return redirect()->route('cafes.index')->with('success', trans('general.form.flash.created_cafe',['name'  => $request->input('name'),
                                               'email' => $request->input('email')]));
     }
-
-
     /**
      * Display the specified resource.
      *

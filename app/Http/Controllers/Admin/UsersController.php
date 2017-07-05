@@ -32,8 +32,6 @@ class UsersController extends Controller
             'title' => 'Users Listing',
             'users' => $users,
         ];
-
-        //return $params;
         return view('admin.users.users_list')->with($params);
     }
 
@@ -99,7 +97,6 @@ class UsersController extends Controller
                 'user' => $user,
             ];
 
-
             return view('admin.users.users_delete')->with($params);
         }
         catch (ModelNotFoundException $ex) 
@@ -128,7 +125,6 @@ class UsersController extends Controller
             if ($user->id != Auth::user()->id) {
                 return response()->view('errors.'.'403');
             }
-
             $params = [
                 'title' => 'Edit User',
                 'user' => $user,

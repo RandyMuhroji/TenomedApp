@@ -21,6 +21,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
+
 </head>
 
 <body class="login">

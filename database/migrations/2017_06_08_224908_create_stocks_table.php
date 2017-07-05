@@ -22,6 +22,7 @@ class CreateStocksTable extends Migration
             $table->softDeletes();
 
             $table->foreign('menu_cafe_id')->references('id')->on('menu_cafe');
+
         });
     }
 
