@@ -40,7 +40,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->input();
     }
 
     /**

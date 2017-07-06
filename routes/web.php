@@ -36,8 +36,12 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::resource('gallery',"GalleryController");
     Route::resource('reviews',"ReviewController");
     Route::resource('messages', 'MessageController');
-    Route::get('/settings',function(){
-        return view('owner.settings.settings_view');
+    Route::group(['prefix' => 'settings'], function(){
+        Route::get('/account',"SettingsController@account")->name('owner_account');
+        Route::post('/account',"SettingsController@accountStore");
+
+        Route::get('/cafe',"SettingsController@cafe")->name('owner_cafe');
+        Route::post('/cafe',"SettingsController@cafeStore");
     });
 });
 

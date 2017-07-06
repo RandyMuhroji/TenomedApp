@@ -8,7 +8,7 @@
     	<div class="col-md-12 col-sm-12 col-xs-12">	
     		<div class="x_panel">
     			<div class="x_title">
-                    <h2>Media Gallery <a href="<?php echo e(route('menus.create')); ?>" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New Album</a></h2>
+                    <h2>Media Gallery <a data-toggle="modal" data-target="#add_album" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New Album</a></h2>
                     <div class="clearfix"></div>
                 </div>
 
@@ -39,11 +39,11 @@
 			                  <div class="col-md-55">
 			                    <div class="thumbnail">
 			                      <div class="image view view-first">
-			                        <img style="width: 100%; display: block;" src="images/media.jpg" alt="image" />
+			                        <img style="width: 100%; display: block;" src="<?php echo e(asset('images/media.jpg')); ?>" alt="image" />
 			                        <div class="mask">
 			                          <p>Your Text</p>
 			                          <div class="tools tools-bottom">
-			                            <a href="#"><i class="fa fa-link"></i></a>
+			                            <a href="#"><i class="fa fa-eye"></i></a>
 			                            <a href="#"><i class="fa fa-pencil"></i></a>
 			                            <a href="#"><i class="fa fa-times"></i></a>
 			                          </div>
@@ -87,6 +87,34 @@
 
   </div>
 </div>
+
+<div id="add_album" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Album</h4>
+      </div>
+      <div class="modal-body">
+      	<form class="form-horizontal">
+	        <div></div>
+	        <div class="col-md-12 col-sm-12 col-xs-24">
+	            <input type="text" class="form-control col-md-7 col-xs-12" placeholder="Album Name ...">
+	            <div id="error_add_album"></div>
+	        </div>
+	        <br/>
+	    </form>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" id="submit" class="btn btn-success">Submit</button>
+        <!-- <button type="button" class="btn btn-success" data-dismiss="modal">Close</button> -->
+      </div>
+    </div>
+
+  </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>
@@ -94,6 +122,23 @@
 		var setModalID = function(val){
 			$("#value").text(val);
 		};
+	</script>
+
+	<script type="text/javascript">
+		$("button#submit").click(function(){
+		   	$.ajax({
+    		   	type: "POST",
+				url: "<?php echo e(route('users.store')); ?>",
+				data: $('form.contact').serialize(),
+	        		success: function(msg){
+	 	          		$("#thanks").html(msg)
+	 		        	$("#form-content").modal('hide');	
+	 		        },
+				error: function(){
+					alert("failure");
+					}
+	      		});
+		});
 	</script>
 <?php $__env->stopSection(); ?>
 

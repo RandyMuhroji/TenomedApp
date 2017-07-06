@@ -7,5 +7,8 @@ use Tenomed\Http\Controllers\Controller;
 
 class ReviewController extends Controller
 {
-    //
+    public function __construct()
+    {
+        $this->middleware('permission:owner');
+    }
 }

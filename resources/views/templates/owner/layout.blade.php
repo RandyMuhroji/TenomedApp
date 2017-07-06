@@ -69,8 +69,8 @@
                     <li><a href="{{route('reviews.index')}}"><i class="fa fa-book"></i>Reviews</a></li>
                     <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                              <li><a href="#">Account</a></li>
-                              <li><a href="#">Cafe</a></li>
+                              <li><a href="{{route('owner_account')}}">Account</a></li>
+                              <li><a href="{{route('owner_cafe')}}">Cafe</a></li>
                           </ul>
                       </li>
                 </ul>
