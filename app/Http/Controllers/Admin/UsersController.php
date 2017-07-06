@@ -4,6 +4,7 @@ namespace Tenomed\Http\Controllers\Admin;
 
 use Tenomed\Models\User;
 use Tenomed\Models\Role;
+use Tenomed\Models\Cafe;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

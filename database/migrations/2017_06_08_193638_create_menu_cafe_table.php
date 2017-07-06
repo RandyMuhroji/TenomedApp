@@ -23,6 +23,9 @@ class CreateMenuCafeTable extends Migration
             $table->string('category')->nullable();
             $table->integer('status')->nullable();
             $table->string('desc')->nullable();
+            $table->string('genre')->nullable();
+
+            
             $table->timestamps();
             $table->softDeletes();
 

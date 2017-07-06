@@ -1,0 +1,14 @@
+.modal-content{
+	border-radius: 10px;
+}
+
+.modal-header{
+	border-radius: 8px 8px 0 0;
+	background: #73879C;
+	color: white;
+}
+
+.modal-footer{
+	background: #73879C;
+	color: white;	
+}

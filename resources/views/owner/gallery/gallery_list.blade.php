@@ -10,7 +10,7 @@
     	<div class="col-md-12 col-sm-12 col-xs-12">	
     		<div class="x_panel">
     			<div class="x_title">
-                    <h2>Media Gallery <a href="{{route('menus.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> @lang('general.app.create_new') </a></h2>
+                    <h2>Media Gallery <a href="{{route('menus.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New Album</a></h2>
                     <div class="clearfix"></div>
                 </div>
 
@@ -75,7 +75,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Modal Header</h4>
       </div>
@@ -83,7 +83,27 @@
         <p id="value">Some text in the modal.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="add_album" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p id="value">Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
       </div>
     </div>
 
@@ -100,5 +120,5 @@
 @stop
 
 @section('css')
-	
+	<link rel="stylesheet" type="text/css" href="{{asset('gantella/build/css/me.css')}}">
 @stop
