@@ -18,7 +18,7 @@ class CreateGaleryTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('album_id')->unsigned();
             $table->string('filename');
-            $table->string('type');
+            $table->string('mime');
             $table->string('original_filename');
             $table->string('status')->nullable();
             $table->string('desc')->nullable();
