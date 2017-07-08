@@ -46,7 +46,12 @@
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="<?php echo e(Auth::user()->getAvatarUrl()); ?>" alt="..." class="img-circle profile_img">
+              <?php if(Auth::user()->avatar != ''): ?>
+                  <img src="<?php echo e(Auth::user()->avatar); ?>" alt="..." class="img-circle profile_img">
+              <?php else: ?>
+                   <img src="<?php echo e(asset('images/user.png')); ?>" alt="..." class="img-circle profile_img">
+              <?php endif; ?>
+             
             </div>
             <div class="profile_info">
               <span><?php echo app('translator')->get('general.app.welcome'); ?>,</span>
@@ -63,10 +68,11 @@
                 <h3><?php echo app('translator')->get('general.app.general'); ?></h3>
                 <ul class="nav side-menu">
                      <li><a href="<?php echo e(route('owner')); ?>"><i class="fa fa-home"></i> <?php echo app('translator')->get('general.nav.home'); ?> </a></li>
-                    <li><a href="<?php echo e(route('menus.index')); ?>"><i class="fa fa-plus"></i>Menu</a></li>
+                    <li><a href="<?php echo e(route('menus.index')); ?>"><i class="fa fa-cutlery"></i>Menu</a></li>
+                    <li><a href="<?php echo e(route('reservations.index')); ?>"><i class="fa fa-book"></i>Reservation</a></li>
                     <li><a href="<?php echo e(route('gallery.index')); ?>"><i class="fa fa-file-image-o"></i>Gallery</a></li>
                     <li><a href="<?php echo e(route('messages.index')); ?>"><i class="fa fa-envelope"></i>Messages</a></li>
-                    <li><a href="<?php echo e(route('reviews.index')); ?>"><i class="fa fa-book"></i>Reviews</a></li>
+                    <li><a href="<?php echo e(route('reviews.index')); ?>"><i class="fa fa-comments"></i>Reviews</a></li>
                     <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                               <li><a href="<?php echo e(route('owner_account')); ?>">Account</a></li>
@@ -91,7 +97,12 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo e(Auth::user()->getAvatarUrl()); ?>" alt=""><?php echo e(Auth::user()->name); ?>
+                    <?php if(Auth::user()->avatar != ''): ?>
+                        <img src="<?php echo e(Auth::user()->avatar); ?>" alt="..." >
+                    <?php else: ?>
+                         <img src="<?php echo e(asset('images/user.png')); ?>" alt="...">
+                    <?php endif; ?>
+                    <?php echo e(Auth::user()->name); ?>
 
                     <span class=" fa fa-angle-down"></span>
                 </a>
