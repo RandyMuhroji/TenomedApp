@@ -15,7 +15,7 @@ class CreateCafesTable extends Migration
     {
         Schema::create('cafes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('address');
             $table->string('long');
@@ -24,15 +24,13 @@ class CreateCafesTable extends Migration
             $table->string('rating')->nullable();
             $table->string('phone')->nullable();
             $table->string('more')->nullable();
-            $table->string('OpeningDays')->nullable();
-            $table->string('openingHours')->nullable();
             $table->integer('seat')->nullable();
             $table->integer('status')->default(0);
             $table->string('desc')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            //$table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

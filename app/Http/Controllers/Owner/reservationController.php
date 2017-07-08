@@ -1,10 +1,11 @@
 <?php
 
-namespace Tenomed\Http\Controllers;
+namespace Tenomed\Http\Controllers\owner;
 
 use Illuminate\Http\Request;
+use Tenomed\Http\Controllers\Controller;
 
-class SponsorsController extends Controller
+class reservationController extends Controller
 {
     /**
      * Display a listing of the resource.

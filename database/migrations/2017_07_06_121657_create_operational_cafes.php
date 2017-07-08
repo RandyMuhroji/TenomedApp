@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateOperationalCafes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('operational_cafe', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->integer('cafe_id')->unsigned();
+            $table->string('days');
+            $table->string('hours');
+            $table->string('desc')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->foreign('cafe_id')->references('id')->on('cafes');
         });
     }
 
@@ -29,6 +33,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::drop('operational_cafe');
     }
 }

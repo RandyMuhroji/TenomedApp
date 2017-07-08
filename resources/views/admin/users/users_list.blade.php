@@ -53,7 +53,7 @@
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
-                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                    <a data-toggle="modal" data-target="#edit_user" class="btn btn-warning btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
@@ -65,6 +65,26 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="edit_user" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit User</h4>
+      </div>
+      <div class="modal-body">
+        <p id="value">Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 @stop
