@@ -152,30 +152,6 @@
                         @endif
                     </div>
                 </div>
-
-                <!-- <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Current Password <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="old_pass" name="current_password" class="form-control col-md-7 col-xs-12" required>
-                    </div><br/><br/>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="new_password">New Password <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="new_password" name="new_password" class="form-control col-md-7 col-xs-12" required>
-                    </div><br/><br/>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_password">Confirm Password <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12" required>
-                    </div><br/><br/>
-                </div> -->
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-success">Save Change</button>

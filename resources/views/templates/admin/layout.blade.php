@@ -161,7 +161,8 @@
   <script src="{{asset('gantella/vendors/jszip/dist/jszip.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-
+  <!-- validator -->
+    <script src="{{asset('gantella/vendors/validator/validator.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>
   <!-- Google Analytics -->

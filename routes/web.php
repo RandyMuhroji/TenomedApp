@@ -34,6 +34,9 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::get('/',"DashboardController@index")->name('owner');
     Route::resource('menus',"MenuController");
     Route::resource('gallery',"GalleryController");
+
+    Route::post('gallery/album',"GalleryController@album")->name("galery_album");
+
     Route::resource('reviews',"ReviewController");
     Route::resource('reservations',"reservationController");
     Route::resource('messages', 'MessageController');
@@ -45,7 +48,6 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
         Route::post('/cafe',"SettingsController@cafeStore")->name('owner_cafe');
 
         Route::post('/account/password',"SettingsController@changePassword")->name('change_password');
-
 
     });
 });

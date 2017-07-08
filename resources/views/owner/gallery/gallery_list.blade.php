@@ -99,19 +99,28 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Album</h4>
       </div>
-      <div class="modal-body">
-      	<form class="form-horizontal">
-	        <div></div>
-	        <div class="col-md-12 col-sm-12 col-xs-24">
-	            <input type="text" class="form-control col-md-7 col-xs-12" placeholder="Album Name ...">
-	            <div id="error_add_album"></div>
-	        </div>
-	        <br/>
-	    </form>
+      <form method="post" action="{{ route('galery_album') }}" data-parsley-validate class="form-horizontal form-label-left">
+      		<div class="modal-body">
+      		 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+      		@if(Session::has('album_name'))
+                <div class="form-group{{' has-error'}}">
+            @else
+            	<div class="form-group{{' '}}">
+            @endif
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Album Name <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" id="album_name" name="album_name">
+                    @if(Session::has('album_name'))
+                    <span class="help-block">{!! Session::get('album_name') !!}</span>
+                    @endif
+                </div>
+            </div>
       </div>
       <div class="modal-footer">
-      	<button type="button" id="submit" class="btn btn-success">Submit</button>
-        <!-- <button type="button" class="btn btn-success" data-dismiss="modal">Close</button> -->
+      		<button type="submit" class="btn btn-success">Save Change</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </form>
       </div>
     </div>
 
@@ -127,22 +136,11 @@
 		};
 	</script>
 
-	<script type="text/javascript">
-		$("button#submit").click(function(){
-		   	$.ajax({
-    		   	type: "POST",
-				url: "{{ route('users.store') }}",
-				data: $('form.contact').serialize(),
-	        		success: function(msg){
-	 	          		$("#thanks").html(msg)
-	 		        	$("#form-content").modal('hide');	
-	 		        },
-				error: function(){
-					alert("failure");
-					}
-	      		});
-		});
-	</script>
+	@if (Session::has('album_name'))
+        <script type="text/javascript">
+           $('#add_album').modal('show');
+        </script>
+    @endif
 @stop
 
 @section('css')
