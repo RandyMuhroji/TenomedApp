@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use Tenomed\Models\AlbumGallery;
+use Tenomed\Models\Gallery;
 
 use Auth;
 

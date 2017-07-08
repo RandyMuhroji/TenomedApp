@@ -38,7 +38,7 @@
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>@lang('general.app.name')</span></a>
+              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Manage Cafe</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -46,7 +46,12 @@
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="{{Auth::user()->getAvatarUrl()}}" alt="..." class="img-circle profile_img">
+              @if(Auth::user()->avatar != '')
+                  <img src="{{Auth::user()->avatar}}" alt="..." class="img-circle profile_img">
+              @else
+                   <img src="{{asset('images/user.png')}}" alt="..." class="img-circle profile_img">
+              @endif()
+             
             </div>
             <div class="profile_info">
               <span>@lang('general.app.welcome'),</span>
@@ -67,8 +72,7 @@
                       <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> @lang('general.nav.users') </a></li>
                       <li><a href="{{route('sponsors.index')}}"><i class="fa fa-users"></i>Sponsors </a></li>
                       <li><a href="{{route('messages.index')}}"><i class="fa fa-envelope"></i>Messages</a></li>
-                      <li><a href="{{route('messages.index')}}"><i class="fa fa-envelope"></i>Settings</a></li>
-                      <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
+                      <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                               <li><a href="#">Account</a></li>
                               <li><a href="#">Administrator</a></li>
@@ -92,7 +96,12 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="">{{Auth::user()->name}}
+                    @if(Auth::user()->avatar != '')
+                        <img src="{{Auth::user()->avatar}}" alt="..." >
+                    @else
+                         <img src="{{asset('images/user.png')}}" alt="...">
+                    @endif()
+                    {{Auth::user()->name}}
                     <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -102,7 +111,6 @@
                       document.getElementById('logout-form').submit();">
                       <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -161,14 +169,15 @@
   <script src="{{asset('gantella/vendors/jszip/dist/jszip.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-  <!-- validator -->
-    <script src="{{asset('gantella/vendors/validator/validator.js"></script>
+
   <!-- Custom Theme Scripts -->
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>
   <!-- Google Analytics -->
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
-
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-23581568-13', 'auto');
   ga('send', 'pageview');

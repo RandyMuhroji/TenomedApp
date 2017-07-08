@@ -24,7 +24,7 @@
 			                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 			                  </li>
 			                  <li class="dropdown">
-			                    <a onclick="setModalID('{{$i}}')" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></a>
+			                    <a onclick="setModalID('{{$i}}')" data-toggle="modal" data-target="#add_photo"><i class="fa fa-plus"></i></a>
 			                  </li>
 			                  <li><a class="close-link"><i class="fa fa-close"></i></a>
 			                  </li>
@@ -70,7 +70,7 @@
 
 
 
-<div id="myModal" class="modal fade" role="dialog">
+<div id="add_photo" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
