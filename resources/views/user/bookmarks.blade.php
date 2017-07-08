@@ -100,8 +100,12 @@
                             <div class="widget">
     <div class="user-photo">
         <a href="#">
-            <img src="{{ asset('') }}assets/img/tmp/agent-2.jpg" alt="User Photo">
+             @if(Auth::user()->avatar=="")
+            <img src="{{ asset('') }}images/user.png" alt="User Photo">
            <!--  <span class="user-photo-action">Click here to reupload</span> -->
+        @else
+            <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="User Photo">
+        @endif
         </a>
     </div><!-- /.user-photo -->
 </div><!-- /.widget -->

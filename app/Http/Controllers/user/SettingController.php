@@ -4,7 +4,7 @@ namespace Tenomed\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
-use Tenomed\Models\User;
+use Tenomed\Models\Setting;
 use File;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
@@ -77,23 +77,34 @@ class SettingController extends Controller
         $this->validate($request,[
         'name'=>'required',
         'email'=>'required',
-        'avatar' =>'required|mimes:jpeg,jpg,png,gif|required|max:10000',
+        //'avatar' =>'required|mimes:jpeg,jpg,png,gif|required|max:10000',
         ]);
-         $Setting= User::find($id);
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // generate a pin based on 2 * 7 digits + a random character
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        // shuffle the result
+        $string = str_shuffle($pin);
+
+         $Setting= Setting::find($id);
       $Setting->name=$request->name;
       $Setting->email=$request->email;
       $Setting->phone=$request->phone;
       $Setting->address=$request->address;
       $Setting->bio=$request->bio;
-      $Setting->avatar=$request->avatar;
        $file = Input::file('avatar');
-        return redirect("user/setting");
+
+      $Setting->avatar=$string.'-'.$file->getClientOriginalName();
         if(Input::hasFile('avatar')){
            
-            $file->move('images', $file->getClientOriginalName());
+            $file->move('images', $string.'-'.$file->getClientOriginalName());
         }
         $Setting->save();
-        redirect('user/setting');
+       ///echo "handoko";
+       return redirect('user/setting');
     }
 
     /**

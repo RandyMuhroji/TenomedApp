@@ -68,7 +68,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::post('user/user/update/{id}', 'user\SettingController@update');
+Route::post('/user/update/{id}', 'user\SettingController@update');
 Route::get('/home', 'HomeController@index');
 
 
@@ -82,4 +82,5 @@ Route::get('/bookmarks', 'cafes@bookmarks');
 Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
 Route::get('/cari', 'cafes@cari');
+Route::get('/cekPass', 'cafes@cekEmail');
 

@@ -39,7 +39,7 @@
                                 @if(Auth::user()->avatar=="")
                                 <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @else
-                                <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @endif
 
                                 <ul class="sub-menu">
@@ -272,6 +272,34 @@
         <div class="background-white p20">
                             <ul class="nav nav-pills nav-pills-rose">
                               <li class="active"><a href="#pill1" data-toggle="tab" aria-expanded="true">Information</a></li>
+
+                             
+
+                    <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
                               <li class=""><a href="#pill2" data-toggle="tab" aria-expanded="false">Our Menu</a></li>
                               <li class=""><a href="#pill3" data-toggle="tab" aria-expanded="false">Review</a></li>
                             </ul>
@@ -421,7 +449,7 @@
                 @if(Auth::user()->avatar=="")
                     <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
                 @else
-                    <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="">        
+                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
                 @endif
         </div><!-- /.review-image -->
 
@@ -486,17 +514,14 @@
                             </div>
 
             <!-- Nav tabs -->
-            
-        </div>
-
-        <div id="loadReview">
+             <div id="loadReview">
 @foreach($review as $reviews)
     <div class="review">
         <div class="review-image">
             @if($reviews->avatar=="")
                     <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
                 @else
-                    <img src="{{ asset('') }}assets/img/tmp/{{$reviews->avatar}}" alt="">        
+                    <img src="{{ asset('') }}images/{{$reviews->avatar}}" alt="">        
                 @endif
         </div><!-- /.review-image -->
 
@@ -533,6 +558,10 @@
     @endforeach
     </div>
     {{ $review->links() }}
+            
+        </div>
+
+       
 
 
         

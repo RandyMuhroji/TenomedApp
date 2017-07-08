@@ -21,12 +21,12 @@ class cafes extends Controller
             $status=request()->status;
 
              DB::table('bookmarks')
-            ->where('idUser', $id)
-            ->where('idCafe', $kafe)
+            ->where('user_id', $id)
+            ->where('cafe_id', $kafe)
             ->delete();
 
              DB::table('bookmarks')->insert(
-                ['idUser' => $id,'idCafe' => $kafe,'status' => $status]
+                ['user_id' => $id,'cafe_id' => $kafe,'status' => $status]
             );
 
 	}
@@ -39,22 +39,22 @@ class cafes extends Controller
         // $bookmarks = Bookmarks::where('id',"=",$id)->get();
         //$Menu = Menu::where('idCafe',"=",$id)->get();
         $Reviews = DB::table('users')
-            ->join('reviews', 'users.id', '=', 'reviews.idUser')
+            ->join('reviews', 'users.id', '=', 'reviews.user_id')
             ->select('users.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc')
-            ->where('idCafe', $id)
+            ->where('cafe_id', $id)
             ->orderBy('updated_at', 'desc')
             ->Paginate(2);
 
         $bookmarks = DB::table('bookmarks')
-                ->select('id','idCafe', 'idUser','status')
-                ->where('idCafe', $id)
-                ->where('idUser', $idUser)
+                ->select('id','cafe_id', 'user_id','status')
+                ->where('user_id', $id)
+                ->where('cafe_id', $idUser)
                 ->get()->first();
 
         $rates = DB::table('reviews')
-                ->select('idCafe', DB::raw('SUM(rate) as rank'), DB::raw('count(idCafe) as jumlah'))
-                ->where('idCafe', $id)
-                ->groupBy('idCafe')
+                ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
+                ->where('cafe_id', $id)
+                ->groupBy('cafe_id')
                 ->get()->first();
         //dd($koor);
                 if ($rates=="") {
@@ -83,8 +83,8 @@ class cafes extends Controller
         //'password' => 'min:6|confirmed',
         ]);
         $reviews= new Review;
-        $reviews->idUser=$request->idUser;
-        $reviews->idCafe=$request->idCafe;
+        $reviews->user_id=$request->idUser;
+        $reviews->cafe_id=$request->idCafe;
         $reviews->rate=$request->rate;
         $reviews->desc=$request->desc;
         $id=$request->idCafe;
@@ -97,7 +97,7 @@ class cafes extends Controller
     {
 
         $data = DB::table('cafes')
-            ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.idCafe')
+            ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.cafe_id')
             ->select('cafes.id as id','cafes.name as name','cafes.desc as desc','cafes.seat as seat','cafes.images as images', 'cafes.phone as phone','cafes.address as address','menu_cafe.name as menuName','price')
             ->where('cafes.name','like','%'.$_GET['kata'].'%')
             ->orWhere('menu_cafe.name', 'like','%'. $_GET['kata'].'%')
@@ -107,8 +107,8 @@ class cafes extends Controller
             ->distinct()->Paginate(5);
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
-                ->select('idCafe', DB::raw('SUM(rate) as rank'), DB::raw('count(idCafe) as jumlah'))
-                ->groupBy('idCafe')
+                ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
+                ->groupBy('cafe_id')
                 ->get()->first();
         if($data=="")
         {
@@ -119,5 +119,10 @@ class cafes extends Controller
     public function lists()
     {
         return view('cafeList');
+    }
+    public function cekEmail()
+    {
+
+        return "babi";
     }
 }

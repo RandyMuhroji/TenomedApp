@@ -100,8 +100,12 @@
                             <div class="widget">
     <div class="user-photo">
         <a href="#">
-            <img src="{{ asset('') }}assets/img/tmp/agent-2.jpg" alt="User Photo">
+        @if(Auth::user()->avatar=="")
+            <img src="{{ asset('') }}images/user.png" alt="User Photo">
            <!--  <span class="user-photo-action">Click here to reupload</span> -->
+        @else
+            <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="User Photo">
+        @endif
         </a>
     </div><!-- /.user-photo -->
 </div><!-- /.widget -->
@@ -140,13 +144,13 @@
 
 
                             <div id="kv-avatar-errors-2" class="center-block" style="width:800px;display:none"></div>
-                            <form class="form form-vertical" action="user/update/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
+                            <form class="form form-vertical" action="/user/update/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="kv-avatar center-block text-center" style="width:200px">
 
-                                            <label for="avatar-2">Avatar</label>
-                                            <input id="avatar-2" name="avatar" type="file" class="file-loading" value="{{Auth::user()->avatar}}" required>
+                                            <label for="avatar-2" >Avatar</label>
+                                            <input id="avatar-2" name="avatar" type="file" class="file-loading" value="{{Auth::user()->avatar}}" >
                                         </div>
                                     </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -170,13 +174,13 @@
                                         <div class="col-sm-6">
                                           <div class="form-group">
                                             <label for="phone">Phone</label>
-                                            <input type="text" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" required>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" >
                                           </div>
                                         </div>
                                         <div class="col-sm-6">
                                           <div class="form-group">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" value="{{Auth::user()->address}}" required>
+                                            <input type="text" class="form-control" id="address" name="address" value="{{Auth::user()->address}}" >
                                           </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -201,7 +205,7 @@
                               <div class="row " >
                                       <div class="form-group col-sm-7">
                                         <label>Old Password</label>
-                                        <input type="password" class="form-control" onchange="check_password(jQuery('#email').val());" name="password" id="password">
+                                        <input type="password" class="form-control" onchange="check_password('{{Auth::user()->id}}');" name="password" id="password">
                                     </div>
                                     <div class="form-group col-sm-7">
                                         <label>New Password</label>
@@ -283,4 +287,27 @@
 
 </div><!-- /.page-wrapper -->
 
+
 @endsection
+<script>
+    function check_password(id){
+        $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        
+        $.ajax({
+          type: 'GET',
+          url: '/cekPass?old='+$('#password').val()+'&id='+id,
+
+          data: {'idUser':a, 'kafe':b},
+          success: function( data ) {
+             // $(".doko").load("/login");
+             alert(data);
+          }
+         });
+        // alert("ajshdu");
+    };
+</script>
+

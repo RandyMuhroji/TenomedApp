@@ -57,6 +57,56 @@
 
 
     <style>
+
+.wizard li {
+  background-color: #E4E4E4;
+  border-radius: 5px;
+  display: inline;
+  padding: 10px 30px 10px 40px;
+  margin-right: -7px;
+  width: auto;
+}
+
+.wizard li::before, .wizard li::after {
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-color: transparent;
+  border-left-color: #fff;
+  border-radius: 10px;
+}
+
+.wizard li::before {
+  border-width: 25px; 
+  margin-top: -16px;
+  margin-left: 84px;
+}
+
+
+.wizard li::after {
+  border-left-color: #E4E4E4;
+  border-width: 21px; 
+  margin-top: -12px;
+  margin-left: 24px;
+}
+
+.wizard li.selected {
+  background-color: #FF4F65;
+  color: #fff;
+}
+
+.wizard li.selected::after {
+  border-left-color: #FF4F65;
+}
+
+.wizard li:last-child::after {
+  border-left-color: transparent;
+}
+
+
+
       .header {
         position: fixed;
         right: 0;
@@ -86,7 +136,10 @@
         box-shadow: 1px 1px 0px #ddd;
         margin: 10px;
       }
-    </style>
+      .menu-advanced{
+        color: black;
+      }    
+      </style>
 
     <script>
         $(document).ready(function(){
@@ -169,7 +222,11 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <script>
 
-
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
 var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
     'onclick="alert(\'Call your custom code here.\')">' +
     '<i class="glyphicon glyphicon-tag"></i>' +
@@ -186,7 +243,7 @@ $("#avatar-2").fileinput({
     removeTitle: 'Cancel or reset changes',
     elErrorContainer: '#kv-avatar-errors-2',
     msgErrorClass: 'alert alert-block alert-danger',
-    defaultPreviewContent: '<img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
+    defaultPreviewContent: '<img src="{{ asset('') }}images/user.png" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
     layoutTemplates: {main2: '{preview}  {remove} {browse}'},
     allowedFileExtensions: ["jpg", "png", "gif"]
 });
@@ -218,6 +275,10 @@ function check_email(email){
             }
         }
     };
+
+
+
+
     function check_name(){
         if($('#name').val() === ""){
           bootbox.alert("<strong>ERR002</strong> - not a valid name must be entered!");
