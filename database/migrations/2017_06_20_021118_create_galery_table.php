@@ -20,6 +20,7 @@ class CreateGaleryTable extends Migration
             $table->string('filename');
             $table->string('mime');
             $table->string('original_filename');
+            $table->string('title')->nullable();
             $table->string('status')->nullable();
             $table->string('desc')->nullable();
             $table->timestamps();

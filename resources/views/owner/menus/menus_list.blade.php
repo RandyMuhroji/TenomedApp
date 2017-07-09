@@ -58,15 +58,51 @@
     <div class="modal-content">
       <div class="modal-header" >
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title"><i class="fa fa-cutlery"></i> &nbsp;<span class="title_menu"></span></h4>
       </div>
       <div class="modal-body">
         <div class="row">
-            <div class="col-md-8">
-                s
+            <div class="col-md-8 col-sm-8">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        Nama
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>sesuatu</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        Nama
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>sesuatu</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        Nama
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>sesuatu</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        Nama
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <p>sesuatu</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                s
+            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                    <div id="crop-avatar">
+                      <!-- Current avatar -->
+                      <img class = "image_menu img-responsive avatar-view" src="" alt="Avatar" title="Change the avatar">
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -88,8 +124,14 @@
     <script type="text/javascript">
         var setModalValue= function(val){
             var obj_val = JSON.parse(val);
-            console.log(obj_val['name']);
-            $('.modal-title').html(obj_val['name']);
+            $('.title_menu').text(obj_val['name']);
+
+            var image = "/images/" + obj_val['images'];
+
+            $(".image_menu").prop("src",image);
+            $(".image_menu").attr("alt",obj_val['name']);
+            $(".image_menu").attr("title",obj_val['desc']);
+
         };
     </script>
 @stop

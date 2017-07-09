@@ -36,6 +36,7 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::resource('gallery',"GalleryController");
 
     Route::post('gallery/album',"GalleryController@album")->name("galery_album");
+    Route::delete('gallery/album/{id}',"GalleryController@deleteAlbum");
 
     Route::resource('reviews',"ReviewController");
     Route::resource('reservations',"reservationController");

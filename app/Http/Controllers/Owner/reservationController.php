@@ -14,7 +14,7 @@ class reservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('owner.reservations.reservation_list');
     }
 
     /**
