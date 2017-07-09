@@ -30,7 +30,7 @@
 	                    </div>
 	                </div>
                     <br />
-                    <form method="post" action="{{ route('users.update', ['id' => $user->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="/manage-cafe/settings/account/{{$user->id}}" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Full Name <span class="required">*</span>
                             </label>
@@ -42,16 +42,38 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">@lang('users.email') <span class="required">*</span>
+                        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">Avatar
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="{{$user->email}}" id="email" name="email" class="form-control col-md-7 col-xs-12">
-                                @if ($errors->has('email'))
-                                <span class="help-block">{{ $errors->first('email') }}</span>
-                                @endif
+                                <input type="file" id="avatar" name="avatar" class="col-md-7 col-xs-12">
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">Phone Number
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="phone" name="phone" class="form-control col-md-7 col-xs-12" value="{{$user->phone}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">Address
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="address" name="address" class="form-control col-md-7 col-xs-12" value="{{$user->address}}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">A little bit about yourself
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea class="form-control" rows="3" id="bio" name="bio" class="form-control col-md-7 col-xs-12" >{{$user->bio}}</textarea>
+                            </div>
+                        </div>
+
                         <br/>
                         <div class="form-group">
 
@@ -61,6 +83,8 @@
                                 <button type="submit" class="btn btn-success">@lang('general.form.save_changes')</button>
                             </div>
                         </div>
+
+
                         <div class="ln_solid"></div>
 
                         

@@ -43,10 +43,10 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::resource('messages', 'MessageController');
     Route::group(['prefix' => 'settings'], function(){
         Route::get('/account',"SettingsController@account")->name('owner_account');
-        Route::post('/account',"SettingsController@accountStore")->name('owner_account');
+        Route::put('/account/{id}',"SettingsController@accountStore");
 
         Route::get('/cafe',"SettingsController@cafe")->name('owner_cafe');
-        Route::post('/cafe',"SettingsController@cafeStore")->name('owner_cafe');
+        Route::put('/cafe/{id}',"SettingsController@cafeStore");
 
         Route::post('/account/password',"SettingsController@changePassword")->name('change_password');
 
