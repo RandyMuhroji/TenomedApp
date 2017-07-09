@@ -94,4 +94,8 @@ Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
 Route::get('/cari', 'cafes@cari');
 Route::get('/cekPass', 'cafes@cekEmail');
+Route::get('/booking/{id}', 'cafes@booking');
+
+Route::post('/saveBooking/{id}', 'cafes@saveBooking');
+Route::get('/invoice/{id}', 'cafes@invoice');
 

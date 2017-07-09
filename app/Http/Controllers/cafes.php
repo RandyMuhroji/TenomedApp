@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Tenomed\Models\Bookmarks;
 use Tenomed\Models\Menu;
 use Tenomed\Models\Review;
+use Tenomed\Models\bookMenu;
+use Tenomed\Models\Reservation;
+
 use Illuminate\Support\Facades\Input;
 use DB;
 
@@ -125,4 +128,53 @@ class cafes extends Controller
 
         return "babi";
     }
+    public function booking($id)
+    {
+        
+        $detail= DB::table('cafes')->where('id', $id)->first();
+        $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
+        $idUser=request()->id;
+        $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
+        $bookmarks = DB::table('bookmarks')
+                ->select('id','cafe_id', 'user_id','status')
+                ->where('user_id', $id)
+                ->where('cafe_id', $idUser)
+                ->get()->first();
+        return view('booking')->with(['detail'=>$detail, 'kategori'=>$kategori, 'menu'=>$menu, 'bookmarks'=>$bookmarks,'test'=>'']);
+                // return($menu);
+    }
+    public function saveBooking(Request $request,$id){
+        $idUser=request()->id;
+        $book= new Reservation;
+        $book->user_id=$idUser;
+        $book->persons=$request->book_persons;
+        $book->name=$request->book_name;
+        $book->phone=$request->book_phone;
+        $book->email=$request->book_email;
+        $book->bookingDate=$request->book_tanggal;
+        $book->bookingTime=$request->book_jam;
+        $book->cafe_id=$id;
+        $book->save();
+        for ($x = 0; $x < sizeof($request->qty); $x++) {
+            if($request->qty[$x]!=0){
+                $bookMenu= new bookMenu;
+                $bookMenu->reservations_id =$book->id;
+                $bookMenu->menu_cafe_id =$request->menu_id[$x];
+                $bookMenu->qunatity =$request->qty[$x];
+                $bookMenu->save();
+            }
+        } 
+        return redirect('invoice/'.$book->id);
+
+
+    }
+     public function invoice($id){
+        $detail= DB::table('reservations')->where('id', $id)->first();
+        $menu = DB::table('menu_reservations')
+            ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
+            ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
+            ->where('menu_reservations.reservations_id', $id)
+            ->get();
+        return view('invoice')->with(['detail'=>$detail, 'menu'=>$menu]);
+     }
 }

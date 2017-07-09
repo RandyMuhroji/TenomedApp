@@ -274,31 +274,7 @@
                               <li class="active"><a href="#pill1" data-toggle="tab" aria-expanded="true">Information</a></li>
 
                              
-
-                    <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
+ 
 
                               <li class=""><a href="#pill2" data-toggle="tab" aria-expanded="false">Our Menu</a></li>
                               <li class=""><a href="#pill3" data-toggle="tab" aria-expanded="false">Review</a></li>
@@ -381,16 +357,15 @@
         </div>
 </div>
 
-            <div class="detail-follow">
-                <h5>Follow Us:</h5>
-                <div class="follow-wrapper">
-                    <a class="follow-btn facebook" href="#"><i class="fa fa-facebook"></i></a>
-                    <a class="follow-btn youtube" href="#"><i class="fa fa-youtube"></i></a>
-                    <a class="follow-btn twitter" href="#"><i class="fa fa-twitter"></i></a>
-                    <a class="follow-btn tripadvisor" href="#"><i class="fa fa-tripadvisor"></i></a>
-                    <a class="follow-btn google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                </div><!-- /.follow-wrapper -->
-            </div><!-- /.detail-follow -->
+            <div class="form-group">
+                <select name="property">
+                    <option>Property Type</option>
+                    <option>Apartment</option>
+                    <option>Condo</option>
+                    <option>House</option>
+                    <option>Villa</option>
+                </select>
+            </div><!-- /.form-group -->     
         </div>
                                   <ul id="listing-detail-location" class="nav nav-tabs" role="tablist">
 
@@ -588,8 +563,27 @@
 
             <div class="detail-actions row">
                 <div class="col-sm-4">
-                    <div class="btn btn-primary btn-book"><i class="fa fa-shopping-cart"></i> Book Now</div>
+                    <div class="btn btn-primary btn-book" onclick="location.href='/booking/{{ $detail->id }}?id={{Auth::user()->id}}';"><i class="fa fa-shopping-cart"></i> Book Now</div>
                 </div><!-- /.col-sm-4 -->
+                <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
                 <div class="col-sm-4">
                     <div class="btn btn-secondary btn-share"><i class="fa fa-share-square-o"></i> Share
                         <div class="share-wrapper">
