@@ -2,10 +2,12 @@
 
 namespace Tenomed\Http\Controllers\owner;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 
 use Tenomed\Models\User;
+use Tenomed\Models\Cafe;
 use Auth;
 use Validator;
 use Hash;
@@ -86,7 +88,15 @@ class SettingsController extends Controller
 
     public function cafe()
     {
-    	return view('owner.settings.cafe');
+        $cafe = DB::table('cafes')->where('user_id', Auth::user()->id)->get();
+        
+        $params = [
+                'title' => 'Edit Cafe',
+                'cafe' => $cafe,
+            ];
+
+
+    	return view('owner.settings.cafe')->with($params);
     }
     public function cafeStore(Request $request)
     {

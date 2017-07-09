@@ -2,7 +2,6 @@
 
 @section('content')
 
-
  <div class="">
     <div class="clearfix"></div>
     <div class="row">

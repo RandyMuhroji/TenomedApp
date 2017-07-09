@@ -134,7 +134,7 @@
      <!-- footer content -->
       <footer>
           <div class="pull-right">
-              Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+              Tenomed 2017 - Manage Cafe
           </div>
           <div class="clearfix"></div>
       </footer>
