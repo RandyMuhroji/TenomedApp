@@ -47,7 +47,7 @@
           <div class="profile clearfix">
             <div class="profile_pic">
               <?php if(Auth::user()->avatar != ''): ?>
-                  <img src="<?php echo e(Auth::user()->avatar); ?>" alt="..." class="img-circle profile_img">
+                  <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="Auth::user()->name" class="img-circle profile_img">
               <?php else: ?>
                    <img src="<?php echo e(asset('images/user.png')); ?>" alt="..." class="img-circle profile_img">
               <?php endif; ?>
@@ -98,7 +98,7 @@
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <?php if(Auth::user()->avatar != ''): ?>
-                        <img src="<?php echo e(Auth::user()->avatar); ?>" alt="..." >
+                        <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="Auth::user()->name" >
                     <?php else: ?>
                          <img src="<?php echo e(asset('images/user.png')); ?>" alt="...">
                     <?php endif; ?>
@@ -136,7 +136,7 @@
      <!-- footer content -->
       <footer>
           <div class="pull-right">
-              Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+              Tenomed 2017 - Manage Cafe
           </div>
           <div class="clearfix"></div>
       </footer>

@@ -2,10 +2,12 @@
 
 namespace Tenomed\Http\Controllers\owner;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 
 use Tenomed\Models\User;
+use Tenomed\Models\Cafe;
 use Auth;
 use Validator;
 use Hash;
@@ -42,14 +44,59 @@ class SettingsController extends Controller
             }
         }
     }
-    public function accountStore(Request $request)
+    public function accountStore(Request $request, $id)
     {
-    	return "account store";
+        //return $request->file();
+        try
+        {
+            $user = User::findOrFail($id);
+
+            $this->validate($request, [
+                'name' => 'required',
+            ]);
+
+            $user->name =  $request->input('name');
+            $user->bio = $request->input('bio');
+            $user->address = $request->input('address');
+            $user->phone = $request->input('phone');
+
+            $picture = "";
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                $picture = md5($filename).'.'.$extension;
+                $destinationPath = base_path() . '\public\images';
+                $file->move($destinationPath, $picture);
+                $user->avatar = $picture;
+            }
+
+            
+
+            $user->save();
+
+            return redirect()->route('owner_account')->with('success', trans('general.form.flash.updated',['name' => $user->name]));
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     public function cafe()
     {
-    	return view('owner.settings.cafe');
+        $cafe = DB::table('cafes')->where('user_id', Auth::user()->id)->get();
+        
+        $params = [
+                'title' => 'Edit Cafe',
+                'cafe' => $cafe,
+            ];
+
+
+    	return view('owner.settings.cafe')->with($params);
     }
     public function cafeStore(Request $request)
     {
@@ -69,7 +116,7 @@ class SettingsController extends Controller
         $current_password = Auth::User()->password;           
         if(Hash::check($request_data['current_password'], $current_password))
         {           
-            $user_id = Auth::User()->id;                       
+                                    
             $obj_user = User::find($user_id);
             $obj_user->password = Hash::make($request_data['password']);;
             $obj_user->save(); 

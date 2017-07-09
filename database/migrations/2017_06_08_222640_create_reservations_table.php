@@ -17,9 +17,13 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->integer('cafe_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
             $table->integer('persons');
             $table->integer('total')->nullable();
             $table->string('bookingDate')->nullable();
+            $table->string('bookingTime')->nullable();
             $table->integer('status')->nullable();
             $table->date('expired')->nullable();
             $table->string('desc')->nullable();

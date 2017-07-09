@@ -2,6 +2,7 @@
 
 namespace Tenomed\Http\Controllers\owner;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use Tenomed\Models\Review;
@@ -26,17 +27,18 @@ class ReviewController extends Controller
     	try
         {
             $cafe   = Cafe::where('user_id',Auth::user()->id)->get();
-            
-            $reviews  = Menu::where('cafe_id',$cafe[0]->id)->get();
 
+            $idCafe = $cafe[0]->id;
+            
+            $reviews = DB::select('select r.id, r.comment, u.name, r.created_at from reviews r join users u on r.user_id = u.id where r.cafe_id = '. $idCafe);
+
+           
             $params = [
                 'title' => 'Review Listing',
-                'cafe' => $cafe,
                 'reviews' => $reviews,
-                'users' -> $user
             ];
 
-            return view('owner.reviews.review_list');->with($params);
+            return view('owner.reviews.review_list')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {

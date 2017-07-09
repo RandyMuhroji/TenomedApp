@@ -15,7 +15,8 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('fr_user_id')->unsigned();
+            $table->integer('to_user_id')->unsigned();
             $table->string('message')->nullable();
             $table->string('images')->nullable();
             $table->string('files')->nullable();
@@ -24,7 +25,8 @@ class CreateMessagesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('fr_user_id')->references('id')->on('users');
+            $table->foreign('to_user_id')->references('id')->on('users');
         });
     }
 

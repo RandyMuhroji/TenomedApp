@@ -15,33 +15,29 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
+                                <th>Review</th>
+                                <th>Date</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
+                                <th>Desc</th>
+                                <th>Date</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @if(count($menus))
-                            @foreach ($menus as $row)
+                            @if(count($reviews))
+                            @foreach ($reviews as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->email}}</td>
-                                <td>
-                                @foreach($row->roles as $r)
-                                    <button title="{{$r->description}}" type="button" class="btn btn-success btn-xs">{{$r->display_name}}</button>
-                                @endforeach
-                                </td>
+                                <td>{{$row->comment}}</td>
+                                <td>{{$row->created_at}}</td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
-                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-reply" title="Reply"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
