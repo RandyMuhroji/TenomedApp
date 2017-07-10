@@ -33,7 +33,7 @@
                                     @if(Auth::user()->avatar=="")
                                     <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                     @else
-                                    <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                     @endif
 
                                     <ul class="sub-menu">
@@ -269,20 +269,7 @@
                                       <h2 class="card-row-title"><a href="detail/{{ $datas->id}}">{{ $datas->name}}</a></h2>
                                   @endif
 
-                                  <?php
-                                    $rankVal = round($rates->rank / $rates->jumlah,2)
-                                  ?>
-                                  <div style="margin-top:-15px;margin-bottom:20px;">
-                                    <span class="card-simple-rating" style="opacity:1;text-align: left; margin-top: -15px;">
-                                        <i class="fa fa-star" style="{{ $rankVal<1?'color:gray':'' }}"></i>
-                                        <i class="fa fa-star" style="{{ $rankVal<2?'color:gray':'' }}"></i>
-                                        <i class="fa fa-star" style="{{ $rankVal<3?'color:gray':'' }}"></i>
-                                        <i class="fa fa-star" style="{{ $rankVal<4?'color:gray':'' }}"></i>
-                                        <i class="fa fa-star" style="{{ $rankVal<5?'color:gray':'' }}"></i>
-                                    </span>
-                                    <span>{{ $rankVal }} / 5</span>
-                                    <br /><small>{{ $datas->address}}</small>
-                                  </div>
+                                 
                                   <div class="card-row-content"><p>{{ substr($datas->desc,1, 100) }}...</p></div><!-- /.card-row-content -->
                               </div><!-- /.card-row-body -->
 

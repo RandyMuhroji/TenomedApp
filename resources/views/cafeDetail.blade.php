@@ -39,7 +39,7 @@
                                 @if(Auth::user()->avatar=="")
                                 <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @else
-                                <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @endif
 
                                 <ul class="sub-menu">
@@ -272,6 +272,10 @@
         <div class="background-white p20">
                             <ul class="nav nav-pills nav-pills-rose">
                               <li class="active"><a href="#pill1" data-toggle="tab" aria-expanded="true">Information</a></li>
+
+                             
+ 
+
                               <li class=""><a href="#pill2" data-toggle="tab" aria-expanded="false">Our Menu</a></li>
                               <li class=""><a href="#pill3" data-toggle="tab" aria-expanded="false">Review</a></li>
                             </ul>
@@ -353,16 +357,15 @@
         </div>
 </div>
 
-            <div class="detail-follow">
-                <h5>Follow Us:</h5>
-                <div class="follow-wrapper">
-                    <a class="follow-btn facebook" href="#"><i class="fa fa-facebook"></i></a>
-                    <a class="follow-btn youtube" href="#"><i class="fa fa-youtube"></i></a>
-                    <a class="follow-btn twitter" href="#"><i class="fa fa-twitter"></i></a>
-                    <a class="follow-btn tripadvisor" href="#"><i class="fa fa-tripadvisor"></i></a>
-                    <a class="follow-btn google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-                </div><!-- /.follow-wrapper -->
-            </div><!-- /.detail-follow -->
+            <div class="form-group">
+                <select name="property">
+                    <option>Property Type</option>
+                    <option>Apartment</option>
+                    <option>Condo</option>
+                    <option>House</option>
+                    <option>Villa</option>
+                </select>
+            </div><!-- /.form-group -->     
         </div>
                                   <ul id="listing-detail-location" class="nav nav-tabs" role="tablist">
 
@@ -421,7 +424,7 @@
                 @if(Auth::user()->avatar=="")
                     <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
                 @else
-                    <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="">        
+                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
                 @endif
         </div><!-- /.review-image -->
 
@@ -486,17 +489,14 @@
                             </div>
 
             <!-- Nav tabs -->
-            
-        </div>
-
-        <div id="loadReview">
+             <div id="loadReview">
 @foreach($review as $reviews)
     <div class="review">
         <div class="review-image">
             @if($reviews->avatar=="")
                     <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
                 @else
-                    <img src="{{ asset('') }}assets/img/tmp/{{$reviews->avatar}}" alt="">        
+                    <img src="{{ asset('') }}images/{{$reviews->avatar}}" alt="">        
                 @endif
         </div><!-- /.review-image -->
 
@@ -533,6 +533,10 @@
     @endforeach
     </div>
     {{ $review->links() }}
+            
+        </div>
+
+       
 
 
         
@@ -559,8 +563,27 @@
 
             <div class="detail-actions row">
                 <div class="col-sm-4">
-                    <div class="btn btn-primary btn-book"><i class="fa fa-shopping-cart"></i> Book Now</div>
+                    <div class="btn btn-primary btn-book" onclick="location.href='/booking/{{ $detail->id }}?id={{Auth::user()->id}}';"><i class="fa fa-shopping-cart"></i> Book Now</div>
                 </div><!-- /.col-sm-4 -->
+                <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
                 <div class="col-sm-4">
                     <div class="btn btn-secondary btn-share"><i class="fa fa-share-square-o"></i> Share
                         <div class="share-wrapper">

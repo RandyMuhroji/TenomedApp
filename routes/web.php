@@ -59,6 +59,7 @@ Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],f
     Route::resource('bookmarks', 'BookmarksController');
     Route::resource('review', 'ReviewController');
     Route::resource('setting', 'SettingController');
+
 });
 
 
@@ -79,6 +80,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
+Route::post('/user/update/{id}', 'user\SettingController@update');
 Route::get('/home', 'HomeController@index');
 
 
@@ -92,4 +94,9 @@ Route::get('/bookmarks', 'cafes@bookmarks');
 Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
 Route::get('/cari', 'cafes@cari');
+Route::get('/cekPass', 'cafes@cekEmail');
+Route::get('/booking/{id}', 'cafes@booking');
+
+Route::post('/saveBooking/{id}', 'cafes@saveBooking');
+Route::get('/invoice/{id}', 'cafes@invoice');
 

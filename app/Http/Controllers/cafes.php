@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Tenomed\Models\Bookmarks;
 use Tenomed\Models\Menu;
 use Tenomed\Models\Review;
+use Tenomed\Models\bookMenu;
+use Tenomed\Models\Reservation;
+
 use Illuminate\Support\Facades\Input;
 use DB;
 
@@ -21,12 +24,12 @@ class cafes extends Controller
             $status=request()->status;
 
              DB::table('bookmarks')
-            ->where('idUser', $id)
-            ->where('idCafe', $kafe)
+            ->where('user_id', $id)
+            ->where('cafe_id', $kafe)
             ->delete();
 
              DB::table('bookmarks')->insert(
-                ['idUser' => $id,'idCafe' => $kafe,'status' => $status]
+                ['user_id' => $id,'cafe_id' => $kafe,'status' => $status]
             );
 
 	}
@@ -39,22 +42,22 @@ class cafes extends Controller
         // $bookmarks = Bookmarks::where('id',"=",$id)->get();
         //$Menu = Menu::where('idCafe',"=",$id)->get();
         $Reviews = DB::table('users')
-            ->join('reviews', 'users.id', '=', 'reviews.idUser')
+            ->join('reviews', 'users.id', '=', 'reviews.user_id')
             ->select('users.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc')
-            ->where('idCafe', $id)
+            ->where('cafe_id', $id)
             ->orderBy('updated_at', 'desc')
             ->Paginate(2);
 
         $bookmarks = DB::table('bookmarks')
-                ->select('id','idCafe', 'idUser','status')
-                ->where('idCafe', $id)
-                ->where('idUser', $idUser)
+                ->select('id','cafe_id', 'user_id','status')
+                ->where('user_id', $id)
+                ->where('cafe_id', $idUser)
                 ->get()->first();
 
         $rates = DB::table('reviews')
-                ->select('idCafe', DB::raw('SUM(rate) as rank'), DB::raw('count(idCafe) as jumlah'))
-                ->where('idCafe', $id)
-                ->groupBy('idCafe')
+                ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
+                ->where('cafe_id', $id)
+                ->groupBy('cafe_id')
                 ->get()->first();
         //dd($koor);
                 if ($rates=="") {
@@ -83,8 +86,8 @@ class cafes extends Controller
         //'password' => 'min:6|confirmed',
         ]);
         $reviews= new Review;
-        $reviews->idUser=$request->idUser;
-        $reviews->idCafe=$request->idCafe;
+        $reviews->user_id=$request->idUser;
+        $reviews->cafe_id=$request->idCafe;
         $reviews->rate=$request->rate;
         $reviews->desc=$request->desc;
         $id=$request->idCafe;
@@ -97,7 +100,7 @@ class cafes extends Controller
     {
 
         $data = DB::table('cafes')
-            ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.idCafe')
+            ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.cafe_id')
             ->select('cafes.id as id','cafes.name as name','cafes.desc as desc','cafes.seat as seat','cafes.images as images', 'cafes.phone as phone','cafes.address as address','menu_cafe.name as menuName','price')
             ->where('cafes.name','like','%'.$_GET['kata'].'%')
             ->orWhere('menu_cafe.name', 'like','%'. $_GET['kata'].'%')
@@ -107,8 +110,8 @@ class cafes extends Controller
             ->distinct()->Paginate(5);
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
-                ->select('idCafe', DB::raw('SUM(rate) as rank'), DB::raw('count(idCafe) as jumlah'))
-                ->groupBy('idCafe')
+                ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
+                ->groupBy('cafe_id')
                 ->get()->first();
         if($data=="")
         {
@@ -120,4 +123,58 @@ class cafes extends Controller
     {
         return view('cafeList');
     }
+    public function cekEmail()
+    {
+
+        return "babi";
+    }
+    public function booking($id)
+    {
+        
+        $detail= DB::table('cafes')->where('id', $id)->first();
+        $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
+        $idUser=request()->id;
+        $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
+        $bookmarks = DB::table('bookmarks')
+                ->select('id','cafe_id', 'user_id','status')
+                ->where('user_id', $id)
+                ->where('cafe_id', $idUser)
+                ->get()->first();
+        return view('booking')->with(['detail'=>$detail, 'kategori'=>$kategori, 'menu'=>$menu, 'bookmarks'=>$bookmarks,'test'=>'']);
+                // return($menu);
+    }
+    public function saveBooking(Request $request,$id){
+        $idUser=request()->id;
+        $book= new Reservation;
+        $book->user_id=$idUser;
+        $book->persons=$request->book_persons;
+        $book->name=$request->book_name;
+        $book->phone=$request->book_phone;
+        $book->email=$request->book_email;
+        $book->bookingDate=$request->book_tanggal;
+        $book->bookingTime=$request->book_jam;
+        $book->cafe_id=$id;
+        $book->save();
+        for ($x = 0; $x < sizeof($request->qty); $x++) {
+            if($request->qty[$x]!=0){
+                $bookMenu= new bookMenu;
+                $bookMenu->reservations_id =$book->id;
+                $bookMenu->menu_cafe_id =$request->menu_id[$x];
+                $bookMenu->qunatity =$request->qty[$x];
+                $bookMenu->save();
+            }
+        } 
+        return redirect('invoice/'.$book->id);
+
+
+    }
+     public function invoice($id){
+        $detail= DB::table('reservations')->where('id', $id)->first();
+        $menu = DB::table('menu_reservations')
+            ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
+            ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
+            ->where('menu_reservations.reservations_id', $id)
+            ->get();
+        return view('invoice')->with(['detail'=>$detail, 'menu'=>$menu]);
+     }
 }
