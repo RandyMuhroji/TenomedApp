@@ -18,6 +18,10 @@
     <link href="{{asset('gantella/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- Animate.css -->
     <link href="{{asset('gantella/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
+     <!-- PNotify -->
+    <link href="{{asset('gantella/vendors/pnotify/dist/pnotify.css')}}" rel="stylesheet">
+    <link href="{{asset('gantella/vendors/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('gantella/vendors/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet"> -->
 
     <!-- Custom Theme Style -->
     <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
@@ -81,5 +85,31 @@
             </div>
         </div>
     </div>
+ 
+    <!-- jQuery -->
+    <script src="{{asset('gantella/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Bootstrap -->
+    <script src="{{asset('gantella/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- PNotify -->
+    <script src="{{asset('gantella/vendors/pnotify/dist/pnotify.js')}}"></script>
+    <script src="{{asset('gantella/vendors/pnotify/dist/pnotify.buttons.js')}}"></script>
+    <script src="{{asset('gantella/vendors/pnotify/dist/pnotify.nonblock.js')}}"></script>
+
+    @if (Session::has('register_success'))
+    <script>
+        $(document).ready(function(){
+            var notif = function() {
+                return new new PNotify({
+                    title: 'Register Success',
+                    text: 'We sent you an activation code. Please check your email.',
+                    type: 'success',
+                    styling: 'bootstrap3'
+                })
+            }
+            notif();
+        });
+    </script>
+    @endif
+
 </body>
 </html>

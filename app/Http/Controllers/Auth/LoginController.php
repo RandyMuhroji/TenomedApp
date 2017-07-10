@@ -4,6 +4,7 @@ namespace Tenomed\Http\Controllers\Auth;
 
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Tenomed\ActivationService;
 
 class LoginController extends Controller
 {
@@ -32,8 +33,21 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    protected $activationService;
+
+    public function __construct(ActivationService $activationService)
     {
         $this->middleware('guest', ['except' => 'logout']);
+        $this->activationService = $activationService;
+    }
+
+    public function activateUser($token)
+    {
+        if ($user = $this->activationService->activateUser($token)) {
+            auth()->login($user);
+            return redirect($this->redirectPath());
+        }
+        abort(404);
     }
 }

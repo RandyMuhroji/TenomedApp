@@ -19,6 +19,10 @@
     <link href="<?php echo e(asset('gantella/vendors/nprogress/nprogress.css')); ?>" rel="stylesheet">
     <!-- Animate.css -->
     <link href="<?php echo e(asset('gantella/vendors/animate.css/animate.min.css')); ?>" rel="stylesheet">
+    <!-- PNotify -->
+    <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.buttons.css')); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.nonblock.css')); ?>" rel="stylesheet"> -->
 
     <!-- Custom Theme Style -->
     <link href="<?php echo e(asset('gantella/build/css/custom.min.css')); ?>" rel="stylesheet">
@@ -68,5 +72,29 @@
             </div>
         </div>
     </div>
+    <!-- jQuery -->
+    <script src="<?php echo e(asset('gantella/vendors/jquery/dist/jquery.min.js')); ?>"></script>
+    <!-- Bootstrap -->
+    <script src="<?php echo e(asset('gantella/vendors/bootstrap/dist/js/bootstrap.min.js')); ?>"></script>
+    <!-- PNotify -->
+    <script src="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.js')); ?>"></script>
+    <script src="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.buttons.js')); ?>"></script>
+    <script src="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.nonblock.js')); ?>"></script>
+
+    <?php if(Session::has('warning')): ?>
+    <script>
+        $(document).ready(function(){
+            var notif = function() {
+                return new new PNotify({
+                    title: 'Login Failed',
+                    text: 'You need to confirm your account. We have sent you an activation code, please check your email.',
+                    type: 'error',
+                    styling: 'bootstrap3'
+                })
+            }
+            notif();
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>

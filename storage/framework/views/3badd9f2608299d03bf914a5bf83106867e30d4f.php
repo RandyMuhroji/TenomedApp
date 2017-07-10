@@ -44,14 +44,14 @@
                                 </li>
                             <?php if(Auth::check()): ?>
 
-                                <?php if (\Entrust::can('user')) : ?>
+                                <?php if (\Entrust::can(('user'))) : ?>
 
                                <li>
                                     <a href="#">
                                     <?php if(Auth::user()->avatar==""): ?>
                                       <img src="<?php echo e(Auth::user()->getAvatarUrl()); ?>" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><?php echo e(Auth::user()->name); ?> <i class="fa fa-chevron-down"></i></a>
                                     <?php else: ?>
-                                      <img src="<?php echo e(asset('')); ?>assets/img/tmp/<?php echo e(Auth::user()->avatar); ?>" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><?php echo e(Auth::user()->name); ?> <i class="fa fa-chevron-down"></i></a>
+                                      <img src="<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><?php echo e(Auth::user()->name); ?> <i class="fa fa-chevron-down"></i></a>
                                     <?php endif; ?>
 
                                     <ul class="sub-menu">

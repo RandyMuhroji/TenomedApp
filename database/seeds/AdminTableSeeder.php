@@ -12,6 +12,7 @@ class AdminTableSeeder extends Seeder
      *
      * @return void
      */
+    
     public function run()
     {
         //create Admin
@@ -19,6 +20,7 @@ class AdminTableSeeder extends Seeder
                 'name' => 'admin',
                 'email'=> 'admin@tenomed.com',
                 'password' => bcrypt('admin'),
+                'status' => 1,
             ]);
 
         $role = Role::find(1);
@@ -29,6 +31,7 @@ class AdminTableSeeder extends Seeder
                 'name' => 'owner cafe',
                 'email'=> 'owner@tenomed.com',
                 'password' => bcrypt('owner'),
+                'status' => 1,
             ]);
 
         $role = Role::find(2);
@@ -52,6 +55,7 @@ class AdminTableSeeder extends Seeder
                 'name' => 'normal user',
                 'email'=> 'user@tenomed.com',
                 'password' => bcrypt('user'),
+                'status' => 1,
             ]);
 
         $role = Role::find(3);

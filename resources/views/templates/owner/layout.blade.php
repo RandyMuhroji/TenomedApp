@@ -47,7 +47,7 @@
           <div class="profile clearfix">
             <div class="profile_pic">
               @if(Auth::user()->avatar != '')
-                  <img src = "{{asset('')}}images/{{Auth::user()->avatar}}" alt="Auth::user()->name" class="img-circle profile_img">
+                  <img src = "{{asset('')}}images/{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" class="img-circle profile_img">
               @else
                    <img src="{{asset('images/user.png')}}" alt="..." class="img-circle profile_img">
               @endif()
@@ -98,7 +98,7 @@
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     @if(Auth::user()->avatar != '')
-                        <img src = "{{asset('')}}images/{{Auth::user()->avatar}}" alt="Auth::user()->name" >
+                        <img src = "{{asset('')}}images/{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" >
                     @else
                          <img src="{{asset('images/user.png')}}" alt="...">
                     @endif()

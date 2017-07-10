@@ -21,8 +21,8 @@ class MailController extends Controller
 
     public function html_email()
     {
-    	$data = ['name' => 'randy muhroji'];
-    	Mail::send(['html' => 'mail'], $data, function($message){
+    	$data = ['link' => 'localhost:8000'];
+    	Mail::send(['html' => 'mail.send_activation_code'], $data, function($message){
     		 $message->to('randymuhroji@gmail.com', 'Randy Muhroji')->subject('can view HTML');
     		 $message->from('tenomed@gmail.com','Tenomed');
     	});

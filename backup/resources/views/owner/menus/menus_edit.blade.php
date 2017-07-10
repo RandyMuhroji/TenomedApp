@@ -1,1 +1,0 @@
-@extends('templates.owner.layout')

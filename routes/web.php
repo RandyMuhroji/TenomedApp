@@ -70,7 +70,8 @@ $this->post('login', 'Auth\LoginController@login');
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
 $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-$this->post('register', 'Auth\RegisterController@register');
+$this->post('register', 'Auth\RegisterController@create');
+Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
 
 // Password Reset Routes...
 $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
@@ -80,13 +81,12 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::post('/user/update/{id}', 'user\SettingController@update');
-Route::get('/home', 'HomeController@index');
-
-
 Route::get('/basicemail','MailController@basic_email');
 Route::get('/htmlemail','MailController@html_email');
 Route::get('/attachmentemail','MailController@attachment_email');
+
+Route::post('/user/update/{id}', 'user\SettingController@update');
+Route::get('/home', 'HomeController@index');
 
 
 Route::get('/detail/{id}', 'cafes@detail');

@@ -47,7 +47,7 @@
           <div class="profile clearfix">
             <div class="profile_pic">
               <?php if(Auth::user()->avatar != ''): ?>
-                  <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="Auth::user()->name" class="img-circle profile_img">
+                  <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="<?php echo e(Auth::user()->name); ?>" class="img-circle profile_img">
               <?php else: ?>
                    <img src="<?php echo e(asset('images/user.png')); ?>" alt="..." class="img-circle profile_img">
               <?php endif; ?>
@@ -98,7 +98,7 @@
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <?php if(Auth::user()->avatar != ''): ?>
-                        <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="Auth::user()->name" >
+                        <img src = "<?php echo e(asset('')); ?>images/<?php echo e(Auth::user()->avatar); ?>" alt="<?php echo e(Auth::user()->name); ?>" >
                     <?php else: ?>
                          <img src="<?php echo e(asset('images/user.png')); ?>" alt="...">
                     <?php endif; ?>

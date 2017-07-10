@@ -7,6 +7,8 @@ use Tenomed\Models\Role;
 use Validator;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Tenomed\ActivationService;
 
 class RegisterController extends Controller
 {
@@ -35,9 +37,13 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    protected $activationService;
+
+    public function __construct(ActivationService $activationService)
     {
         $this->middleware('guest');
+        $this->activationService = $activationService;
     }
 
     /**
@@ -61,18 +67,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+        $this->validate($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
 
+        $user = User::create([
+            'name' => $data->input('name'),
+            'email' => $data->input('email'),
+            'password' => bcrypt($data->input('password')),
+        ]);
 
+        $this->activationService->sendActivationMail($user);
         $role = Role::find($data['role_id']);
         $user->attachRole($role);
 
-        return $user;
+        
+
+        $msg = "please check ".$user->email." for active this account";
+        
+        return redirect()->route('register')->with('register_success',$msg);
     }
 }
