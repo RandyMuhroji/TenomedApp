@@ -34,18 +34,19 @@ class ActivationService
         $token = $this->activationRepo->createActivation($user);
 
         $link = route('user.activate', $token);
-        $message = sprintf('Activate account <a href="%s">%s</a>', $link, $link);
 
-        $this->mailer->raw($message, function (Message $m) use ($user) {
-            $m->to($user->email)->subject('Tenomed - Activation mail');
+        $data = ['link' => $link];
+
+        Mail::send(['html' => 'mail.send_activation_code'], $data, function($message) use($user){
+             $message->to($user->email)->subject('Activation Code TENOMED Account');
+             $message->from('tenomed01@gmail.com','Tenomed');
         });
 
-        // $data = ['link' => $link];
-        // Mail::send(['html' => 'mail.send_activation_code'], $data, function($message) use ($user)   {
-        //      $message->to('randymuhroji@gmail.com', 'Randy Muhroji')->subject('Tenomed - Activation mail');
-        //      $message->from('tenomed01@gmail.com','Tenomed');
-        // });
+        // $message = sprintf('Activate account <a href="%s">%s</a>', $link, $link);
 
+        // $this->mailer->raw($message, function (Message $m) use ($user) {
+        //     $m->to($user->email)->subject('Tenomed - Activation mail');
+        // });
        
 
     }

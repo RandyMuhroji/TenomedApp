@@ -21,10 +21,11 @@ class MailController extends Controller
 
     public function html_email()
     {
-    	$data = ['link' => 'localhost:8000'];
-    	Mail::send(['html' => 'mail.send_activation_code'], $data, function($message){
-    		 $message->to('randymuhroji@gmail.com', 'Randy Muhroji')->subject('can view HTML');
-    		 $message->from('tenomed@gmail.com','Tenomed');
+        $email = 'randymuhroji@gmail.com';
+        $data = ['link' => 'http://facebook.com'];
+    	Mail::send(['html' => 'mail.send_activation_code'], $data, function($message) use($email){
+    		 $message->to($email, 'Randy Muhroji')->subject('can view HTML');
+    		 $message->from('tenomed01@gmail.com','Tenomed');
     	});
 
     	echo "email was sent";	
@@ -32,6 +33,7 @@ class MailController extends Controller
 
     public function attachment_email()
     {
+        $email = 'randymuhroji@gmail.com';
     	$data = ['name' => 'randy muhroji'];
     	Mail::send(['text' => 'mail'], $data, function($message){
     		 $message->to('randymuhroji@gmail.com', 'Randy Muhroji')->subject('can view HTML');

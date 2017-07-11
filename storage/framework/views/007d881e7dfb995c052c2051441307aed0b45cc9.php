@@ -73,7 +73,7 @@
                     <li><a href="<?php echo e(route('gallery.index')); ?>"><i class="fa fa-file-image-o"></i>Gallery</a></li>
                     <li><a href="<?php echo e(route('messages.index')); ?>"><i class="fa fa-envelope"></i>Messages</a></li>
                     <li><a href="<?php echo e(route('reviews.index')); ?>"><i class="fa fa-comments"></i>Reviews</a></li>
-                    <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                               <li><a href="<?php echo e(route('owner_account')); ?>">Account</a></li>
                               <li><a href="<?php echo e(route('owner_cafe')); ?>">Cafe</a></li>

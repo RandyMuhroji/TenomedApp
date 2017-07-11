@@ -48,6 +48,6 @@ class LoginController extends Controller
             auth()->login($user);
             return redirect($this->redirectPath());
         }
-        abort(404);
+        return response()->view('errors.'.'404');
     }
 }
