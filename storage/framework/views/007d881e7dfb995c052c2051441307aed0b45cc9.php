@@ -26,6 +26,8 @@
   <link href="<?php echo e(asset('gantella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(asset('gantella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')); ?>" rel="stylesheet">
   <link href="<?php echo e(asset('gantella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')); ?>" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="<?php echo e(asset('gantella//vendors/iCheck/skins/flat/green.css')); ?>" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="<?php echo e(asset('gantella/build/css/custom.min.css')); ?>" rel="stylesheet">
 
@@ -173,6 +175,8 @@
   <script src="<?php echo e(asset('gantella/vendors/pdfmake/build/pdfmake.min.js')); ?>"></script>
   <script src="<?php echo e(asset('gantella/vendors/pdfmake/build/vfs_fonts.js')); ?>"></script>
 
+  <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
   <!-- Custom Theme Scripts -->
   <script src="<?php echo e(asset('gantella/build/js/custom.min.js')); ?>"></script>
   <!-- Google Analytics -->

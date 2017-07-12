@@ -19,6 +19,8 @@ class CreatePaymentsTable extends Migration
             $table->integer('status');
             $table->string('valid');
             $table->string('desc');
+            $table->boolean('isReadCafe')->default(false);
+            $table->boolean('isReadUser')->default(false);
             $table->timestamps();
             $table->softDeletes();
             

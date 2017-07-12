@@ -49,7 +49,6 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
         Route::put('/cafe/{id}',"SettingsController@cafeStore");
 
         Route::post('/account/password',"SettingsController@changePassword")->name('change_password');
-
     });
 });
 

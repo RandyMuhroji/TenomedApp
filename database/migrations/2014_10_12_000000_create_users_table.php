@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('contact')->nullable();
             $table->string('desc')->nullable();
             $table->integer('status')->default(0);
+            $table->boolean('isRead')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -89,18 +89,60 @@ class SettingsController extends Controller
     public function cafe()
     {
         $cafe = DB::table('cafes')->where('user_id', Auth::user()->id)->get();
-        
+        $cafe = $cafe[0];
+
         $params = [
                 'title' => 'Edit Cafe',
                 'cafe' => $cafe,
             ];
 
-
     	return view('owner.settings.cafe')->with($params);
     }
-    public function cafeStore(Request $request)
+    public function cafeStore(Request $request, $id)
     {
-    	return "account store";
+      return $request->input();
+      try
+        {
+            $cafe = Cafe::findOrFail($id);
+
+            $this->validate($request, [
+                'name' => 'required',
+                'days' => 'required',
+                'address' => 'required',
+                'phone' => 'required'
+            ]);
+
+            $cafe->name =  $request->input('name');
+            $cafe->address = $request->input('address');
+            $cafe->phone = $request->input('phone');
+            $cafe->desc = $request->input('desc');
+            $cafe->save();
+
+            DB::table('operational_cafe')->insert(
+              [
+                  'cafe_id' => $id,
+                  'day' => $request->input('day'),
+                  'open_hour' => $request->input('address'),
+                  'close_hour' => $request->input('address'),
+              ]
+            );
+
+            DB:table('highlights')->insert(
+              [
+                  'cafe_id' => $id,
+                  'name' => $highlight
+              ]
+            );
+            
+            return redirect()->route('owner_cafe')->with('success', trans('general.form.flash.updated',['name' => $cafe->name]));
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     public function changePassword(Request $request)

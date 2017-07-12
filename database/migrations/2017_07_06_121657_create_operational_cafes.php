@@ -16,8 +16,9 @@ class CreateOperationalCafes extends Migration
         Schema::create('operational_cafe', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cafe_id')->unsigned();
-            $table->string('days');
-            $table->string('hours');
+            $table->string('day');
+            $table->string('open_hour');
+            $table->string('close_hour');
             $table->string('desc')->nullable();
             $table->timestamps();
             $table->softDeletes();

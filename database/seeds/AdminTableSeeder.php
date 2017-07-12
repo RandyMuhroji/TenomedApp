@@ -39,14 +39,29 @@ class AdminTableSeeder extends Seeder
 
         // Make Cafe 
 
+        $address = 'Jl. Letda Sudjono No.131, Bantan Tim., Medan Tembung, Kota Medan, Sumatera Utara 20223, Indonesia';
+        $arrAddress = explode(',',$address);
+
+        $kec = $arrAddress[2];
+        $kel = $arrAddress[1];
+        $city = $arrAddress[3];
+        $province = $arrAddress[4];
+        $arrProv = explode(' ', $province);
+
+        $province = $arrProv[0];
+
         DB::table('cafes')->insert(
             [
                 'user_id' => $user->id,
                 'name' => 'Tenomed Cafe',
-                'address' => 'Jl. Letda Sudjono No.131, Bantan Tim., Medan Tembung, Kota Medan, Sumatera Utara 20223, Indonesia',
+                'address' => $address,
                 'phone' => '082363071285',
                 'lat' => '3.5981977039643183',
-                'long' => '98.7072978224121'
+                'long' => '98.7072978224121',
+                'kecamatan' => $kec,
+                'kelurahan' => $kel,
+                'city' => $city,
+                'province' => $province,
             ]
         );
 

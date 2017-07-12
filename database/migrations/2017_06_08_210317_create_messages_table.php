@@ -22,6 +22,7 @@ class CreateMessagesTable extends Migration
             $table->string('files')->nullable();
             $table->integer('status')->nullable();
             $table->integer('desc')->nullable();
+            $table->boolean('isRead')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

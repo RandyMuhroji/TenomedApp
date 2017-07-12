@@ -71,17 +71,32 @@ class CafesController extends Controller
             'name' => $request->input('user_name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
+            'status' => 1,
         ]);
 
         $role = Role::find($request->input('role_id'));
 
         $user->attachRole($role);
 
+        $arrAddress = explode(',',$cafe->address);
+
+        $kec = $arrAddress[2];
+        $kel = $arrAddress[1];
+        $city = $arrAddress[3];
+        $province = $arrAddress[4];
+        $arrProv = explode(' ', $province);
+
+        $province = $arrProv[0];
+
         DB::table('cafes')->insert(
             [
                 'user_id' => $user->id,
                 'name' => $request->input('name'),
                 'address' => $request->input('address'),
+                'kecamatan' => $kec,
+                'kelurahan' => $kel,
+                'city' => $city,
+                'province' => $province,
                 'phone' => $request->input('phone'),
                 'lat' => $request->input('lat'),
                 'long' => $request->input('lng')
@@ -96,8 +111,8 @@ class CafesController extends Controller
                 ];
         
         Mail::send(['html' => 'mail.new_cafe'], $data, function($message){
-             $message->to($request->input('email'), $request->input('user_name'))->subject('can view HTML');
-             $message->from('tenomed@gmail.com','Tenomed');
+             $message->to($request->input('email'))->subject('Password Account Cafe');
+             $message->from('tenomed@gmail01.com','Tenomed');
         });
 
         return redirect()->route('cafes.index')->with('success', trans('general.form.flash.created_cafe',['name'  => $request->input('name'),

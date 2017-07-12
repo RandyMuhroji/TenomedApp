@@ -17,7 +17,11 @@ class CreateCafesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
+            $table->string('kecamatan');
+            $table->string('kelurahan');
             $table->string('address');
+            $table->string('province');
+            $table->string('city');
             $table->string('long');
             $table->string('lat');
             $table->string('images')->nullable();

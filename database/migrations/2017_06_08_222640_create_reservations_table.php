@@ -27,6 +27,8 @@ class CreateReservationsTable extends Migration
             $table->integer('status')->nullable();
             $table->date('expired')->nullable();
             $table->string('desc')->nullable();
+            $table->boolean('isReadCafe')->default(false);
+            $table->boolean('isReadAdmin')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

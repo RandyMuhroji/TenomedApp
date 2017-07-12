@@ -18,11 +18,13 @@ class CreateReviewsTable extends Migration
 
             $table->integer('user_id')->unsigned();
             $table->integer('cafe_id')->unsigned();
-
+            $table->integer('parent_id')->nullable();
             $table->integer('rate')->nullable();
             $table->string('comment')->nullable();
             $table->string('desc')->nullable();
             $table->integer('status')->nullable();
+            $table->boolean('isRead')->default(false);
+
             $table->timestamps();
             $table->softDeletes();
 
