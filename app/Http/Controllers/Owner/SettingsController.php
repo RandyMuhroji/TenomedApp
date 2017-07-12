@@ -131,7 +131,7 @@ class SettingsController extends Controller
 
     public function cafeStore(Request $request, $id)
     {
-        return $request->input();
+        //return $request->input();
       try
         {
             $this->validate($request, [
@@ -175,8 +175,8 @@ class SettingsController extends Controller
 
             for ($i=0; $i < count($request->input('days')); $i++) { 
               $day = $request->input('days')[$i];
-              $open = $request->input('open_hours')[$i];
-              $close = $request->input('close_hours')[$i];
+              $open = $request->input('open_hours')[$day];
+              $close = $request->input('close_hours')[$day];
               
               DB::table('operational_cafe')->insert(
                 [

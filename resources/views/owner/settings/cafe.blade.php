@@ -57,7 +57,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" name='days[]' value="0" {{isset($days[0]) ? 'checked' : '' }} > Sunday
+                        <input type="checkbox" class="flat change" name='days[]' value="0" {{isset($days[0]) ? 'checked' : '' }} > Sunday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['0']) ? $close_hours['0'] : '' }}"> 
                         <label class="control-label lbl">To</label>
                         <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['0']) ? $open_hours['0'] : '' }}">
@@ -67,7 +67,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="1" name="days[]" {{isset($days[1]) ? 'checked' : '' }}> Monday 
+                        <input type="checkbox" class="flat change" value="1" name="days[]" {{isset($days[1]) ? 'checked' : '' }}> Monday 
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['1']) ? $close_hours['1'] : '' }}"> 
                         <label class="control-label lbl">To</label>
                         <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['1']) ? $open_hours['1'] : '' }}">
@@ -77,7 +77,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="2" name = 'days[]' {{isset($days[2]) ? 'checked' : '' }}> Tuesday
+                        <input type="checkbox" class="flat change" value="2" name = 'days[]' {{isset($days[2]) ? 'checked' : '' }}> Tuesday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['2']) ? $close_hours['2'] : '' }}"> 
                         <label class="control-label lbl">To</label>
                         <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['2']) ? $open_hours['2'] : '' }}">
@@ -87,7 +87,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="3" name = 'days[]' {{isset($days[3]) ? 'checked' : '' }}>
+                        <input type="checkbox" class="flat change" value="3" name = 'days[]' {{isset($days[3]) ? 'checked' : '' }}>
                          Wednesday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['3']) ? $close_hours['3'] : '' }}"> 
                         <label class="control-label lbl">To</label>
@@ -98,7 +98,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="4" name = 'days[]' {{isset($days[4]) ? 'checked' : '' }}> Thursday
+                        <input type="checkbox" class="flat change" value="4" name = 'days[]' {{isset($days[4]) ? 'checked' : '' }}> Thursday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['4']) ? $close_hours['4'] : '' }}"> 
                         <label class="control-label lbl">To</label>
                         <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['4']) ? $open_hours['4'] : '' }}">
@@ -108,7 +108,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="5" name = 'days[]' {{isset($days[5]) ? 'checked' : '' }}>
+                        <input type="checkbox" class="flat change" value="5" name = 'days[]' {{isset($days[5]) ? 'checked' : '' }}>
                          Friday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['5']) ? $close_hours['5'] : '' }}"> 
                         <label class="control-label lbl">To</label>
@@ -119,7 +119,7 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="6" name = 'days[]' {{isset($days[6]) ? 'checked' : '' }}> Saturday
+                        <input type="checkbox" class="flat change" value="6" name = 'days[]' {{isset($days[6]) ? 'checked' : '' }}> Saturday
                         <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['6']) ? $close_hours['6'] : '' }}"> 
                         <label class="control-label lbl">To</label>
                         <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['6']) ? $open_hours['6'] : '' }}">
@@ -255,24 +255,6 @@
   <script src="{{asset('gantella/build/js/datepair.js')}}"> </script>
   <script src="{{asset('gantella/build/js/jquery.datepair.js')}}"> </script>
 
-  <!-- <script>
-    var step1 = function(){
-      console.log("step1 click");
-
-      return $('#stepExample1').timepicker({ 'step': 30, 'timeFormat': 'h:i A' });
-    };
-    var step2 = function() {
-      console.log("step2 click");
-      return $('#stepExample2').timepicker({
-        'start': $('#stepExample1').val(),
-        'step': 30,
-        'timeFormat': 'h:i A',
-        'minTime': $('#stepExample1').val(),
-        'maxTime': '11:30pm ',
-        'showDuration': true
-      });
-    };
-</script> -->
   <script>
 
     $('.datepairExample .time').timepicker({
@@ -285,8 +267,10 @@
 
     $(document).ready(function(){
       $(".sesuatu").change(function() {
-        if(this.checked)
-         alert($(this).val());
+        if(this.checked){
+            alert($(this).val());
+        }
+        console.log('udah masok ni');
       });
     })
   </script>
