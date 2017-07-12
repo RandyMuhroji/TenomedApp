@@ -328,33 +328,35 @@
 
         var id = $(this).data("id");
         var name = $(this).data("name");
-        if(confirm("Are you sure delete album " + name + " ?")){
-            var token = $(this).data("token");
-            $.ajax(
-            {
-                url: "/manage-cafe/gallery/album/"+id,
-                type: 'DELETE',
-                dataType: "JSON",
-                data: {
-                    "id": id,
-                    "_method": 'DELETE',
-                    "_token": token,
-                },
-                success: function (msg)
-                {
-                  console.log(msg);
-                  $('#album'+id).remove();
-                  $('div#notification').show();
-                  $('div#notification p').text(msg['success']);
-                  $('div#notification').addClass('alert-success');
+        if(name != 'slider'){
+          if(confirm("Are you sure delete album " + name + " ?")){
+              var token = $(this).data("token");
+              $.ajax(
+              {
+                  url: "/manage-cafe/gallery/album/"+id,
+                  type: 'DELETE',
+                  dataType: "JSON",
+                  data: {
+                      "id": id,
+                      "_method": 'DELETE',
+                      "_token": token,
+                  },
+                  success: function (msg)
+                  {
+                    console.log(msg);
+                    $('#album'+id).remove();
+                    $('div#notification').show();
+                    $('div#notification p').text(msg['success']);
+                    $('div#notification').addClass('alert-success');
 
-                  var closeAlert = setTimeout(function(){
-                    $('div#notification').hide();
-                  }, 100);
+                    var closeAlert = setTimeout(function(){
+                      $('div#notification').hide();
+                    }, 100);
 
-                  return clearTimeout(closeAlert);
-                }
-            }); 
+                    return clearTimeout(closeAlert);
+                  }
+              }); 
+          }
         }
         
     });

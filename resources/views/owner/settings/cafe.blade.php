@@ -45,10 +45,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea class="form-control col-md-7 col-xs-12" rows="3"></textarea>
-                  @if ($errors->has('desc'))
-                <span class="help-block">{{ $errors->first('desc') }}</span>
-                  @endif
+                <textarea class="form-control col-md-7 col-xs-12" rows="3" name="desc">{{$cafe->desc}}</textarea>
               </div>
             </div>
 
@@ -60,72 +57,72 @@
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" name = 'days[]' value="0"> Sunday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="checkbox" class="flat" name='days[]' value="0" {{isset($days[0]) ? 'checked' : '' }} > Sunday
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['0']) ? $close_hours['0'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['0']) ? $open_hours['0'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="1" name="days[]"> Monday 
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="checkbox" class="flat" value="1" name="days[]" {{isset($days[1]) ? 'checked' : '' }}> Monday 
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['1']) ? $close_hours['1'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['1']) ? $open_hours['1'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="2" name = 'days[]'> Tuesday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="checkbox" class="flat" value="2" name = 'days[]' {{isset($days[2]) ? 'checked' : '' }}> Tuesday
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['2']) ? $close_hours['2'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['2']) ? $open_hours['2'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="3" name = 'days[]'>
+                        <input type="checkbox" class="flat" value="3" name = 'days[]' {{isset($days[3]) ? 'checked' : '' }}>
                          Wednesday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['3']) ? $close_hours['3'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['3']) ? $open_hours['3'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="4" name = 'days[]'> Thursday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end" > 
+                        <input type="checkbox" class="flat" value="4" name = 'days[]' {{isset($days[4]) ? 'checked' : '' }}> Thursday
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['4']) ? $close_hours['4'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start" >
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['4']) ? $open_hours['4'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="5" name = 'days[]'>
+                        <input type="checkbox" class="flat" value="5" name = 'days[]' {{isset($days[5]) ? 'checked' : '' }}>
                          Friday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['5']) ? $close_hours['5'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['5']) ? $open_hours['5'] : '' }}">
                       </div>
                     </p>
                   </li>
                   <li>
                     <p>
                       <div class="datepairExample">
-                        <input type="checkbox" class="flat" value="6" name = 'days[]' onchange="change()"> Saturday
-                        <input type="text" name="close_hours[]" class="form-control timePic time end"> 
+                        <input type="checkbox" class="flat" value="6" name = 'days[]' {{isset($days[6]) ? 'checked' : '' }}> Saturday
+                        <input type="text" name="close_hours[]" class="form-control timePic time end" value="{{ isset($close_hours['6']) ? $close_hours['6'] : '' }}"> 
                         <label class="control-label lbl">To</label>
-                        <input type="text" name="open_hours[]" class="form-control timePic time start">
+                        <input type="text" name="open_hours[]" class="form-control timePic time start" value="{{ isset($open_hours['6']) ? $open_hours['6'] : '' }}">
                       </div>
                     </p>
                   </li>
@@ -137,7 +134,7 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Highlights
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tags_1" type="text" class="tags form-control col-md-7 col-xs-12"" value="" name="highlights" data-name="add new" />
+                <input id="tags_1" type="text" class="tags form-control col-md-7 col-xs-12"" value="{{$highlights}}" name="highlights" data-name="add new" />
               </div>
             </div>
 

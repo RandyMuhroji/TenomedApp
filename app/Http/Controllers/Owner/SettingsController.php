@@ -91,50 +91,120 @@ class SettingsController extends Controller
         $cafe = DB::table('cafes')->where('user_id', Auth::user()->id)->get();
         $cafe = $cafe[0];
 
+        $highlights = DB::table('highlights')->
+                      select('name')
+                      ->where('cafe_id',$cafe->id)
+                      ->get();
+
+        $operational_cafe = DB::table('operational_cafe')
+                            ->select('day','open_hour','close_hour')
+                            ->where('cafe_id',$cafe->id)
+                            ->get();
+
+        $highlight = "";
+        foreach ($highlights as $value) {
+          $highlight =  $highlight.",".$value->name;
+        }
+
+        $days  = array();
+        $open_hours = array();
+        $close_hours = array();
+
+        foreach ($operational_cafe as $value) {
+          $days[''.$value->day] = $value->day;
+          $open_hours[''.$value->day] = $value->open_hour; 
+          $close_hours[''.$value->day] = $value->close_hour; 
+        }
+
         $params = [
                 'title' => 'Edit Cafe',
                 'cafe' => $cafe,
+                'highlights' => $highlight,
+                'days' => $days,
+                'open_hours' => $open_hours,
+                'close_hours' => $close_hours
             ];
-
+        // return $params;
+        
     	return view('owner.settings.cafe')->with($params);
     }
+
     public function cafeStore(Request $request, $id)
     {
-      return $request->input();
+        return $request->input();
       try
         {
-            $cafe = Cafe::findOrFail($id);
-
             $this->validate($request, [
                 'name' => 'required',
                 'days' => 'required',
                 'address' => 'required',
-                'phone' => 'required'
+                'phone' => 'required',
+                'open_hours' => 'required',
+                'close_hours' => 'required',
             ]);
 
-            $cafe->name =  $request->input('name');
-            $cafe->address = $request->input('address');
-            $cafe->phone = $request->input('phone');
-            $cafe->desc = $request->input('desc');
-            $cafe->save();
+            $arrAddress = explode(',',$request->input('address'));
+            $kec = $arrAddress[2];
+            $kel = $arrAddress[1];
+            $city = $arrAddress[3];
+            $province = $arrAddress[4];
+            $arrProv = explode(' ', $province);
+            $province = $arrProv[0];
 
-            DB::table('operational_cafe')->insert(
-              [
-                  'cafe_id' => $id,
-                  'day' => $request->input('day'),
-                  'open_hour' => $request->input('address'),
-                  'close_hour' => $request->input('address'),
-              ]
-            );
+            $cafe = DB::table('cafes')
+                ->where('id',$id)
+                ->update(
+                    [
+                        'name'    => $request->input('name'),
+                        'address' => $request->input('address'),
+                        'kecamatan' => $kec,
+                        'kelurahan' => $kel,
+                        'city' => $city,
+                        'province' => $province,
+                        'phone' => $request->input('phone'),
+                        'lat' => $request->input('lat'),
+                        'long' => $request->input('lng'),
+                        'desc' => $request->input('desc'),
 
-            DB:table('highlights')->insert(
-              [
-                  'cafe_id' => $id,
-                  'name' => $highlight
-              ]
-            );
+                    ]
+                );
+
+            DB::table('operational_cafe')
+                ->where('cafe_id', $id)
+                ->delete();
+
+            for ($i=0; $i < count($request->input('days')); $i++) { 
+              $day = $request->input('days')[$i];
+              $open = $request->input('open_hours')[$i];
+              $close = $request->input('close_hours')[$i];
+              
+              DB::table('operational_cafe')->insert(
+                [
+                    'cafe_id' => $id,
+                    'day' => $day,
+                    'open_hour' => $open,
+                    'close_hour' => $close,
+                ]
+              );
+            }
+
+                        
+            DB::table('highlights')
+                ->where('cafe_id', $id)
+                ->delete();
+
+            $highlights = explode(',',$request->input('highlights'));
+
+            foreach ($highlights as $highlight) {
+              DB::table('highlights')->insert(
+                [
+                    'cafe_id' => $id,
+                    'name' => $highlight
+                ]
+              );
+            }
             
-            return redirect()->route('owner_cafe')->with('success', trans('general.form.flash.updated',['name' => $cafe->name]));
+            return redirect()->route('owner_cafe')->with('success', trans('general.form.flash.updated',['name' => $request->input('name')]));
         }
         catch (ModelNotFoundException $ex) 
         {

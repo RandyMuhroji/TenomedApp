@@ -78,7 +78,7 @@ class CafesController extends Controller
 
         $user->attachRole($role);
 
-        $arrAddress = explode(',',$cafe->address);
+        $arrAddress = explode(',',$request->input('address'));
 
         $kec = $arrAddress[2];
         $kel = $arrAddress[1];
@@ -88,7 +88,7 @@ class CafesController extends Controller
 
         $province = $arrProv[0];
 
-        DB::table('cafes')->insert(
+        $cafe = DB::table('cafes')->insert(
             [
                 'user_id' => $user->id,
                 'name' => $request->input('name'),
@@ -100,6 +100,13 @@ class CafesController extends Controller
                 'phone' => $request->input('phone'),
                 'lat' => $request->input('lat'),
                 'long' => $request->input('lng')
+            ]
+        );
+
+        DB::table('album_gallery')->insert(
+            [
+                'cafe_id' => $cafe->id,
+                'name' => 'slider'
             ]
         );
 
