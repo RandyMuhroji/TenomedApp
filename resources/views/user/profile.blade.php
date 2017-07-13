@@ -23,7 +23,7 @@
 
                         <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
    
-						<li class="active" >
+                        <li class="active" >
                                 <a href="/">Home </a>
 
                             </li>
@@ -36,7 +36,7 @@
                                 @if(Auth::user()->avatar=="")
                                 <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @else
-                                <img src="{{ asset('') }}assets/img/tmp/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
                                 @endif
 
                                 <ul class="sub-menu">
@@ -74,12 +74,12 @@
 
                         </ul>
 
-						<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
-						    <span class="sr-only">Toggle navigation</span>
-						    <span class="icon-bar"></span>
-						    <span class="icon-bar"></span>
-						    <span class="icon-bar"></span>
-						</button>
+                        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
                     </div><!-- /.header-bottom -->
                 </div><!-- /.header-content -->
@@ -98,31 +98,29 @@
                     <div class="col-sm-4 col-lg-3">
                         <div class="sidebar">
                             <div class="widget">
-    <div class="user-photo">
-        <a href="#">
-            @if(Auth::user()->avatar=="")
-            <img src="{{ asset('') }}images/user.png" alt="User Photo">
-           <!--  <span class="user-photo-action">Click here to reupload</span> -->
-        @else
-            <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="User Photo">
-        @endif
-        </a>
-    </div><!-- /.user-photo -->
-</div><!-- /.widget -->
-
-
+                                <div class="user-photo">
+                                    <a href="#">
+                                        @if(Auth::user()->avatar=="")
+                                        <img src="{{ asset('') }}images/user.png" alt="User Photo">
+                                       <!--  <span class="user-photo-action">Click here to reupload</span> -->
+                                    @else
+                                        <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="User Photo">
+                                    @endif
+                                    </a>
+                                </div><!-- /.user-photo -->
+                            </div><!-- /.widget -->
                             <div class="widget">
 
-    <ul class="menu-advanced">
-        <li class="active"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-        <li ><a href="{{url('user/notification')}}"><i class="fa fa-envelope-o"></i> Notification</a></li>
-        <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
-        <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
-        <li><a href="{{url('user/setting')}}"><i class="fa fa-pencil"></i> Setting</a></li>
-        <li><a href="{{url('logout')}}"  onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a></li>
-    </ul>
-</div><!-- /.widget -->
+                                <ul class="menu-advanced">
+                                    <li class="active"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                                    <li ><a href="{{url('user/notification')}}"><i class="fa fa-envelope-o"></i> Notification</a></li>
+                                    <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
+                                    <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
+                                    <li><a href="{{url('user/setting')}}"><i class="fa fa-pencil"></i> Setting</a></li>
+                                    <li><a href="{{url('logout')}}"  onclick="event.preventDefault();
+                                                                    document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> Logout</a></li>
+                                </ul>
+                            </div><!-- /.widget -->
 
                         </div><!-- /.sidebar -->
                     </div><!-- /.col-* -->

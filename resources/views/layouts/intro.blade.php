@@ -32,6 +32,7 @@
 
     <title>Tempat Nongkrong Medan</title>
     <style type="text/css">
+    
 
 .wizard {
     margin: 20px auto;
@@ -485,6 +486,11 @@ function check_email(email){
                 check_username(email);
             }
     };
+
+     function budi(aku){
+
+       document.getElementById("replyKu"+aku).style.display='inherit';
+    };
 $(function(){
      
     $('#tmbPass').click(function(){
@@ -495,13 +501,8 @@ $(function(){
 });
 
 
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-
 
 $(function(){
-     
     $('#tmbProfile').click(function(){
       document.getElementById("editProfile").style.display='inherit';
        document.getElementById("editPassword").style.display='none';
@@ -512,7 +513,6 @@ $(function(){
   $(function(){
 
     $('#bookmarks').click(function(){
-
 
 
 $.ajaxSetup({

@@ -43,23 +43,35 @@ class cafes extends Controller
         //$Menu = Menu::where('idCafe',"=",$id)->get();
         $Reviews = DB::table('users')
             ->join('reviews', 'users.id', '=', 'reviews.user_id')
-            ->select('users.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc')
+            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc')
             ->where('cafe_id', $id)
+            ->where('parent_id','==', 0)
             ->orderBy('updated_at', 'desc')
-            ->Paginate(2);
+            ->Paginate(4);
+
+            $child = DB::table('users')
+            ->join('reviews', 'users.id', '=', 'reviews.user_id')
+            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.parent_id', 'reviews.updated_at', 'reviews.desc')
+            ->where('cafe_id', $id)
+            ->where('parent_id','<>', 0)
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         $bookmarks = DB::table('bookmarks')
                 ->select('id','cafe_id', 'user_id','status')
                 ->where('user_id', $id)
                 ->where('cafe_id', $idUser)
                 ->get()->first();
+         $highlight = DB::table('highlights')
+                ->select('name')
+                ->where('cafe_id', $id)
+                ->get();
 
         $rates = DB::table('reviews')
                 ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
                 ->where('cafe_id', $id)
                 ->groupBy('cafe_id')
                 ->get()->first();
-        //dd($koor);
                 if ($rates=="") {
                     $rates="";
                 }
@@ -72,14 +84,33 @@ class cafes extends Controller
                     if($bookmarks->status==0){$test="";}
 
                 }
-        return view('cafeDetail')->with(['detail'=>$detail, 'review'=>$Reviews, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
+        $owner=DB::table('cafes')
+                ->select('user_id')
+                ->where('id', $id)
+                ->get();
+
+
+        $idGaleri=DB::table('album_gallery')
+                ->select('id')
+                ->where('user_id', $owner[0]->user_id)
+                ->where('name','slider')
+                ->get();
+        //return $idGaleri;
+     $foto=DB::select('select * from gallery where album_id='.$idGaleri[0]->id);
+
+       // return $foto;
+     $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
+     $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
+     
+
+        return view('cafeDetail1')->with(['detail'=>$detail,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
     }
     public function sendReview(Request $request)
     {
     	$this->validate($request,[
-        'rate'=>'required',
         'idUser'=>'required',
         'desc'=>'required',
+        'parent'=>'required',
 
         /*'email'=>'required',
         'password' => 'min:6|confirmed',*/
@@ -90,10 +121,12 @@ class cafes extends Controller
         $reviews->cafe_id=$request->idCafe;
         $reviews->rate=$request->rate;
         $reviews->desc=$request->desc;
+
+        $reviews->parent_id=$request->parent;
         $id=$request->idCafe;
         $reviews->save();
 
-        return redirect('detail/'.$id.'?id='.$request->idUser);
+        return redirect('detail/'.$id.'?id='.$request->idUser)->with(['status'=>'active']);
 
     }
      public function cari()
@@ -169,12 +202,12 @@ class cafes extends Controller
 
     }
      public function invoice($id){
-        $detail= DB::table('reservations')->where('id', $id)->first();
-        $menu = DB::table('menu_reservations')
-            ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
-            ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
-            ->where('menu_reservations.reservations_id', $id)
-            ->get();
-        return view('invoice')->with(['detail'=>$detail, 'menu'=>$menu]);
+         $detail= DB::table('reservations')->where('id', $id)->first();
+        // $menu = DB::table('menu_reservations')
+        //     ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
+        //     ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
+        //     ->where('menu_reservations.reservations_id', $id)
+        //     ->get();
+        return view('invoice')->with(['detail'=>$detail]);
      }
 }
