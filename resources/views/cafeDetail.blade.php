@@ -1,88 +1,184 @@
-@extends('layouts.intro')
+<!DOCTYPE html>
+<html>
 
-@section('content')
+
+<!-- Mirrored from preview.byaviators.com/template/superlist/index-bootstrap-slider.html by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 14 May 2017 15:06:30 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link href="http://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet" type="text/css">
+    <link href="{{ asset('') }}assets/libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('') }}assets/libraries/owl.carousel/{{ asset('') }}assets/owl.carousel.css" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('') }}assets/libraries/colorbox/example1/colorbox.css" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('') }}assets/libraries/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('') }}assets/css/superlist.css" rel="stylesheet" type="text/css" >
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
+
+    <title>Superlist - Bootstrap Slider</title>
+</head>
+
+
+<body class="">
+
 <div class="page-wrapper">
     
-   
-
-<header class="header header-transparent">
+    <header class="header">
     <div class="header-wrapper">
         <div class="container">
             <div class="header-inner">
                 <div class="header-logo">
                     <a href="index-2.html">
-                        <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
-                        <span>Tenomed</span>
+                        <img src="{{ asset('') }}assets/img/logo.png" alt="Logo">
+                        <span>Superlist</span>
                     </a>
                 </div><!-- /.header-logo -->
 
                 <div class="header-content">
-                    <div class="header-bottom">
-                        <!-- /.header-action -->
-                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
-                        	
-                            <li class="active" >
-                                <a href="/">Home </a>
+                    <div class="header-top">
+                        <div class="header-search">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                        </div><!-- /.header-search -->
 
-                            </li>
-                        @if(Auth::check())
+                        <ul class="header-nav-social social-links nav nav-pills">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul><!-- /.header-nav-social -->
 
-                            @permission(('user'))
-
-                           <li><input type="hidden" name="idUser" id="idUser" value="{{Auth::user()->id}}">
-                           <input type="hidden" name="status" id="status" value="">
-                           @if($bookmarks != "")
-                           <input type="hidden" name="bokk" id="bokk" value="{{$bookmarks->status}}">
-                           @endif
-                           
-                                <a href="#">
-                                @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @else
-                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @endif
-
-                                <ul class="sub-menu">
-                                    <li><a href="user/profile">Profile</a></li>
-                                    <li><a href="user/profile">Notifications</a></li>
-                                    <li><a href="user/profile">Bookmarks</a></li>
-                                    <li><a href="user/profile">Review</a></li>
-                                    <li><a href="user/profile">Setting</a></li>
-                                    <li>
-                                        <a href="{{route('logout')}}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-
-                                    </li>
-                                </ul>
-                            </li>
-                            @endpermission
-                            
-                        @else
-                            <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
-
-                            </li>
-                            <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
-
-                            </li>
-                        @endif
-
+                        <ul class="header-nav-secondary nav nav-pills">
+                            <li><a href="login.html">Login</a></li>
+                            <li><a href="register.html">Register</a></li>
                         </ul>
+                    </div><!-- /.header-top -->
 
-                        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                    <div class="header-bottom">
+                        <div class="header-action">
+                            <a href="listing-submit.html" class="header-action-inner" title="Add Listing" data-toggle="tooltip" data-placement="bottom">
+                                <i class="fa fa-plus"></i>
+                            </a><!-- /.header-action-inner -->
+                        </div><!-- /.header-action -->
+
+                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
+    <li class="active">
+        <a href="#">Home <i class="fa fa-chevron-down"></i></a>
+
+        <ul class="sub-menu">
+            <li><a href="index-video.html">Video v1</a></li>
+            <li><a href="index-video-transparent-header.html">Video v2</a></li>
+            <li><a href="index-google-map.html">Google Map V1</a></li>
+            <li><a href="index-google-map-transparent-header.html">Google Map v2</a></li>
+            <li><a href="index-image.html">Image v1</a></li>
+            <li><a href="index-2.html">Image v2</a></li>
+            <li><a href="index-bootstrap-slider.html">Boxed Slider</a></li>
+        </ul>
+    </li>
+
+    <li >
+        <a href="#">Listing <i class="fa fa-chevron-down"></i></a>
+
+        <ul class="sub-menu">
+            <li><a href="listing-detail.html">Detail</a></li>
+            <li><a href="listing-map.html">Row + Map</a></li>
+            <li><a href="listing-grid.html">Grid</a></li>
+            <li><a href="listing-grid-sidebar.html">Grid Sidebar</a></li>
+            <li><a href="listing-row.html">Row</a></li>
+            <li><a href="listing-row-sidebar.html">Row Sidebar</a></li>
+        </ul>
+    </li>
+
+    <li class="has-mega-menu ">
+        <a href="#">Pages <i class="fa fa-chevron-down"></i></a>
+
+        <ul class="mega-menu">
+            <li>
+                <a href="#">General</a>
+
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="invoice.html">Invoice</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="grid.html">Grid System</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">User Account</a>
+
+                <ul>
+                    <li><a href="user-profile-edit.html">Profile Edit</a></li>
+                    <li><a href="login.html">Login Form</a></li>
+                    <li><a href="register.html">Register Form</a></li>
+                    <li><a href="change-password.html">Change Password Form</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">Miscellaneous</a>
+
+                <ul>
+                    <li><a href="sticky-footer.html">Sticky Footer</a></li>
+                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+                    <li><a href="error-403.html">403 - Forbidden</a></li>
+                    <li><a href="error-404.html">404 - Not Found</a></li>
+                    <li><a href="error-500.html">500 - Internal Error</a></li>
+                </ul>
+            </li>
+
+            <li class="hidden-xs">
+                <div class="special">
+                    <a href="register.html">Sign Up Now</a>
+                </div><!-- /.special-->
+            </li>
+        </ul>
+    </li>
+
+    <li >
+        <a href="#">Blog <i class="fa fa-chevron-down"></i></a>
+
+        <ul class="sub-menu">
+            <li><a href="blog-standard-right-sidebar.html">Standard Right Sidebar</a></li>
+            <li><a href="blog-standard-left-sidebar.html">Standard Left Sidebar</a></li>
+            <li><a href="blog-boxed.html">Boxed Style</a></li>
+            <li><a href="blog-condensed.html">Condensed Style</a></li>
+            <li><a href="blog-detail.html">Detail Fullwidth</a></li>
+            <li><a href="blog-detail-right-sidebar.html">Detail Right Sidebar</a></li>
+            <li><a href="blog-detail-left-sidebar.html">Detail Left Sidebar</a></li>
+        </ul>
+    </li>
+
+    <li >
+        <a href="#">Admin <i class="fa fa-chevron-down"></i></a>
+
+        <ul class="sub-menu">
+            <li><a href="admin-dashboard.html">Dashboard</a></li>
+            <li><a href="admin-grid.html">Grid System</a></li>
+            <li><a href="admin-tables.html">Tables</a></li>
+            <li><a href="admin-forms.html">Forms</a></li>
+            <li><a href="admin-notifications.html">Notifications</a></li>
+        </ul>
+    </li>
+
+    <li >
+        <a href="#">Contact <i class="fa fa-chevron-down"></i></a>
+        <ul class="sub-menu">
+            <li><a href="contact-1.html">Contact v1</a></li>
+            <li><a href="contact-2.html">Contact v2</a></li>
+            <li><a href="contact-3.html">Contact v3</a></li>
+        </ul>
+    </li>
+</ul>
+
+<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+</button>
 
                     </div><!-- /.header-bottom -->
                 </div><!-- /.header-content -->
@@ -90,681 +186,670 @@
         </div><!-- /.container -->
     </div><!-- /.header-wrapper -->
 </header><!-- /.header -->
-<!-- 
- <div class="modal fade login" id="loginModal">
-              <div class="modal-dialog login animated">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Login with</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="box">
-                             <div class="content">
-                                <div class="social">
-                                    <a class="circle github" href="#">
-                                        <i class="fa fa-github fa-fw"></i>
-                                    </a>
-                                    <a id="google_login" class="circle google" href="#">
-                                        <i class="fa fa-google-plus fa-fw"></i>
-                                    </a>
-                                    <a id="facebook_login" class="circle facebook" href="#">
-                                        <i class="fa fa-facebook fa-fw"></i>
-                                    </a>
-                                </div>
-                                <div class="division">
-                                    <div class="line l"></div>
-                                      <span>or</span>
-                                    <div class="line r"></div>
-                                </div>
-                                <div class="error"></div>
-                                <div class="form loginBox">
-                                    <form method="" action="#" accept-charset="UTF-8">
-                                    <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                    <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
-                                    </form>
-                                </div>
-                             </div>
-                        </div>
-                        <div class="box">
-                            <div class="content registerBox" style="display:none;">
-                             <div class="form">
-                                <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
-                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-                                <input class="btn btn-default btn-register" type="button" value="Create account" name="commit">
-                                </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="forgot login-footer">
-                            <span>Looking to
-                                 <a href="javascript: showRegisterForm();">create an account</a>
-                            ?</span>
-                        </div>
-                        <div class="forgot register-footer" style="display:none">
-                             <span>Already have an account?</span>
-                             <a href="javascript: showLoginForm();">Login</a>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-          </div> -->
+
+
 
 
     <div class="main">
         <div class="main-inner">
-            <div class="content">
-                <div class="mt-150">
-    <div class="hero-image">
-    <div class="hero-image-inner detail-banner" style="background-image: url('{{ asset('') }}assets/img/pizza3.jpg');">
-        <div class="hero-image-content">
             <div class="container">
-            <div class="detail-banner-info">
-                <div class="detail-label">Restaurant</div>
-                <div class="detail-verified">Verified</div>
-            </div><!-- /.detail-banner-info -->
-                <h1 class="detail-title">
-                {{ $detail->name }}
-
-            </h1>
-            <div class="detail-banner-address" style="color: white;">
-                <i class="fa fa-map-o"></i> {{ $detail->address }}
-                <input type="hidden" name="kafe" id="kafe" value="{{ $detail->id }}">
-            </div><!-- /.detail-banner-address -->
-            		<div class="detail-banner-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div><!-- /.detail-banner-rating -->
-                 @if(Auth::check())
-                    <div class="detail-banner-btn bookmark {{ $test }}" id="bookmarks">
-                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
-                    </div><!-- /.detail-claim -->
-                    <div class="detail-banner-btn heart">
-                        <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
-                    </div><!-- /.detail-claim -->
-                @else
-                    <div class="detail-banner-btn bookmark" id="bookmarks" onclick="window.open('/login');">
-                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
-                    </div><!-- /.detail-claim -->
-                    <div class="detail-banner-btn heart" onclick="window.open('/login');">
-                       <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
-                    </div><!-- /.detail-claim -->
-                @endif
-            
-               
-            </div><!-- /.container -->
-        </div><!-- /.hero-image-content -->
-
-        
-    </div><!-- /.hero-image-inner -->
-</div><!-- /.hero-image -->
-
-</div>
-
-<br><br><br>
-
-
-<div class="container">
-    <div class="row detail-content">
-    <div class="col-sm-7">
-        <div class="detail-gallery">
-            <div class="detail-gallery-preview">
-                <a href="{{ asset('') }}assets/img/tmp/gallery-1.jpg">
-                    <img src="{{ asset('') }}assets/img/tmp/gallery-1.jpg">
-                </a>
-            </div>
-
-            <ul class="detail-gallery-index">
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-1.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-1.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-2.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-2.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-3.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-3.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-4.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-4.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-5.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-5.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-6.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-6.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-7.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-7.jpg" alt="...">
-                    </a>
-                </li>
-                <li class="detail-gallery-list-item active">
-                    <a data-target="{{ asset('') }}assets/img/tmp/gallery-8.jpg">
-                        <img src="{{ asset('') }}assets/img/tmp/gallery-8.jpg" alt="...">
-                    </a>
-                </li>
-            </ul>
-        </div><!-- /.detail-gallery -->
-
-        <h2>We Are Here</h2>
-
-
-        <div class="background-white p20">
-                            <ul class="nav nav-pills nav-pills-rose">
-                              <li class="active"><a href="#pill1" data-toggle="tab" aria-expanded="true">Information</a></li>
-
-                             
- 
-
-                              <li class=""><a href="#pill2" data-toggle="tab" aria-expanded="false">Our Menu</a></li>
-                              <li class=""><a href="#pill3" data-toggle="tab" aria-expanded="false">Review</a></li>
-                            </ul>
-                            <div class="tab-content tab-space">
-                                <div class="tab-pane active" id="pill1">
-                                <div class="background-white p20">
-            <div class="detail-vcard">
-                <div class="detail-logo">
-                    <img src="{{ asset('') }}assets/img/tmp/pragmaticmates-logo.png">
-                </div><!-- /.detail-logo -->
-
-                <div class="detail-contact">
-                    <div class="detail-contact-email">
-                        <i class="fa fa-envelope-o"></i> <a href="mailto:#">company@example.com</a>
-                    </div>
-                    <div class="detail-contact-phone">
-                        <i class="fa fa-mobile-phone"></i> <a href="tel:#">{{ $detail->phone }}</a>
-                    </div>
-                    <div class="detail-contact-address">
-                        <i class="fa fa-map-o"></i>
-                        {{ $detail->address }}
-                    </div>
-                </div><!-- /.detail-contact -->
-            </div><!-- /.detail-vcard -->
-
-            <div class="detail-description">
-                <p>{{ $detail->desc }}</p>
-            </div>
-
-            <div class="widget">
-    <h2 >Working Hours</h2>
-
-    <div class="p20 background-white">
-        <div class="working-hours">
-            <div class="day clearfix">
-                <span class="name">Mon</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Tue</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Wed</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Thu</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Fri</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Sat</span><span class="hours">07:00 AM - 02:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Sun</span><span class="hours">Closed</span>
-            </div><!-- /.day -->
-        </div>
-    </div>
-<h2 >Our Facility</h2>
-    <div class="background-white p20">
-            <ul class="detail-amenities">
-                <li class="yes">WiFi</li>
-                <li class="yes">Parking</li>
-                <li class="no">Vine</li>
-                <li class="yes">Terrace</li>
-                <li class="no">Bar</li>
-                <li class="yes">Take Away Coffee</li>
-                <li class="no">Catering</li>
-                <li class="yes">Raw Food</li>
-                <li class="no">Delivery</li>
-                <li class="yes">No-smoking room</li>
-                <li class="no">Reservations</li>
-            </ul>
-        </div>
-</div>
-
-            <div class="form-group">
-                <select name="property">
-                    <option>Property Type</option>
-                    <option>Apartment</option>
-                    <option>Condo</option>
-                    <option>House</option>
-                    <option>Villa</option>
-                </select>
-            </div><!-- /.form-group -->     
-        </div>
-                                  <ul id="listing-detail-location" class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="active">
-                        <a href="#simple-map-panel" aria-controls="simple-map-panel" role="tab" data-toggle="tab">
-                            <i class="fa fa-map"></i>Maps
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#street-view-panel" aria-controls="street-view-panel" role="tab" data-toggle="tab">
-                            <i class="fa fa-street-view"></i>Street View
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="simple-map-panel">
-                        <div class="detail-map">
-                            <div class="map-position">
-                                <div id="listing-detail-map"
-                                     data-transparent-marker-image="{{ asset('') }}assets/img/transparent-marker-image.png"
-                                     data-styles='[{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.government","elementType":"labels.text.fill","stylers":[{"color":"#b43b3b"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"lightness":"8"},{"color":"#bcbec0"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#5b5b5b"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7cb3c9"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#abb9c0"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"color":"#fff1f1"},{"visibility":"off"}]}]'
-                                     data-zoom="15"
-                                     data-latitude="{{ $detail->lat }}"
-                                     data-longitude="{{ $detail->long }}"
-                                     data-icon="fa fa-coffee">
-                                </div><!-- /#map-property -->
-                            </div><!-- /.map-property -->
-                        </div><!-- /.detail-map -->
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="street-view-panel">
-                        <div id="listing-detail-street-view"
-                                data-latitude="{{ $detail->lat }}"
-                                data-longitude="{{ $detail->long }}"
-                                data-heading="225"
-                                data-pitch="0"
-                                data-zoom="1">
-                        </div>
-                    </div>
-                </div>
-                                </div>
-                                <div class="tab-pane" id="pill2">
-                                  Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
-                                  <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-                                </div>
-                                <div class="tab-pane" id="pill3">
-                                        <div class="reviews">
-
-
-
- <form class="background-white p20 add-review" method="post" action="/sendReview">
-@if(Auth::check())
-<div class="review">
-        <div class="review-image">
-                @if(Auth::user()->avatar=="")
-                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
-                @else
-                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
-                @endif
-        </div><!-- /.review-image -->
-
-        <div class="review-inner">
-            <div class="review-title">
-                <h2>{{Auth::user()->name}}</h2>
-                
-                <span class="report">
-                    <span class="separator">•</span><i class="fa fa-flag" title="" data-toggle="tooltip" data-placement="top" data-original-title="Report"></i>
-                </span>
-                <div class="row">
-                <div class="form-group input-rating col-sm-8">
-
-                    <div class="rating-title">Rate This Cafe</div>
-
-                    <input value="1" name="rate" id="rating-food-1" type="radio" required="">
-                    <label for="rating-food-1"></label>
-                    <input value="2" name="rate" id="rating-food-2" type="radio" required="">
-                    <label for="rating-food-2"></label>
-                    <input value="3" name="rate" id="rating-food-3" type="radio" required="">
-                    <label for="rating-food-3"></label>
-                    <input value="4" name="rate" id="rating-food-4" type="radio" required="">
-                    <label for="rating-food-4"></label>
-                    <input value="5" name="rate" id="rating-food-5" type="radio" required="">
-                    <label for="rating-food-5"></label>
-
-                </div><!-- /.col-sm-3 -->
-            </div>
-            <input type="hidden" name="idUser" value="{{Auth::user()->id}}">
-            <input type="hidden" name="idCafe" value="{{ $detail->id }}">
-            <input type="hidden" name="_method" value="POST">
-            <input type="hidden" name="_token" value="{{ Session::token() }}">
-            <!-- <input type="_token" name="idCafe" value="{{ csrf_token() }}"> -->
-            <div class="row">
-                <div class="form-group col-sm-12">
-                    <label for="">Review Description</label>
-                    <textarea class="form-control" rows="5" id="desc" name="desc" required=""></textarea><div class="textarea-resize"></div>
-                </div><!-- /.col-sm-6 -->
-
-                <div class="col-sm-8">
-                    <p>Required fields are marked <span class="required">*</span></p>
-                </div><!-- /.col-sm-8 -->
-                <div class="col-sm-4">
-                    <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-star"></i>Submit</button>
-                </div>
-            </div>
-
-           
-        </form>
-                
-            </div><!-- /.review-content-wrapper -->
-
-        </div><!-- /.review-inner -->
-    </div>
-
-@endif
-
-    
-
-</div>
-                                </div>
-                            </div>
-
-            <!-- Nav tabs -->
-             <div id="loadReview">
-@foreach($review as $reviews)
-    <div class="review">
-        <div class="review-image">
-            @if($reviews->avatar=="")
-                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
-                @else
-                    <img src="{{ asset('') }}images/{{$reviews->avatar}}" alt="">        
-                @endif
-        </div><!-- /.review-image -->
-
-        <div class="review-inner">
-            <div class="review-title">
-                <h2>{{$reviews->name}}</h2>
-                
-                <span class="report">
-                    <span class="separator">•</span><i class="fa fa-flag" title="" data-toggle="tooltip" data-placement="top" data-original-title="Report"></i>
-                </span>
-
-                <div class="review-overall-rating">
-                    <span class="overall-rating-title">Total Score:</span>
-                        @for($i=0;$i<$reviews->rate;$i++)
-                            <i class="fa fa-star"></i>
-                        @endfor
-                </div><!-- /.review-rating -->
-            </div><!-- /.review-title -->
-
-            <div class="review-content-wrapper">
-                <div class="review-content">
-                    <div class="review-pros">
-                        <p>{{ $reviews->desc }}</p>
-                    </div><!-- /.pros -->
+                <div class="content">
                     
-                </div><!-- /.review-content -->
 
-                
-            </div><!-- /.review-content-wrapper -->
 
-        </div><!-- /.review-inner -->
-    </div><!-- /.review -->
+                    <div class="mb80">
+    <div class="hero-slider">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
-    @endforeach
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="item-bg" style="background-image: url('{{ asset('') }}assets/img/tmp/slider-2.jpg')"></div>
+            <img src="{{ asset('') }}assets/img/tmp/slider-2.jpg" alt="">
+
+            <div class="carousel-caption">
+                <div class="hero-slider-content">
+                    <h1>O`Harrys Tuning Workshop</h1>
+
+                    <div class="hero-slider-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.card-simple-rating -->
+                </div><!-- /.hero-slider-content -->
+
+                <div class="hero-slider-actions">
+                    <a href="#" ><i class="fa fa-heart-o"></i></a>
+                    <a href="#" class="active"><i class="fa fa-bookmark-o"></i></a>
+                </div><!-- /.hero-slider-actions -->
+            </div><!-- /.carousel-caption -->
+        </div><!-- /.item -->
+
+        
+
+        
+    </div><!-- /.carousel-inner -->
+
+      <!-- Controls -->
+     
     </div>
-    {{ $review->links() }}
-            
-        </div>
+</div><!-- /.hero-slider -->
 
-       
+</div>
 
 
-        
-        
 
-    </div><!-- /.col-sm-7 -->
 
-    <div class="col-sm-5">
-
-        <div class="background-white p20">
-            <div class="detail-overview-hearts">
-                <i class="fa fa-heart"></i> <strong>213 </strong>people love it
-
-            </div>
-            @if($rates != "")
-            <div class="detail-overview-rating">
-                <i class="fa fa-star"></i> <strong>{{ round($rates->rank / $rates->jumlah,2)}} / 5 </strong>from <a href="#">{{$rates->jumlah}} reviews</a>
-            </div>
-            @else
-                <div class="detail-overview-rating">
-                <i class="fa fa-star"></i> <strong>0 / 5 </strong>from <a href="#">0 reviews</a>
-            </div>
-            @endif
-
-            <div class="detail-actions row">
-                <div class="col-sm-4">
-                    <div class="btn btn-primary btn-book" onclick="location.href='/booking/{{ $detail->id }}?id={{Auth::user()->id}}';"><i class="fa fa-shopping-cart"></i> Book Now</div>
-                </div><!-- /.col-sm-4 -->
-                <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+<div class="block background-white fullwidth mt80">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="posts">
     
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-                <div class="col-sm-4">
-                    <div class="btn btn-secondary btn-share"><i class="fa fa-share-square-o"></i> Share
-                        <div class="share-wrapper">
-                            <ul class="share">
-                                <li><i class="fa fa-facebook"></i> Facebook</li>
-                                <li><i class="fa fa-twitter"></i> Twitter</li>
-                                <li><i class="fa fa-google-plus"></i> Google+</li>
-                                <li><i class="fa fa-pinterest"></i> Pinterest</li>
-                                <li><i class="fa fa-chain"></i> Link</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!-- /.col-sm-4 -->
-                <div class="col-sm-4">
-                    <div class="btn btn-secondary btn-claim"><i class="fa fa-hand-peace-o"></i> Claim</div>
-                </div><!-- /.col-sm-4 -->
-            </div><!-- /.detail-actions -->
-        </div>
 
-        <h2><span class="text-secondary">Recomended Cafe</span></h2>
-        <div class="background-white p20">
-            
+    <div class="post">
+        <div class="post-image">
+            <img src="{{ asset('') }}assets/img/tmp/product-6.jpg" alt="">
+            <a class="read-more" href="blog-detail-right-sidebar.html">View</a>
+        </div><!-- /.post-image -->
 
-            <div class="cards-small">
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-        </div>
-            
-        </div>
-
-        
-
-
-        <h2>Send A Massagge</h2>
-
-        <div class="detail-enquire-form background-white p20">
-            <form method="post" action="http://preview.byaviators.com/template/superlist/listing-detail.html?">
-                <div class="form-group">
-                    <label for="">Name</label>
-                    <input type="text" class="form-control" name="" id="">
-                </div><!-- /.form-group -->
-
-                <div class="form-group">
-                    <label for="">Email <span class="required">*</span></label>
-                    <input type="email" class="form-control" name="" id="" required>
-                </div><!-- /.form-group -->
-
-                <div class="form-group">
-                    <label for="">Message <span class="required">*</span></label>
-                    <textarea class="form-control" name="" id="" rows="5" required></textarea>
-                </div><!-- /.form-group -->
-
-                <p>Required fields are marked <span class="required">*</span></p>
-
-                <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-paper-plane"></i>Send Message</button>
-            </form>
-        </div><!-- /.detail-enquire-form -->
-
-        <h2>3 Reasons Why Choose Us</h2>
-
-        <div class="background-white p20 reasons">
-            <div class="reason">
-                <div class="reason-icon">
-                    <i class="fa fa-trophy"></i>
-                </div><!-- /.reason-icon -->
-                <div class="reason-content">
-                    <h4>Coffee House of the Year 2015</h4>
-                    <p>Fusce at venenatis lorem. Quisque volutpat aliquam leo, a pellentesque orci varius sit amet.</p>
-                </div><!-- /.reason-content -->
-            </div><!-- /.reason -->
-            <div class="reason">
-                <div class="reason-icon">
-                    <i class="fa fa-coffee"></i>
-                </div><!-- /.reason-icon -->
-                <div class="reason-content">
-                    <h4>High Quality Coffee Beans</h4>
-                    <p>Fusce at venenatis lorem. Quisque volutpat aliquam leo, a pellentesque orci varius sit amet.</p>
-                </div><!-- /.reason-content -->
-            </div><!-- /.reason -->
-            <div class="reason">
-                <div class="reason-icon">
-                    <i class="fa fa-cutlery"></i>
-                </div><!-- /.reason-icon -->
-                <div class="reason-content">
-                    <h4>Snacks & Deserts</h4>
-                    <p>Fusce at venenatis lorem. Quisque volutpat aliquam leo, a pellentesque orci varius sit amet.</p>
-                </div><!-- /.reason-content -->
-            </div><!-- /.reason -->
-        </div>
-
-       
-    </div><!-- /.col-sm-5 -->
+        <div class="post-content">
+            <div class="post-label">Automotive</div><!-- /.post-label -->
+            <div class="post-date">07/12/2015</div><!-- /.post-date -->
+            <h2>The Deep South</h2>
+            <p>Oh, all right, I am. But if anything happens to me, tell them I died robbing some old man. Calculon is gonna kill us and it's a...</p>
+        </div><!-- /.post-content -->
+    </div><!-- /.post -->
 
     
+
+    <div class="post">
+        <div class="post-image">
+            <img src="{{ asset('') }}assets/img/tmp/product-8.jpg" alt="">
+            <a class="read-more" href="blog-detail-right-sidebar.html">View</a>
+        </div><!-- /.post-image -->
+
+        <div class="post-content">
+            <div class="post-label">Transport</div><!-- /.post-label -->
+            <div class="post-date">06/18/2015</div><!-- /.post-date -->
+            <h2>Raging Bender</h2>
+            <p>For one beautiful night I knew what it was like to be a grandmother. Subjugated, yet honored. Then throw her in the laundry roo...</p>
+        </div><!-- /.post-content -->
+    </div><!-- /.post -->
+
+    
+
+    <div class="post">
+        <div class="post-image">
+            <img src="{{ asset('') }}assets/img/tmp/product-10.jpg" alt="">
+            <a class="read-more" href="blog-detail-right-sidebar.html">View</a>
+        </div><!-- /.post-image -->
+
+        <div class="post-content">
+            <div class="post-label">Vacation</div><!-- /.post-label -->
+            <div class="post-date">05/26/2015</div><!-- /.post-date -->
+            <h2>The Prisoner of Benda</h2>
+            <p>Check it out, y'all. Everyone who was invited is here. Well, thanks to the Internet, I'm now bored with. Is there a place on th...</p>
+        </div><!-- /.post-content -->
+    </div><!-- /.post -->
+</div><!-- /.posts -->
+
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-6">
+            <div class="events">
+    <div class="event">
+        <div class="event-date">
+            <span class="day">28</span>
+            <span class="month">APR</span>
+        </div><!-- /.event-date -->
+
+        <div class="event-content">
+            <h2>Cras cursus augue at porttitor</h2>
+            <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
+            <div class="event-time"><i class="fa fa-clock-o"></i> 8:00PM - 11:00PM</div><!-- /.event-time -->
+        </div><!-- /.event-content -->
+    </div><!-- /.event -->
+
+    <div class="event">
+        <div class="event-date">
+            <span class="day">18</span>
+            <span class="month">OCT</span>
+        </div><!-- /.event-date -->
+
+        <div class="event-content">
+            <h2>Fusce pulvinar quam odio</h2>
+            <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
+            <div class="event-time"><i class="fa fa-clock-o"></i> 12:00AM - 2:00PM</div><!-- /.event-time -->
+        </div><!-- /.event-content -->
+    </div><!-- /.event -->
+
+    <div class="event">
+        <div class="event-date">
+            <span class="day">22</span>
+            <span class="month">FEB</span>
+        </div><!-- /.event-date -->
+
+        <div class="event-content">
+            <h2>Cras libero justo, fringilla in quam</h2>
+            <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
+            <div class="event-time"><i class="fa fa-clock-o"></i> 10:00AM - 6:00PM</div><!-- /.event-time -->
+        </div><!-- /.event-content -->
+    </div><!-- /.event -->
+
+    <div class="event">
+        <div class="event-date">
+            <span class="day">28</span>
+            <span class="month">AUG</span>
+        </div><!-- /.event-date -->
+
+        <div class="event-content">
+            <h2>Phasellus vitae velit sit</h2>
+            <p>Nulla ac lectus posuere, rhoncus dui sed, finibus tellus. Proin enim mi.</p>
+            <div class="event-time"><i class="fa fa-clock-o"></i> 8:00PM - 10:00PM</div><!-- /.event-time -->
+        </div><!-- /.event-content -->
+    </div><!-- /.event -->
+</div><!-- /.events -->
+
+        </div><!-- /.col-* -->
+    </div><!-- /.row -->
+</div><!-- /.block -->
+
+<div class="block background-black-light fullwidth">
+    <div class="row">
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-life-ring"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>E-mail Support</h2>
+                <p>We are always here to answer all your questions. Feel free to contact us.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
+
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-flask"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>Always Improving</h2>
+                <p>Our dedicated team of developers are implementing awesome features.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
+
+    <div class="col-sm-4">
+        <div class="box">
+            <div class="box-icon">
+                <i class="fa fa-thumbs-o-up"></i>
+            </div><!-- /.box-icon -->
+
+            <div class="box-content">
+                <h2>Best Quality</h2>
+                <p>We list only verifiend places and events to provide best content.</p>
+
+                <a href="#">Read More <i class="fa fa-chevron-right"></i></a>
+            </div><!-- /.box-content -->
+        </div>
+    </div><!-- /.col-sm-4 -->
 </div><!-- /.row -->
 
-</div><!-- /.container -->
+</div><!-- /.block -->
 
-            </div><!-- /.content -->
+<div class="block background-white background-transparent-image fullwidth">
+    <div class="page-header">
+    <h1>Most Recent Places &amp; Events</h1>
+    <p>List of most recent interesting places and events in our directory submitted <br>by our users. Check whats going on in the city now.</p>
+</div><!-- /.page-header -->
+
+<div class="cards-simple-wrapper">
+    <div class="row">
+        
+
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-2.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Tasty Brazil Coffee</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Coffee</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-3.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Healthy Breakfast</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Food</div>
+                        
+                            <div class="card-simple-price">$12 / person</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-4.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Coffee &amp; Newspaper</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Restaurant</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-5.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Boat Trip</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Vacation</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-6.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Italian Restaurant</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Restaurant</div>
+                        
+                            <div class="card-simple-price">$28 / person</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-7.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Best Brazil Coffee</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Pub</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-8.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Retro Shop</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Shop</div>
+                        
+                            <div class="card-simple-price">$3 / cup</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+            
+
+            <div class="col-sm-6 col-md-3">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/img/tmp/product-9.jpg">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="listing-detail.html">Wine Tasting</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
+
+                            <div class="card-simple-actions">
+                                <a href="#" class="fa fa-bookmark-o"></a>
+                                <a href="listing-detail.html" class="fa fa-search"></a>
+                                <a href="#" class="fa fa-heart-o"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
+
+                        <div class="card-simple-label">Event</div>
+                        
+                            <div class="card-simple-price">$13 / ticket</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
+        
+    </div><!-- /.row -->
+</div><!-- /.cards-simple-wrapper -->
+
+</div>
+
+<div class="block background-white fullwidth">
+    <div class="page-header">
+    <h1>Testimonials</h1>
+    <p>Read what our customers says about our directory services and products. Do you want to<br> read more? Check out another <a href="#">interesting testimonials</a>.</p>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="testimonial">
+            <div class="testimonial-image">
+                <img src="{{ asset('') }}assets/img/tmp/agent-1.jpg" alt="">
+            </div><!-- /.testimonial-image -->
+
+            <div class="testimonial-inner">
+                <div class="testimonial-title">
+                    <h2>Exactly What I Need</h2>
+
+                    <div class="testimonial-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.testimonial-rating -->
+                </div><!-- /.testimonial-title -->
+
+                Quisque aliquet ornare nunc in viverra. Nullam ornare molestie ligula in luctus. Suspendisse ac cursus elit. Donec vel enim sit amet lorem vulputate condimentum.
+
+                <div class="testimonial-sign">- Fiona Wilson</div><!-- /.testimonial-sign -->
+            </div><!-- /.testimonial-inner -->
+        </div><!-- /.testimonial -->
+
+        <div class="testimonial">
+            <div class="testimonial-image">
+                <img src="{{ asset('') }}assets/img/tmp/agent-2.jpg" alt="">
+            </div><!-- /.testimonial-image -->
+
+            <div class="testimonial-inner">
+                <div class="testimonial-title">
+                    <h2>Best Support Ever</h2>
+
+                    <div class="testimonial-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.testimonial-rating -->
+                </div><!-- /.testimonial-title -->
+
+                Duis et magna vel est tempus vehicula vitae sit amet enim. Sed vitae ligula congue, luctus mauris eu, scelerisque felis.
+
+                <div class="testimonial-sign">- Natasha Samson</div><!-- /.testimonial-sign -->
+            </div><!-- /.testimonial-inner -->
+        </div><!-- /.testimonial -->
+
+        <div class="testimonial last">
+            <div class="testimonial-image">
+                <img src="{{ asset('') }}assets/img/tmp/agent-3.jpg" alt="">
+            </div><!-- /.testimonial-image -->
+
+            <div class="testimonial-inner">
+                <div class="testimonial-title">
+                    <h2>Best Directory</h2>
+
+                    <div class="testimonial-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.testimonial-rating -->
+                </div><!-- /.testimonial-title -->
+
+                Duis et magna vel est tempus vehicula vitae sit amet enim. Sed vitae ligula congue, luctus mauris eu, scelerisque felis.
+
+                <div class="testimonial-sign">- Kim Glove</div><!-- /.testimonial-sign -->
+            </div><!-- /.testimonial-inner -->
+        </div><!-- /.testimonial -->
+    </div><!-- /.col-* -->
+
+    <div class="col-sm-6">
+        <div class="testimonial">
+            <div class="testimonial-image">
+                <img src="{{ asset('') }}assets/img/tmp/agent-4.jpg" alt="">
+            </div><!-- /.testimonial-image -->
+
+            <div class="testimonial-inner">
+                <div class="testimonial-title">
+                    <h2>Totally Impressed</h2>
+
+                    <div class="testimonial-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.testimonial-rating -->
+                </div><!-- /.testimonial-title -->
+
+                Curabitur scelerisque nulla consequat elit semper, vitae lobortis velit tempor. Sed purus eros, pellentesque non maximus scelerisque, aliquam id magna. Integer in metus ante. Integer faucibus mi quis rhoncus cursus.
+
+                <div class="testimonial-sign">- Richard Peterson</div><!-- /.testimonial-sign -->
+            </div><!-- /.testimonial-inner -->
+        </div><!-- /.testimonial -->
+
+        <div class="testimonial last">
+            <div class="testimonial-image">
+                <img src="{{ asset('') }}assets/img/tmp/agent-5.jpg" alt="">
+            </div><!-- /.testimonial-image -->
+
+            <div class="testimonial-inner">
+                <div class="testimonial-title">
+                    <h2>Awesome Directory </h2>
+
+                    <div class="testimonial-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div><!-- /.testimonial-rating -->
+                </div><!-- /.testimonial-title -->
+
+                Donec finibus consectetur nunc, quis viverra nisi iaculis a. Donec non eros vel turpis bibendum sodales. Curabitur scelerisque nulla consequat elit semper, vitae lobortis velit tempor. Sed purus eros, pellentesque non maximus scelerisque, aliquam id magna. Integer in metus ante. Integer faucibus mi quis rhoncus cursus. Aliquam malesuada eleifend tellus, sit amet eleifend lacus aliquam in. Etiam a neque ut augue mattis gravida vel vel purus. Nullam bibendum viverra enim, in pretium purus.
+
+                <div class="testimonial-sign">- Rachel Fast</div><!-- /.testimonial-sign -->
+            </div><!-- /.testimonial-inner -->
+        </div><!-- /.testimonial -->
+    </div><!-- /.col-* -->
+</div>
+
+</div>
+
+<div class="page-header">
+    <h1>Fair Pricing</h1>
+    <p>Our company offers best pricing options for field agents and companies. If you are interested <br>in special plan don't hesitate and contact our <a href="#">sales support</a>.</p>
+</div><!-- /.page-header -->
+
+<div class="pricings">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="pricing">
+                <div class="pricing-title">Personal</div><!-- /.pricing-title -->
+                <div class="pricing-subtitle">For Personal Use</div><!-- /.pricing-subtitle -->
+                <div class="pricing-price"><span class="pricing-currency">$</span>10.59 <span class="pricing-period">/ month</span></div><!-- /.pricing-price -->
+                <a href="#" class="btn-primary">Get Started</a>
+                <hr>
+                <ul class="pricing-list">
+                    <li><span>Max. Submissions</span><strong>Limited number</strong></li>
+                    <li><span>Custom Agents</span><strong>One agent for all</strong></li>
+                    <li><span>Support</span><strong>Mail communication</strong></li>
+                </ul><!-- /.pricing-list -->
+                <hr>
+                <a href="#" class="pricing-action">Full List of Features</a>
+            </div><!-- /.pricing -->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-4">
+            <div class="pricing">
+                <div class="pricing-title">Business</div><!-- /.pricing-title -->
+                <div class="pricing-subtitle">Best for Companies</div><!-- /.pricing-subtitle -->
+                <div class="pricing-price"><span class="pricing-currency">$</span>19.59 <span class="pricing-period">/ month</span></div><!-- /.pricing-price -->
+                <a href="#" class="btn-primary">Get Started</a>
+                <hr>
+                <ul class="pricing-list">
+                    <li><span>Max. Submissions</span><strong>Unlimited number</strong></li>
+                    <li><span>Custom Agents</span><strong>One agent for all</strong></li>
+                    <li><span>Support</span><strong>Mail communication</strong></li>
+                </ul><!-- /.pricing-list -->
+                <hr>
+                <a href="#" class="pricing-action">Full List of Features</a>
+            </div><!-- /.pricing -->
+        </div><!-- /.col-* -->
+
+        <div class="col-sm-4">
+            <div class="pricing">
+                <div class="pricing-title">Unlimited</div><!-- /.pricing-title -->
+                <div class="pricing-subtitle">Entrepreneurs</div><!-- /.pricing-subtitle -->
+                <div class="pricing-price"><span class="pricing-currency">$</span>49.59 <span class="pricing-period">/ month</span></div><!-- /.pricing-price -->
+                <a href="#" class="btn-primary">Get Started</a>
+                <hr>
+                <ul class="pricing-list">
+                    <li><span>Max. Submissions</span><strong>Unlimited number</strong></li>
+                    <li><span>Custom Agents</span><strong>Unlimited number</strong></li>
+                    <li><span>Support</span><strong>Personal training</strong></li>
+                </ul><!-- /.pricing-list -->
+                <hr>
+                <a href="#" class="pricing-action">Full List of Features</a>
+            </div><!-- /.pricing -->
+        </div><!-- /.col-* -->
+    </div><!-- /.row -->
+</div><!-- /.pricings -->
+
+
+                </div><!-- /.content -->
+            </div><!-- /.container -->
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
 
@@ -822,5 +907,38 @@
     </div>
 </footer><!-- /.footer -->
 
-@endsection
+</div><!-- /.page-wrapper -->
 
+<script src="{{ asset('') }}assets/js/jquery.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/js/map.js" type="text/javascript"></script>
+
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/collapse.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/carousel.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/transition.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/dropdown.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/tooltip.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/tab.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/bootstrap-sass/javascripts/bootstrap/alert.js" type="text/javascript"></script>
+
+<script src="{{ asset('') }}assets/libraries/colorbox/jquery.colorbox-min.js" type="text/javascript"></script>
+
+<script src="{{ asset('') }}assets/libraries/flot/jquery.flot.min.js" type="text/javascript"></script>
+<script src="{{ asset('') }}assets/libraries/flot/jquery.flot.spline.js" type="text/javascript"></script>
+
+<script src="{{ asset('') }}assets/libraries/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+
+<script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places,drawing" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/infobox.js"></script>
+<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/markerclusterer.js"></script>
+<script type="text/javascript" src="{{ asset('') }}assets/libraries/jquery-google-map/jquery-google-map.js"></script>
+
+<script type="text/javascript" src="{{ asset('') }}assets/libraries/owl.carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.js"></script>
+
+<script src="{{ asset('') }}assets/js/superlist.js" type="text/javascript"></script>
+
+</body>
+
+<!-- Mirrored from preview.byaviators.com/template/superlist/index-bootstrap-slider.html by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 14 May 2017 15:07:00 GMT -->
+</html>

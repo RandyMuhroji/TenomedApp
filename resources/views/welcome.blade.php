@@ -41,13 +41,14 @@
 
                             <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
-                                <li class="active" >
-                                    <a href="/">Home </a>
-
-                                </li>
+                               
                             @if(Auth::check())
 
                                 @permission(('user'))
+                                 <li class="active" >
+                                    <a href="/">Home </a>
+
+                                </li>
 
                                <li>
                                     <a href="#">
@@ -76,6 +77,22 @@
 
                                         </li>
                                     </ul>
+                                </li>
+                                @endpermission
+                                @permission(('owner'))
+                                   <li class="active" >
+                                    <a href="{{url('manage-cafe')}}">Admin Pane </a>
+
+                                  </li>
+                                @endpermission
+                                @permission(('admin'))
+
+                               <li>
+                                   <li class="active" >
+                                    <a href="{{url('admin')}}">Manage Cafe </a>
+
+                                  </li>
+                                    
                                 </li>
                                 @endpermission
 
