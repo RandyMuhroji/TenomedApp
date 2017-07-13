@@ -50,7 +50,7 @@ class AdminTableSeeder extends Seeder
 
         $province = $arrProv[0];
 
-        DB::table('cafes')->insert(
+        $cafe = DB::table('cafes')->insert(
             [
                 'user_id' => $user->id,
                 'name' => 'Tenomed Cafe',
@@ -62,6 +62,13 @@ class AdminTableSeeder extends Seeder
                 'kelurahan' => $kel,
                 'city' => $city,
                 'province' => $province,
+            ]
+        );
+
+        DB::table('album_gallery')->insert(
+            [
+                'cafe_id' => $cafe->id,
+                'name' => 'slider'
             ]
         );
 

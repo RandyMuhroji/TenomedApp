@@ -266,7 +266,7 @@
 
 
     $(document).ready(function(){
-      $(".sesuatu").change(function() {
+      $(".change").change(function() {
         if(this.checked){
             alert($(this).val());
         }
