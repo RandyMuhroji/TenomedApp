@@ -29,8 +29,7 @@ class CafesController extends Controller
 
     public function index()
     {
-        $cafes = DB::select('select c.id, c.name as name, u.name as owner, c.address, c.status  from cafes c inner join users u on c.user_id = u.id');
-
+        $cafes = DB::select('select c.id, c.name as name, u.name as owner, c.address, c.status, u.desc  from cafes c inner join users u on c.user_id = u.id');
 
         $params = [
             'title' => 'Cafes Listing',
@@ -118,7 +117,7 @@ class CafesController extends Controller
                 ];
         
         Mail::send(['html' => 'mail.new_cafe'], $data, function($message){
-             $message->to($request->input('email'))->subject('Password Account Cafe');
+             $message->to($request->input('email'))->subject('Password Acount Cafe Login - TENOMED');
              $message->from('tenomed@gmail01.com','Tenomed');
         });
 

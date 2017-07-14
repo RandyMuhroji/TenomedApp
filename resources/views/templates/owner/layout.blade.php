@@ -30,6 +30,7 @@
   <link href="{{asset('gantella/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{asset('gantella/build/css/me.css')}}">
 
   @yield('css')
 </head>

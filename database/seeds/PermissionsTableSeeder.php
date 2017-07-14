@@ -43,6 +43,11 @@ class PermissionsTableSeeder extends Seeder
                 'display_name' => 'Manage User',
                 'description' => 'Allow user to manage account'
             ],
+            [
+                'name' => 'super_admin',
+                'display_name' => 'Super Administrator',
+                'description' => 'Allow user to manage system admin, users and cafes'
+            ],
 
         ];
 
