@@ -208,8 +208,8 @@
     <div class="col-sm-7">
         <div class="detail-gallery">
             <div class="detail-gallery-preview">
-                <a href="{{ asset('') }}images/duku.png">
-                    <img src="{{ asset('') }}images/duku.png">
+                <a href="{{ asset('') }}images/cdf9f740db31b7af453465e39411b891.jpg ">
+                    <img src="{{ asset('')}}images/cdf9f740db31b7af453465e39411b891.jpg">
                 </a>
             </div>
 
@@ -409,7 +409,7 @@
 <div class="review">
         <div class="review-image">
                 @if(Auth::user()->avatar=="")
-                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
+                    <img src="{{ asset('') }}images/user.png" alt="">
                 @else
                     <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
                 @endif
@@ -660,7 +660,7 @@
             <div class="testimonial">
                 <div class="testimonial-image" >
                     @if($reviews->avatar=="")
-                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
+                    <img src="{{ asset('') }}images/uer.png" alt="">
                 @else
                     <img src="{{ asset('') }}images/{{$reviews->avatar}}" alt="">        
                 @endif
@@ -690,16 +690,15 @@
 
                         <form class="background-white p20 add-review " style="margin:0; padding:0;" method="post" action="/sendReview">
                         <div class="review">
-                     <div class="col-sm-2" style="margin:0; padding:0;">
-
-                        <div class="user">
-                            @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
-                            @else
-                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
-                            @endif  
-                        </div>
-                    </div>
+                            <div class="col-sm-2" style="margin:0; padding:0;">
+                                <div class="user">
+                                    @if(Auth::user()->avatar=="")
+                                        <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
+                                    @else
+                                        <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
+                                    @endif  
+                                </div>
+                            </div>
 
                             <input name="idUser" value="{{Auth::user()->id}}" type="hidden">
                                 <input name="parent" value="{{$reviews->id}}" type="hidden">
@@ -718,47 +717,36 @@
 
                             </div>
                     </div> <!-- abis  -->
-
-
                      @else
                      <div class="testimonial-sign" id="reply" onclick="location.href='/login'" style="cursor: pointer;">Reply</div>
                      @endif
-
-                     <!-- @foreach($child as $childs)
-                            @if($childs->parent_id === $reviews->id)
-                                    <div class="row" style="margin:0; padding:0;">
-
-
-                        <form class="background-white p20 add-review " style="margin:0; padding:0;" method="post" action="/sendReview">
-                        <div class="review">
-                     <div class="col-sm-2" style="margin:0; padding:0;">
-
-                        <div class="user">
-                            @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
-                            @else
-                                <img src="{{ asset('') }}images/{{$childs->avatar}}" alt="">        
-                            @endif  
-                        </div>
-                    </div>
-                    <div class="col-sm-10" style="margin:0; padding:0;">
-                             <span>{{$childs->desc}}</span>
-                    </div>
+                     @if(count($child))
+                          @foreach($child as $childs)
+                                @if($childs->parent_id === $reviews->id)
+                                        <div class="row" style="margin:0; padding:0;">
+                                            <form class="background-white p20 add-review " style="margin:0; padding:0;" method="post" action="/sendReview">
+                                            <div class="review">
+                                                <div class="col-sm-2" style="margin:0; padding:0;">
+                                                    <div class="user">
+                                                        @if(Auth::user()->avatar=="")
+                                                            <img src="{{ asset('') }}images/user.png" alt="">
+                                                        @else
+                                                            <img src="{{ asset('') }}images/{{$childs->avatar}}" alt="">        
+                                                        @endif  
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-10" style="margin:0; padding:0;">
+                                                    <span>{{$childs->desc}}</span>
+                                                </div>
+                                            </div>          
+                                        </div>
+                                    </form>
                                 </div>
-                                
-                                </div>
-                        </form>
-
-
-                            </div>
-                            @endif
-                    @endforeach
- -->
-                    
+                                @endif
+                            @endforeach
+                    @endif
                 </div><!-- /.testimonial-inner -->
-
             </div><!-- /.testimonial -->
-            
         </div><!-- /.col-* -->
     @endforeach
  <div class="col-sm-12">{{ $review->links() }}<br></div></div>

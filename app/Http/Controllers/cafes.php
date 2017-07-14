@@ -140,7 +140,7 @@ class cafes extends Controller
             ->orWhere('address', 'like','%'. $_GET['location'].'%')
             //->orWhere('price', '>', $_GET['price'])
             ->orderBy('id', 'desc')
-            ->distinct()->Paginate(5);
+            ->distinct(['cafes.name'])->Paginate(5);
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
                 ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
@@ -203,11 +203,11 @@ class cafes extends Controller
     }
      public function invoice($id){
          $detail= DB::table('reservations')->where('id', $id)->first();
-        // $menu = DB::table('menu_reservations')
-        //     ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
-        //     ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
-        //     ->where('menu_reservations.reservations_id', $id)
-        //     ->get();
-        return view('invoice')->with(['detail'=>$detail]);
+        $menu = DB::table('menu_reservations')
+            ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
+            ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
+            ->where('menu_reservations.reservations_id', $id)
+            ->get();
+        return view('invoice')->with(['detail'=>$detail,'menu'=>$menu]);
      }
 }

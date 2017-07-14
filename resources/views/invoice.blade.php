@@ -272,7 +272,7 @@ input[type=number]
            @endforeach
             </tbody>
         </table>
-
+<hr>
         <div class="invoice-summary clearfix">
             <dl class="dl-horizontal pull-right">
                 <dt>Sub - Total amount:</dt>
