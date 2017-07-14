@@ -210,6 +210,26 @@
               </div>
             </div>
 
+            <div class="form-group{{ $errors->has('web') ? ' has-error' : '' }}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Web <span class="required" readonly>*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->web }}" id="web" name="web" class="form-control col-md-7 col-xs-12">
+                  @if ($errors->has('web'))
+                  <span class="help-block">{{ $errors->first('web') }}</span>
+                  @endif
+              </div>
+
+              <label class="control-label col-md-2 col-sm-2 col-xs-8" for="address">Facebook <span class="required">*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->facebook }}" id="facebook" name="facebook" class="form-control col-md-7 col-xs-12" >
+                  @if ($errors->has('facebook'))
+                  <span class="help-block">{{ $errors->first('facebook') }}</span>
+                  @endif
+              </div>
+            </div>
+
 
             <div class="ln_solid"></div>
 

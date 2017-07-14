@@ -30,6 +30,7 @@
   <link href="<?php echo e(asset('gantella/vendors/iCheck/skins/flat/green.css')); ?>" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="<?php echo e(asset('gantella/build/css/custom.min.css')); ?>" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('gantella/build/css/me.css')); ?>">
 
   <?php echo $__env->yieldContent('css'); ?>
 </head>
