@@ -20,8 +20,10 @@
                             <tr>
                                 <th>Cafe Name</th>
                                 <th>Owner</th>
-                                <th>Address</th>
+                                <th>User</th>
+                                <th>Total</th>
                                 <th>Status</th>
+                                <th>Total</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
@@ -29,13 +31,29 @@
                             <tr>
                                 <th>Cafe Name</th>
                                 <th>Owner</th>
-                                <th>Address</th>
+                                <th>User</th>
+                                <th>Total</th>
                                 <th>Status</th>
+                                <th>Total</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            
+                            @if(count($reservations))
+                            @foreach ($reservations as $row)
+                            <tr>
+                                <td>{{$row->name}}</td>
+                                <td>{{$row->category}}</td>
+                                <td>{{$row->price}}</td>
+                                <td>
+                                    <a  data-toggle="modal" data-target="#show_menu" class="btn btn-info btn-xs" onclick="setModalValue('{{$row}}')"><i class="fa fa-eye" title="View"></i> </a>
+                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                    <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                </td>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

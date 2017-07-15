@@ -24,7 +24,7 @@ class CreateReservationsTable extends Migration
             $table->integer('total')->nullable();
             $table->string('bookingDate')->nullable();
             $table->string('bookingTime')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(0);
             $table->date('expired')->nullable();
             $table->string('desc')->nullable();
             $table->boolean('isReadCafe')->default(false);
