@@ -111,3 +111,5 @@ Route::get('/booking/{id}', 'cafes@booking');
 
 Route::post('/saveBooking/{id}', 'cafes@saveBooking');
 Route::get('/invoice/{id}', 'cafes@invoice');
+
+Route::get('/slots/{id}', 'cafes@slots');

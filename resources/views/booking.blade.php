@@ -17,7 +17,18 @@
     <link href="{{ asset('') }}assets/css/superlist.css" rel="stylesheet" type="text/css" >
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
+
+    <link rel="stylesheet" href="{{asset('gantella/build/css/maps.css')}}">
+  <link rel="stylesheet" href="{{asset('gantella/build/css/jquery.timepicker.css')}}">
+  <link rel="stylesheet" href="{{asset('gantella/build/css/lib/bootstrap-datepicker.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('') }}assets/css/jquery-ui.css">
+  <link rel="stylesheet" href="{{ asset('') }}assets/css/style1.css">
+  <script src="https:{{ asset('') }}assets/js/jquery-1.12.4.js"></script>
+  <script src="https:{{ asset('') }}assets/js/jquery-ui.js"></script>
+
     <style type="text/css">
+
         .quantity {
   position: relative;
 }
@@ -50,6 +61,7 @@ input[type=number]
 .quantity input:focus {
   outline: 0;
 }
+
 
 .quantity-nav {
   float: left;
@@ -87,6 +99,72 @@ input[type=number]
   position: absolute;
   bottom: -1px;
   height: 50%;
+}
+.switch-field {
+  font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+  padding: 40px;
+    overflow: hidden;
+}
+
+.switch-title {
+  margin-bottom: 6px;
+}
+
+.switch-field input.aku {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+    appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+.switch-field label {
+  float: left;
+}
+
+.switch-field label {
+  display: inline-block;
+  width: 60px;
+  background-color: #e4e4e4;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition:    all 0.1s ease-in-out;
+  -ms-transition:     all 0.1s ease-in-out;
+  -o-transition:      all 0.1s ease-in-out;
+  transition:         all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+    cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: #A5DC86;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 4px 4px 0;
 }
     </style>
 
@@ -233,7 +311,8 @@ input[type=number]
             </div><!-- /.form-group -->
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                <input class="form-control" type="date" name="book_tanggal" id="book_tanggal" placeholder="Date" required="">
+                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required="">
+              <!--   <input type="text" id="hari" name=""> -->
                 <input class="form-control" type="hidden" name="book_jam" value="12:00" id="book_jam" placeholder="Date" required="">
             </div><!-- /.form-group -->
             <div class="row">
@@ -244,13 +323,29 @@ input[type=number]
                     </div>
 
                 </div><!-- /.form-group -->
+                
                 <div class="col-sm-4" style="height: 100%; padding: 10px;">
                     <span style="line-height: 100%; display: block; font-size: 14; font-weight: 400px;">Persons</span>
-
+    
                 </div><!-- /.form-group -->
             </div>
         </div><!-- /.col-* -->
     </div><!-- /.row -->
+    <!-- <div class="row">
+
+        <div class="col-sm-12">
+            <div class="switch-field">
+              <div class="switch-title">Three fields? Sure.</div>
+              <input type="radio" id="switch_3_left" class="aku" name="switch_3" value="yes" checked/>
+              <label for="switch_3_left">One</label>
+              <input type="radio" id="switch_3_center" class="aku" name="switch_3" value="maybe" />
+              <label for="switch_3_center">Two</label>
+                    <input type="radio" id="switch_3_right" class="aku" name="switch_3" value="no" />
+              <label for="switch_3_right">Three</label>
+            </div>
+
+        </div>
+    </div> -->
 </div><!-- /.box -->
 
 <div class="row">
@@ -601,6 +696,47 @@ input[type=number]
 
     });
 </script>
+<script src="{{asset('gantella/build/js/maps.js')}}"></script>
+  <script src="{{asset('gantella/build/js/jquery.timepicker.js')}}"> </script>
+  <script src="{{asset('gantella/build/js/lib/bootstrap-datepicker.js')}}"> </script>
+  <script src="{{asset('gantella/build/js/lib/site.js')}}"> </script>
+  <script src="{{asset('gantella/build/js/datepair.js')}}"> </script>
+  <script src="{{asset('gantella/build/js/jquery.datepair.js')}}"> </script>
+
+  <script>
+
+    $('.datepairExample .time').timepicker({
+        'showDuration': true,
+        'timeFormat': 'h:i A'
+    });
+
+    $('.datepairExample').datepair();
+    var dateToday = new Date();
+    $( function() {
+        $("#datepicker").datepicker();
+    });
+    function getHari(hari) {
+        var d = new Date(hari);
+        var n = d.getDay()
+        // document.getElementById("demo").innerHTML = n;
+        $('#hari').val(n);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+          type: 'GET',
+          url: 'slots/'+$('#hari').val(),
+
+          data: {'idUser':a, 'kafe':b},
+          success: function( data ) {
+             alert(data);
+          }
+         });
+    }
+  </script>
+  <script src="{{asset('gantella/vendors/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
 
 </body>
 
