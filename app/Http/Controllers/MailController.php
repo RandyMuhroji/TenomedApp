@@ -3,13 +3,16 @@
 namespace Tenomed\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 
 use Mail;
+
 
 class MailController extends Controller
 {
     public function basic_email()
     {
+      
     	$data = ['name' => 'randy muhroji'];
     	Mail::send(['text' => 'mail'], $data, function($message){
     		 $message->to('randymuhroji@gmail.com', 'Randy Muhroji')->subject('test aja nih');

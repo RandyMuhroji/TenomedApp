@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="{{asset('gantella/build/css/lib/bootstrap-datepicker.css')}}">
 
     <link rel="stylesheet" href="{{ asset('') }}assets/css/jquery-ui.css">
-  <link rel="stylesheet" href="{{ asset('') }}assets/css/style.css">
+  <link rel="stylesheet" href="{{ asset('') }}assets/css/style1.css">
   <script src="https:{{ asset('') }}assets/js/jquery-1.12.4.js"></script>
   <script src="https:{{ asset('') }}assets/js/jquery-ui.js"></script>
 
@@ -311,7 +311,8 @@ input[type=number]
             </div><!-- /.form-group -->
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                <input class="form-control" type="date" name="book_tanggal" id="datepicker" placeholder="Date" required="">
+                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required="">
+              <!--   <input type="text" id="hari" name=""> -->
                 <input class="form-control" type="hidden" name="book_jam" value="12:00" id="book_jam" placeholder="Date" required="">
             </div><!-- /.form-group -->
             <div class="row">
@@ -330,7 +331,7 @@ input[type=number]
             </div>
         </div><!-- /.col-* -->
     </div><!-- /.row -->
-    <div class="row">
+    <!-- <div class="row">
 
         <div class="col-sm-12">
             <div class="switch-field">
@@ -344,7 +345,7 @@ input[type=number]
             </div>
 
         </div>
-    </div>
+    </div> -->
 </div><!-- /.box -->
 
 <div class="row">
@@ -712,14 +713,28 @@ input[type=number]
     $('.datepairExample').datepair();
     var dateToday = new Date();
     $( function() {
-        $( "#datepicker" ).datepicker({
-             dateFormat: 'yy-m-d',
-            inline: true,
-            onChange: function(dateText, inst) { 
-                alert("dok")
+        $("#datepicker").datepicker();
+    });
+    function getHari(hari) {
+        var d = new Date(hari);
+        var n = d.getDay()
+        // document.getElementById("demo").innerHTML = n;
+        $('#hari').val(n);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    });
+        $.ajax({
+          type: 'GET',
+          url: 'slots/'+$('#hari').val(),
+
+          data: {'idUser':a, 'kafe':b},
+          success: function( data ) {
+             alert(data);
+          }
+         });
+    }
   </script>
   <script src="{{asset('gantella/vendors/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
 

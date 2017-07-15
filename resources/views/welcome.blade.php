@@ -81,7 +81,7 @@
                                 @endpermission
                                 @permission(('owner'))
                                    <li class="active" >
-                                    <a href="{{url('manage-cafe')}}">Admin Pane </a>
+                                    <a href="{{url('manage-cafe')}}">Manage Cafe</a>
 
                                   </li>
                                 @endpermission
@@ -89,7 +89,7 @@
 
                                <li>
                                    <li class="active" >
-                                    <a href="{{url('admin')}}">Manage Cafe </a>
+                                    <a href="{{url('admin')}}">Admin Panel</a>
 
                                   </li>
                                     
@@ -98,11 +98,11 @@
 
                             @else
                                 <li class="active" >
-                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
 
                                 </li>
                                 <li class="active">
-                                    <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                    <a data-toggle="modal" href="/register" onclick="openRegisterModal();">Sign Up</a>
 
                                 </li>
                             @endif

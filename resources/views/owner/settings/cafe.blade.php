@@ -12,7 +12,7 @@
               <h2>Cafe</h2>
             </div>
             <div class="col-md-11 col-sm-11 col-xs-12">
-              <h2 style="float:right;"><a href="#" target="_blank" class="btn btn-info btn-xs">Show Cafe &nbsp;<i class="fa fa-eye"></i> </a></h2>
+              <h2 style="float:right;"><a href="/detail/{{$cafe->id}}?id={{Auth::user()->id}}" target="_blank" class="btn btn-info btn-xs">Show Cafe &nbsp;<i class="fa fa-eye"></i> </a></h2>
             </div>
           </div>
           <div class="clearfix"></div>
@@ -49,7 +49,7 @@
               </div>
             </div>
 
-            <div class="form-group{{ $errors->has('desc') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('days') ? ' has-error' : '' }}">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Operation Cafe <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -127,6 +127,9 @@
                     </p>
                   </li>
                 </ul>
+                @if ($errors->has('days'))
+                  <span class="help-block">{{ $errors->first('days') }}</span>
+                @endif
               </div>
             </div>
 
@@ -207,6 +210,26 @@
               </div>
             </div>
 
+            <div class="form-group{{ $errors->has('web') ? ' has-error' : '' }}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Web <span class="required" readonly>*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->web }}" id="web" name="web" class="form-control col-md-7 col-xs-12">
+                  @if ($errors->has('web'))
+                  <span class="help-block">{{ $errors->first('web') }}</span>
+                  @endif
+              </div>
+
+              <label class="control-label col-md-2 col-sm-2 col-xs-8" for="address">Facebook <span class="required">*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->facebook }}" id="facebook" name="facebook" class="form-control col-md-7 col-xs-12" >
+                  @if ($errors->has('facebook'))
+                  <span class="help-block">{{ $errors->first('facebook') }}</span>
+                  @endif
+              </div>
+            </div>
+
 
             <div class="ln_solid"></div>
 
@@ -265,14 +288,10 @@
     $('.datepairExample').datepair();
 
 
-    $(document).ready(function(){
-      $(".change").change(function() {
-        if(this.checked){
-            alert($(this).val());
-        }
-        console.log('udah masok ni');
-      });
-    })
+    $("input").change(function() {
+      console.log('udah masok ni');
+    });
+
   </script>
   <script src="{{asset('gantella/vendors/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
 @stop

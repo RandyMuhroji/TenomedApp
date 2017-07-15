@@ -15,7 +15,6 @@ class AdminTableSeeder extends Seeder
     
     public function run()
     {
-        //create Admin
         $user = User::create([
                 'name' => 'admin',
                 'email'=> 'admin@tenomed.com',
@@ -23,7 +22,7 @@ class AdminTableSeeder extends Seeder
                 'status' => 1,
             ]);
 
-        $role = Role::find(1);
+        $role = Role::find(4);
         $user->attachRole($role);
 
         //create Owner
@@ -44,11 +43,7 @@ class AdminTableSeeder extends Seeder
 
         $kec = $arrAddress[2];
         $kel = $arrAddress[1];
-        $city = $arrAddress[3];
-        $province = $arrAddress[4];
-        $arrProv = explode(' ', $province);
 
-        $province = $arrProv[0];
 
         $cafe = DB::table('cafes')->insert(
             [
@@ -60,25 +55,23 @@ class AdminTableSeeder extends Seeder
                 'long' => '98.7072978224121',
                 'kecamatan' => $kec,
                 'kelurahan' => $kel,
-                'city' => $city,
-                'province' => $province,
+                'rating' => 0
             ]
         );
 
         DB::table('album_gallery')->insert(
             [
-                'cafe_id' => $cafe->id,
+                'user_id' =>  $user->id,
                 'name' => 'slider'
             ]
         );
 
-        //Create User
         $user = User::create([
-                'name' => 'normal user',
-                'email'=> 'user@tenomed.com',
-                'password' => bcrypt('user'),
-                'status' => 1,
-            ]);
+            'name' => 'normal user',
+            'email'=> 'user@tenomed.com',
+            'password' => bcrypt('user'),
+            'status' => 1,
+        ]);
 
         $role = Role::find(3);
         $user->attachRole($role);

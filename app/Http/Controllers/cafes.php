@@ -210,4 +210,7 @@ class cafes extends Controller
             ->get();
         return view('invoice')->with(['detail'=>$detail,'menu'=>$menu]);
      }
+     public function slots($id){
+        return("babi kau");
+     }
 }

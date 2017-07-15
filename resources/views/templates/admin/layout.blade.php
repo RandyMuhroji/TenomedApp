@@ -28,6 +28,7 @@
   <link href="{{asset('gantella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{asset('gantella/build/css/me.css')}}">
 
   @yield('css')
 </head>
@@ -38,7 +39,7 @@
       <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Manage Cafe</span></a>
+              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>Admin Panel</span></a>
           </div>
 
           <div class="clearfix"></div>
@@ -68,15 +69,14 @@
                   <h3>@lang('general.app.general')</h3>
                   <ul class="nav side-menu">
                       <li><a href="{{route('admin')}}"><i class="fa fa-home"></i> Dashboard </a></li>
+                      <li><a href="/admin/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                       <li><a href="{{route('cafes.index')}}"><i class="fa fa-coffee"></i> Cafes </a></li>
-                      <li><a href="{{route('cafes.index')}}"><i class="fa fa-coffee"></i> Reservation   </a></li>
+                      <li><a href="{{route('admin_reservation')}}"><i class="fa fa-coffee"></i> Reservation   </a></li>
                       <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> @lang('general.nav.users') </a></li>
-                      <li><a href="{{route('sponsors.index')}}"><i class="fa fa-users"></i>Sponsors </a></li>
-                      <li><a href="{{route('messages.index')}}"><i class="fa fa-envelope"></i>Messages</a></li>
                       <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                              <li><a href="#">Account</a></li>
-                              <li><a href="#">Administrator</a></li>
+                              <li><a href="{{route('admin_account')}}">Account</a></li>
+                              <li><a href="{{route('admin_list')}}">Administrator</a></li>
                           </ul>
                       </li>
                   </ul>

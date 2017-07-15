@@ -38,13 +38,14 @@
 
                             <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
-                                <li class="active" >
-                                    <a href="/">Home </a>
-
-                                </li>
+                               
                             <?php if(Auth::check()): ?>
 
                                 <?php if (\Entrust::can(('user'))) : ?>
+                                 <li class="active" >
+                                    <a href="/">Home </a>
+
+                                </li>
 
                                <li>
                                     <a href="#">
@@ -76,14 +77,30 @@
                                     </ul>
                                 </li>
                                 <?php endif; // Entrust::can ?>
+                                <?php if (\Entrust::can(('owner'))) : ?>
+                                   <li class="active" >
+                                    <a href="<?php echo e(url('manage-cafe')); ?>">Manage Cafe</a>
+
+                                  </li>
+                                <?php endif; // Entrust::can ?>
+                                <?php if (\Entrust::can(('admin'))) : ?>
+
+                               <li>
+                                   <li class="active" >
+                                    <a href="<?php echo e(url('admin')); ?>">Admin Panel</a>
+
+                                  </li>
+                                    
+                                </li>
+                                <?php endif; // Entrust::can ?>
 
                             <?php else: ?>
                                 <li class="active" >
-                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
 
                                 </li>
                                 <li class="active">
-                                    <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                    <a data-toggle="modal" href="/register" onclick="openRegisterModal();">Sign Up</a>
 
                                 </li>
                             <?php endif; ?>

@@ -2,6 +2,7 @@
 
 namespace Tenomed\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use Tenomed\Models\User;
 use Tenomed\Models\Role;
 use Tenomed\Models\Cafe;
@@ -27,7 +28,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = DB::select('select * from role_user r inner join users u on r.user_id = u.id where role_id = 3');
 
         $params = [
             'title' => 'Users Listing',
@@ -157,24 +158,23 @@ class UsersController extends Controller
             $user = User::findOrFail($id);
 
             $this->validate($request, [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email,'.$id,
+                'desc' => 'required',
             ]);
 
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
+            $user->desc = $request->input('desc');
+            $user->status = $request->input('status');
 
             $user->save();
 
-            $roles = $user->roles;
+            // $roles = $user->roles;
 
-            foreach ($roles as $key => $value) {
-                $user->detachRole($value);
-            }
+            // foreach ($roles as $key => $value) {
+            //     $user->detachRole($value);
+            // }
 
-            $role = Role::find($request->input('role_id'));
+            // $role = Role::find($request->input('role_id'));
 
-            $user->attachRole($role);
+            // $user->attachRole($role);
 
             return redirect()->route('users.index')->with('success', trans('general.form.flash.updated',['name' => $user->name]));
         }

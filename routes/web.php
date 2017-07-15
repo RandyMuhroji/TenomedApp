@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,14 +21,26 @@ Route::get('/', [
 //     //route
 // });
 
-
-
 Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin'],function(){
     Route::get('/',"DashboardController@index")->name('admin');
     Route::resource('users', 'UsersController');
     Route::resource('cafes', 'CafesController');
-    Route::resource('sponsors', 'SponsorsController');
     Route::resource('messages', 'MessageController');
+
+    Route::group(['prefix' => 'reservation'],function(){
+        Route::get('/',"ReservationController@index")->name('admin_reservation');
+    });
+
+    Route::group(['prefix' => 'settings'], function(){
+        Route::get('/account',"SettingsController@account")->name('admin_account');
+        Route::put('/account',"SettingsController@accountStore");
+        Route::post('/account/password',"SettingsController@changePassword")->name('change_password_admin');
+
+        Route::get('/administrator',"SettingsController@showAdmin")->name('admin_list');
+        Route::post('/administrator/add',"SettingsController@addAdmin")->name('add_admin');
+        Route::put('/administrator/update/{id}',"SettingsController@updateAdmin")->name('update_admin');
+        Route::delete('/administrator/delete/{id}',"SettingsController@deleteAdmin")->name('delete_admin');
+    });
 });
 
 Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'Owner'],function(){
@@ -99,3 +112,4 @@ Route::get('/booking/{id}', 'cafes@booking');
 Route::post('/saveBooking/{id}', 'cafes@saveBooking');
 Route::get('/invoice/{id}', 'cafes@invoice');
 
+Route::get('/slots/{id}', 'cafes@slots');
