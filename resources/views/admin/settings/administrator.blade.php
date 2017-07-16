@@ -233,7 +233,6 @@
 			});
 
 			$('#submit_delete').click(function(){
-				alert(id);
 				var token = $(this).data("token");
         $.ajax({
 	          url  :"/admin/settings/administrator/delete/"+id,

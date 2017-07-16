@@ -112,7 +112,7 @@
                         <label class="control-label col-md-2 col-sm-2 col-xs-12" for="address">longitude <span class="required">*</span>
                         </label>
                         <div class="col-md-2 col-sm-2 col-xs-5">
-                            <input type="text" value="{{ Request::old('lng') ?: '' }}" id="lng" name="lng" class="form-control col-md-7 col-xs-12" >
+                            <input type="text" value="{{ Request::old('lng') ?: '' }}" id="lng" name="lng" class="form-control col-md-7 col-xs-12" readonly>
                             @if ($errors->has('lng'))
                             <span class="help-block">{{ $errors->first('lng') }}</span>
                             @endif

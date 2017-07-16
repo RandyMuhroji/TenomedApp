@@ -1,10 +1,13 @@
 @extends('templates.owner.layout')
 
 @section('content')
+<div class="clearfix"></div>
+<div id = "notification" class="alert " role="alert" hidden>
+    <a  class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p></p>
+</div>
 <div class="">
-
     <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -32,14 +35,14 @@
                         <tbody>
                             @if(count($menus))
                             @foreach ($menus as $row)
-                            <tr>
+                            <tr id = "row{{$row->id}}">
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->category}}</td>
                                 <td>{{$row->price}}</td>
                                 <td>
                                     <a  data-toggle="modal" data-target="#show_menu" class="btn btn-info btn-xs" onclick="setModalValue('{{$row}}')"><i class="fa fa-eye" title="View"></i> </a>
                                     <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                    <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                     <a data-toggle="modal" data-target="#delete_menu" class="btn btn-danger btn-xs delete" onclick="setname('{{$row->name}}','{{$row->id}}')"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -114,6 +117,30 @@
 
   </div>
 </div>
+
+<div id="delete_menu" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Administrator</h4>
+      </div>
+      <form data-parsley-validate class="form-horizontal form-label-left">
+            <div class="modal-body">
+                <p>Are you sure delete menu <strong id="delete_name"></strong></p>
+          </div>
+
+      <div class="modal-footer">
+            <button id = "submit_delete" type="button" class="btn btn-success" data-token="{{ csrf_token() }}" >Delete</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
 @stop
 
 @section('css')
@@ -122,6 +149,13 @@
 
 @section('js')
     <script type="text/javascript">
+        var id;
+
+        var setname = function(name,_id){
+            $('#delete_name').html(name);
+            id = _id;
+        };
+
         var setModalValue= function(val){
             var obj_val = JSON.parse(val);
             $('.title_menu').text(obj_val['name']);
@@ -133,5 +167,26 @@
             $(".image_menu").attr("title",obj_val['desc']);
 
         };
+
+        $('#submit_delete').click(function(){
+            var token = $(this).data("token");
+            $.ajax({
+              url  :"/manage-cafe/menus/"+id,
+              type : 'DELETE',
+              dataType: "JSON",
+              data:{
+                  "id": id,
+                  "_method": 'DELETE',
+                  "_token": token,
+              },
+              success:function(msg){
+                $('#delete_menu').modal('hide');
+                $('#row'+id).remove();
+                $('div#notification').show();
+                $('div#notification p').text(msg['success']);
+                $('div#notification').addClass('alert-success');
+              }
+        });
+      });
     </script>
 @stop

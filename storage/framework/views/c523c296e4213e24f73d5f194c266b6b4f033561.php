@@ -40,10 +40,10 @@
                     <?php if($row->id == $image->album_id): ?>
                     <div class="col-md-55" id="image<?php echo e($image->id); ?>">
                       <div class="thumbnail">
-                        <div class="image view view-first">
+                        <div class="image view view-first" style="height: 140px;">
                           <img style="width: 100%; display: block;" src = "<?php echo e(asset('')); ?>images/<?php echo e($image->filename); ?>" alt="image" />
                           <div class="mask">
-                            <p><?php echo e($image->title); ?></p>
+                            <p><?php echo e(isset($image->title) ? $image->title : 'title here'); ?></p>
                             <div class="tools tools-bottom">
                               <a href="#"><i class="fa fa-eye"></i></a>
                               <a href="#" class="editImage" data-name = "<?php echo e($row->name); ?>" data-id = "<?php echo e($image->id); ?>" data-image="<?php echo e($image->filename); ?>" data-title="<?php echo e($image->title); ?>" data-desc="<?php echo e($image->desc); ?>" data-toggle="modal" data-target="#edit_photo"><i class="fa fa-pencil"></i></a>
@@ -52,7 +52,7 @@
                           </div>
                         </div>
                         <div class="caption">
-                          <p><?php echo e($image->desc); ?></p>
+                          <p><?php echo e(isset($image->desc) ? $image->desc : "Caption here"); ?></p>
                         </div>
                       </div>
                     </div>

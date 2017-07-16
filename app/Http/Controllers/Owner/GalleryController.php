@@ -83,8 +83,6 @@ class GalleryController extends Controller
                     'user_id' => $user_id,
                     'album_id' => $album_id,
                     'filename' => $picture,
-                    'mime' => $extension,
-                    'original_filename' => $filename,
                     'title' => $title,
                     'desc' => $desc,
                 ]

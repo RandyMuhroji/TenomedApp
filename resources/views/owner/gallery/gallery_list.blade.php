@@ -42,10 +42,10 @@
                     @if($row->id == $image->album_id)
                     <div class="col-md-55" id="image{{$image->id}}">
                       <div class="thumbnail">
-                        <div class="image view view-first">
+                        <div class="image view view-first" style="height: 140px;">
                           <img style="width: 100%; display: block;" src = "{{asset('')}}images/{{$image->filename}}" alt="image" />
                           <div class="mask">
-                            <p>{{$image->title}}</p>
+                            <p>{{$image->title or 'title here'}}</p>
                             <div class="tools tools-bottom">
                               <a href="#"><i class="fa fa-eye"></i></a>
                               <a href="#" class="editImage" data-name = "{{$row->name}}" data-id = "{{$image->id}}" data-image="{{$image->filename}}" data-title="{{$image->title}}" data-desc="{{$image->desc}}" data-toggle="modal" data-target="#edit_photo"><i class="fa fa-pencil"></i></a>
@@ -54,7 +54,7 @@
                           </div>
                         </div>
                         <div class="caption">
-                          <p>{{$image->desc}}</p>
+                          <p>{{$image->desc or "Caption here"}}</p>
                         </div>
                       </div>
                     </div>

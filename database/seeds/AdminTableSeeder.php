@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Tenomed\Models\User;
 use Tenomed\Models\Role;
+use Tenomed\Models\Menu;
 use Illuminate\Support\Facades\DB;
 
 class AdminTableSeeder extends Seeder
@@ -55,7 +56,7 @@ class AdminTableSeeder extends Seeder
                 'long' => '98.7072978224121',
                 'kecamatan' => $kec,
                 'kelurahan' => $kel,
-                'rating' => 0
+                'rating' => 0,
             ]
         );
 

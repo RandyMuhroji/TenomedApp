@@ -164,6 +164,22 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $menu = Menu::find($id);
+
+            $menu->delete();
+
+            return response()->json([
+                'success' => 'Menu has been deleted successfully!'
+             ]);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }
