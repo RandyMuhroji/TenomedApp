@@ -316,7 +316,7 @@
           id    = $(this).data('id');
           desc  = $(this).data('desc');
           title = $(this).data('title');
-          name = $(this).data('name');
+          name  = $(this).data('name');
           console.log(image,id,desc,title,name);
 
           $('form#editImage').attr('action','/manage-cafe/gallery/'+id);

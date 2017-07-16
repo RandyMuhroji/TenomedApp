@@ -141,6 +141,7 @@ class SettingsController extends Controller
                 'phone' => 'required',
                 'open_hours' => 'required',
                 'close_hours' => 'required',
+                'seat' => 'required',
             ]);
 
             $arrAddress = explode(',',$request->input('address'));
@@ -167,6 +168,7 @@ class SettingsController extends Controller
                         'web' => $request->input('web'),
                         'linkedin' => $request->input('linkedin'),
                         'twitter' => $request->input('twitter'),
+                        'seat' => $request->input('seat'),
                         'status' => 1,
                     ]
                 );

@@ -48,6 +48,9 @@ class DummyTableSeeder extends Seeder
                 'kelurahan' => $kel,
                 'rating' => 0,
                 'status' => 1,
+                'seat' => 30,
+                'web' => 'http://rumah_burger.com',
+                'facebook' => 'http://facebook.com/rumah.burger',
             ]
         );
 

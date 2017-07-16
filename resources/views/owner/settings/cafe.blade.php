@@ -134,10 +134,23 @@
             </div>
 
             <div class ="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Seat
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="number" id="seat" name="seat" class="form-control col-md-7 col-xs-12" required min='1' value="{{$cafe->seat}}">
+                <span class="help-block">*Available seat to reservation</span>
+                  @if ($errors->has('name'))
+                <span class="help-block">{{ $errors->first('name') }}</span>
+                  @endif
+              </div>
+            </div>
+
+            <div class ="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Highlights
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tags_1" type="text" class="tags form-control col-md-7 col-xs-12"" value="{{$highlights}}" name="highlights" data-name="add new" />
+                <input id="tags_1" type="text" class="tags form-control col-md-7 col-xs-12"" value="{{$highlights=='' ? 'Wifi, Parking Area,AC' : $highlights}}" name="highlights" data-name="add new" />
+                <span class="help-block">*Cafe facility </span>
               </div>
             </div>
 
@@ -211,7 +224,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('web') ? ' has-error' : '' }}">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Web <span class="required" readonly>*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Web
               </label>
               <div class="col-md-2 col-sm-2 col-xs-8">
                   <input type="text" value="{{ $cafe->web }}" id="web" name="web" class="form-control col-md-7 col-xs-12">
@@ -220,7 +233,7 @@
                   @endif
               </div>
 
-              <label class="control-label col-md-2 col-sm-2 col-xs-8" for="address">Facebook <span class="required">*</span>
+              <label class="control-label col-md-2 col-sm-2 col-xs-8" for="address">Facebook
               </label>
               <div class="col-md-2 col-sm-2 col-xs-8">
                   <input type="text" value="{{ $cafe->facebook }}" id="facebook" name="facebook" class="form-control col-md-7 col-xs-12" >
@@ -231,7 +244,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('web') ? ' has-error' : '' }}">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Linkedin <span class="required" readonly>*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Linkedin
               </label>
               <div class="col-md-2 col-sm-2 col-xs-8">
                   <input type="text" value="{{ $cafe->linkedin }}" id="linkedin" name="linkedin" class="form-control col-md-7 col-xs-12">
