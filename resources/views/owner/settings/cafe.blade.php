@@ -296,7 +296,9 @@
 
     $('.datepairExample .time').timepicker({
         'showDuration': true,
-        'timeFormat': 'h:i A'
+        'step': 60,
+        'timeFormat': 'H:i',
+        'maxTime': '11:30pm',
     });
 
     $('.datepairExample').datepair();
