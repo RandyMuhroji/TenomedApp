@@ -230,6 +230,20 @@
               </div>
             </div>
 
+            <div class="form-group{{ $errors->has('web') ? ' has-error' : '' }}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Linkedin <span class="required" readonly>*</span>
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->linkedin }}" id="linkedin" name="linkedin" class="form-control col-md-7 col-xs-12">
+              </div>
+
+              <label class="control-label col-md-2 col-sm-2 col-xs-8" for="address">Twitter
+              </label>
+              <div class="col-md-2 col-sm-2 col-xs-8">
+                  <input type="text" value="{{ $cafe->twitter }}" id="twitter" name="twitter" class="form-control col-md-7 col-xs-12" >
+              </div>
+            </div>
+
 
             <div class="ln_solid"></div>
 

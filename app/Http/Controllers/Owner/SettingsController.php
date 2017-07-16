@@ -163,8 +163,11 @@ class SettingsController extends Controller
                         'lat' => $request->input('lat'),
                         'long' => $request->input('lng'),
                         'desc' => $request->input('desc'),
+                        'facebook' => $request->input('facebook'),
+                        'web' => $request->input('web'),
+                        'linkedin' => $request->input('linkedin'),
+                        'twitter' => $request->input('twitter'),
                         'status' => 1,
-
                     ]
                 );
 
