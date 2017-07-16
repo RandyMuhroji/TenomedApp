@@ -10,13 +10,14 @@
 
     <link href="http://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet" type="text/css">
     <link href="{{ asset('') }}assets/libraries/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="{{ asset('') }}assets/libraries/owl.carousel/{{ asset('') }}assets/owl.carousel.css" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('') }}assets/libraries/owl.carousel/assets/owl.carousel.css" rel="stylesheet" type="text/css" >
     <link href="{{ asset('') }}assets/libraries/colorbox/example1/colorbox.css" rel="stylesheet" type="text/css" >
     <link href="{{ asset('') }}assets/libraries/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.css" rel="stylesheet" type="text/css">
     <link href="{{ asset('') }}assets/css/superlist.css" rel="stylesheet" type="text/css" >
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
+
+
 
     <link rel="stylesheet" href="{{asset('gantella/build/css/maps.css')}}">
   <link rel="stylesheet" href="{{asset('gantella/build/css/jquery.timepicker.css')}}">
@@ -26,6 +27,7 @@
   <link rel="stylesheet" href="{{ asset('') }}assets/css/style1.css">
   <script src="https:{{ asset('') }}assets/js/jquery-1.12.4.js"></script>
   <script src="https:{{ asset('') }}assets/js/jquery-ui.js"></script>
+    <script src="{{ asset('') }}assets/js/bootbox.min.js" type="text/javascript"></script>
 
     <style type="text/css">
 
@@ -273,6 +275,7 @@ input[type=number]
                             <div class="page-title">
                             <form method="post" action="/saveBooking/{{ $detail->id }}?id={{Auth::user()->id}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" value="{{ $detail->id }}" name="idKafe" id="idKafe">
 
     <h1>Booking From {{$detail->name}} Cafe's</h1>
 </div>
@@ -283,25 +286,29 @@ input[type=number]
     <h3 class="page-title">Booking Information</h3>
 
     <div class="row">
-
-        <div class="col-sm-6">
+    <div class="col-sm-12">
         <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-map-o"></i></span>
                         <input class="form-control" name="book_name" id="book_name" type="text" placeholder="Booking Name" required="">
                     </div><!-- /.form-group -->
+                    </div>
+
+        <div class="col-sm-6">
+       
            <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                 <input class="form-control" name="book_phone" id="book_phone" type="text" placeholder="Phone" required="">
             </div><!-- /.form-group -->
-            
-            
-            <div class="form-group">
-                <select  name="book_kategori" id="book_kategori">
-                    <option value="1">BreakFast</option>
-                    <option value="2">Lunch</option>
-                    <option value="3">Dinner</option>
-                </select>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required=""  readonly="">
+                <input type="hidden" id="hari" name="">
+                <input type="hidden" name="kafeSeat" id="kafeSeat" value="{{$detail->seat}}">
+               
             </div><!-- /.form-group -->
+            
+                   
+            
         </div><!-- /.col-* -->
 
         <div class="col-sm-6">
@@ -309,43 +316,53 @@ input[type=number]
                 <span class="input-group-addon"><i class="fa fa-at"></i></span>
                 <input class="form-control" name="book_email" id="book_email" type="text" placeholder="E-mail" required="">
             </div><!-- /.form-group -->
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required="">
-              <!--   <input type="text" id="hari" name=""> -->
-                <input class="form-control" type="hidden" name="book_jam" value="12:00" id="book_jam" placeholder="Date" required="">
-            </div><!-- /.form-group -->
             <div class="row">
                  <div class="col-sm-8">
                     <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input class="form-control" type="number"  name="book_persons" id="book_persons" min="1"  step="1" value="0">
+                    <input class="form-control" type="number"  name="book_persons" id="book_persons" min="1"  step="1"   onchange="getSeat(jQuery('#book_persons').val());">
                     </div>
 
                 </div><!-- /.form-group -->
                 
                 <div class="col-sm-4" style="height: 100%; padding: 10px;">
                     <span style="line-height: 100%; display: block; font-size: 14; font-weight: 400px;">Persons</span>
+                    <input  type="hidden" name="book_jam" id="book_jam" required="" >
     
                 </div><!-- /.form-group -->
             </div>
+            <!-- <div class="datepairExample">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                    <input class="form-control timePic time end" type="text"  name="book_jam" id="book_jam" required="" >
+                </div>
+            </div> -->
         </div><!-- /.col-* -->
     </div><!-- /.row -->
-    <!-- <div class="row">
+    <br>
+    <div id="bukaTime" style="display: none;">
+      <h5 class="page-title">Available Booking Time</h5>
+      <div class="row">
+              <div class="detail-gallery">
+              <ul class="detail-gallery-index" id="jamKu">
+                
+                  
+              </ul>
+          </div><!-- /.detail-gallery -->
+         <!--  <div class="col-sm-12">
+              <div class="switch-field">
+                <div class="switch-title">Three fields? Sure.</div>
+                <input type="radio" id="switch_3_left" class="aku" name="switch_3" value="yes" checked/>
+                <label for="switch_3_left">One</label>
+                <input type="radio" id="switch_3_center" class="aku" name="switch_3" value="maybe" />
+                <label for="switch_3_center">Two</label>
+                      <input type="radio" id="switch_3_right" class="aku" name="switch_3" value="no" />
+                <label for="switch_3_right">Three</label>
+              </div>
 
-        <div class="col-sm-12">
-            <div class="switch-field">
-              <div class="switch-title">Three fields? Sure.</div>
-              <input type="radio" id="switch_3_left" class="aku" name="switch_3" value="yes" checked/>
-              <label for="switch_3_left">One</label>
-              <input type="radio" id="switch_3_center" class="aku" name="switch_3" value="maybe" />
-              <label for="switch_3_center">Two</label>
-                    <input type="radio" id="switch_3_right" class="aku" name="switch_3" value="no" />
-              <label for="switch_3_right">Three</label>
-            </div>
-
-        </div>
-    </div> -->
+          </div> -->
+      </div>
+    </div>
 </div><!-- /.box -->
 
 <div class="row">
@@ -704,6 +721,7 @@ input[type=number]
   <script src="{{asset('gantella/build/js/jquery.datepair.js')}}"> </script>
 
   <script>
+  var jam = [];
 
     $('.datepairExample .time').timepicker({
         'showDuration': true,
@@ -713,28 +731,122 @@ input[type=number]
     $('.datepairExample').datepair();
     var dateToday = new Date();
     $( function() {
-        $("#datepicker").datepicker();
+        $("#datepicker").datepicker({autclose: true});
     });
     function getHari(hari) {
         var d = new Date(hari);
         var n = d.getDay()
         // document.getElementById("demo").innerHTML = n;
         $('#hari').val(n);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-          type: 'GET',
-          url: 'slots/'+$('#hari').val(),
+       //  if($("#datepicker").val()===""){
+       //    $("#bukaTime").text(" ");
+       //    $("#bukaTime").append('<div class="alert alert-icon alert-warning" role="alert">Your Booking slot is not available, please fill the date!</div>');
 
-          data: {'idUser':a, 'kafe':b},
-          success: function( data ) {
-             alert(data);
-          }
-         });
+       // document.getElementById("bukaTime").style.display='inherit';   
+       //  }else{
+       //    $("#bukaTime").text(" ");
+       //  }
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+             console.log("tes masuk");
+             $.ajax({
+              type: 'GET',
+              url: '/slots/'+$('#hari').val()+'?idKafe='+$('#idKafe').val(),
+
+              data: {'idUser':'zzz', 'kafe':'zz'},
+              success: function( data ) {
+                $("#jamKu").empty();
+                 // $(".doko").load("/login");
+                 console.log("tees sukses");
+                 var doko=data[0];
+                 console.log(doko);
+                 // var data=JSON.parse(data);
+                 if(data!=''){
+                     $('.datepairExample .time').timepicker({
+                        'minTime': doko["open_hour"],
+                        'maxTime': doko["close_hour"],
+                        'timeFormat': 'h:i A',
+                    });
+                    var tmp=doko["open_hour"].split(":");
+                    tmp=parseInt(tmp[0]);
+                    var tmp2=doko["close_hour"].split(":");
+                    tmp2=parseInt(tmp2[0]);
+                    console.log(tmp,tmp2);
+                    for(var i=tmp;i<=tmp2;i++){
+                      var x=i<10?'0'+i:i;
+                      var randy='<div class="owl-item active" style="width: 143.6px; margin-right: 0px;" id="jam'+i+'"><li class="detail-gallery-list-item active"><a data-target=""><button onclick="getJam(\''+x+':00'+'\')" class="btn btn-sm btn-danger" type="button">'+x+':00'+'</button></a></li></div>';
+                       //console.log(randy);
+                       $("#jamKu").append(randy);
+                    }
+
+                 }else{
+                    // alert("Day is not available for booking!")
+                     $('#datepicker').val(" ");
+                 }
+
+
+              }
+             });
     }
+
+     function getJam(jam) {
+     // alert(jam);
+      $("#book_jam").val(jam);
+     }
+    function getSeat(seat) {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+             console.log("tes masuk");
+             $.ajax({
+              type: 'GET',
+              url: '/seats/'+$('#idKafe').val()+'?tgl='+$('#datepicker').val()+'&seat='+seat,
+
+              data: {'idUser':'zzz', 'kafe':'zz'},
+              success: function( data ) {
+               // document.getElementById("bukaTime").style.display='inherit';
+                 var doko=data;
+                 console.log(doko);
+                 var i = 0;
+                 var jam = [];
+
+                while (i < doko.length) {
+                    // console.log("banyak seat = "+ $('#kafeSeat').val());
+                    // console.log("yang udah pesan = "+doko[i]["persons"]);
+
+                    var total = parseInt(doko[i]['persons']) + parseInt(seat);
+                    var requestSeat = parseInt($('#kafeSeat').val());
+                    // console.log("total " + total);
+
+                   console.log(doko[i]["persons"]);
+                    var tmp = doko[i]["bookingTime"].split(":");
+                    tmp     = parseInt(tmp[0]);
+                    console.log(tmp);
+                    if(total>requestSeat){
+                        $('#jam'+tmp).hide();
+                    }
+                    else{
+                      $('#jam'+tmp).show(); 
+                    }
+                    i++;
+                }
+                $('.datepairExample .time').timepicker({
+                    'disableTimeRanges': jam
+                });
+
+                $('.datepairExample').datepair();
+                
+                document.getElementById("bukaTime").style.display='inherit';                  
+              }
+             });
+    }
+    
+
   </script>
   <script src="{{asset('gantella/vendors/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
 
