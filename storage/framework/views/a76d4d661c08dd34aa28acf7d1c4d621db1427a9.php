@@ -23,7 +23,7 @@
     <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.buttons.css')); ?>" rel="stylesheet">
     <!-- <link href="<?php echo e(asset('gantella/vendors/pnotify/dist/pnotify.nonblock.css')); ?>" rel="stylesheet"> -->
-
+    <link href="<?php echo e(asset('gantella/build/css/me.css')); ?>" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<?php echo e(asset('gantella/build/css/custom.min.css')); ?>" rel="stylesheet">
 </head>
@@ -51,8 +51,8 @@
                         </div>
                         <div>
                             <button type="submit" class="btn btn-default submit"><?php echo app('translator')->get('general.login.login'); ?></button>
-                            <a class="reset_pass" href="<?php echo e(route('register')); ?>">Register</a>
-                            <a class="reset_pass" href="<?php echo e(route('password.reset')); ?>"><?php echo app('translator')->get('general.login.lost_your_password'); ?></a>
+                            <a class="reset_pass" href="<?php echo e(route('register')); ?>" style="text-decoration: none;">Register</a>
+                            <a class="reset_pass" href="<?php echo e(route('password.reset')); ?>" style="text-decoration: none;"><?php echo app('translator')->get('general.login.lost_your_password'); ?></a>
                         </div>
 
                         <div class="clearfix"></div>
@@ -63,7 +63,8 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Tenomed</h1>
+                                <a href="/" style="text-decoration: none;">
+                                <h1><i class="fa fa-paw"></i> Tenomed</h1></a>
                                 <p>©2017 All Rights Reserved.</a></p>
                             </div>
                         </div>

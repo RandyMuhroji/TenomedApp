@@ -76,7 +76,8 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i> Tenomed Admin Panel</h1>
+                               <a href="/" style="text-decoration: none;">
+                                <h1><i class="fa fa-paw"></i> Tenomed</h1></a>
                                 <p>©2017 All Rights Reserved.</p>
                             </div>
                         </div>
