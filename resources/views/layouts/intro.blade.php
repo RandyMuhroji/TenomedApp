@@ -458,7 +458,7 @@ function check_email(email){
             var atpos=x.indexOf("@"); var sppos=x.indexOf(" "); 
             var tdpos=x.indexOf(":"); var dotpos=x.lastIndexOf(".");
             if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length || sppos>=0 || tdpos>=0) {
-                bootbox.alert("<strong>ERR001</strong> - not a valid e-mail address example: user@yahoo.com");
+                bootbox.alert("<strong>ERR001</strong> - not a valid e-mail abootboxddress example: user@yahoo.com");
                 $('#email').addClass('when-error');
                 $('#email').focus();
                 return false;

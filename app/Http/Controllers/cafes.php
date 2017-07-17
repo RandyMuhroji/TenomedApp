@@ -211,6 +211,25 @@ class cafes extends Controller
         return view('invoice')->with(['detail'=>$detail,'menu'=>$menu]);
      }
      public function slots($id){
-        return("babi kau");
+        $idKafe = Input::get('idKafe');
+        $jam = DB::table('operational_cafe')
+                ->select('open_hour','close_hour')
+                ->where('cafe_id', $idKafe)
+                ->where('day', $id)
+                ->get();
+
+        return($jam);
+     }
+     public function seats($id){
+        $tgl = Input::get('tgl');
+        $seat=Input::get('seat');
+         $ada = DB::table('reservations')
+                ->select('bookingTime', DB::raw('SUM(persons) as persons'))
+                ->where('bookingDate', $tgl)
+                ->where('cafe_id', $id)
+                ->groupBy('bookingTime')
+                ->get();
+       // $ada->persons=$ada->persons+$seat;
+        return($ada);
      }
 }
