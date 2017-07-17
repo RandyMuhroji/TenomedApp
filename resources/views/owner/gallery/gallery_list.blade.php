@@ -47,7 +47,7 @@
                           <div class="mask">
                             <p>{{$image->title or 'title here'}}</p>
                             <div class="tools tools-bottom">
-                              <a href="#"><i class="fa fa-eye"></i></a>
+                              <a href="#" data-toggle="modal" data-target="#show_image" onclick="showImage('{{$image->title or 'title image'}}','{{$image->filename}}','{{$image->desc}}')"><i class="fa fa-eye"></i></a>
                               <a href="#" class="editImage" data-name = "{{$row->name}}" data-id = "{{$image->id}}" data-image="{{$image->filename}}" data-title="{{$image->title}}" data-desc="{{$image->desc}}" data-toggle="modal" data-target="#edit_photo"><i class="fa fa-pencil"></i></a>
                               <a href="#" class="deleteImage" data-id = "{{$image->id}}" data-token="{{ csrf_token() }}"><i class="fa fa-times"></i></a>
                             </div>
@@ -267,11 +267,50 @@
   </div>
 </div>
 
+<div id="show_image" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span id="show_title">Image</span></h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-9 col-sm-9 col-xs-20">
+            <div class="profile_img">
+                <div id="crop-avatar">
+                  <!-- Current avatar -->
+                  <img class = "image_menu img-responsive avatar-view" src="" alt="Avatar" title="Change the avatar">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-sx-12">
+          <span id="show_desc"></span>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 @stop
 
 @section('js')
+  <script src = "{{asset('gantella/build/js/photo-gallery.js')}}"></script>
 	<script type="text/javascript">
   var id,name,image,desc,title;
+    showImage = function(title, link, desc){
+      $('#show_title').text(title);
+      $('#show_desc').text(desc);
+      var image = "/images/" + link;
+      $(".image_menu").prop("src",image);
+    };
+
 		$(".addImage").click(function(){
 
 			id = $(this).data("id");
