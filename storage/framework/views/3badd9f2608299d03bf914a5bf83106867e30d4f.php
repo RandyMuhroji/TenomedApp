@@ -306,7 +306,7 @@
             <?php $__currentLoopData = $cafes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cafe): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 
             <div class="col-sm-6 col-md-3">
-                <div class="card-simple" data-background-image="<?php echo e(asset('')); ?>assets/images/<?php echo e(isset($cafe->image) ? $cafe->image : 'kafe.jpg'); ?>">
+                <div class="card-simple" data-background-image="<?php echo e(asset('')); ?>images/<?php echo e(isset($cafe->image) ? $cafe->image : 'kafe.jpg'); ?>">
                     <div class="card-simple-background">
                         <div class="card-simple-content">
                             <h2><a href="listing-detail.html"><span style="text-transform: capitalize;"><?php echo e($cafe->name); ?></span></a></h2>

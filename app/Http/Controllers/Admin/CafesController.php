@@ -13,6 +13,7 @@ use Tenomed\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Mail;
+use Auth;
 
 class CafesController extends Controller
 {
@@ -202,8 +203,10 @@ class CafesController extends Controller
             $cafe = Cafe::findOrFail($id);
 
             $cafe->status  = $request->input('status');
-            $cafe->desc  = $request->input('desc');
-            
+
+            $user = User::findOrFail(Auth::User()->id);
+            $user->desc  = $request->input('desc');
+            $user->save();
 
             $cafe->save();
 

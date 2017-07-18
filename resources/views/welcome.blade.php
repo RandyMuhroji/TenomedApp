@@ -309,7 +309,7 @@
             @foreach($cafes as $cafe)
 
             <div class="col-sm-6 col-md-3">
-                <div class="card-simple" data-background-image="{{ asset('') }}assets/images/{{$cafe->image or 'kafe.jpg'}}">
+                <div class="card-simple" data-background-image="{{ asset('') }}images/{{$cafe->image or 'kafe.jpg'}}">
                     <div class="card-simple-background">
                         <div class="card-simple-content">
                             <h2><a href="listing-detail.html"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
