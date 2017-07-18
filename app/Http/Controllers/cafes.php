@@ -38,9 +38,12 @@ class cafes extends Controller
     {
 
         $idUser=request()->id;
-        $detail= DB::table('cafes')->where('id', $id)->first();
+        $detail= DB::table('cafes')->where('id', $id)->where('status','<>','0')->first();
         // $bookmarks = Bookmarks::where('id',"=",$id)->get();
         //$Menu = Menu::where('idCafe',"=",$id)->get();
+        if($detail==""){
+            return redirect("/");
+        }
         $Reviews = DB::table('users')
             ->join('reviews', 'users.id', '=', 'reviews.user_id')
             ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc')
@@ -56,7 +59,11 @@ class cafes extends Controller
             ->where('parent_id','<>', 0)
             ->orderBy('updated_at', 'desc')
             ->get();
-
+         $jambuka = DB::table('operational_cafe')
+                ->select('day','open_hour', 'close_hour')
+                ->where('cafe_id', $idUser)
+                ->get();
+        //return($jambuka);
         $bookmarks = DB::table('bookmarks')
                 ->select('id','cafe_id', 'user_id','status')
                 ->where('user_id', $id)
@@ -103,7 +110,7 @@ class cafes extends Controller
      $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
      
 
-        return view('cafeDetail1')->with(['detail'=>$detail,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
+        return view('cafeDetail1',array('jambuka'=>$jambuka))->with(['detail'=>$detail,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
     }
     public function sendReview(Request $request)
     {
@@ -232,4 +239,5 @@ class cafes extends Controller
        // $ada->persons=$ada->persons+$seat;
         return($ada);
      }
+     
 }

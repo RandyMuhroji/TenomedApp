@@ -67,7 +67,7 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
 
 Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],function(){
     Route::resource('profile', 'ProfileController');
-    Route::resource('notification', 'NotificationController');
+    Route::resource('bookingList', 'NotificationController');
     Route::resource('bookmarks', 'BookmarksController');
     Route::resource('review', 'ReviewController');
     Route::resource('setting', 'SettingController');
@@ -113,4 +113,5 @@ Route::post('/saveBooking/{id}', 'cafes@saveBooking');
 Route::get('/invoice/{id}', 'cafes@invoice');
 
 Route::get('/slots/{id}', 'cafes@slots');
+// Route::get('/user/deleteReview/{$id}', 'user\ReviewController@deleteReview');
 Route::get('/seats/{id}', 'cafes@seats');
