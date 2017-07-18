@@ -38,7 +38,7 @@ class cafes extends Controller
     {
 
         $idUser=request()->id;
-        $detail= DB::table('cafes')->where('id', $id)->where('status','<>','0')->first();
+        $detail= DB::table('cafes')->where('id', $id)->where('status','1')->first();
         // $bookmarks = Bookmarks::where('id',"=",$id)->get();
         //$Menu = Menu::where('idCafe',"=",$id)->get();
         if($detail==""){
@@ -141,7 +141,7 @@ class cafes extends Controller
 
         $data = DB::table('cafes')
             ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.cafe_id')
-            ->select('cafes.id as id','cafes.name as name','cafes.desc as desc','cafes.seat as seat','cafes.images as images', 'cafes.phone as phone','cafes.address as address','menu_cafe.name as menuName','price')
+            ->select('cafes.id as id','cafes.name as name','cafes.desc as desc','cafes.seat as seat','cafes.image as images', 'cafes.phone as phone','cafes.address as address','menu_cafe.name as menuName','price')
             ->where('cafes.name','like','%'.$_GET['kata'].'%')
             ->orWhere('menu_cafe.name', 'like','%'. $_GET['kata'].'%')
             ->orWhere('address', 'like','%'. $_GET['location'].'%')

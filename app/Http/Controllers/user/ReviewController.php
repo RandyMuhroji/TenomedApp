@@ -19,11 +19,11 @@ class ReviewController extends Controller
         $user = Auth::user();
         $reviews = DB::table('cafes')
             ->join('reviews', 'cafes.id', '=', 'reviews.cafe_id')
-            ->select('cafes.name','cafes.kecamatan','cafes.images','cafes.kelurahan','cafes.desc as ket','reviews.desc','reviews.id','cafes.id as id_cafe','reviews.rate','reviews.updated_at')
+            ->select('cafes.name','cafes.kecamatan','cafes.image','cafes.kelurahan','cafes.desc as ket','reviews.desc','reviews.id','cafes.id as id_cafe','reviews.rate','reviews.updated_at')
             ->where('reviews.user_id',$user->id)
             ->where('reviews.parent_id','0')
             ->orderBy('reviews.updated_at', 'desc')
-            ->Paginate(2);
+            ->Paginate(3);
         //return($bookmarks);
         return view('user.review')->with(['reviews'=>$reviews]);   
     }

@@ -12,7 +12,7 @@
               <h2>Cafe</h2>
             </div>
             <div class="col-md-11 col-sm-11 col-xs-12">
-              <h2 style="float:right;"><a href="/detail/{{$cafe->id}}?id={{Auth::user()->id}}" target="_blank" class="btn btn-info btn-xs">Show Cafe &nbsp;<i class="fa fa-eye"></i> </a></h2>
+              <h2 style="float:right;"><a href="/detail/{{$cafe->id}}" target="_blank" class="btn btn-info btn-xs">Show Cafe &nbsp;<i class="fa fa-eye"></i> </a></h2>
             </div>
           </div>
           <div class="clearfix"></div>

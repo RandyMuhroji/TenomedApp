@@ -306,13 +306,13 @@
 
 
 
-            @foreach($rates as $rate)
+            @foreach($cafes as $cafe)
 
             <div class="col-sm-6 col-md-3">
-                <div class="card-simple" data-background-image="{{ asset('') }}assets/images/{{$rate->images or 'kafe.jpg'}}">
+                <div class="card-simple" data-background-image="{{ asset('') }}assets/images/{{$cafe->image or 'kafe.jpg'}}">
                     <div class="card-simple-background">
                         <div class="card-simple-content">
-                            <h2><a href="listing-detail.html"><span style="text-transform: capitalize;">{{$rate->name}}</span></a></h2>
+                            <h2><a href="listing-detail.html"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
                             <div class="card-simple-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -322,11 +322,11 @@
                             </div><!-- /.card-rating -->
 
                             <div class="card-simple-actions">
-                                <a href="detail/{{$rate->id}}" class="fa fa-search"></a>
+                                <a href="detail/{{$cafe->id}}" class="fa fa-search"></a>
                             </div><!-- /.card-simple-actions -->
                         </div><!-- /.card-simple-content -->
 
-                        <div class="card-simple-label" alt="availabe seat">{{$rate->seat or 0}} People</div>
+                        <div class="card-simple-label" alt="availabe seat">{{$cafe->seat or 0}} People</div>
 
                     </div><!-- /.card-simple-background -->
                 </div><!-- /.card-simple -->

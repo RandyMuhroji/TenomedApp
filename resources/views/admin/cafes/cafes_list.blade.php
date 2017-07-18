@@ -40,12 +40,12 @@
                             @if(count($cafes))
                             @foreach ($cafes as $row)
                             <tr>
-                                <td>{{$row->name}}</td>
+                                <td><a href="/detail/{{$row->id}}" target="_blank">{{$row->name}}</a></td>
                                 <td>{{$row->owner}}</td>
                                 <td>{{$row->address}}</td>
                                 <td>
                                     @if($row->status == 1)
-                                        <button type="button" class="btn btn-primary btn-xs">Activated</button>
+                                        <button type="button" class="btn btn-success btn-xs">Activated</button>
                                     @elseif($row->status == 0)
                                         <button type="button" class="btn btn-primary btn-xs">Pending</button>
                                     @else
@@ -53,9 +53,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                	<a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
-                                    <a data-toggle="modal" data-target="#update_cafe" 
-                                    class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
+                                    <a data-toggle="modal" data-target="#update_cafe" class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
                                     <a href="{{ route('cafes.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
@@ -129,7 +127,7 @@
     var setUpdate = function(name,_id,_status,desc){
         console.log(_status);
         $('#update_name').val(name);
-        $('#frmUpdate').attr('action', "/admin/settings/administrator/update/"+_id);
+        $('#frmUpdate').attr('action', "/admin/cafes/"+_id);
         $("#status").val(_status);
         $("#desc").val(desc);
     }

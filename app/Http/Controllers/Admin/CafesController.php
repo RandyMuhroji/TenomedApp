@@ -162,6 +162,7 @@ class CafesController extends Controller
     {
         try
         {
+            
             $cafe = Cafe::findOrFail($id);
 
             $user = User::findOrFail($cafe->user_id);
@@ -194,13 +195,15 @@ class CafesController extends Controller
     {
         try
         {
+            $this->validate($request, [
+                'desc' => 'required',
+            ]);
+            
             $cafe = Cafe::findOrFail($id);
 
-            $cafe->name  = $request->input('name');
-            $cafe->email = $request->input('email');
-            $cafe->phone = $request->input('phone');
-            $cafe->lat   = $request->input('lat');
-            $cafe->long  = $request->input('lng');
+            $cafe->status  = $request->input('status');
+            $cafe->desc  = $request->input('desc');
+            
 
             $cafe->save();
 

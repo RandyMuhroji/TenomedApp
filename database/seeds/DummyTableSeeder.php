@@ -19,11 +19,11 @@ class DummyTableSeeder extends Seeder
      */
     public function run()
     {
-        //Cafe 1
+        //Cafe1
 
     	$user = User::create([
-                'name' => 'Rumah Burger',
-                'email'=> 'rumah@burger.com',
+                'name' => 'Rumah Blepot',
+                'email'=> 'rumah@blepot.com',
                 'password' => bcrypt('owner'),
                 'status' => 1,
             ]);
@@ -41,13 +41,14 @@ class DummyTableSeeder extends Seeder
         $cafe = Cafe::create(
             [
                 'user_id' => $user->id,
-                'name' => 'Rumah Burger',
+                'name' => 'Rumah Blepot',
                 'address' => $address,
                 'phone' => '082363071285',
                 'lat' => '3.5778315',
                 'long' => '98.70135019999998',
                 'kecamatan' => $kec,
                 'kelurahan' => $kel,
+                'image' => 'burger/11143669_10153661731517985_1423348416227249367_n.jpg',
                 'rating' => 0,
                 'status' => 1,
                 'seat' => 30,
@@ -193,7 +194,7 @@ class DummyTableSeeder extends Seeder
                 'cafe_id'   => $cafe->id,
                 'name'      => 'Teh manis dingin',
                 'price'     => '6000',
-                'images'    => 'burger/es-teh-manis.jpg.jpg',
+                'images'    => 'burger/es-teh-manis.jpg',
                 'tag'       => 'Halal, Burger',
                 'category'  => 'Minuman',
                 'status'    => 1,
@@ -222,11 +223,20 @@ class DummyTableSeeder extends Seeder
         	[
         		'user_id'  	=> $user->id,
         		'album_id' 	=> $album->id,
-        		'filename' 	=> 'burger/rumah-burger-medan.jpg',
+        		'filename' 	=> 'burger/DSC_0383.jpg',
         		'title'    	=> 'View Cafe Rumah Burger',
         		'status'	=> 1
         	]
     	);
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'burger/the-menus.jpg',
+                'title'     => 'View Cafe Rumah Burger',
+                'status'    => 1
+            ]
+        );
 
         //cafe2
 
@@ -260,6 +270,7 @@ class DummyTableSeeder extends Seeder
                 'rating' => 0,
                 'status' => 1,
                 'seat' => 120,
+                'iamge' => 'APrahmat/12825945_1270302919663658_1350279316_n.jpg',
                 'web' => 'http://ayampenyetrahmat.com',
                 'facebook' => 'http://facebook.com/ayampenyetrahmat',
                 'twitter' => 'http://twitter.com/ayampenyetrahmat',
@@ -477,6 +488,7 @@ class DummyTableSeeder extends Seeder
                 'facebook' => 'http://facebook.com/kopisadis',
                 'twitter' => 'http://twitter.com/kopisadis',
                 'linkedin' => 'http://linkedin.com/kopisadis',
+                'image' => 'kopisadis/11182188_903145413061240_6299424958647968481_n.jpg'
             ]
         );
 
@@ -515,6 +527,14 @@ class DummyTableSeeder extends Seeder
         DB::table('operational_cafe')->insert(
             [
                 'cafe_id' => $cafe->id,
+                'day' => 4,
+                'open_hour' => '14:00',
+                'close_hour' => '23:00',
+            ]
+        );
+        DB::table('operational_cafe')->insert(
+            [
+                'cafe_id' => $cafe->id,
                 'day' => 5,
                 'open_hour' => '14:00',
                 'close_hour' => '23:00',
@@ -543,10 +563,10 @@ class DummyTableSeeder extends Seeder
         DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Ayam Penyet Sambal Ijo',
-                'price'     => '13000',
-                'images'    => 'APrahmat/resep-ayam-penyel-sambal-cabai-hijau.jpg',
-                'tag'       => 'Halal, Ayam Penyet',
+                'name'      => 'Pisang Goreng Cripsy',
+                'price'     => '15000',
+                'images'    => 'kopisadis/12277553_1111650785526924_417357877_n.jpg',
+                'tag'       => 'Halal, Pisang Goreng',
                 'category'  => 'Makanan',
                 'status'    => 1,
             ]
@@ -554,21 +574,20 @@ class DummyTableSeeder extends Seeder
        DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Ayam Penyet Komplit mantap',
+                'name'      => 'Roti Bakart',
                 'price'     => '32000',
-                'images'    => 'APrahmat/resep-ayam-penyel-sambal-cabai-hijau.jpg',
+                'images'    => 'kopisadis/CIMG2915.JPG',
                 'tag'       => 'Halal, Ayam Penyet',
                 'category'  => 'Makanan',
                 'status'    => 1,
-                'desc'      => 'Nasi + Ayam Penyet + Lalapan + Minuman Pilihan'
             ]
         );
         DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Ayam Penyet Komplit sederhna',
-                'price'     => '25000',
-                'images'    => 'APrahmat/resep-ayam-penyel-sambal-cabai-hijau.jpg',
+                'name'      => 'Ayam Penyet Komplit',
+                'price'     => '28000',
+                'images'    => 'kopisadis/13298230_1721072608161102_1376107349_n',
                 'tag'       => 'Halal, Ayam Penyet',
                 'category'  => 'Makanan',
                 'status'    => 1,
@@ -578,10 +597,10 @@ class DummyTableSeeder extends Seeder
         DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Ice choco float',
+                'name'      => 'Vanilla Milkshake',
                 'price'     => '15000',
-                'images'    => 'APrahmat/ombe cafe.jpg',
-                'tag'       => 'Jus, float',
+                'images'    => 'kopisadis/AnekaJus.jpg',
+                'tag'       => 'Jus,Milkshake',
                 'category'  => 'Minuman',
                 'status'    => 1,
             ]
@@ -589,10 +608,10 @@ class DummyTableSeeder extends Seeder
         DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Ice Drink ',
-                'price'     => '13000',
-                'images'    => 'APrahmat/ice-drink-4.jpg',
-                'tag'       => 'jus',
+                'name'      => 'Strawberry Milkshake',
+                'price'     => '15000',
+                'images'    => 'kopisadis/AnekaJus.jpg',
+                'tag'       => 'Jus,Milkshake',
                 'category'  => 'Minuman',
                 'status'    => 1,
             ]
@@ -600,14 +619,37 @@ class DummyTableSeeder extends Seeder
         DB::table('menu_cafe')->insert(
             [
                 'cafe_id'   => $cafe->id,
-                'name'      => 'Teh Manis Dingin',
-                'price'     => '6000',
-                'images'    => 'APrahmat/es-teh-manis.jpg',
-                'tag'       => 'Mandi',
-                'category'  => 'Makanan',
+                'name'      => 'Jus Alpukat',
+                'price'     => '15000',
+                'images'    => 'kopisadis/kopi-300x187.jpg',
+                'tag'       => 'Jus,Milkshake',
+                'category'  => 'Minuman',
                 'status'    => 1,
             ]
         );
+        DB::table('menu_cafe')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'      => 'Kopi Crimer',
+                'price'     => '12000',
+                'images'    => 'kopisadis/images.jpg',
+                'tag'       => 'Kopi',
+                'category'  => 'Minuman',
+                'status'    => 1,
+            ]
+        );
+        DB::table('menu_cafe')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'      => 'Kopi spesial sadis',
+                'price'     => '20000',
+                'images'    => 'kopisadis/kopi-300x187.jpg',
+                'tag'       => 'Kopi',
+                'category'  => 'Minuman',
+                'status'    => 1,
+            ]
+        );
+        
 
         $album = AlbumGallery::create(
             [
@@ -620,8 +662,8 @@ class DummyTableSeeder extends Seeder
             [
                 'user_id'   => $user->id,
                 'album_id'  => $album->id,
-                'filename'  => 'APrahmat/resep-ayam-penyel-sambal-cabai-hijau.jpg',
-                'title'     => 'Ayam Penyet Sambal Hijau',
+                'filename'  => 'kopisadis/SAM_2893.jpg',
+                'title'     => 'List menu Kopi Sadis Cafe',
                 'status'    => 1
             ]
         );
@@ -630,7 +672,34 @@ class DummyTableSeeder extends Seeder
             [
                 'user_id'   => $user->id,
                 'album_id'  => $album->id,
-                'filename'  => 'APrahmat/foody-ayam-goreng.jpg',
+                'filename'  => 'kopisadis/Kopi Sadis.jpg',
+                'title'     => 'View Kopi Sadis Cafe',
+                'status'    => 1
+            ]
+        );
+
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'kopisadis/the kopi sadis tembung.JPG',
+                'title'     => 'View Ayam Penyet Rahmat',
+                'status'    => 1
+            ]
+        );
+
+        $album = AlbumGallery::create(
+            [
+                'user_id' =>  $user->id,
+                'name' => 'Kopi Sadis'
+            ]
+        );
+
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'kopisadis/the kopi sadis tembung.JPG',
                 'title'     => 'View Ayam Penyet Rahmat',
                 'status'    => 1
             ]
@@ -640,7 +709,37 @@ class DummyTableSeeder extends Seeder
             [
                 'user_id'   => $user->id,
                 'album_id'  => $album->id,
-                'filename'  => 'APrahmat/12825945_1270302919663658_1350279316_n.jpg',
+                'filename'  => 'kopisadis/the kopi sadis tembung.JPG13298230_1721072608161102_1376107349_n.jpg',
+                'title'     => 'View Ayam Penyet Rahmat',
+                'status'    => 1
+            ]
+        );
+
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'kopisadis/11254280_751695444940062_1761233298_n.jpg',
+                'title'     => 'View Ayam Penyet Rahmat',
+                'status'    => 1
+            ]
+        );
+
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'kopisadis/IMG_0499-650x404.jpg',
+                'title'     => 'View Ayam Penyet Rahmat',
+                'status'    => 1
+            ]
+        );
+
+        DB::table('gallery')->insert(
+            [
+                'user_id'   => $user->id,
+                'album_id'  => $album->id,
+                'filename'  => 'kopisadis/kopi-300x187.jpg',
                 'title'     => 'View Ayam Penyet Rahmat',
                 'status'    => 1
             ]

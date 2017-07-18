@@ -217,7 +217,7 @@
             @foreach($foto as $fotos)
                 <li class="detail-gallery-list-item active">
                     <a data-target="{{ asset('') }}images/{{$fotos->filename}}">
-                        <img src="{{ asset('') }}images/{{$fotos->filename}}" alt="...">
+                        <img src="{{ asset('') }}images/{{$fotos->filename}}" alt="..." class="img-responsive">
                     </a>
                 </li>
             @endforeach
@@ -330,8 +330,8 @@
                             <div class="col-sm-4">
                             <div class="card-small">
                             <div class="card-small-image">
-                                <a href="listing-detail.html">
-                                    <img src="{{ asset('') }}images/{{$menus->images}}" alt="Tasty Brazil Coffee">
+                                <a href="#">
+                                    <img src="{{ asset('') }}images/{{$menus->images or '204827lunch.png'}}" alt="Tasty Brazil Coffee">
                                 </a>
                             </div><!-- /.card-small-image -->
 
