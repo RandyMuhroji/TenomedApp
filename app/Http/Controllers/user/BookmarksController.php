@@ -4,7 +4,8 @@ namespace Tenomed\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
-
+use Auth;
+use DB;
 class BookmarksController extends Controller
 {
     /**
@@ -13,8 +14,18 @@ class BookmarksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        return view('user.bookmarks');
+        $user = Auth::user();
+        $bookmarks = DB::table('cafes')
+            ->join('bookmarks', 'cafes.id', '=', 'bookmarks.cafe_id')
+            ->select('cafes.name','cafes.kecamatan','cafes.images','cafes.kelurahan')
+            ->where('bookmarks.user_id',$user->id)
+            ->where('bookmarks.status','1')
+            ->orderBy('cafes.id', 'desc')
+            ->Paginate(6);
+        //return($bookmarks);
+        return view('user.bookmarks')->with(['bookmarks'=>$bookmarks]);
     }
 
     /**

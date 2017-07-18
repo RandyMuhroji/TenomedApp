@@ -232,8 +232,10 @@
                             <ul class="nav nav-pills nav-pills-rose">
                               <li class="active"><a href="#pill1" data-toggle="tab" class="btn btn-lg btn-danger" aria-expanded="true">Information</a></li>
                               <li class="{{$status}}"><a href="#pill2" data-toggle="tab" class="btn btn-lg btn-danger"  aria-expanded="false">Our Menu</a></li>
+                              @if(Auth::check())
                               <li class=""><a href="#pill3" data-toggle="tab" class="btn btn-lg btn-danger"  aria-expanded="false">Review</a></li>
-                              <li class=""><a href="#pill4" data-toggle="tab" class="btn btn-lg btn-danger"  aria-expanded="false">Opening hour</a></li>
+                              @endif
+                              <li class=""><a href="#pill4" data-toggle="tab" class="btn btn-lg btn-danger"  aria-expanded="false">Working hour</a></li>
                               <li class=""><a href="#pill5" data-toggle="tab" class="btn btn-lg btn-danger"  aria-expanded="false">Facility</a></li>
                             </ul>
                             <div class="tab-content tab-space">
@@ -261,10 +263,20 @@
             <div class="detail-description">
                 <p>{{ $detail->desc }}</p>
             </div>
-
             
+            <div class="detail-follow">
+                <h5>Follow Us:</h5>
+                <div class="follow-wrapper">
+                    <a class="follow-btn facebook" href="#"><i class="fa fa-facebook"></i></a>
+                    <a class="follow-btn youtube" href="#"><i class="fa fa-youtube"></i></a>
+                    <a class="follow-btn twitter" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="follow-btn tripadvisor" href="#"><i class="fa fa-tripadvisor"></i></a>
+                    <a class="follow-btn google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+                </div><!-- /.follow-wrapper -->
+            </div>
               
         </div>
+        
                                   <ul id="listing-detail-location" class="nav nav-tabs" role="tablist">
 
                     <li role="presentation" class="active">
@@ -343,33 +355,27 @@
 
                     <div class="p20 background-white">
                         <div class="working-hours">
-                            <div class="day clearfix">
-                                <span class="name">Mon</span><span class="hours">07:00 AM - 07:00 PM</span>
-                            </div><!-- /.day -->
+                        <?php
+                                $days= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                                $tmp = 0
+                        ?>
 
-                            <div class="day clearfix">
-                                <span class="name">Tue</span><span class="hours">07:00 AM - 07:00 PM</span>
-                            </div><!-- /.day -->
 
+                        @for ($i = 0; $i <= 6; $i++)
                             <div class="day clearfix">
-                                <span class="name">Wed</span><span class="hours">07:00 AM - 07:00 PM</span>
-                            </div><!-- /.day -->
-
-                            <div class="day clearfix">
-                                <span class="name">Thu</span><span class="hours">07:00 AM - 07:00 PM</span>
-                            </div><!-- /.day -->
-
-                            <div class="day clearfix">
-                                <span class="name">Fri</span><span class="hours">07:00 AM - 07:00 PM</span>
-                            </div><!-- /.day -->
-
-                            <div class="day clearfix">
-                                <span class="name">Sat</span><span class="hours">07:00 AM - 02:00 PM</span>
-                            </div><!-- /.day -->
-
-                            <div class="day clearfix">
-                                <span class="name">Sun</span><span class="hours">Closed</span>
-                            </div><!-- /.day -->
+                                <span class="name">{{ $days[$i] }}</span><span class="hours">
+                                @if(isset($jambuka[$tmp]) and $i == $jambuka[$tmp]->day)
+                                    {{$jambuka[$tmp]->open_hour}} Wib - {{$jambuka[$tmp]->close_hour}} Wib 
+                                    <?php  
+                                        $tmp += 1;
+                                    ?>
+                                @else
+                                    Closed
+                                @endif
+                                </span>
+                            </div>
+                        @endfor 
+                                
                         </div>
                     </div>
 
@@ -728,7 +734,7 @@
                                             <div class="review">
                                                 <div class="col-sm-2" style="margin:0; padding:0;">
                                                     <div class="user">
-                                                        @if(Auth::user()->avatar=="")
+                                                        @if($childs->avatar=="")
                                                             <img src="{{ asset('') }}images/user.png" alt="">
                                                         @else
                                                             <img src="{{ asset('') }}images/{{$childs->avatar}}" alt="">        

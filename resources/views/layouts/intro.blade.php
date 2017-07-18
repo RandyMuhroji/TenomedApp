@@ -206,56 +206,7 @@ span.round-tab:hover {
 
     <style>
 
-.wizard li {
-  background-color: #E4E4E4;
-  border-radius: 5px;
-  display: inline;
-  padding: 10px 30px 10px 40px;
-  margin-right: -7px;
-  width: auto;
-}
-
-.wizard li::before, .wizard li::after {
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  border-color: transparent;
-  border-left-color: #fff;
-  border-radius: 10px;
-}
-
-.wizard li::before {
-  border-width: 25px; 
-  margin-top: -16px;
-  margin-left: 84px;
-}
-
-
-.wizard li::after {
-  border-left-color: #E4E4E4;
-  border-width: 21px; 
-  margin-top: -12px;
-  margin-left: 24px;
-}
-
-.wizard li.selected {
-  background-color: #FF4F65;
-  color: #fff;
-}
-
-.wizard li.selected::after {
-  border-left-color: #FF4F65;
-}
-
-.wizard li:last-child::after {
-  border-left-color: transparent;
-}
-
-
-
-      .header {
+     .header {
         position: fixed;
         right: 0;
         left: 0;
@@ -491,24 +442,41 @@ function check_email(email){
 
        document.getElementById("replyKu"+aku).style.display='inherit';
     };
-$(function(){
-     
-    $('#tmbPass').click(function(){
-      document.getElementById("editProfile").style.display='none';
-       document.getElementById("editPassword").style.display='inherit';
 
+
+function editReview(){
+
+        bootbox.alert({message:'<br><div class="testimonial"><div class="testimonial-image"><img src="http://localhost:8000/images/user.png" alt=""></div><div class="testimonial-inner"><div class="testimonial-title"><div class="row"><div class="col-sm-7"><div lass="card-small"><div class="card-small-image"><a href="listing-detail.html"><img src="http://localhost:8000/images/duku.png" alt="Tasty Brazil Coffee"></a></div><div class="card-small-content"><h3><a href="listing-detail.html">Tenomed Cafe</a></h3><h3><a href="listing-detail.html"></a></h3><h4><a href="listing-detail.html"> Medan Tembung</a></h4><div class="card-small-price"></div></div></div></div><div class="col-sm-5"><div class="testimonial-rating"><div class="form-group input-rating">                        <input value="1" name="rate" id="rating-food-1" required="" type="radio">                    <label for="rating-food-1" class=""></label>                    <input value="2" name="rate" id="rating-food-2" required="" type="radio">                    <label for="rating-food-2" class=""></label>                    <input value="3" name="rate" id="rating-food-3" required="" type="radio">                    <label for="rating-food-3" class=""></label>                    <input value="4" name="rate" id="rating-food-4" required="" type="radio">                    <label for="rating-food-4" class=""></label>                    <input value="5" name="rate" id="rating-food-5" required="" type="radio">                    <label for="rating-food-5" class=""></label>                </div></div></div></div></div><textarea class="form-control" rows="5" id="desc" name="desc" required="">bagus banget</textarea></div></div>', size: 'large'});
+    };
+function deleteReview(data){
+    bootbox.confirm({ 
+    size: "small",
+    message: "Are you sure, to delete the review? <br><br><br>", 
+    callback: function(result){ 
+        if(result==true){
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            console.log("Review " +data);
+            $.ajax({
+              url: '/user/review/'+data,              
+              type: 'delete',
+
+              data: {'idUser':'a', 'kafe':'b'},
+              success: function( data ) {
+                console.log("masuk sini");
+                window.location('/user/review');   
+              }
+             });
+        }
+     }
   });
-});
+}
 
 
 
-$(function(){
-    $('#tmbProfile').click(function(){
-      document.getElementById("editProfile").style.display='inherit';
-       document.getElementById("editPassword").style.display='none';
-
-  });
-});
 
   $(function(){
 

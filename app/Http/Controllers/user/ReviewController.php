@@ -4,6 +4,8 @@ namespace Tenomed\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
+use Auth;
+use DB;
 
 class ReviewController extends Controller
 {
@@ -14,7 +16,16 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        return view('user.review');    
+        $user = Auth::user();
+        $reviews = DB::table('cafes')
+            ->join('reviews', 'cafes.id', '=', 'reviews.cafe_id')
+            ->select('cafes.name','cafes.kecamatan','cafes.images','cafes.kelurahan','cafes.desc as ket','reviews.desc','reviews.id','cafes.id as id_cafe','reviews.rate','reviews.updated_at')
+            ->where('reviews.user_id',$user->id)
+            ->where('reviews.parent_id','0')
+            ->orderBy('reviews.updated_at', 'desc')
+            ->Paginate(2);
+        //return($bookmarks);
+        return view('user.review')->with(['reviews'=>$reviews]);   
     }
 
     /**
@@ -22,6 +33,12 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function deleteReview($id){
+            $user = Auth::user();
+            DB::table('reviews')->where('id',$id)->where('user_id', $user)->delete();
+            return redirect('/reviews');
+
+    }
     public function create()
     {
         //
@@ -80,6 +97,9 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Auth::user()->id;
+        DB::table('reviews')->where('id',$id)->where('user_id', $user)->delete();
+        return;
+
     }
 }

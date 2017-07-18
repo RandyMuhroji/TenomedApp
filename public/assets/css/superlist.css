@@ -6836,7 +6836,9 @@ ul.dropdown-menu li a {
   padding: 0px !important; }
 
 .header-wrapper {
-  background-color: #fff;
+
+    background: rgba(0, 159, 139, 1);
+    color: white;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   padding: 0px;
   position: relative;
@@ -6858,7 +6860,7 @@ ul.dropdown-menu li a {
   white-space: nowrap;
   width: 1px; }
   .header-logo a {
-    color: #363636; }
+    color: white; }
     .header-logo a:active, .header-logo a:focus, .header-logo a:hover {
       color: #363636;
       text-decoration: none; }
@@ -7402,6 +7404,7 @@ h2.widgettitle {
       .widget .menu-advanced li a {
         color: #444;
         display: block;
+        text-decoration: none;
         padding: 10px 15px; }
         .widget .menu-advanced li a .fa {
           color: #b6b7b8;
