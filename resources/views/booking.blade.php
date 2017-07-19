@@ -382,12 +382,12 @@ input[type=number]
                             @if($menus->category==$kategoris->category)
                             <div class="col-sm-3">
                                 <div class="statusbox" >
-                                    <h2>{{ substr($menus->name,1, 100) }}...</h2>
+                                    <h2>{{ substr($menus->name,0, 100) }}</h2>
                                     <div class="statusbox-content" style="margin:0;padding: 10px;">
                                         <img src="{{ asset('') }}images/{{$menus->images}}" alt="" style="width:120%; border-radius: 6px; overflow: relative; margin-right: 7px; margin-top: 0; margin-left: -15px;margin-right: -15px;">
                                         <span>Rp.{{$menus->price}}</span>
+                                        <input type="text" name="menu_id[]" value="{{$menus->id}}">
                                         <div class="quantity" style="margin-bottom: 20px;">
-                                        <input type="hidden" name="menu_id[]" id="menu_id" value="{{$menus->id}}">
                                           <input type="number" name="qty[]" min="0"  step="1" value="0">
                                         </div>
                                     </div><!-- /.statusbox-content -->

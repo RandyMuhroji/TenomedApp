@@ -38,10 +38,10 @@ class cafes extends Controller
     {
 
         $idUser=request()->id;
-        $detail= DB::table('cafes')->where('id', $id)->where('status','1')->first();
+        $detail= DB::table('cafes')->where('id', $id)->first();
         // $bookmarks = Bookmarks::where('id',"=",$id)->get();
         //$Menu = Menu::where('idCafe',"=",$id)->get();
-        if($detail==""){
+        if($detail->status!="1"){
             return redirect("/");
         }
         $Reviews = DB::table('users')
@@ -138,16 +138,20 @@ class cafes extends Controller
     }
      public function cari()
     {
+        $aku='';
+        if($_GET['location']!=''){
+            $aku=explode(' ', $_GET['location']);
+            $aku=$aku[1];
+        }
 
         $data = DB::table('cafes')
-            ->leftJoin('menu_cafe', 'cafes.id', '=', 'menu_cafe.cafe_id')
-            ->select('cafes.id as id','cafes.name as name','cafes.desc as desc','cafes.seat as seat','cafes.image as images', 'cafes.phone as phone','cafes.address as address','menu_cafe.name as menuName','price')
-            ->where('cafes.name','like','%'.$_GET['kata'].'%')
-            ->orWhere('menu_cafe.name', 'like','%'. $_GET['kata'].'%')
-            ->orWhere('address', 'like','%'. $_GET['location'].'%')
-            //->orWhere('price', '>', $_GET['price'])
-            ->orderBy('id', 'desc')
-            ->distinct(['cafes.name'])->Paginate(5);
+            ->select('id','name','desc','seat','image', 'phone','address')
+            ->where('name','like','%'.$_GET['kata'].'%')
+            ->where('address','like','%'.$aku.'%')
+            ->where('status',1)
+            ->Paginate(6);
+            //return($_GET['kata']);
+
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
                 ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))

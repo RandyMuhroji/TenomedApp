@@ -186,19 +186,7 @@
                             </div><!-- /.card-small -->
                         </div><!-- /.cards-small -->
                 </div><!-- /.widget -->
-                <div class="widget">
-                    <h2 class="widgettitle">Categories</h2>
-
-                    <ul class="menu">
-                        <li><a href="#">Automotive</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="#">Nightlife</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Transportation</a></li>
-                        <li><a href="#">Real Estate</a></li>
-                        <li><a href="#">Restaurants</a></li>
-                    </ul><!-- /.menu -->
-                </div><!-- /.wifget -->
+                
             </div><!-- /.sidebar -->
         </div><!-- /.col-* -->
 
@@ -255,41 +243,39 @@
               <div class="card-row-body">
 
                 @foreach($data as $datas)
-                      <div class="card-row">
-                          <div class="card-row-inner">
-                              <div class="card-row-image card-simple-background" data-background-image="{{ asset('') }}assets/img/tmp/product-6.jpg">
-                                  <div class="card-row-label"><a href="listing-detail.html">Cafe</a></div><!-- /.card-row-label -->
-                                      <div class="card-row-price">$28 / person</div><!-- -->
-                              </div><!-- /.card-row-image -->
+                      <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="card-simple" data-background-image="{{ asset('') }}images/{{$datas->image or 'kafe.jpg'}}">
+                    <div class="card-simple-background">
+                        <div class="card-simple-content">
+                            <h2><a href="{{url('detail/'.$datas->id)}}" style="">{{$datas->name}}</a></h2>
+                            <div class="card-simple-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div><!-- /.card-rating -->
 
-                              <div class="card-row-body">
-                                  @if(Auth::check())
-                                      <h2 class="card-row-title"><a href="detail/{{ $datas->id}}?id={{Auth::user()->id}}">{{ $datas->name}}</a></h2>
-                                  @else
-                                      <h2 class="card-row-title"><a href="detail/{{ $datas->id}}">{{ $datas->name}}</a></h2>
-                                  @endif
+                            <div class="card-simple-actions">
+                                <a href="detail/{{$datas->id}}" class="fa fa-search"></a>
+                            </div><!-- /.card-simple-actions -->
+                        </div><!-- /.card-simple-content -->
 
-                                 
-                                  <div class="card-row-content"><p>{{ substr($datas->desc,1, 100) }}...</p></div><!-- /.card-row-content -->
-                              </div><!-- /.card-row-body -->
-
-                              <div class="card-row-properties">
-                                  <dl>
-                                      <dd>Seat</dd><dt>{{ $datas->seat}} Persons</dt>
-                                      <dd>Phone</dd><dt>{{ $datas->phone}}</dt>
-                                  </dl>
-                              </div><!-- /.card-row-properties -->
-                          </div><!-- /.card-row-inner -->
-                      </div><!-- /.card-row -->
-                      <hr/>
+                        
+                        <div class="card-simple-label" alt="availabe seat">{{$datas->seat or 0}} People</div>
+                        
+                    </div><!-- /.card-simple-background -->
+                </div><!-- /.card-simple -->
+            </div><!-- /.col-* -->
                 @endforeach
 
               </div>
             </div>
+            {{ $data->links() }}
+            <br>
           </div>
-                {{ $data->links() }}
-                <br>
-                <br>
+          <br><br>
+                
 
             </div><!-- /.content -->
         </div><!-- /.col-* -->

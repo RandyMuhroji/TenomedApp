@@ -312,7 +312,7 @@
                 <div class="card-simple" data-background-image="{{ asset('') }}images/{{$cafe->image or 'kafe.jpg'}}">
                     <div class="card-simple-background">
                         <div class="card-simple-content">
-                            <h2><a href="listing-detail.html"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
+                            <h2><a href="detail/{{$cafe->id}}"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
                             <div class="card-simple-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>

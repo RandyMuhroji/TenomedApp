@@ -331,7 +331,7 @@
                             <div class="card-small">
                             <div class="card-small-image">
                                 <a href="#">
-                                    <img src="{{ asset('') }}images/{{$menus->images or '204827lunch.png'}}" alt="Tasty Brazil Coffee">
+                                    <img src="{{ asset('') }}images/{{$menus->images or 'lunch.png'}}" alt="img">
                                 </a>
                             </div><!-- /.card-small-image -->
 

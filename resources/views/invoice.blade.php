@@ -205,7 +205,7 @@ input[type=number]
                     
 
 
-                    <div class="invoice-wrapper">
+                    <div class="invoice-wrapper" id="invoice-wrapper">
     <div class="invoice">
         <div class="invoice-header clearfix">
             <div class="invoice-logo">

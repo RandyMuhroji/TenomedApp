@@ -38,31 +38,54 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>No</th>
                                 <th>Name</th>
-                                <th>Category</th>
-                                <th>Price</th>
+                                <th>Booking Date</th>
+                                <th>Booking Time</th>
+                                <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                       
+                        @foreach($data as $items)
+
                             <tr >
-                                <td>aku</td>
-                                <td>aku</td>
-                                <td>aku</td>
+                                <td></td>
+                                <td>{{ $items->name}}</td>
+                                <td>{{ $items->bookingDate}}</td>
+                                <td>{{ $items->bookingTime}}</td>
                                 <td>
-                                   aku
+                                    @if($items->status=='0')
+                                      <span class="label label-danger">Panding</span>
+                                    @else
+                                      <span class="label label-success">Accepted</span>
+                                     @endif
+
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
+                                    <button class="btn btn-sm btn-secondary" type="button">
+                                      Invoice 
+                                  </button>
                                 </td>
                             </tr>
+                          @endforeach
                         </tbody>
                     </table>
+                    <br>
+                    <div class="col-sm-12">{{ $data->links() }}<br></div>
                     </div>
 
 
@@ -92,4 +115,25 @@
   <script src="{{asset('gantella/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
   <!-- Custom Theme Scripts -->
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>
+  <script>
+    function getProforma(data){
+      $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            console.log("Review " +data);
+            $.ajax({
+              url: '/invoice/'+data,              
+              type: 'get',
+
+              data: {'idUser':'a', 'kafe':'b'},
+              success: function( data ) {
+                bootbox.alert({size:"large",
+                  message:$(data).find('#invoice-wrapper').html()});
+              }
+             });
+    }
+  </script>
+
 @endsection

@@ -4,7 +4,8 @@ namespace Tenomed\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
-
+use DB;
+use Auth;
 class NotificationController extends Controller
 {
     /**
@@ -14,7 +15,16 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return view('user.notification');
+        $user = Auth::user()->id;
+        //return($user);
+        $data= DB::table('reservations')
+                ->select('id','name','email','persons','status','bookingDate','bookingTime')
+                ->where('user_id',$user)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);   
+
+        //return($data);
+        return view('user.notification')->with(['data'=>$data]);
     }
 
     /**

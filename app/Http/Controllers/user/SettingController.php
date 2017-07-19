@@ -97,8 +97,9 @@ class SettingController extends Controller
       $Setting->bio=$request->bio;
        $file = Input::file('avatar');
 
-      $Setting->avatar=$string.'-'.$file->getClientOriginalName();
+      
         if(Input::hasFile('avatar')){
+            $Setting->avatar=$string.'-'.$file->getClientOriginalName();
            
             $file->move('images', $string.'-'.$file->getClientOriginalName());
         }
