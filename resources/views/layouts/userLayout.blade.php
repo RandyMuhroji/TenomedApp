@@ -84,7 +84,7 @@
 
          @yield('css')
 
-    <title>Superlist - User Profile Edit</title>
+    <title>Tenomed - User Profile Edit</title>
 </head>
 
 
@@ -97,7 +97,7 @@
             <div class="container">
                 <div class="header-inner">
                     <div class="header-logo">
-                        <a href="index-2.html">
+                        <a href="/">
                             <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
                             <span>Tenomed</span>
                         </a>
@@ -270,15 +270,15 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="footer-bottom-left">
-                &copy; 2015 All rights reserved. Created by <a href="#">Aviators</a>.
+                &copy; 2017 All rights reserved.
             </div><!-- /.footer-bottom-left -->
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->

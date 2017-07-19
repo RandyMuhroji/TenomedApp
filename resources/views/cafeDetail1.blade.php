@@ -10,7 +10,7 @@
         <div class="container">
             <div class="header-inner">
                 <div class="header-logo">
-                    <a href="index-2.html">
+                    <a href="/">
                         <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
                         <span>Tenomed</span>
                     </a>
@@ -23,7 +23,6 @@
                         	
                             <li class="active" >
                                 <a href="/">Home </a>
-
                             </li>
                         @if(Auth::check())
 
@@ -63,14 +62,24 @@
                                 </ul>
                             </li>
                             @endpermission
-                            
+                                
+                            @permission(('admin'))
+                                <li class="active">
+                                    <a data-toggle="modal" href="/admin">Admin Panel</a>
+                                </li>
+                            @endpermission
+                            @permission(('owner'))
+                                <li class="active">
+                                    <a data-toggle="modal" href="/manage-cafe">Manage Cafe</a>
+                                </li>
+                            @endpermission
                         @else
                             <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login">Login</a>
 
                             </li>
                             <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                <a data-toggle="modal" href="/register">Sign Up</a>
 
                             </li>
                         @endif
@@ -814,10 +823,10 @@
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->
