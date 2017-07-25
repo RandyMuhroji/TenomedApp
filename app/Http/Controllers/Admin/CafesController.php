@@ -95,8 +95,6 @@ class CafesController extends Controller
                 'address' => $request->input('address'),
                 'kecamatan' => $kec,
                 'kelurahan' => $kel,
-                'city' => $city,
-                'province' => $province,
                 'phone' => $request->input('phone'),
                 'lat' => $request->input('lat'),
                 'long' => $request->input('lng')

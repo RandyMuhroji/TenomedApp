@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="header-inner">
                     <div class="header-logo">
-                        <a href="index-2.html">
+                        <a href="/">
                             <img src="<?php echo e(asset('')); ?>assets/img/logo-white.png" alt="Logo">
                             <span>Tenomed</span>
                         </a>
@@ -309,7 +309,7 @@
                 <div class="card-simple" data-background-image="<?php echo e(asset('')); ?>images/<?php echo e(isset($cafe->image) ? $cafe->image : 'kafe.jpg'); ?>">
                     <div class="card-simple-background">
                         <div class="card-simple-content">
-                            <h2><a href="listing-detail.html"><span style="text-transform: capitalize;"><?php echo e($cafe->name); ?></span></a></h2>
+                            <h2><a href="detail/<?php echo e($cafe->id); ?>"><span style="text-transform: capitalize;"><?php echo e($cafe->name); ?></span></a></h2>
                             <div class="card-simple-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -384,10 +384,10 @@
 
             <div class="footer-bottom-right">
                 <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul><!-- /.nav -->
             </div><!-- /.footer-bottom-right -->
         </div><!-- /.container -->

@@ -4,6 +4,7 @@ namespace Tenomed\Http\Controllers\owner;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class reservationController extends Controller
 {
@@ -14,7 +15,20 @@ class reservationController extends Controller
      */
     public function index()
     {
-        return view('owner.reservations.reservation_list');
+        $reservations = DB::select('select * from reservations');
+
+         $users = DB::select('select u.* from users u inner join cafes c on u.id = c.user_id');
+
+         $cafes = DB::select('select c.* from users u inner join cafes c on u.id = c.user_id');
+
+        //return $users;
+        $params = [
+            'title' => 'Reservation Listing',
+            'cafes' => $cafes,
+            'users' => $users,
+            'reservations' => $reservations
+        ];
+        return view('owner.reservations.reservation_list')->with($params);
     }
 
     /**
