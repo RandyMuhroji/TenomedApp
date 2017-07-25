@@ -1,8 +1,7 @@
 
 
 @extends('layouts.intro')
-
-@section('content')
+@section('css')
     <style>
       @media (max-width: 767px) {
         .hero-image-content {
@@ -19,13 +18,15 @@
       }
 
       .hero-image-inner {
-        height: 345px;
         margin-top:59px;
       }
     </style>
-    <div class="page-wrapper">
+@endsection
 
-    <header class="header">
+@section('content')
+  
+
+    <header class="header opaque">
         <div class="header-wrapper">
             <div class="container">
                 <div class="header-inner">
@@ -47,24 +48,24 @@
 
                                 @permission(('user'))
                                  <li class="active" >
-                                    <a href="/">Home </a>
+                                    <a href="/" style="color: white;">Home </a>
 
                                 </li>
 
                                <li>
                                     <a href="#">
                                     @if(Auth::user()->avatar=="")
-                                      <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
+                                      <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize; color: white;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
                                     @else
-                                      <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;">{{Auth::user()->name}}</span><i class="fa fa-chevron-down"></i></a>
+                                      <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize; color: white;">{{Auth::user()->name}}</span><i class="fa fa-chevron-down"></i></a>
                                     @endif
 
                                     <ul class="sub-menu">
-                                        <li><a href="user/profile">Profile</a></li>
-                                        <li><a href="user/profile">Notifications</a></li>
-                                        <li><a href="user/profile">Bookmarks</a></li>
-                                        <li><a href="user/profile">Review</a></li>
-                                        <li><a href="user/profile">Setting</a></li>
+                                       <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                        <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
+                                        <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
+                                        <li><a href="{{url('user/review')}}">Review</a></li>
+                                        <li><a href="{{url('user/setting')}}">Setting</a></li>
                                         <li>
                                             <a href="{{route('logout')}}"
                                             onclick="event.preventDefault();
@@ -240,25 +241,7 @@
                                                     <button type="submit" class="btn btn-primary btn-block">Search</button>
                                                   </div>
 
-                                              </div><!-- /.form-group -->
-
-                                                <!-- <div class="hero-image-category form-group">
-                                                    <select class="form-control" title="Category" id="category" name="kategory">
-                                                        <option value="" selected="">Coffe</option>
-                                                        <option value="">Dessert And Bake</option>
-                                                        <option value="">dinner</option>
-                                                        <option value="">lunch</option>
-                                                        <option value="">Drink</option>
-                                                    </select>
-                                                </div> --><!-- /.form-group --><!--
-                                                <input type="hidden" name="_method" value="POST">
-                                                <input type="hidden" name="_token" value="{{ Session::token() }}"> -->
-
-                                                <!-- <div class="hero-image-price form-group">
-                                                    <input type="text" class="form-control" placeholder="Min. Price" name="price" value="0">
-                                                </div> --><!-- /.form-group -->
-
-                                            </form>
+                                              </div>                                            </form>
                                         </div><!-- /.col-* -->
                                     </div><!-- /.row -->
                                 </div><!-- /.container -->
@@ -306,7 +289,7 @@
 
 
 
-            @foreach($cafes as $cafe)
+            @foreach($rate as $cafe)
 
             <div class="col-sm-6 col-md-3">
                 <div class="card-simple" data-background-image="{{ asset('') }}images/{{$cafe->image or 'kafe.jpg'}}">
@@ -343,59 +326,5 @@
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
 
-    <footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h2>About Superlist</h2>
-
-                    <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
-                </div><!-- /.col-* -->
-
-                <div class="col-sm-4">
-                    <h2>Contact Information</h2>
-
-                    <p>
-                        Your Street 123, Melbourne, Australia<br>
-                        +1-123-456-789, <a href="#">sample@example.com</a>
-                    </p>
-                </div><!-- /.col-* -->
-
-                <div class="col-sm-4">
-                    <h2>Stay Connected</h2>
-
-                    <ul class="social-links nav nav-pills">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul><!-- /.header-nav-social -->
-                </div><!-- /.col-* -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </div><!-- /.footer-top -->
-
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="footer-bottom-left">
-                &copy; 2015 All rights reserved. Created by <a href="#">Aviators</a>.
-            </div><!-- /.footer-bottom-left -->
-
-            <div class="footer-bottom-right">
-                <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
-                </ul><!-- /.nav -->
-            </div><!-- /.footer-bottom-right -->
-        </div><!-- /.container -->
-    </div>
-</footer><!-- /.footer -->
-
-</div><!-- /.page-wrapper -->
+    
 @endsection

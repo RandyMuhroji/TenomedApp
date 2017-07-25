@@ -84,7 +84,7 @@
 
          @yield('css')
 
-    <title>Superlist - User Profile Edit</title>
+    <title>Tempat Nongkrong Medan</title>
 </head>
 
 
@@ -128,7 +128,7 @@
 
                                     <ul class="sub-menu">
                                         <li><a href="{{url('user/profile')}}">Profile</a></li>
-                                        <li><a href="{{url('user/BookingList')}}">Booking Histories</a></li>
+                                        <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
                                         <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
                                         <li><a href="{{url('user/review')}}">Review</a></li>
                                         <li><a href="{{url('user/setting')}}">Setting</a></li>
@@ -315,7 +315,7 @@
 <script type="text/javascript" src="{{ asset('') }}assets/libraries/bootstrap-fileinput/fileinput.min.js"></script>
 
 <script src="{{ asset('') }}assets/js/superlist.js" type="text/javascript"></script>
-     @yield('java')
+@yield('java')
 </body>
 
 <!-- Mirrored from preview.byaviators.com/template/superlist/user-profile-edit.html by HTTrack Website Copier/3.x [XR&CO'2013], Sun, 14 May 2017 15:08:41 GMT -->

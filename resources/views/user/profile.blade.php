@@ -109,10 +109,5 @@
                     </div><!-- /.col-* -->
 @endsection
 
-@section('java')
-<script >
 
-
-
-</script>
 @endsection

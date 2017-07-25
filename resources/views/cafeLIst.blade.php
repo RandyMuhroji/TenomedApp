@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="header-inner">
                     <div class="header-logo">
-                        <a href="index-2.html">
+                        <a href="{{url('/')}}">
                             <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
                             <span>Tenomed</span>
                         </a>
@@ -21,7 +21,7 @@
                             <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
                                 <li class="active" >
-                                    <a href="/">Home </a>
+                                    <a href="/" style="color: white;">Home </a>
 
                                 </li>
                             @if(Auth::check())
@@ -31,17 +31,17 @@
                                <li><input type="hidden" name="idUser" value="{{Auth::user()->id}}">
                                     <a href="#">
                                     @if(Auth::user()->avatar=="")
-                                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                    <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;  color: white;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
                                     @else
-                                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
+                                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;  color: white;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
                                     @endif
 
                                     <ul class="sub-menu">
-                                        <li><a href="user/profile">Profile</a></li>
-                                        <li><a href="user/profile">Notifications</a></li>
-                                        <li><a href="user/profile">Bookmarks</a></li>
-                                        <li><a href="user/profile">Review</a></li>
-                                        <li><a href="user/profile">Setting</a></li>
+                                        <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                        <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
+                                        <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
+                                        <li><a href="{{url('user/review')}}">Review</a></li>
+                                        <li><a href="{{url('user/setting')}}">Setting</a></li>
                                         <li>
                                             <a href="{{route('logout')}}"
                                             onclick="event.preventDefault();
@@ -100,91 +100,26 @@
 
         <div class="col-sm-4 col-lg-3">
             <div class="sidebar">
-                <div class="widget">
-                  <!-- <h2 class="widgettitle">Filter</h2> -->
-                    <div class="background-white p20">
-                        <form method="post" action="http://preview.byaviators.com/template/superlist/listing-row-sidebar.html?">
-                            <div class="form-group">
-                                <label for="">Keyword</label>
-                                <input type="text" class="form-control" name="" id="">
-                            </div><!-- /.form-group -->
-
-                            <div class="form-group">
-                                <label for="">Category</label>
-
-                                <select class="form-control" title="Select Category">
-                                    <option>Automotive</option>
-                                    <option>Real Estate</option>
-                                </select>
-                            </div><!-- /.form-group -->
-
-                            <div class="form-group">
-                                <label for="">Location</label>
-                                <select class="form-control" title="Select Location">
-                                    <option>New York</option>
-                                    <option>San Francisco</option>
-                                </select>
-                            </div><!-- /.form-group -->
-
-                            <div class="form-group">
-                                <label for="">Starting Price</label>
-                                <input type="text" class="form-control" name="" id="">
-                            </div><!-- /.form-group -->
-
-                            <button class="btn btn-primary btn-block" type="submit">Search</button>
-                        </form>
-                    </div>
-                </div><!-- /.widget -->
+                
                 <div class="widget">
                   <h2 class="widgettitle">Recent Listings</h2>
                       <div class="cards-small">
+                      @foreach($recent as $item)
                           <div class="card-small">
                               <div class="card-small-image">
                                   <a href="listing-detail.html">
-                                      <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
+                                      <img src="{{ asset('') }}images/{{$item->image or kafe.png}}" alt="img">
                                   </a>
                               </div><!-- /.card-small-image -->
 
                               <div class="card-small-content">
-                                  <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                                  <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                                  <div class="card-small-price">$180 / person</div>
+                                  <h3><a href="/detail/{{$item->id}}">{{$item->name}}</a></h3>
+                                  <h4><a href="/detail/{{$item->id}}">{{$item->desc}}</a></h4>
+                                  <div class="/detail/{{$item->id}}">{{$item->seat}}/ person</div>
                               </div><!-- /.card-small-content -->
                           </div><!-- /.card-small -->
+                        @endforeach
                       </div><!-- /.cards-small -->
-                      <div class="cards-small">
-                          <div class="card-small">
-                              <div class="card-small-image">
-                                  <a href="listing-detail.html">
-                                      <img src="{{ asset('') }}assets/img/tmp/product-3.jpg" alt="Healthy Breakfast">
-                                  </a>
-                              </div><!-- /.card-small-image -->
-
-                              <div class="card-small-content">
-                                  <h3><a href="listing-detail.html">Healthy Breakfast</a></h3>
-                                  <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                                  <div class="card-small-price">$180 / person</div>
-                              </div><!-- /.card-small-content -->
-                          </div><!-- /.card-small -->
-                      </div><!-- /.cards-small -->
-                      <div class="cards-small">
-                            <div class="card-small">
-                                <div class="card-small-image">
-                                    <a href="listing-detail.html">
-                                        <img src="{{ asset('') }}assets/img/tmp/product-4.jpg" alt="Coffee &amp; Newspaper">
-                                    </a>
-                                </div><!-- /.card-small-image -->
-
-                                <div class="card-small-content">
-                                    <h3><a href="listing-detail.html">Coffee &amp; Newspaper</a></h3>
-                                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                                    <div class="card-small-price">$180 / person</div>
-                                </div><!-- /.card-small-content -->
-                            </div><!-- /.card-small -->
-                        </div><!-- /.cards-small -->
                 </div><!-- /.widget -->
                 
             </div><!-- /.sidebar -->
@@ -192,49 +127,64 @@
 
         <div class="col-sm-8 col-lg-9">
             <div class="content">
-                <form class="filter" method="post" action="/cari">
+                <form class="filter" method="get" action="/cari">
                     <div class="row">
 
-                          <div class="col-xs-12">
-                              <label><strong>Search result for :</strong></label>
-                          </div><!-- /.col-* -->
+                          <div class="col-sm-12 col-lg-12">
+                                            <form method="get" action="/cari">
+                                           <!--  {{ csrf_field() }} -->
 
-                        <div class="col-ticket">
-                            <div class="form-group">
-                                <label>Keyword</label>
-                                <span>Tes</span>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.col-* -->
+                                              <div class="form-group row">
 
-                        <div class="col-ticket">
-                            <div class="form-group">
-                                <label>Location</label>
-                                <span>Medan Kota</span>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.col-* -->
+                                                 <div class="   col-xs-12 col-sm-4">
+                                                    <select class="form-control" title="Location" name="location" id="location">
+                                                        <option selected="">Medan Kota</option>
+                                                        <option>Medan Tuntungan</option>
+                                                        <option>Medan Timur</option>
+                                                        <option>Medan Tembung</option>
+                                                        <option>Medan Sunggal</option>
+                                                        <option>Medan Selayang</option>
+                                                        <option>Medan Polonia</option>
+                                                        <option>Medan Petisah</option>
+                                                        <option>Medan Perjuangan</option>
+                                                        <option>Medan Marelan</option>
+                                                        <option>Medan Maimun</option>
+                                                        <option>Medan Labuhan</option>
+                                                        <option>Medan Petisah</option>
+                                                        <option>Medan Perjuangan</option>
+                                                    </select>
+                                                 </div>
 
-                        <div class="col-ticket">
-                            <div class="form-group">
-                                <label>Category</label>
-                                <span>Coffee</span>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.col-* -->
-                    </div><!-- /.row -->
+                                                  <div class="hero-image-keyword col-xs-12 col-sm-6">
+                                                      <input type="text" class="form-control" placeholder="Keyword" name="kata">
+                                                  </div>
 
-                    <hr />
+                                                  <div class=" col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-0">
+                                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                                  </div>
 
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <div class="filter-actions">
-                                <a href="#"><i class="fa fa-close"></i> Reset Filter</a>
-                                <a href="#"><i class="fa fa-save"></i> Save Search</a>
-                            </div><!-- /.filter-actions -->
-                        </div><!-- /.col-* -->
+                                              </div><!-- /.form-group -->
 
-                        <div class="col-sm-4">
-                            <button type="submit" class="btn btn-primary">Redefine Search Result</button>
-                        </div><!-- /.col-* -->
-                    </div><!-- /.row -->
+                                                <!-- <div class="hero-image-category form-group">
+                                                    <select class="form-control" title="Category" id="category" name="kategory">
+                                                        <option value="" selected="">Coffe</option>
+                                                        <option value="">Dessert And Bake</option>
+                                                        <option value="">dinner</option>
+                                                        <option value="">lunch</option>
+                                                        <option value="">Drink</option>
+                                                    </select>
+                                                </div> --><!-- /.form-group --><!--
+                                                <input type="hidden" name="_method" value="POST">
+                                                <input type="hidden" name="_token" value="{{ Session::token() }}"> -->
+
+                                                <!-- <div class="hero-image-price form-group">
+                                                    <input type="text" class="form-control" placeholder="Min. Price" name="price" value="0">
+                                                </div> --><!-- /.form-group -->
+
+                                            </form>
+                                        </div><!-- /.col-* -->
+
+                    </div>
                 </form>
 
 
@@ -282,59 +232,6 @@
 
     </div>
 
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h2>About Superlist</h2>
-
-                        <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
-                    </div><!-- /.col-* -->
-
-                    <div class="col-sm-4">
-                        <h2>Contact Information</h2>
-
-                        <p>
-                            Your Street 123, Melbourne, Australia<br>
-                            +1-123-456-789, <a href="#">sample@example.com</a>
-                        </p>
-                    </div><!-- /.col-* -->
-
-                    <div class="col-sm-4">
-                        <h2>Stay Connected</h2>
-
-                        <ul class="social-links nav nav-pills">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                        </ul><!-- /.header-nav-social -->
-                    </div><!-- /.col-* -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.footer-top -->
-
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-bottom-left">
-                    &copy; 2015 All rights reserved. Created by <a href="#">Aviators</a>.
-                </div><!-- /.footer-bottom-left -->
-
-                <div class="footer-bottom-right">
-                    <ul class="nav nav-pills">
-                        <li><a href="index-2.html">Home</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                        <li><a href="contact-1.html">Contact</a></li>
-                    </ul><!-- /.nav -->
-                </div><!-- /.footer-bottom-right -->
-            </div><!-- /.container -->
-        </div>
-    </footer><!-- /.footer -->
 
 </div><!-- /.page-wrapper -->
 

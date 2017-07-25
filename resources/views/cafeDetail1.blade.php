@@ -1,95 +1,130 @@
 @extends('layouts.intro')
 
+@section('css')
+    <style>
+      @media (max-width: 767px) {
+        .hero-image-content {
+            display: block !important;
+        }
+      }
+
+      .hero-image-form-wrapper form [class^="hero-image-"]{
+        margin-bottom: 10px;
+      }
+
+      .hero-image-form-wrapper form {
+        padding-bottom: 10px;
+      }
+
+      .hero-image-inner {
+        margin-top:59px;
+      }
+    </style>
+@endsection
+
 @section('content')
 <div class="page-wrapper">
     
    
 
-<header class="header header-transparent">
-    <div class="header-wrapper">
-        <div class="container">
-            <div class="header-inner">
-                <div class="header-logo">
-                    <a href="index-2.html">
-                        <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
-                        <span>Tenomed</span>
-                    </a>
-                </div><!-- /.header-logo -->
+<header class="header opaque">
+        <div class="header-wrapper">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="header-logo">
+                        <a href="{{url('/')}}">
+                            <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
+                            <span style=" color: white;">Tenomed</span>
+                        </a>
+                    </div><!-- /.header-logo -->
 
-                <div class="header-content">
-                    <div class="header-bottom">
-                        <!-- /.header-action -->
-                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
-                        	
-                            <li class="active" >
-                                <a href="/">Home </a>
+                    <div class="header-content">
+                        <div class="header-bottom">
+                            <!-- /.header-action -->
 
-                            </li>
-                        @if(Auth::check())
+                            <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
-                            @permission(('user'))
+                               
+                            @if(Auth::check())
 
-                           <li><input type="hidden" name="idUser" id="idUser" value="{{Auth::user()->id}}">
-                           <input type="hidden" name="status" id="status" value="">
-                           @if($bookmarks != "")
-                           <input type="hidden" name="bokk" id="bokk" value="{{$bookmarks->status}}">
-                           @endif
-                           
-                                <a href="#">
-                                @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @else
-                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @endif
+                                @permission(('user'))
+                                 <li class="active" >
+                                    <a href="/" style=" color: white;">Home </a>
 
-                                <ul class="sub-menu">
-                                    <li><a href="user/profile">Profile</a></li>
-                                    <li><a href="user/profile">Notifications</a></li>
-                                    <li><a href="user/profile">Bookmarks</a></li>
-                                    <li><a href="user/profile">Review</a></li>
-                                    <li><a href="user/profile">Setting</a></li>
-                                    <li>
-                                        <a href="{{route('logout')}}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
-                                    </a>
+                                </li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                               <li>
+                                    <a href="#">
+                                    @if(Auth::user()->avatar=="")
+                                      <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;  color: white;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
+                                    @else
+                                      <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize; color: white;">{{Auth::user()->name}}</span><i class="fa fa-chevron-down"></i></a>
+                                    @endif
 
-                                    </li>
-                                </ul>
-                            </li>
-                            @endpermission
-                            
-                        @else
-                            <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                        <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
+                                        <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
+                                        <li><a href="{{url('user/review')}}">Review</a></li>
+                                        <li><a href="{{url('user/setting')}}">Setting</a></li>
+                                        <li>
+                                            <a href="{{route('logout')}}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
+                                        </a>
 
-                            </li>
-                            <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
 
-                            </li>
-                        @endif
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endpermission
+                                @permission(('owner'))
+                                   <li class="active" >
+                                    <a href="{{url('manage-cafe')}}">Manage Cafe</a>
 
-                        </ul>
+                                  </li>
+                                @endpermission
+                                @permission(('admin'))
 
-                        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                               <li>
+                                   <li class="active" >
+                                    <a href="{{url('admin')}}">Admin Panel</a>
 
-                    </div><!-- /.header-bottom -->
-                </div><!-- /.header-content -->
-            </div><!-- /.header-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.header-wrapper -->
-</header><!-- /.header -->
+                                  </li>
+                                    
+                                </li>
+                                @endpermission
+
+                            @else
+                                <li class="active" >
+                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
+
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="modal" href="/register" onclick="openRegisterModal();">Sign Up</a>
+
+                                </li>
+                            @endif
+
+                            </ul>
+
+                            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div><!-- /.header-bottom -->
+                    </div><!-- /.header-content -->
+                </div><!-- /.header-inner -->
+            </div><!-- /.container -->
+        </div><!-- /.header-wrapper -->
+    </header><!-- /.header -->
 <!-- 
  <div class="modal fade login" id="loginModal">
               <div class="modal-dialog login animated">
@@ -384,20 +419,17 @@
 
                     <div class="widget">
     
-                        <h2 >Our Facility</h2>
+                        <h4 >Our Facility</h4>
                             <div class="background-white p20">
                                     <ul class="detail-amenities">
-                                        <li class="yes">WiFi</li>
-                                        <li class="yes">Parking</li>
-                                        <li class="no">Vine</li>
-                                        <li class="yes">Terrace</li>
-                                        <li class="no">Bar</li>
-                                        <li class="yes">Take Away Coffee</li>
-                                        <li class="no">Catering</li>
-                                        <li class="yes">Raw Food</li>
-                                        <li class="no">Delivery</li>
-                                        <li class="yes">No-smoking room</li>
-                                        <li class="no">Reservations</li>
+                                    @if(count($highlight))
+                                        @foreach($highlight as $highlights)
+                                            <li class="yes" style="text-transform: capitalize;">{{$highlights->name}}</li>
+                                        @endforeach
+                                    @else
+                                        <h5>There is no facility yet</h5>
+                                    @endif
+
                                     </ul>
                                 </div>
                         </div>
@@ -558,55 +590,27 @@
             </div><!-- /.detail-actions -->
         </div>
 
-        <h2><span class="text-secondary">Recomended Cafe</span></h2>
+        <h2><span class="text-secondary">Recent listing</span></h2>
         <div class="background-white p20">
             
 
             <div class="cards-small">
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
 
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
+            @foreach($recent as $item)
+                          <div class="card-small">
+                              <div class="card-small-image">
+                                  <a href="listing-detail.html">
+                                      <img src="{{ asset('') }}images/{{$item->image or kafe.png}}" alt="img">
+                                  </a>
+                              </div><!-- /.card-small-image -->
 
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-            
-           
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
+                              <div class="card-small-content">
+                                  <h3><a href="/detail/{{$item->id}}">{{$item->name}}</a></h3>
+                                  <h4><a href="/detail/{{$item->id}}">{{$item->desc}}</a></h4>
+                                  <div class="/detail/{{$item->id}}">{{$item->seat}}/ person</div>
+                              </div><!-- /.card-small-content -->
+                          </div><!-- /.card-small -->
+                        @endforeach
         </div>
             
         </div>
@@ -770,59 +774,7 @@
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
 
-    <footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h2>About Superlist</h2>
-
-                    <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
-                </div><!-- /.col-* -->
-
-                <div class="col-sm-4">
-                    <h2>Contact Information</h2>
-
-                    <p>
-                        Your Street 123, Melbourne, Australia<br>
-                        +1-123-456-789, <a href="#">sample@example.com</a>
-                    </p>
-                </div><!-- /.col-* -->
-
-                <div class="col-sm-4">
-                    <h2>Stay Connected</h2>
-
-                    <ul class="social-links nav nav-pills">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul><!-- /.header-nav-social -->
-                </div><!-- /.col-* -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </div><!-- /.footer-top -->
-
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="footer-bottom-left">
-                &copy; 2015 All rights reserved. Created by <a href="#">Aviators</a>.
-            </div><!-- /.footer-bottom-left -->
-
-            <div class="footer-bottom-right">
-                <ul class="nav nav-pills">
-                    <li><a href="index-2.html">Home</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
-                    <li><a href="contact-1.html">Contact</a></li>
-                </ul><!-- /.nav -->
-            </div><!-- /.footer-bottom-right -->
-        </div><!-- /.container -->
-    </div>
-</footer><!-- /.footer -->
+    
 
 @endsection
 

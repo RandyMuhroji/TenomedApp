@@ -76,8 +76,8 @@
 
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
-                                    <button class="btn btn-sm btn-secondary" type="button">
-                                      Invoice 
+                                    <button class="btn btn-sm btn-secondary" type="button" onclick="downloadPdf('{{ $items->id}}')">
+                                      Invoice PDF
                                   </button>
                                 </td>
                             </tr>
@@ -133,6 +133,24 @@
                   message:$(data).find('#invoice-wrapper').html()});
               }
              });
+    }
+    function downloadPdf(data){
+      // $.ajaxSetup({
+      //         headers: {
+      //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //         }
+      //       });
+      //       console.log("Review " +data);
+      //       $.ajax({
+      //         url: '/user/InvoiceDownload/'+data,              
+      //         type: 'get',
+
+      //         data: {'idUser':'a', 'kafe':'b'},
+      //         success: function( data ) {
+      //         }
+      //        });
+
+window.location.href = "/user/InvoiceDownload/"+data;
     }
   </script>
 

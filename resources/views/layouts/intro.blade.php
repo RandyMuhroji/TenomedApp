@@ -28,7 +28,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('') }}assets/favicon.png">
 
-
+    @yield('css')
 
     <title>Tempat Nongkrong Medan</title>
     <style type="text/css">
@@ -175,7 +175,6 @@ span.round-tab:hover {
     }
 }
 
-
       ul.pager li.active span {
           background-color: rgba(0, 159, 139, 0.7);
           color: white;
@@ -195,23 +194,23 @@ span.round-tab:hover {
         display: table-cell;
         max-width: 220px;
     }
-    .when-error{border-color: pink;}
+    
     .kv-reqd {
         color: red;
         font-family: monospace;
         font-weight: normal;
     }
-    </style>
-
-
-    <style>
-
+    header{
+        color: white;
+    } 
+      .when-error{border-color: pink;}
      .header {
         position: fixed;
         right: 0;
         left: 0;
         top: 0;
         z-index: 99;
+        color: white;
       }
 
       .header .header-wrapper {
@@ -223,7 +222,6 @@ span.round-tab:hover {
       }
 
       .header.opaque .header-wrapper a {
-        color: #fff !important;
       }
 
       .col-ticket {
@@ -237,84 +235,70 @@ span.round-tab:hover {
       }
       .menu-advanced{
         color: black;
-      }    
-      </style>
-
-    <script>
-
-function nextTab(elem) {
-    $(elem).next().find('a[data-toggle="tab"]').click();
-}
-function prevTab(elem) {
-    $(elem).prev().find('a[data-toggle="tab"]').click();
-}
-
-        $(document).ready(function(){
-
-
-
-
-
- $('.nav-tabs > li a[title]').tooltip();
-    
-    //Wizard
-    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-        var $target = $(e.target);
-    
-        if ($target.parent().hasClass('disabled')) {
-            return false;
-        }
-    });
-
-    $(".next-step").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.active');
-        $active.next().removeClass('disabled');
-        nextTab($active);
-
-    });
-    $(".prev-step").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.active');
-        prevTab($active);
-
-    });
-
-
-
-
-
-          var wHeight = $(window).innerHeight();
-          var presetHeights = $('.hero-image').outerHeight() / 2 - 70;
-          console.log(presetHeights);
-          var scroll_pos = 0;
-
-          function processScroll() {
-            scroll_pos = $(this).scrollTop();
-            if((!(presetHeights == null || scroll_pos == 0) && presetHeights <= scroll_pos) || presetHeights <=0)
-              $(".header").removeClass('header-transparent').addClass('opaque');
-            else {
-              $(".header").addClass('header-transparent').removeClass('opaque');
-            }
-          }
-
-          processScroll();
-
-          $(document).scroll(processScroll);
-
-          $('.bootstrap-select > button').click(function(){
-            $('.bootstrap-select').addClass('open');
-          })
-        });
-    </script>
+      } 
+      .hero-image-location{
+        padding-left: 15px;
+      }
+          </style>
 </head>
 
 
 <body class="" id="loadContent">
+<div class="page-wrapper">
+    @yield('content')
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2>About Tenomed</h2>
 
+                        <p>The biggest online reservaion cafes in medan,</p>
+                    </div><!-- /.col-* -->
 
-@yield('content')
+                    <div class="col-sm-4">
+                        <h2>Contact Information</h2>
+
+                        <p>
+                            Jln. Pukat Banting IV No.81, Mandala BY PASS, Medan<br>
+                            +62821-6115-1070, <a href="#">tenomed01@gmail.com</a>
+                        </p>
+                    </div><!-- /.col-* -->
+
+                    <div class="col-sm-4">
+                        <h2>Stay Connected</h2>
+
+                        <ul class="social-links nav nav-pills">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul><!-- /.header-nav-social -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.footer-top -->
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-left">
+                    &copy; 2015 All rights reserved. Created by <a href="#">The Fighters</a>.
+                </div><!-- /.footer-bottom-left -->
+
+                <div class="footer-bottom-right">
+                    <ul class="nav nav-pills">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+                        <li><a href="contact-1.html">Contact</a></li>
+                    </ul><!-- /.nav -->
+                </div><!-- /.footer-bottom-right -->
+            </div><!-- /.container -->
+        </div>
+    </footer><!-- /.footer -->
+
+    </div><!-- /.page-wrapper -->
 
 <script src="{{ asset('') }}assets/js/jquery.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/js/map.js" type="text/javascript"></script>
@@ -363,6 +347,7 @@ function prevTab(elem) {
 </script> -->
 
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+   @yield('java')
 <script>
 
 $(document).ready(function(){
@@ -372,6 +357,29 @@ $(document).ready(function(){
               materialKit.initFormExtendedDatetimepickers();
 
     });
+
+
+     var wHeight = $(window).innerHeight();
+          var presetHeights = $('.hero-image').outerHeight() / 2 - 70;
+          console.log(presetHeights);
+          var scroll_pos = 0;
+
+          function processScroll() {
+            scroll_pos = $(this).scrollTop();
+            if((!(presetHeights == null || scroll_pos == 0) && presetHeights <= scroll_pos) || presetHeights <=0)
+              $(".header").removeClass('header-transparent').addClass('opaque');
+            else {
+              $(".header").addClass('header-transparent').removeClass('opaque');
+            }
+          }
+
+          processScroll();
+
+          $(document).scroll(processScroll);
+
+  
+
+
 });
 var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
     'onclick="alert(\'Call your custom code here.\')">' +
@@ -401,26 +409,7 @@ $("#avatar-2").fileinput({
 
    // });
 
-function check_email(email){
-        email = email.replace(/ /g,'');
-//        $('#email_add').val(email);
-        if(email !== ""){
-            var x=email;
-            var atpos=x.indexOf("@"); var sppos=x.indexOf(" "); 
-            var tdpos=x.indexOf(":"); var dotpos=x.lastIndexOf(".");
-            if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length || sppos>=0 || tdpos>=0) {
-                bootbox.alert("<strong>ERR001</strong> - not a valid e-mail abootboxddress example: user@yahoo.com");
-                $('#email').addClass('when-error');
-                $('#email').focus();
-                return false;
-            }
-            else{
-              bootbox.alert("<strong>ERR002</strong> - not a valid name mustbe entereds");
-                $('#email').removeClass('when-error');
-                check_username(email);
-            }
-        }
-    };
+
 
 
 

@@ -113,6 +113,7 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //DB::table('reviews')->where('id', $id)->delete();
+            return("doko");
     }
 }

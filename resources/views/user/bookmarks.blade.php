@@ -33,8 +33,8 @@
                           </div><!-- /.card-small-image -->
 
                           <div class="card-small-content">
-                              <h3><a href="listing-detail.html">{{$bookmarkss->name}}</a></h3>
-                              <h4><a href="listing-detail.html">Bookmarked</a></h4>
+                              <h3><a href="{{url('detail/'.$bookmarkss->cafe_id)}}">{{$bookmarkss->name}}</a></h3>
+                              <h4><a href="{{url('detail/'.$bookmarkss->cafe_id)}}">Bookmarked</a></h4>
 
                               <div class="card-small-price">{{$bookmarkss->kelurahan}}</div>
                           </div><!-- /.card-small-content -->

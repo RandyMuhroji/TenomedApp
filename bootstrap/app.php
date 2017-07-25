@@ -41,6 +41,7 @@ $app->singleton(
     Tenomed\Exceptions\Handler::class
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

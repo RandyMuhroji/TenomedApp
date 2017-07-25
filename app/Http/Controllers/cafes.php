@@ -11,6 +11,7 @@ use Tenomed\Models\Reservation;
 
 use Illuminate\Support\Facades\Input;
 use DB;
+use \PDF;
 
 class cafes extends Controller
 {
@@ -73,10 +74,11 @@ class cafes extends Controller
                 ->select('name')
                 ->where('cafe_id', $id)
                 ->get();
-
+        $recent=DB::select("select * from cafes where status=1 ORDER BY created_at desc limit 3");
         $rates = DB::table('reviews')
                 ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
                 ->where('cafe_id', $id)
+                ->where('parent_id','0')
                 ->groupBy('cafe_id')
                 ->get()->first();
                 if ($rates=="") {
@@ -110,7 +112,7 @@ class cafes extends Controller
      $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
      
 
-        return view('cafeDetail1',array('jambuka'=>$jambuka))->with(['detail'=>$detail,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
+        return view('cafeDetail1',array('jambuka'=>$jambuka))->with(['detail'=>$detail,'recent'=>$recent,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'bookmarks'=>$bookmarks,'test'=>$test]);
     }
     public function sendReview(Request $request)
     {
@@ -144,6 +146,8 @@ class cafes extends Controller
             $aku=$aku[1];
         }
 
+        $recent=DB::select("select * from cafes where status=1 ORDER BY created_at desc limit 5");
+
         $data = DB::table('cafes')
             ->select('id','name','desc','seat','image', 'phone','address')
             ->where('name','like','%'.$_GET['kata'].'%')
@@ -151,7 +155,7 @@ class cafes extends Controller
             ->where('status',1)
             ->Paginate(6);
             //return($_GET['kata']);
-
+        //return($recent);
         $data->appends(Input::all())->render();
         $rates = DB::table('reviews')
                 ->select('cafe_id', DB::raw('SUM(rate) as rank'), DB::raw('count(cafe_id) as jumlah'))
@@ -161,7 +165,7 @@ class cafes extends Controller
         {
             $data=="";
         }
-        return view('cafeList')->with(['data'=>$data,'rates'=>$rates]);
+        return view('cafeList')->with(['data'=>$data,'recent'=>$recent,'rates'=>$rates]);
     }
     public function lists()
     {
@@ -176,6 +180,10 @@ class cafes extends Controller
     {
         
         $detail= DB::table('cafes')->where('id', $id)->first();
+         if($detail->status!="1"){
+            return redirect("/");
+        }
+        $recent=DB::select("select * from cafes where status=1 ORDER BY created_at desc limit 5");
         $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
         $idUser=request()->id;
         $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
@@ -184,7 +192,15 @@ class cafes extends Controller
                 ->where('user_id', $id)
                 ->where('cafe_id', $idUser)
                 ->get()->first();
-        return view('booking')->with(['detail'=>$detail, 'kategori'=>$kategori, 'menu'=>$menu, 'bookmarks'=>$bookmarks,'test'=>'']);
+        $jambuka = DB::table('operational_cafe')
+                ->select('day','open_hour', 'close_hour')
+                ->where('cafe_id', $id)
+                ->get();
+         $highlight = DB::table('highlights')
+                ->select('name')
+                ->where('cafe_id', $id)
+                ->get();
+        return view('booking')->with(['detail'=>$detail,'jambuka'=> $jambuka,'recent'=>$recent,'highlight'=>$highlight, 'kategori'=>$kategori, 'menu'=>$menu, 'bookmarks'=>$bookmarks,'test'=>'']);
                 // return($menu);
     }
     public function saveBooking(Request $request,$id){
@@ -214,12 +230,17 @@ class cafes extends Controller
     }
      public function invoice($id){
          $detail= DB::table('reservations')->where('id', $id)->first();
+         $recent=DB::select("select * from cafes where status=1 ORDER BY created_at desc limit 3");
         $menu = DB::table('menu_reservations')
             ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
             ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
             ->where('menu_reservations.reservations_id', $id)
             ->get();
-        return view('invoice')->with(['detail'=>$detail,'menu'=>$menu]);
+             $jambuka = DB::table('operational_cafe')
+                ->select('day','open_hour', 'close_hour')
+                ->where('cafe_id', $detail->cafe_id)
+                ->get();
+        return view('invoice')->with(['detail'=>$detail,'recent'=>$recent,'menu'=>$menu,'jambuka'=>$jambuka]);
      }
      public function slots($id){
         $idKafe = Input::get('idKafe');
@@ -243,5 +264,30 @@ class cafes extends Controller
        // $ada->persons=$ada->persons+$seat;
         return($ada);
      }
+     public function deleteReview($id){
+         DB::table('reviews')->where('id', $id)->delete();
+     }
+    public function updateReview(Request $request,$id){
+        //return($request->rate.','.$request->desc.','.$id);
+        $data = Review::find($id);
+        $data->rate=$request->rate;
+        $data->desc=$request->desc;
+        $data->save();
+        return redirect('user/review');
+
+     }
+     public function downloadPDF($id){
+      $detail= DB::table('reservations')->where('id', $id)->first();
+         $recent=DB::select("select * from cafes where status=1 ORDER BY created_at desc limit 3");
+        $menu = DB::table('menu_reservations')
+            ->join('menu_cafe', 'menu_reservations.menu_cafe_id', '=', 'menu_cafe.id')
+            ->select('menu_cafe.id','menu_cafe.name','menu_cafe.desc','menu_reservations.qunatity', 'menu_cafe.price')
+            ->where('menu_reservations.reservations_id', $id)
+            ->get();
+            //return view('invoiceDownload')->with(['detail'=>$detail,'recent'=>$recent,'menu'=>$menu]);
+      $pdf = PDF::loadView('invoiceDownload', compact('detail','recent','menu'));
+      return $pdf->download('invoiceDownload.pdf');
+
+    }
      
 }

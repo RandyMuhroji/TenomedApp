@@ -178,87 +178,104 @@ input[type=number]
 
 <div class="page-wrapper">
     
-    <header class="header">
-    <div class="header-wrapper">
-        <div class="container">
-            <div class="header-inner">
-                <div class="header-logo">
-                    <a href="index-2.html">
-                        <img src="{{ asset('') }}assets/img/logo.png" alt="Logo">
-                        <span>Tenomed</span>
-                    </a>
-                </div><!-- /.header-logo -->
+    <header class="header opaque">
+        <div class="header-wrapper">
+            <div class="container">
+                <div class="header-inner">
+                    <div class="header-logo">
+                        <a href="{{url('/')}}">
+                            <img src="{{ asset('') }}assets/img/logo-white.png" alt="Logo">
+                            <span style=" color: white;">Tenomed</span>
+                        </a>
+                    </div><!-- /.header-logo -->
 
-                <div class="header-content">
-                    <div class="header-bottom">
-                        
+                    <div class="header-content">
+                        <div class="header-bottom">
+                            <!-- /.header-action -->
 
-                        <ul class="header-nav-primary nav nav-pills collapse navbar-collapse">
-   
-                        <li class="active" >
-                                <a href="/">Home </a>
+                            <ul class="header-nav-primary nav nav-pills collapse navbar-collapse" style="font-weight: 500;">
 
-                            </li>
-                        @if(Auth::check())
+                               
+                            @if(Auth::check())
 
-                            @permission(('user'))
+                                @permission(('user'))
+                                 <li class="active" >
+                                    <a href="/" style=" color: white;">Home </a>
 
-                           <li>
-                                <a href="#">
-                                @if(Auth::user()->avatar=="")
-                                <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @else
-                                <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;">{{Auth::user()->name}} <i class="fa fa-chevron-down"></i></a>
-                                @endif
+                                </li>
 
-                                <ul class="sub-menu">
-                                    <li><a href="{{url('user/profile')}}">Profile</a></li>
-                                    <li><a href="{{url('user/notification')}}">Notifications</a></li>
-                                    <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
-                                    <li><a href="{{url('user/review')}}">Review</a></li>
-                                    <li><a href="{{url('user/setting')}}">Setting</a></li>
-                                    <li>
-                                        <a href="{{route('logout')}}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
-                                    </a>
+                               <li>
+                                    <a href="#">
+                                    @if(Auth::user()->avatar=="")
+                                      <img src="{{Auth::user()->getAvatarUrl()}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize;  color: white;">{{Auth::user()->name}}</span> <i class="fa fa-chevron-down"></i></a>
+                                    @else
+                                      <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" style="width:30px;height: 30px; border-radius: 30px; overflow: relative; margin-right: 7px; margin-top: -5px;"><span style="text-transform: capitalize; color: white;">{{Auth::user()->name}}</span><i class="fa fa-chevron-down"></i></a>
+                                    @endif
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                        <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
+                                        <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
+                                        <li><a href="{{url('user/review')}}">Review</a></li>
+                                        <li><a href="{{url('user/setting')}}">Setting</a></li>
+                                        <li>
+                                            <a href="{{route('logout')}}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
+                                        </a>
 
-                                    </li>
-                                </ul>
-                            </li>
-                            @endpermission
-                            
-                        @else
-                            <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
 
-                            </li>
-                            <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @endpermission
+                                @permission(('owner'))
+                                   <li class="active" >
+                                    <a href="{{url('manage-cafe')}}">Manage Cafe</a>
 
-                            </li>
-                        @endif
+                                  </li>
+                                @endpermission
+                                @permission(('admin'))
 
-                        </ul>
+                               <li>
+                                   <li class="active" >
+                                    <a href="{{url('admin')}}">Admin Panel</a>
 
-                        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                                  </li>
+                                    
+                                </li>
+                                @endpermission
 
-                    </div><!-- /.header-bottom -->
-                </div><!-- /.header-content -->
-            </div><!-- /.header-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.header-wrapper -->
-</header><!-- /.header -->
+                            @else
+                                <li class="active" >
+                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
+
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="modal" href="/register" onclick="openRegisterModal();">Sign Up</a>
+
+                                </li>
+                            @endif
+
+                            </ul>
+
+                            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".header-nav-primary">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div><!-- /.header-bottom -->
+                    </div><!-- /.header-content -->
+                </div><!-- /.header-inner -->
+            </div><!-- /.container -->
+        </div><!-- /.header-wrapper -->
+    </header><!-- /.header -->
 
 <input type="hidden" name="idUser" id="idUser" value="{{Auth::user()->id}}">
 
@@ -340,6 +357,7 @@ input[type=number]
         </div><!-- /.col-* -->
     </div><!-- /.row -->
     <br>
+    <!-- handoko -->
     <div id="bukaTime" style="display: none;">
       <h5 class="page-title">Available Booking Time</h5>
       <div class="row">
@@ -349,20 +367,15 @@ input[type=number]
                   
               </ul>
           </div><!-- /.detail-gallery -->
-         <!--  <div class="col-sm-12">
-              <div class="switch-field">
-                <div class="switch-title">Three fields? Sure.</div>
-                <input type="radio" id="switch_3_left" class="aku" name="switch_3" value="yes" checked/>
-                <label for="switch_3_left">One</label>
-                <input type="radio" id="switch_3_center" class="aku" name="switch_3" value="maybe" />
-                <label for="switch_3_center">Two</label>
-                      <input type="radio" id="switch_3_right" class="aku" name="switch_3" value="no" />
-                <label for="switch_3_right">Three</label>
-              </div>
-
-          </div> -->
+          
       </div>
     </div>
+
+
+  
+
+
+
 </div><!-- /.box -->
 
 <div class="row">
@@ -386,7 +399,7 @@ input[type=number]
                                     <div class="statusbox-content" style="margin:0;padding: 10px;">
                                         <img src="{{ asset('') }}images/{{$menus->images}}" alt="" style="width:120%; border-radius: 6px; overflow: relative; margin-right: 7px; margin-top: 0; margin-left: -15px;margin-right: -15px;">
                                         <span>Rp.{{$menus->price}}</span>
-                                        <input type="text" name="menu_id[]" value="{{$menus->id}}">
+                                        <input type="hidden" name="menu_id[]" value="{{$menus->id}}">
                                         <div class="quantity" style="margin-bottom: 20px;">
                                           <input type="number" name="qty[]" min="0"  step="1" value="0">
                                         </div>
@@ -402,20 +415,20 @@ input[type=number]
             @endforeach
         </div><!-- /.col-* -->
 
-        
-    </div><!-- /.row -->
-            
-        </div><!-- /.box -->
-    </div>
+                                  
+                              </div><!-- /.row -->
+                                      
+                                  </div><!-- /.box -->
+                              </div>
 
-    
-</div><!-- /.row -->
+                              
+                          </div><!-- /.row -->
 
 
-<div class="center">
-    <button type="submit" class="btn btn-primary btn-xl">Book Cafe</button>
-</div><!-- /.center -->
-</form>
+                          <div class="center">
+                              <button type="submit" class="btn btn-primary btn-xl">Book Cafe</button>
+                          </div><!-- /.center -->
+                          </form>
 
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->
@@ -423,170 +436,81 @@ input[type=number]
                     <div class="col-sm-4 col-lg-3">
                         <div class="sidebar">
                             <div class="widget">
-    <h2 class="widgettitle">Recent Listings</h2>
+                                  <h2 class="widgettitle">Recent Listings</h2>
 
-    
+                                  @foreach($recent as $item)
+                          <div class="card-small">
+                              <div class="card-small-image">
+                                  <a href="listing-detail.html">
+                                      <img src="{{ asset('') }}images/{{$item->image or kafe.png}}" alt="img">
+                                  </a>
+                              </div><!-- /.card-small-image -->
 
-    
-        
-
-        <div class="cards-small">
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-2.jpg" alt="Tasty Brazil Coffee">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Tasty Brazil Coffee</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-        </div><!-- /.cards-small -->
+                              <div class="card-small-content">
+                                  <h3><a href="/detail/{{$item->id}}">{{$item->name}}</a></h3>
+                                  <h4><a href="/detail/{{$item->id}}">{{$item->desc}}</a></h4>
+                                  <div class="/detail/{{$item->id}}">{{$item->seat}}/ person</div>
+                              </div><!-- /.card-small-content -->
+                          </div><!-- /.card-small -->
+                        @endforeach
+                                   
+                                    
     
         
 
-        <div class="cards-small">
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-3.jpg" alt="Healthy Breakfast">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Healthy Breakfast</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-        </div><!-- /.cards-small -->
-    
-        
-
-        <div class="cards-small">
-            <div class="card-small">
-                <div class="card-small-image">
-                    <a href="listing-detail.html">
-                        <img src="{{ asset('') }}assets/img/tmp/product-4.jpg" alt="Coffee &amp; Newspaper">
-                    </a>
-                </div><!-- /.card-small-image -->
-
-                <div class="card-small-content">
-                    <h3><a href="listing-detail.html">Coffee &amp; Newspaper</a></h3>
-                    <h4><a href="listing-detail.html">New York / Village</a></h4>
-
-                    <div class="card-small-price">$180 / person</div>
-                </div><!-- /.card-small-content -->
-            </div><!-- /.card-small -->
-        </div><!-- /.cards-small -->
-    
-</div><!-- /.widget -->
+                                   
+                                
+                            </div><!-- /.widget -->
 
                             
-                            <div class="widget">
-    <h2 class="widgettitle">Filter</h2>
-
-    <div class="background-white p20">
-        <form method="post" action="http://preview.byaviators.com/template/superlist/listing-submit.html?">
-            <div class="form-group">
-                <label for="">Keyword</label>
-                <input type="text" class="form-control" name="" id="">
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-                <label for="">Category</label>
-
-                <select class="form-control" title="Select Category">
-                    <option>Automotive</option>
-                    <option>Real Estate</option>
-                </select>
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-                <label for="">Location</label>
-                <select class="form-control" title="Select Location">
-                    <option>New York</option>
-                    <option>San Francisco</option>
-                </select>
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-                <label for="">Starting Price</label>
-                <input type="text" class="form-control" name="" id="">
-            </div><!-- /.form-group -->
-
-            <button class="btn btn-primary btn-block" type="submit">Search</button>
-        </form>
-    </div>
-</div><!-- /.widget -->
+                            
 
 
                             <div class="widget">
-    <h2 class="widgettitle">Working Hours</h2>
+                              <h2 class="widgettitle">Working Hours</h2>
 
-    <div class="p20 background-white">
-        <div class="working-hours">
-            <div class="day clearfix">
-                <span class="name">Mon</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
+                              <div class="p20 background-white">
+                                  <div class="working-hours">
+                                      <?php
+                                                          $days= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                                                          $tmp = 0
+                                                  ?>
 
-            <div class="day clearfix">
-                <span class="name">Tue</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
 
-            <div class="day clearfix">
-                <span class="name">Wed</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Thu</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Fri</span><span class="hours">07:00 AM - 07:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Sat</span><span class="hours">07:00 AM - 02:00 PM</span>
-            </div><!-- /.day -->
-
-            <div class="day clearfix">
-                <span class="name">Sun</span><span class="hours">Closed</span>
-            </div><!-- /.day -->
-        </div>
-    </div>
-</div><!-- /.widget -->
+                                                  @for ($i = 0; $i <= 6; $i++)
+                                                      <div class="day clearfix">
+                                                          <span class="name">{{ $days[$i] }}</span><span class="hours">
+                                                          @if(isset($jambuka[$tmp]) and $i == $jambuka[$tmp]->day)
+                                                              {{$jambuka[$tmp]->open_hour}} Wib - {{$jambuka[$tmp]->close_hour}} Wib 
+                                                              <?php  
+                                                                  $tmp += 1;
+                                                              ?>
+                                                          @else
+                                                              Closed
+                                                          @endif
+                                                          </span>
+                                                      </div>
+                                                  @endfor 
+                                  </div>
+                              </div>
+                          </div><!-- /.widget -->
 
 
                             <div class="widget">
-    <h2 class="widgettitle">Categories</h2>
+                              <h2 class="widgettitle">Facility</h2>
 
-    <ul class="menu">
-        <li><a href="#">Automotive</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Nightlife</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Transportation</a></li>
-        <li><a href="#">Real Estate</a></li>
-        <li><a href="#">Restaurants</a></li>
-    </ul><!-- /.menu -->
-</div><!-- /.wifget -->
+                              <ul class="menu">
+                                 @if(count($highlight))
+                                        @foreach($highlight as $highlights)
+                                            <li class="yes" style="text-transform: capitalize;"><a href="">{{$highlights->name}}</a></li>
+                                        @endforeach
+                                    @else
+                                        <h5>There is no facility yet</h5>
+                                    @endif
+                              </ul><!-- /.menu -->
+                          </div><!-- /.wifget -->
 
 
-                            <div class="widget">
-    <h2 class="widgettitle">Archives</h2>
-
-    <ul class="menu">
-        <li><a href="#">August <strong class="pull-right">12</strong></a></li>
-        <li><a href="#">July <strong class="pull-right">23</strong></a></li>
-        <li><a href="#">June <strong class="pull-right">53</strong></a></li>
-    </ul><!-- /.menu -->
-</div><!-- /.wifget -->
 
                         </div><!-- /.sidebar -->
                     </div><!-- /.col-* -->

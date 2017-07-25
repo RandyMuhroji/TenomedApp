@@ -41,11 +41,17 @@
             <div class="testimonial-inner">
                 <div class="testimonial-title">
                 <div class="row">
+
+
+
+
+
+
                 <div class="col-sm-8">
                     <div class="card-small">
                       <div class="card-small-image">
                           <a href="#">
-                              <img src="{{ asset('') }}images/{{$reviewss->images or 'duku.png'}}" alt="Tasty Brazil Coffee">
+                              <img src="{{ asset('') }}images/{{$reviewss->images or 'duku.png'}}" alt="img">
                           </a>
                       </div><!-- /.card-small-image -->
 
@@ -71,7 +77,7 @@
 
                {{$reviewss->desc}}
                 <div class="testimonial-sign">
-                    <button class="btn btn-sm btn-primary" onclick="editReview()" type="button">
+                    <button class="btn btn-sm btn-primary" onclick="editReview('{{$reviewss->id}}', {{$reviewss->rate}}, '{{$reviewss->desc}}','{{$reviewss->name}}')" type="button">
                         Edit 
                     </button>
                     <button class="btn btn-sm btn-danger" onclick="deleteReview({{$reviewss->id}})" type="button">
@@ -81,6 +87,8 @@
             </div><!-- /.testimonial-inner -->
         </div>
 
+
+ 
      @endforeach
       <br>
     <div class="col-sm-12">{{ $reviews->links() }}<br></div>
@@ -101,9 +109,9 @@
 @section('java')
 <script >
 
-function editReview(){
+function editReview(id,rate,desc,name){
 
-        bootbox.alert({message:'<br><div class="testimonial"><div class="testimonial-image"><img src="http://localhost:8000/images/user.png" alt=""></div><div class="testimonial-inner"><div class="testimonial-title"><div class="row"><div class="col-sm-7"><div lass="card-small"><div class="card-small-image"><a href="listing-detail.html"><img src="http://localhost:8000/images/duku.png" alt="Tasty Brazil Coffee"></a></div><div class="card-small-content"><h3><a href="listing-detail.html">Tenomed Cafe</a></h3><h3><a href="listing-detail.html"></a></h3><h4><a href="listing-detail.html"> Medan Tembung</a></h4><div class="card-small-price"></div></div></div></div><div class="col-sm-5"><div class="testimonial-rating"><div class="form-group input-rating">                        <input value="1" name="rate" id="rating-food-1" required="" type="radio">                    <label for="rating-food-1" class=""></label>                    <input value="2" name="rate" id="rating-food-2" required="" type="radio">                    <label for="rating-food-2" class=""></label>                    <input value="3" name="rate" id="rating-food-3" required="" type="radio">                    <label for="rating-food-3" class=""></label>                    <input value="4" name="rate" id="rating-food-4" required="" type="radio">                    <label for="rating-food-4" class=""></label>                    <input value="5" name="rate" id="rating-food-5" required="" type="radio">                    <label for="rating-food-5" class=""></label>                </div></div></div></div></div><textarea class="form-control" rows="5" id="desc" name="desc" required="">bagus banget</textarea></div></div>', size: 'large'});
+        bootbox.alert({message:'<form class="background-white p20 add-review" method="post" action="/user/updateReview/'+id+'">        <div class="review">        <div class="review-image">                                    <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">                                </div><!-- /.review-image -->        <div class="review-inner">            <div class="review-title">                <h2><span style="text-transform: capitalize;">{{Auth::user()->name}}</span></h2>                                <span class="report">                    <span class="separator">•</span><i class="fa fa-flag" title="" data-toggle="tooltip" data-placement="top" data-original-title="Report"></i>                </span>                <div class="row">                <div class="form-group input-rating col-sm-8">                    <div class="rating-title">Rate This Cafe</div>                    <input value="1" name="rate" id="rating-food-1" required="" type="radio">                    <label for="rating-food-1" class=""></label>                    <input value="2" name="rate" id="rating-food-2" required="" type="radio" >                    <label for="rating-food-2" class="" ></label>                    <input value="3" name="rate" id="rating-food-3" required="" type="radio">                    <label for="rating-food-3" class=""></label>                    <input value="4" name="rate" id="rating-food-4" required="" type="radio">                    <label for="rating-food-4" class=""></label>                    <input value="5" name="rate" id="rating-food-5" required="" type="radio">                    <label for="rating-food-5" class=""></label>                </div><!-- /.col-sm-3 -->            </div>            <input type="hidden" name="idUser" value="{{Auth::user()->id}}">            <input type="hidden" name="parent" value="0">            <input type="hidden" name="_method" value="POST">            <input type="hidden" name="_token" value="{{ Session::token() }}">            <div class="row">                <div class="form-group col-sm-12">                    <label for="">Review Description</label>                    <textarea class="form-control" rows="5" id="desc" name="desc" required="">'+desc+'</textarea><div class="textarea-resize"></div><div class="textarea-resize"></div>                </div><!-- /.col-sm-6 -->                <div class="col-sm-8">                    <p>Required fields are marked <span class="required">*</span></p>                </div><!-- /.col-sm-8 -->                <div class="col-sm-4">                    <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-star"></i>Submit</button>                </div>            </div>                                       </div><!-- /.review-content-wrapper -->        </div><!-- /.review-inner -->    </div></form>', size: 'large'});
     };
 function deleteReview(data){
     bootbox.confirm({ 
@@ -118,13 +126,13 @@ function deleteReview(data){
             });
             console.log("Review " +data);
             $.ajax({
-              url: '/user/review/'+data,              
-              type: 'delete',
+              url: '/user/deleteReview/'+data,              
+              type: 'GET',
 
               data: {'idUser':'a', 'kafe':'b'},
               success: function( data ) {
-                console.log("masuk sini");
-                window.location('/user/review');   
+                console.log(data);
+                location.reload(); 
               }
              });
         }

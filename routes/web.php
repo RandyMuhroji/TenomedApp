@@ -115,3 +115,6 @@ Route::get('/invoice/{id}', 'cafes@invoice');
 Route::get('/slots/{id}', 'cafes@slots');
 // Route::get('/user/deleteReview/{$id}', 'user\ReviewController@deleteReview');
 Route::get('/seats/{id}', 'cafes@seats');
+Route::get('/user/deleteReview/{id}', 'cafes@deleteReview');
+Route::post('/user/updateReview/{id}', 'cafes@updateReview');
+Route::get('/user/InvoiceDownload/{id}', 'cafes@downloadPDF');

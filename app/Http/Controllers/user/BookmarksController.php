@@ -19,7 +19,7 @@ class BookmarksController extends Controller
         $user = Auth::user();
         $bookmarks = DB::table('cafes')
             ->join('bookmarks', 'cafes.id', '=', 'bookmarks.cafe_id')
-            ->select('cafes.name','cafes.kecamatan','cafes.image','cafes.kelurahan')
+            ->select('bookmarks.cafe_id','cafes.name','cafes.kecamatan','cafes.image','cafes.kelurahan')
             ->where('bookmarks.user_id',$user->id)
             ->where('bookmarks.status','1')
             ->orderBy('cafes.id', 'desc')
