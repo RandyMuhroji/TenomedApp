@@ -158,6 +158,10 @@
 @section('java')
 <script >
 
+ $(document).ready(function(){
+    hideLoading();
+  });
+
 var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
     'onclick="alert(\'Call your custom code here.\')">' +
     '<i class="glyphicon glyphicon-tag"></i>' +

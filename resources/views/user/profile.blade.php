@@ -108,6 +108,10 @@
                         </div><!-- /.content -->
                     </div><!-- /.col-* -->
 @endsection
-
-
+  @section('java')
+<script >
+ $(document).ready(function(){
+    hideLoading();
+  });
+</script>
 @endsection

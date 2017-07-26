@@ -239,11 +239,130 @@ span.round-tab:hover {
       .hero-image-location{
         padding-left: 15px;
       }
+
+      div#loading2
+        {
+            display: none;
+        /*    width:100px;*/
+            /*height: 100px;*/
+            position: fixed;
+            top: 43%;
+            left: 50%;
+            text-align:center;
+            opacity: 2%;
+            /*margin-left: -50px;*/
+            /*margin-top: -100px;*/
+            text-overflow: ellipsis;
+            z-index:1006;
+            font-size: 16px;
+
+        /*    background-color: orangered;*/
+
+        } 
+
+        #loading-overlay { 
+            background-color: #212121;
+            position:fixed;
+            width:100%;
+            height:100%;
+            top: 0px;
+            padding:70px;
+            z-index:1005;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+        }
+        
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1007;
+            display:none;
+        }
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+            -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #e74c3c;
+            -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #f9c922;
+            -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        @-webkit-keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+        @keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
           </style>
 </head>
 
 
 <body class="" id="loadContent">
+
+
+<div id="loading-overlay" hidden></div>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
+
+
 <div class="page-wrapper">
     @yield('content')
     <footer class="footer">
@@ -299,7 +418,31 @@ span.round-tab:hover {
     </footer><!-- /.footer -->
 
     </div><!-- /.page-wrapper -->
+<script>
+    showLoading();
+    function showLoading(){
+        $("#loader-wrapper").fadeIn(100,0);    
+        $("#loader-wrapper").show();
+        $("#loader-wrapper").css({visibility:"visible"});
+        $("#loader-wrapper").css({display:"block"});
+       
 
+        $("#loading-overlay").css({opacity:"0.6"});
+        $("#loading-overlay").fadeIn(100,0);    
+        $("#loading-overlay").css({visibility:"visible"});
+//        $("#loading-overlay").css({display:"block"});
+
+    };
+    //hide loading bar
+    function hideLoading(){
+          
+//        $("#loading2").hide("slow");
+//        $("#loading-overlay").hide("slow");
+          $("#loader-wrapper").css({display:"none"});
+          $("#loading-overlay").fadeTo(0, 1000);
+          $("#loading-overlay").css({display:"none"});
+    };
+</script>
 <script src="{{ asset('') }}assets/js/jquery.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/js/map.js" type="text/javascript"></script>
 
@@ -347,7 +490,7 @@ span.round-tab:hover {
 </script> -->
 
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-   @yield('java')
+   
 <script>
 
 $(document).ready(function(){
@@ -558,7 +701,7 @@ $.ajaxSetup({
 
 
 </script>
-
+@yield('java')
 </body>
 
 

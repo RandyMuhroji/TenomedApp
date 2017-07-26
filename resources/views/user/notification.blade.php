@@ -57,30 +57,36 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                       <?php $i=1; ?>
                        
                         @foreach($data as $items)
 
                             <tr >
-                                <td></td>
+                                <td><?php echo $i; ?></td>
                                 <td>{{ $items->name}}</td>
                                 <td>{{ $items->bookingDate}}</td>
                                 <td>{{ $items->bookingTime}}</td>
                                 <td>
                                     @if($items->status=='0')
-                                      <span class="label label-danger">Panding</span>
-                                    @else
+                                      <span class="label label-warning">Panding</span>
+                                    @elseif($items->status=='1')
                                       <span class="label label-success">Accepted</span>
+                                    @else
+                                      <span class="label label-danger">Canceled</span>
                                      @endif
 
                                 </td>
 
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
-                                    <button class="btn btn-sm btn-secondary" type="button" onclick="downloadPdf('{{ $items->id}}')">
-                                      Invoice PDF
-                                  </button>
+                                    @if($items->status=='1')
+                                      <button class="btn btn-sm btn-secondary" type="button" onclick="downloadPdf('{{ $items->id}}')">
+                                        Invoice PDF
+                                    </button>
+                                    @endif
                                 </td>
                             </tr>
+                            <?php $i++; ?>
                           @endforeach
                         </tbody>
                     </table>
@@ -116,6 +122,9 @@
   <!-- Custom Theme Scripts -->
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>
   <script>
+ $(document).ready(function(){
+    hideLoading();
+  });
     function getProforma(data){
       $.ajaxSetup({
               headers: {

@@ -297,11 +297,26 @@
                         <div class="card-simple-content">
                             <h2><a href="detail/{{$cafe->id}}"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
                             <div class="card-simple-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                              <?php
+                                    if($cafe->total==null){$cafe->total=0;}
+
+                                    if((int)$cafe->total==$cafe->total){
+                                      for($i=0;$i<(int)$cafe->total;$i++){
+                              ?>
+                                          <i class="fa fa-star"></i>
+                              <?php
+                                      }
+                                    }else{
+                                      for($i=0;$i<(int)$cafe->total;$i++){
+                              ?>
+                                        <i class="fa fa-star"></i>
+                            <?php
+                                      }
+                            ?>
+                                      <i class="fa fa-star-half-o"></i>
+                            <?php
+                                    }
+                            ?>
                             </div><!-- /.card-rating -->
 
                             <div class="card-simple-actions">
@@ -326,4 +341,11 @@
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
 
+@endsection
+@section('java')
+<script>
+  $(document).ready(function(){
+    hideLoading();
+  });
+</script>
 @endsection

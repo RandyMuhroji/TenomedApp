@@ -88,6 +88,117 @@ input[type=number]
   bottom: -1px;
   height: 50%;
 }
+
+div#loading2
+        {
+            display: none;
+        /*    width:100px;*/
+            /*height: 100px;*/
+            position: fixed;
+            top: 43%;
+            left: 50%;
+            text-align:center;
+            opacity: 2%;
+            /*margin-left: -50px;*/
+            /*margin-top: -100px;*/
+            text-overflow: ellipsis;
+            z-index:1006;
+            font-size: 16px;
+
+        /*    background-color: orangered;*/
+
+        } 
+
+        #loading-overlay { 
+            background-color: #212121;
+            position:fixed;
+            width:100%;
+            height:100%;
+            top: 0px;
+            padding:70px;
+            z-index:1005;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+        }
+        
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1007;
+            display:none;
+        }
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+            -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #e74c3c;
+            -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #f9c922;
+            -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        @-webkit-keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+        @keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
     </style>
 
     <title>Tempat Nongkrong Medan</title>
@@ -95,7 +206,10 @@ input[type=number]
 
 
 <body class="">
-
+<div id="loading-overlay" hidden></div>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+        </div>
 <div class="page-wrapper">
     
 
@@ -388,65 +502,88 @@ input[type=number]
         </div><!-- /.main-inner -->
     </div><!-- /.main -->
 
-<<<<<<< HEAD
+<footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2>About Tenomed</h2>
 
-=======
-    <footer class="footer">
-    <div class="footer-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h2>About Superlist</h2>
+                        <p>The biggest online reservaion cafes in medan,</p>
+                    </div><!-- /.col-* -->
 
-                    <p>Superlist is directory template built upon Bootstrap and SASS to bring great experience in creation of directory.</p>
-                </div><!-- /.col-* -->
+                    <div class="col-sm-4">
+                        <h2>Contact Information</h2>
 
-                <div class="col-sm-4">
-                    <h2>Contact Information</h2>
+                        <p>
+                            Jln. Pukat Banting IV No.81, Mandala BY PASS, Medan<br>
+                            +62821-6115-1070, <a href="#">tenomed01@gmail.com</a>
+                        </p>
+                    </div><!-- /.col-* -->
 
-                    <p>
-                        Your Street 123, Melbourne, Australia<br>
-                        +1-123-456-789, <a href="#">sample@example.com</a>
-                    </p>
-                </div><!-- /.col-* -->
+                    <div class="col-sm-4">
+                        <h2>Stay Connected</h2>
 
-                <div class="col-sm-4">
-                    <h2>Stay Connected</h2>
+                        <ul class="social-links nav nav-pills">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                        </ul><!-- /.header-nav-social -->
+                    </div><!-- /.col-* -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.footer-top -->
 
-                    <ul class="social-links nav nav-pills">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul><!-- /.header-nav-social -->
-                </div><!-- /.col-* -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </div><!-- /.footer-top -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-left">
+                    &copy; 2015 All rights reserved. Created by <a href="#">The Fighters</a>.
+                </div><!-- /.footer-bottom-left -->
 
-    <div class="footer-bottom">
-        <div class="container">
-            <div class="footer-bottom-left">
-                &copy; 2017 All rights reserved. 
-            </div><!-- /.footer-bottom-left -->
-
-            <div class="footer-bottom-right">
-                <ul class="nav nav-pills">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul><!-- /.nav -->
-            </div><!-- /.footer-bottom-right -->
-        </div><!-- /.container -->
-    </div>
-</footer><!-- /.footer -->
->>>>>>> 5441558a56daab964882c732b62f59a415a3fc07
+                <div class="footer-bottom-right">
+                    <ul class="nav nav-pills">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+                        <li><a href="contact-1.html">Contact</a></li>
+                    </ul><!-- /.nav -->
+                </div><!-- /.footer-bottom-right -->
+            </div><!-- /.container -->
+        </div>
+    </footer><!-- /.footer -->
 
 </div><!-- /.page-wrapper -->
+<script type="text/javascript">
+
+showLoading();
+ $(document).ready(function(){
+        hideLoading();
+      });
+    function showLoading(){
+        $("#loader-wrapper").fadeIn(100,0);    
+        $("#loader-wrapper").show();
+        $("#loader-wrapper").css({visibility:"visible"});
+        $("#loader-wrapper").css({display:"block"});
+       
+
+        $("#loading-overlay").css({opacity:"0.6"});
+        $("#loading-overlay").fadeIn(100,0);    
+        $("#loading-overlay").css({visibility:"visible"});
+//        $("#loading-overlay").css({display:"block"});
+
+    };
+    //hide loading bar
+    function hideLoading(){
+          
+//        $("#loading2").hide("slow");
+//        $("#loading-overlay").hide("slow");
+          $("#loader-wrapper").css({display:"none"});
+          $("#loading-overlay").fadeTo(0, 1000);
+          $("#loading-overlay").css({display:"none"});
+    };
+</script>
 
 <script src="{{ asset('') }}assets/js/jquery.js" type="text/javascript"></script>
 <script src="{{ asset('') }}assets/js/map.js" type="text/javascript"></script>
@@ -477,6 +614,10 @@ input[type=number]
 
 <script src="{{ asset('') }}assets/js/superlist.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+
+
+
         jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
     jQuery('.quantity').each(function() {
       var spinner = jQuery(this),

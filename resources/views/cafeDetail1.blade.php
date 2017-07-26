@@ -20,11 +20,31 @@
         margin-top:59px;
       }
     </style>
+    <script>
+        $( function() {
+        console.log("bulat="+($("#txtStar").val()));
+        if(($("#txtStar").val())%1==0){
+             console.log("bulat");
+            for(i=0;i<Math.floor(($("#txtStar").val()));i++){
+                $( "#bintang" ).append(' <i class="fa fa-star"></i> ');
+            }
+        }else{
+             console.log("ganjil");
+
+             for(i=0;i<Math.floor(($("#txtStar").val()));i++){
+                $( "#bintang" ).append(' <i class="fa fa-star"></i> ');
+            }
+
+              $( "#bintang" ).append(' <i class="fa fa-star-half-o"></i> ');
+                        
+        }
+    });
+
+    </script>
 @endsection
 
 @section('content')
 <div class="page-wrapper">
-    
    
 
 <header class="header opaque">
@@ -210,13 +230,13 @@
                 <i class="fa fa-map-o"></i> {{ $detail->address }}
                 <input type="hidden" name="kafe" id="kafe" value="{{ $detail->id }}">
             </div><!-- /.detail-banner-address -->
-            		<div class="detail-banner-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div><!-- /.detail-banner-rating -->
+            		<div class="detail-banner-rating" id="bintang">
+                      <!--   <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i> -->
+                    </div><!-- /.detail-banner-rating -->
                  @if(Auth::check())
                     <div class="detail-banner-btn bookmark {{ $test }}" id="bookmarks">
                         <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
@@ -241,6 +261,11 @@
 
 
 <div class="container">
+ @if($rates!="")
+    <input type="hidden" value="{{ round($rates->rank / $rates->jumlah,2)}}" name="txtStar" id="txtStar">
+@else
+    <input type="hidden" value="0" name="txtStar" id="txtStar">
+@endif
     <div class="row detail-content">
     <div class="col-sm-7">
         <div class="detail-gallery">
@@ -573,21 +598,22 @@
       
     </div>
   </div>
+
                 <div class="col-sm-4">
                     <div class="btn btn-secondary btn-share"><i class="fa fa-share-square-o"></i> Share
                         <div class="share-wrapper">
                             <ul class="share">
-                                <li><i class="fa fa-facebook"></i> Facebook</li>
-                                <li><i class="fa fa-twitter"></i> Twitter</li>
-                                <li><i class="fa fa-google-plus"></i> Google+</li>
-                                <li><i class="fa fa-pinterest"></i> Pinterest</li>
-                                <li><i class="fa fa-chain"></i> Link</li>
+                                <li><i class="fa fa-facebook doggo"></i><a href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}"  target="_blank">Facebook</a> </li>
+                                <li><i class="fa fa-twitter doggo"></i> <a href="https://twitter.com/intent/tweet?url={{url('/')}}"  target="_blank">Twitter</a></li>
+                                <li><i class="fa fa-google-plus doggo"></i><a href="https://plus.google.com/share?url={{url('/')}}"  target="_blank"> Google+</a></li>
+                              <!--  -->
+
                             </ul>
                         </div>
                     </div>
                 </div><!-- /.col-sm-4 -->
                 <div class="col-sm-4">
-                    <div class="btn btn-secondary btn-claim"><i class="fa fa-hand-peace-o"></i> Claim</div>
+                    <div class="btn btn-secondary btn-claim" onclick="report()"><i class="fa fa-hand-peace-o"></i> Report</div>
                 </div><!-- /.col-sm-4 -->
             </div><!-- /.detail-actions -->
         </div>
@@ -831,5 +857,45 @@
     </div>
 </footer><!-- /.footer -->
 
+@endsection
+
+@section('java')
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script>
+ hideLoading();
+     $(document).ready(function(){
+       
+      });
+    
+    var popupSize = {
+        width: 780,
+        height: 550
+    };
+
+    $(document).on('click', '.doggo > a', function(e){
+
+        var
+            verticalPos = Math.floor(($(window).width() - popupSize.width) / 2),
+            horisontalPos = Math.floor(($(window).height() - popupSize.height) / 2);
+
+        var popup = window.open($(this).prop('href'), 'social',
+            'width='+popupSize.width+',height='+popupSize.height+
+            ',left='+verticalPos+',top='+horisontalPos+
+            ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
+
+        if (popup) {
+            popup.focus();
+            e.preventDefault();
+        }
+
+    });
+
+    function report(){
+        
+          bootbox.alert("<strong>ERR002</strong> - not a valid name must be entered!");
+    }
+
+
+</script>
 @endsection
 

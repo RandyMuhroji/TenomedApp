@@ -259,9 +259,13 @@ class cafes extends Controller
                 ->select('bookingTime', DB::raw('SUM(persons) as persons'))
                 ->where('bookingDate', $tgl)
                 ->where('cafe_id', $id)
+                ->where('status','<>', '2')
                 ->groupBy('bookingTime')
                 ->get();
        // $ada->persons=$ada->persons+$seat;
+        if($ada==""){
+            $ada=[];
+        }
         return($ada);
      }
      public function deleteReview($id){
