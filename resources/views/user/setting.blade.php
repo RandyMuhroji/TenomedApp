@@ -130,21 +130,53 @@
 
                             <div id="editPassword" style="display: none;">
                               <div class="row " >
-                                      <div class="form-group col-sm-7">
-                                        <label>Old Password</label>
-                                        <input type="password" class="form-control" onchange="check_password('{{Auth::user()->id}}');" name="password" id="password">
-                                    </div>
-                                    <div class="form-group col-sm-7">
-                                        <label>New Password</label>
-                                        <input type="password" class="form-control"  name="name" id="name">
-                                    </div>
-                                    <div class="form-group col-sm-7">
-                                        <label>Re-password</label>
-                                        <input type="password" class="form-control"  name="name" id="name">
-                                    </div>
-                                    <div class="center col-sm-7">
-                                        <button type="submit" class="btn btn-primary btn-xl">Submit </button>
-                                    </div>
+                                  <form id="frmChangePassword" method="post" action="{{url('user/password')}}" data-parsley-validate class="form-horizontal form-label-left">
+                                  <div class="modal-body">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+                                        @if(Session::has('current_password'))
+                                            <div class="form-group{{' has-error'}}">
+                                        @else
+                                        <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
+                                        @endif
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Current Password <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="password" class="form-control col-md-7 col-xs-12" id="current_password" name="current_password">
+                                                @if ($errors->has('current_password'))
+                                                <span class="help-block">{{ $errors->first('current_password') }}</span>
+                                                @elseif(Session::has('current_password'))
+                                                <span class="help-block">{!! Session::get('current_password') !!}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password"> New Password <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="password" id="password" name="password" class="form-control col-md-7 col-xs-12">
+                                                @if ($errors->has('password'))
+                                                <span class="help-block">{{ $errors->first('password') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_password">Retry Password <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control col-md-7 col-xs-12">
+                                                @if ($errors->has('password_confirmation'))
+                                                <span class="help-block">{{ $errors->first('password_confirmation') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success">Save Change</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                  </div>
+                                </form>
                               </div>
                             </div>
                             </div>

@@ -41,7 +41,6 @@
                                 <th>No</th>
                                 <th>Name</th>
                                 <th>Date</th>
-                                <th>Time</th>
                                 <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
@@ -50,8 +49,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Booking Date</th>
-                                <th>Booking Time</th>
+                                <th>Booking Due</th>
                                 <th>Status</th>
                                 <th>@lang('users.action')</th>
                             </tr>
@@ -64,8 +62,7 @@
                             <tr >
                                 <td><?php echo $i; ?></td>
                                 <td>{{ $items->name}}</td>
-                                <td>{{ $items->bookingDate}}</td>
-                                <td>{{ $items->bookingTime}}</td>
+                                <td>{{ $items->bookingDue}}</td>
                                 <td>
                                     @if($items->status=='0')
                                       <span class="label label-warning">Panding</span>
@@ -79,8 +76,9 @@
 
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
+                                    <!-- <button class="btn btn-sm btn-info" type="button" onclick="getProforma({{$items->id}})">Bukti Bayar</button> -->
                                     @if($items->status=='1')
-                                      <button class="btn btn-sm btn-secondary" type="button" onclick="downloadPdf('{{ $items->id}}')">
+                                      <button class="btn btn-sm btn-success" type="button" onclick="downloadPdf('{{ $items->id}}')">
                                         Invoice PDF
                                     </button>
                                     @endif

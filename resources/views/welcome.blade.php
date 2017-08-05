@@ -100,11 +100,11 @@
 
                             @else
                                 <li class="active" >
-                                    <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
+                                    <a style="border: 1px solid white;padding: 10px 17px; color: white; margin-top: 10px;" data-toggle="modal" href="/login" onclick="openLoginModal();">Login</a>
 
                                 </li>
                                 <li class="active">
-                                    <a data-toggle="modal" href="/register" onclick="openRegisterModal();">Sign Up</a>
+                                    <a data-toggle="modal" href="/register" style="color: white;" onclick="openRegisterModal();">Sign Up</a>
 
                                 </li>
                             @endif
@@ -209,6 +209,8 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-sm-12 col-lg-12">
+                                   
+
                                             <form method="get" action="/cari">
                                            <!--  {{ csrf_field() }} -->
 
@@ -235,6 +237,7 @@
 
                                                   <div class="hero-image-keyword col-xs-12 col-sm-6">
                                                       <input type="text" class="form-control" placeholder="Keyword" name="kata">
+                                                      <input type="hidden" class="form-control" placeholder="Keyword" name="menu">
                                                   </div>
 
                                                   <div class=" col-xs-4 col-xs-offset-8 col-sm-2 col-sm-offset-0">
@@ -255,27 +258,27 @@
     <div class="block background-white fullwidth pt0 pb0">
         <div class="partners">
 
-    <a href="#">
-        <img src="{{ asset('') }}assets/img/coffee.png" alt="">
-        Coffee
-    </a>
-    <a href="#">
-        <img src="{{ asset('') }}assets/img/dessert &bakes.png" alt="">
-        Dessert & Bakes
-    </a>
-    <a href="#">
-        <img src="{{ asset('') }}assets/img/dinner.png" alt="">
-        Dinner
-    </a>
-    <a href="#">
-        <img src="{{ asset('') }}assets/img/lunch.png" alt="">
-        Lunch
-    </a>
-    <a href="#">
-        <img src="{{ asset('') }}assets/img/luxurydinning.png" alt="">
-        Drink
-    </a>
-</div><!-- /.partners -->
+        <a href="/cari?menu=coffe&location&kata=">
+            <img src="{{ asset('') }}assets/img/coffee.png" alt="">
+            Coffee
+        </a>
+        <a href="/cari?menu=Dessert & Bake&location=&kata=">
+            <img src="{{ asset('') }}assets/img/dessert &bakes.png" alt="">
+            Dessert & Bakes
+        </a>
+        <a href="/cari?menu=Dinner&location=&kata=">
+            <img src="{{ asset('') }}assets/img/dinner.png" alt="">
+            Dinner
+        </a>
+        <a href="/cari?menu=Lunch&location=&kata=">
+            <img src="{{ asset('') }}assets/img/lunch.png" alt="">
+            Lunch
+        </a>
+        <a href="/cari?menu=Drink&location=&kata=">
+            <img src="{{ asset('') }}assets/img/luxurydinning.png" alt="">
+            Drink
+        </a>
+      </div><!-- /.partners -->
 
     </div>
 
@@ -288,7 +291,6 @@
     <div class="row">
 
 
-
             @foreach($rate as $cafe)
 
             <div class="col-sm-6 col-md-3">
@@ -297,25 +299,29 @@
                         <div class="card-simple-content">
                             <h2><a href="detail/{{$cafe->id}}"><span style="text-transform: capitalize;">{{$cafe->name}}</span></a></h2>
                             <div class="card-simple-rating">
-                              <?php
-                                    if($cafe->total==null){$cafe->total=0;}
-
-                                    if((int)$cafe->total==$cafe->total){
-                                      for($i=0;$i<(int)$cafe->total;$i++){
-                              ?>
-                                          <i class="fa fa-star"></i>
-                              <?php
-                                      }
+                             <?php
+                              if($cafe->total==null){$cafe->total=0;}
+                                if((int)$cafe->total==$cafe->total){
+                                  $sts="genab";
+                                  $x=(int)$cafe->total;
+                                }else{
+                                  $sts="ganjil";
+                                   $x=((int)$cafe->total)+1;
+                              }
+                              for($i=0;$i<5;$i++){
+                                if($i<$x){
+                                  if($sts=="genab"){echo('<i class="fa fa-star"></i>');}
+                                  else{
+                                    if($i==($x-1)){
+                                      echo('<i class="fa fa-star-half-o"></i>');
                                     }else{
-                                      for($i=0;$i<(int)$cafe->total;$i++){
-                              ?>
-                                        <i class="fa fa-star"></i>
-                            <?php
-                                      }
-                            ?>
-                                      <i class="fa fa-star-half-o"></i>
-                            <?php
+                                      echo('<i class="fa fa-star"></i>');
                                     }
+                                  }
+                                }else{
+                                  echo('<i class="fa fa-star-o"></i>');
+                                }
+                              }
                             ?>
                             </div><!-- /.card-rating -->
 

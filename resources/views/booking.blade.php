@@ -590,7 +590,7 @@ div#loading2
                                   <div class="working-hours">
                                       <?php
                                                           $days= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-                                                          $tmp = 0
+                                                          $tmp = 0;
                                                   ?>
 
 

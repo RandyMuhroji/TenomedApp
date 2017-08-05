@@ -233,7 +233,7 @@ class SettingsController extends Controller
         if(Hash::check($request_data['current_password'], $current_password))
         {           
                                     
-            $obj_user = User::find($user_id);
+            $obj_user = User::find(Auth::user()->id);
             $obj_user->password = Hash::make($request_data['password']);;
             $obj_user->save(); 
             return redirect()->route('owner_account')->with('success', "Password save changes");

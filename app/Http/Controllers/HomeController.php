@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-  		$rate= DB::select("select c.id,c.name,c.image,c.seat,rs.rate,rs.jlh,rs.rate/rs.jlh total from cafes c left join (SELECT cafe_id,sum(rate) rate, COUNT(user_id) jlh from reviews WHERE parent_id=0 GROUP BY cafe_id ) rs on c.id=rs.cafe_id order by total desc LIMIT 8");
+  		$rate= DB::select("select c.id,c.name,c.status,c.image,c.seat,rs.rate,rs.jlh,rs.rate/rs.jlh total from cafes c left join (SELECT cafe_id,sum(rate) rate, COUNT(user_id) jlh from reviews WHERE parent_id=0 GROUP BY cafe_id ) rs on c.id=rs.cafe_id where c.status=1 order by total desc LIMIT 8");
 
         $cafes = DB::select("select * from cafes where status = 1 order by rating ");
 

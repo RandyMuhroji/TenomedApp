@@ -27,8 +27,8 @@
                     <div class="col-sm-4">
                         <div class="card-small">
                           <div class="card-small-image">
-                              <a href="listing-detail.html">
-                                  <img src="{{ asset('') }}images/{{$bookmarkss->images or 'duku.png'}}" alt="Tasty Brazil Coffee">
+                              <a href="{{url('detail/'.$bookmarkss->cafe_id)}}">
+                                  <img src="{{ asset('') }}images/{{$bookmarkss->image or 'duku.png'}}" alt="img">
                               </a>
                           </div><!-- /.card-small-image -->
 

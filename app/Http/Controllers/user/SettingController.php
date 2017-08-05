@@ -89,13 +89,13 @@ class SettingController extends Controller
         // shuffle the result
         $string = str_shuffle($pin);
 
-         $Setting= Setting::find($id);
-      $Setting->name=$request->name;
-      $Setting->email=$request->email;
-      $Setting->phone=$request->phone;
-      $Setting->address=$request->address;
-      $Setting->bio=$request->bio;
-       $file = Input::file('avatar');
+          $Setting= Setting::find($id);
+          $Setting->name=$request->name;
+          $Setting->email=$request->email;
+          $Setting->phone=$request->phone;
+          $Setting->address=$request->address;
+          $Setting->bio=$request->bio;
+          $file = Input::file('avatar');
 
       
         if(Input::hasFile('avatar')){
@@ -104,7 +104,6 @@ class SettingController extends Controller
             $file->move('images', $string.'-'.$file->getClientOriginalName());
         }
         $Setting->save();
-       ///echo "handoko";
        return redirect('user/setting');
     }
 

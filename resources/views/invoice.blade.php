@@ -331,7 +331,7 @@ div#loading2
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
-                     Booking Form Berhasil di simpan, silahkan lakukan pembayaran ke nomor rekening di bawah.
+                     Booking Form Berhasil di simpan, silahkan lakukan pembayaran.
                 </div>
                         <div class="content">
                     
@@ -345,7 +345,7 @@ div#loading2
             </div><!-- /.invoice-logo -->
 
             <div class="invoice-description">
-                <strong>#{{$detail->id}} / {{$detail->persons}} Persons</strong>
+                <strong>#{{$detail->reserv_code}} / {{$detail->persons}} Persons</strong>
                 <span></span>
             </div>
         </div><!-- /.invoice-header -->

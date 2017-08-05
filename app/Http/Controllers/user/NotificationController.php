@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
 use DB;
 use Auth;
+use Carbon\Carbon;
 class NotificationController extends Controller
 {
     /**
@@ -15,13 +16,16 @@ class NotificationController extends Controller
      */
     public function index()
     {
+
+       // return($current = new Carbon());
         $user = Auth::user()->id;
         //return($user);
         $data= DB::table('reservations')
-                ->select('id','name','email','persons','status','bookingDate','bookingTime')
+                ->select('id','name','email','persons','status',DB::raw('CONCAT(bookingDate, " ", bookingTime) AS bookingDue') )
                 ->where('user_id',$user)
-                ->orderBy('created_at', 'desc')
+                ->orderBy('bookingDate', 'desc')
                 ->paginate(10);   
+        //return($data);
 
         //return($data);
         return view('user.notification')->with(['data'=>$data]);

@@ -51,7 +51,7 @@
                     <div class="card-small">
                       <div class="card-small-image">
                           <a href="#">
-                              <img src="{{ asset('') }}images/{{$reviewss->images or 'duku.png'}}" alt="img">
+                              <img src="{{ asset('') }}images/{{$reviewss->image or 'duku.png'}}" alt="img">
                           </a>
                       </div><!-- /.card-small-image -->
 

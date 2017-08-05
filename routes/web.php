@@ -71,6 +71,8 @@ Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],f
     Route::resource('bookmarks', 'BookmarksController');
     Route::resource('review', 'ReviewController');
     Route::resource('setting', 'SettingController');
+    Route::resource('chatting', 'ChattingController');
+    Route::post('password',"SettingsController@changePassword");
 
 });
 
@@ -105,12 +107,14 @@ Route::get('/detail/{id}', 'cafes@detail');
 Route::get('/bookmarks', 'cafes@bookmarks');
 Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
+Route::post('/sendReport', 'cafes@sendReport');
+Route::post('/message', 'cafes@Message');
 Route::get('/cari', 'cafes@cari');
 Route::get('/cekPass', 'cafes@cekEmail');
-Route::get('/booking/{id}', 'cafes@booking');
+Route::get('/booking/{id}', 'booking@booking');
 
-Route::post('/saveBooking/{id}', 'cafes@saveBooking');
-Route::get('/invoice/{id}', 'cafes@invoice');
+Route::post('/saveBooking/{id}', 'booking@saveBooking');
+Route::get('/invoice/{id}', 'booking@invoice');
 
 Route::get('/slots/{id}', 'cafes@slots');
 // Route::get('/user/deleteReview/{$id}', 'user\ReviewController@deleteReview');

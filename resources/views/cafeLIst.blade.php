@@ -107,8 +107,8 @@
                       @foreach($recent as $item)
                           <div class="card-small">
                               <div class="card-small-image">
-                                  <a href="listing-detail.html">
-                                      <img src="{{ asset('') }}images/{{$item->image or kafe.png}}" alt="img">
+                                  <a href="">
+                                      <img src="{{ asset('') }}images/{{$item->image or 'kafe.png'}}" alt="img">
                                   </a>
                               </div><!-- /.card-small-image -->
 
@@ -191,33 +191,56 @@
         <div class="card-row">
             <div class="card-row-inner">
               <div class="card-row-body">
+              @if(count($data ))
+                    @foreach($data as $datas)
+                          <div class="col-sm-6 col-md-4 col-lg-4">
+                            <div class="card-simple" data-background-image="{{ asset('') }}images/{{$datas->image or 'kafe.jpg'}}">
+                                <div class="card-simple-background">
+                                    <div class="card-simple-content">
+                                        <h2><a href="{{url('detail/'.$datas->id)}}" style="">{{$datas->name}}</a></h2>
+                                        <div class="card-simple-rating">
+                                            <?php
+                                              if($datas->total==null){$datas->total=0;}
+                                                if((int)$datas->total==$datas->total){
+                                                  $sts="genab";
+                                                  $x=(int)$datas->total;
+                                                }else{
+                                                  $sts="ganjil";
+                                                   $x=((int)$datas->total)+1;
+                                              }
+                                              for($i=0;$i<5;$i++){
+                                                if($i<$x){
+                                                  if($sts=="genab"){echo('<i class="fa fa-star"></i>');}
+                                                  else{
+                                                    if($i==($x-1)){
+                                                      echo('<i class="fa fa-star-half-o"></i>');
+                                                    }else{
+                                                      echo('<i class="fa fa-star"></i>');
+                                                    }
+                                                  }
+                                                }else{
+                                                  echo('<i class="fa fa-star-o"></i>');
+                                                }
+                                              }
+                                            ?>
+                                            </div><!-- /.card-rati
+                                        </div><!-- /.card-rating -->
 
-                @foreach($data as $datas)
-                      <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="card-simple" data-background-image="{{ asset('') }}images/{{$datas->image or 'kafe.jpg'}}">
-                    <div class="card-simple-background">
-                        <div class="card-simple-content">
-                            <h2><a href="{{url('detail/'.$datas->id)}}" style="">{{$datas->name}}</a></h2>
-                            <div class="card-simple-rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div><!-- /.card-rating -->
+                                        <div class="card-simple-actions">
+                                            <a href="detail/{{$datas->id}}" class="fa fa-search"></a>
+                                        </div><!-- /.card-simple-actions -->
+                                    </div><!-- /.card-simple-content -->
 
-                            <div class="card-simple-actions">
-                                <a href="detail/{{$datas->id}}" class="fa fa-search"></a>
-                            </div><!-- /.card-simple-actions -->
-                        </div><!-- /.card-simple-content -->
-
-                        
-                        <div class="card-simple-label" alt="availabe seat">{{$datas->seat or 0}} People</div>
-                        
-                    </div><!-- /.card-simple-background -->
-                </div><!-- /.card-simple -->
-            </div><!-- /.col-* -->
-                @endforeach
+                                    
+                                    <div class="card-simple-label" alt="availabe seat">{{$datas->seat or 0}} People</div>
+                                    
+                                </div><!-- /.card-simple-background -->
+                            </div><!-- /.card-simple -->
+                        </div><!-- /.col-* -->
+                    @endforeach
+                @else
+                    <p>No Cafe founds.</p>
+                @endif
 
               </div>
             </div>

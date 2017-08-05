@@ -176,7 +176,7 @@ span.round-tab:hover {
 }
 
       ul.pager li.active span {
-          background-color: rgba(0, 159, 139, 0.7);
+          /*background-color: rgba(0, 159, 139, 0.7);*/
           color: white;
       }
 
@@ -502,7 +502,7 @@ $(document).ready(function(){
     });
 
 
-     var wHeight = $(window).innerHeight();
+        var wHeight = $(window).innerHeight();
           var presetHeights = $('.hero-image').outerHeight() / 2 - 70;
           console.log(presetHeights);
           var scroll_pos = 0;
@@ -589,10 +589,7 @@ function check_email(email){
             }
     };
 
-     function budi(aku){
-
-       document.getElementById("replyKu"+aku).style.display='inherit';
-    };
+     
 
 
 function editReview(){
@@ -629,45 +626,7 @@ function deleteReview(data){
 
 
 
-  $(function(){
-
-    $('#bookmarks').click(function(){
-
-
-$.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': {!! json_encode(csrf_token()) !!};,
-        //     }
-        // });
-         console.log("tes masuk");
-         var a=$('#idUser').val();
-         var b=$('#kafe').val();
-
-         if($('#bookmarks').hasClass("marked")){
-         // alert('cong');
-          $('#status').val(1);
-         }else{
-          $('#status').val(0);
-         }
-         $.ajax({
-          type: 'GET',
-          url: '/bookmarks?status='+$('#status').val(),
-
-          data: {'idUser':a, 'kafe':b},
-          success: function( data ) {
-             // $(".doko").load("/login");
-             //alert(data);
-          }
-         });
-      });
-  });
+ 
 
 
 // $(function(){

@@ -4,9 +4,13 @@ namespace Tenomed\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
-use Auth;
+use Tenomed\Models\Message;
+use Illuminate\Support\Facades\Input;
 use DB;
-class BookmarksController extends Controller
+use \PDF;
+use Auth;
+
+class chattingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +20,9 @@ class BookmarksController extends Controller
     public function index()
 
     {
-        $user = Auth::user();
-        $bookmarks = DB::table('cafes')
-            ->join('bookmarks', 'cafes.id', '=', 'bookmarks.cafe_id')
-            ->select('bookmarks.cafe_id','cafes.name','cafes.kecamatan','cafes.image','cafes.kelurahan')
-            ->where('bookmarks.user_id',$user->id)
-            ->orderBy('cafes.id', 'desc')
-            ->Paginate(6);
-        //return($bookmarks);
-        return view('user.bookmarks')->with(['bookmarks'=>$bookmarks]);
+    $lists=DB::select("select DISTINCT m.to_user_id,m.fr_user_id,m.id,m.images,m.message from cafes c inner join users u on c.user_id = u.id inner join messages m on c.id=m.fr_user_id WHERE m.fr_user_id='".Auth::user()->id."' GROUP BY m.to_user_id");
+    return($lists);
+        return view('user.chatting')->with(['lists'=>$lists]);
     }
 
     /**
