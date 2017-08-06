@@ -210,7 +210,7 @@ class dummyOwnerCafe extends Seeder
         	[
         		'user_id'  	=> $user->id,
         		'album_id' 	=> $album->id,
-        		'filename' 	=> 'burger/the-menu_cafe.jpg',
+        		'filename' 	=> 'burger/the-menus.jpg',
         		'title'    	=> 'Daftar menu Rumah Burger',
         		'status'	=> 1
         	]

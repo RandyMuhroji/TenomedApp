@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->integer('rate')->nullable();
             $table->string('comment')->nullable();
-            $table->string('desc')->nullable();
+            $table->string('description')->nullable();
             $table->integer('status')->nullable();
             $table->boolean('isRead')->default(false);
 

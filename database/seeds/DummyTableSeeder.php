@@ -237,6 +237,48 @@ class DummyTableSeeder extends Seeder
                 'status'    => 1
             ]
         );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Free Wifi',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Private Room',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
 
         //cafe2
 
@@ -449,6 +491,60 @@ class DummyTableSeeder extends Seeder
                 'filename'  => 'APrahmat/12825945_1270302919663658_1350279316_n.jpg',
                 'title'     => 'View Ayam Penyet Rahmat',
                 'status'    => 1
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Free Wifi',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Private Room',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'No-Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Vine',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Bar',
             ]
         );
 
@@ -744,7 +840,72 @@ class DummyTableSeeder extends Seeder
                 'status'    => 1
             ]
         );
-
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Free Wifi',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Private Room',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'No-Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Meeting Room',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Meeting Proyektor',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Live Music',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Band Live on satuday Night',
+            ]
+        );
         //cafe4
 
         $user = User::create([
@@ -959,6 +1120,66 @@ class DummyTableSeeder extends Seeder
             ]
         );
 
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Hotspots Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Bar',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Vine',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Live Music',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Band Live on satuday Night',
+            ]
+        );
         //cafe5
 
         $user = User::create([
@@ -1170,6 +1391,54 @@ class DummyTableSeeder extends Seeder
                 'filename'  => 'APrahmat/12825945_1270302919663658_1350279316_n.jpg',
                 'title'     => 'View Ayam Penyet Rahmat',
                 'status'    => 1
+            ]
+        );
+        DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Hotspots Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Live Music',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Band Live on satuday Night',
             ]
         );
 
@@ -1389,6 +1658,66 @@ class DummyTableSeeder extends Seeder
                 'filename'  => 'burger/the-menus.jpg',
                 'title'     => 'View Cafe Rumah Burger',
                 'status'    => 1
+            ]
+        );
+        DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Hotspots Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Mushala',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Smoking Area',
+            ]
+        );
+          DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Full AC',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Parking',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Terrace',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Bar',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Vine',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Live Music',
+            ]
+        );
+         DB::table('highlights')->insert(
+            [
+                'cafe_id'   => $cafe->id,
+                'name'  => 'Band Live on satuday Night',
             ]
         );
 

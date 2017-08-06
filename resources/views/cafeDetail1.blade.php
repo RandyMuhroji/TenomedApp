@@ -122,11 +122,11 @@
                             
                         @else
                             <li class="active" >
-                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login</a>
+                                <a style="border: 1px solid white;padding: 10px 17px;margin-top: 10px;" data-toggle="modal" href="/login">Login</a>
 
                             </li>
                              <li class="active">
-                                <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Sign Up</a>
+                                <a data-toggle="modal" href="register">Sign Up</a>
 
                             </li>
                         @endif
@@ -242,11 +242,8 @@
                                         <div class="detail-follow">
                                             <h5>Follow Us:</h5>
                                             <div class="follow-wrapper">
-                                                <a class="follow-btn facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                                <a class="follow-btn youtube" href="#"><i class="fa fa-youtube"></i></a>
-                                                <a class="follow-btn twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                                <a class="follow-btn tripadvisor" href="#"><i class="fa fa-tripadvisor"></i></a>
-                                                <a class="follow-btn google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+                                                <a class="follow-btn facebook" href="{{$detail->facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                                                <a class="follow-btn twitter" href="{{$detail->twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
                                             </div><!-- /.follow-wrapper -->
                                         </div>
                                     </div>
@@ -519,7 +516,11 @@
                                             <div class="cards-small" style="background-color: gray;">
                                                 <div class="card-small">
                                                   <div class="user" style="float: left;">
-                                                         <img  src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" >   
+                                                         @if(Auth::user()->avatar=="")
+                                                            <img src="{{Auth::user()->getAvatarUrl()}}" alt="">
+                                                        @else
+                                                            <img src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="">        
+                                                        @endif
                                                   </div><!-- /.card-small-image -->
 
                                                   <div class="card-small-content">
@@ -584,14 +585,14 @@
                                                     &nbsp;&nbsp;&nbsp;
                                                      @if(Auth::check())
                                                         @if($reviews->user_id==Auth::user()->id)
-                                                       <!--  <span class="glyphicon glyphicon-edit" onclick="editReview('{{$reviews->id}}', {{$reviews->rate}}, '{{$reviews->desc}}','{{$reviews->name}}')" style="color: gray; cursor: pointer;"></span> -->
+                                                       <!--  <span class="glyphicon glyphicon-edit" onclick="editReview('{{$reviews->id}}', {{$reviews->rate}}, '{{$reviews->description}}','{{$reviews->name}}')" style="color: gray; cursor: pointer;"></span> -->
                                                         <span class="glyphicon glyphicon-trash" onclick="deleteReview({{$reviews->id}})" style="color: gray; cursor: pointer;"></span>
                                                         @endif
                                                     @endif
                                                 </div><!-- /.testimonial-rating -->
 
                                             </div>
-                                            <p>{{$reviews->desc}}</p>
+                                            <p>{{$reviews->description}}</p>
                                             @if(Auth::check())
                                                 <div class="testimonial-sign" >
                                                     <span id="reply" class="label label-primary" onclick="budi('{{$reviews->id}}')" style="cursor: pointer;">Reply</span> 
@@ -654,7 +655,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm-8">
                                                                                     <h3>{{$childs->name}}</h3>
-                                                                                    <div><p>{{$childs->desc}}</p></div>
+                                                                                    <div><p>{{$childs->description}}</p></div>
                                                                                 </div>
                                                                                 <div class="col-sm-4">
                                                                                     @if(Auth::check())
