@@ -441,7 +441,7 @@ div#loading2
             </div><!-- /.form-group -->
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required=""  readonly="">
+                <input class="form-control" type="date" name="book_tanggal" onchange="getHari(jQuery('#datepicker').val());" id="datepicker" placeholder="Date" required=""  >
                 <input type="hidden" id="hari" name="">
                 <input type="hidden" name="kafeSeat" id="kafeSeat" value="{{$detail->seat}}">
                
@@ -517,6 +517,7 @@ div#loading2
                                         <img src="{{ asset('') }}images/{{$menus->images}}" alt="" style="width:120%; border-radius: 6px; overflow: relative; margin-right: 7px; margin-top: 0; margin-left: -15px;margin-right: -15px;">
                                         <span>Rp.{{$menus->price}}</span>
                                         <input type="hidden" name="menu_id[]" value="{{$menus->id}}">
+                                        <input type="hidden" name="price[]" value="{{$menus->price}}">
                                         <div class="quantity" style="margin-bottom: 20px;">
                                           <input type="number" name="qty[]" min="0"  step="1" value="0">
                                         </div>
@@ -725,6 +726,9 @@ div#loading2
  $(document).ready(function(){
         hideLoading();
         //bootbox.alert("handoko");
+        $( function() {
+        $("#datepicker").datepicker({autclose: true});
+    });
       });
     function showLoading(){
         $("#loader-wrapper").fadeIn(100,0);    
@@ -800,9 +804,7 @@ div#loading2
 
     $('.datepairExample').datepair();
     var dateToday = new Date();
-    $( function() {
-        $("#datepicker").datepicker({autclose: true});
-    });
+    
     function getHari(hari) {
         var d = new Date(hari);
         var n = d.getDay()

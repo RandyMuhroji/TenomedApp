@@ -65,7 +65,7 @@ class booking extends Controller
         $book->bookingDate=$request->book_tanggal;
         $book->bookingTime=$request->book_jam;
         $book->cafe_id=$id;
-        $book->save();
+        $total=0;
         for ($x = 0; $x < sizeof($request->qty); $x++) {
             if($request->qty[$x]!=0){
                 $bookMenu= new bookMenu;
@@ -73,8 +73,11 @@ class booking extends Controller
                 $bookMenu->menu_cafe_id =$request->menu_id[$x];
                 $bookMenu->qunatity =$request->qty[$x];
                 $bookMenu->save();
+                $total+=$request->qty[$x]*$request->price[$x];
             }
         } 
+        $book->total=$total;
+        $book->save();
         return redirect('invoice/'.$book->id);
 
 

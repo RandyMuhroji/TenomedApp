@@ -22,6 +22,8 @@ class ReservationController extends Controller
 
          $cafes = DB::select('select c.* from users u inner join cafes c on u.id = c.user_id');
 
+         // return $reservations;
+
         //return $users;
         $params = [
             'title' => 'Reservation Listing',

@@ -38,12 +38,12 @@
                             @foreach ($reservations as $row)
                             <tr>
                                 @foreach($cafes as $c)
-                                    @if($row->cafe_id == c.cafe_id)
+                                    @if($row->cafe_id == $c->id)
                                     <td>{{$c->name}}</td>
                                     @endif
                                 @endforeach
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->date}}</td>
+                                <td>{{$row->bookingDate}} {{$row->bookingTime}}</td>
                                 <td>
                                     @if($row->status == 1)
                                         <button type="button" class="btn btn-primary btn-xs">Succes</button>
@@ -55,7 +55,6 @@
                                 </td>
                                 <td>Total</td>
                                 <td>
-                                    <a  data-toggle="modal" data-target="#show_menu" class="btn btn-info btn-xs" onclick="setModalValue('{{$row}}')"><i class="fa fa-eye" title="View"></i> </a>
                                     <a data-toggle="modal" data-target="#update_reservation" 
                                     class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
@@ -123,8 +122,4 @@
 
   </div>
 </div>
-@stop
-
-@section ('css')
-
 @stop

@@ -54,7 +54,7 @@ class cafes extends Controller
         }
         $Reviews = DB::table('users')
             ->join('reviews', 'users.id', '=', 'reviews.user_id')
-            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.desc', 'reviews.user_id')
+            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.updated_at', 'reviews.description', 'reviews.user_id')
             ->where('cafe_id', $id)
             ->where('parent_id','==', 0)
             ->orderBy('updated_at', 'asc')
@@ -62,7 +62,7 @@ class cafes extends Controller
 
             $child = DB::table('users')
             ->join('reviews', 'users.id', '=', 'reviews.user_id')
-            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.parent_id', 'reviews.updated_at', 'reviews.desc', 'reviews.user_id')
+            ->select('reviews.id','users.email','users.name','users.avatar', 'reviews.rate', 'reviews.parent_id', 'reviews.updated_at', 'reviews.description', 'reviews.user_id')
             ->where('cafe_id', $id)
             ->where('parent_id','<>', 0)
             ->orderBy('updated_at', 'desc')
@@ -184,7 +184,7 @@ class cafes extends Controller
                 $reviews->user_id=$request->idUser;
                 $reviews->cafe_id=$request->idCafe;
                 $reviews->rate=$request->rate;
-                $reviews->desc=$request->desc;
+                $reviews->description=$request->desc;
 
                 $reviews->parent_id=$request->parent;
                 $id=$request->idCafe;
@@ -194,7 +194,7 @@ class cafes extends Controller
                 ->where('user_id', $request->idUser)
                 ->where('cafe_id', $request->idCafe)
                 ->where('parent_id', '0')
-                ->update(['rate' => $request->rate,'desc'=>$request->desc]);
+                ->update(['rate' => $request->rate,'xmlrpc_parse_method_descriptions(xml)'=>$request->desc]);
                 $id=$request->idCafe;
             }
         
@@ -203,7 +203,7 @@ class cafes extends Controller
             $reviews->user_id=$request->idUser;
             $reviews->cafe_id=$request->idCafe;
             $reviews->rate=$request->rate;
-            $reviews->desc=$request->desc;
+            $reviews->description=$request->desc;
 
             $reviews->parent_id=$request->parent;
             $id=$request->idCafe;
