@@ -113,10 +113,21 @@ class cafes extends Controller
 
        // return $foto;
      $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
-     $kategori = DB::table('menu_cafe')->distinct()->get(['category']);
+     $kategori = DB::table('menu_cafe')->get();
      
 
         return view('cafeDetail1',array('jambuka'=>$jambuka))->with(['detail'=>$detail,'recent'=>$recent,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'test'=>$test,'cek'=>$cek]);
+    }
+    public function listChat()
+    {
+         $lists=DB::select("select * from messages where (fr_user_id='".Auth::user()->id."' and to_user_id='".request()->untuk."') or (fr_user_id='".request()->untuk."' and to_user_id='".Auth::user()->id."')");
+         //return($lists);
+        return view('user.listChat')->with(['lists'=>$lists,'img'=>request()->img]);
+        
+    }
+     public function pesan()
+    {
+        return("handoko");
     }
     public function message(Request $request)
     {
@@ -146,7 +157,12 @@ class cafes extends Controller
             $file->move('images', $string.'-'.$file->getClientOriginalName());
         }
         $Setting->save();
-        return redirect('detail/'.$request->kafe.'?id='.Auth::user()->id)->with(['status'=>'active']);
+        if(request()->status==0){
+            $lists=DB::select("select * from messages where (fr_user_id='".Auth::user()->id."' and to_user_id='".$request->untuk."') or (fr_user_id='".$request->untuk."' and to_user_id='".Auth::user()->id."')");
+             //return($lists);
+            return view('user.listChat')->with(['lists'=>$lists,'img'=>$request->img]);
+        }
+        //return redirect('detail/'.$request->kafe.'?id='.Auth::user()->id)->with(['status'=>'active']);
     }
     public function sendReview(Request $request)
     {

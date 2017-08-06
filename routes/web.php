@@ -79,6 +79,7 @@ Route::group(['prefix' => 'user','middleware' => 'auth','namespace' => 'user'],f
 
 //Auth::routes();
 //Authentication Routes...
+
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login');
 $this->post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -109,9 +110,11 @@ Route::get('/cafeList', 'cafes@lists');
 Route::post('/sendReview', 'cafes@sendReview');
 Route::post('/sendReport', 'cafes@sendReport');
 Route::post('/message', 'cafes@Message');
+Route::post('/pesan', 'cafes@pesan');
 Route::get('/cari', 'cafes@cari');
 Route::get('/cekPass', 'cafes@cekEmail');
 Route::get('/booking/{id}', 'booking@booking');
+Route::get('listChat', 'cafes@listChat');
 
 Route::post('/saveBooking/{id}', 'booking@saveBooking');
 Route::get('/invoice/{id}', 'booking@invoice');

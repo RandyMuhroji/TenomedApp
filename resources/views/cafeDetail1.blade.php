@@ -513,13 +513,17 @@
                         </div>
                         @if(Auth::check())
                             <h2>Send a massage</h2>
-                            <form class="form form-vertical" action="/message" method="POST" enctype="multipart/form-data">
+                            <form class="form form-vertical" action="/message" method="POST" id="dataku" enctype="multipart/form-data">
                                 <div class="detail-enquire-form background-white p20">
                                     <div class="row" style="margin:0; padding:0;">
                                             <div class="cards-small" style="background-color: gray;">
                                                 <div class="card-small">
                                                   <div class="user" style="float: left;">
-                                                         <img  src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" >   
+                                                    @if(Auth::user()->avatar!="")
+                                                         <img  src="{{ asset('') }}images/{{Auth::user()->avatar}}" alt="" >  
+                                                    @else
+                                                        <img  src="{{ asset('') }}images/user.png" alt="" >  
+                                                    @endif 
                                                   </div><!-- /.card-small-image -->
 
                                                   <div class="card-small-content">
@@ -708,6 +712,30 @@ hideLoading();
      if($("#status").val()==1){
         $('#bookmarks').addClass("marked");
      } 
+
+
+     $("#dataku").submit(function(e) {
+        e.preventDefault(); // prevent page refresh
+
+       $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var formdata = new FormData(this);  
+         $.ajax({
+          type: 'POST',
+          url: '/message?status=1',
+          data :formdata, 
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function( data ) {
+            bootbox.alert("Message has been send");
+            $("#dataku")[0].reset();
+          }
+         });
+    });
 
     var rootchatref = firebase.database().ref('/');  
     var chatref = firebase.database().ref('/'+$("#idUser").val()+'_'+$("#kafe").val()); 

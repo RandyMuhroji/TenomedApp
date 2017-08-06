@@ -235,18 +235,22 @@
             </div>
             
             <div class="member_list">
+
                <ul class="list-unstyled">
                 @if(count($lists))
                   @foreach($lists as $list)
-                  <li class="left clearfix">
+                  <li class="left clearfix" onclick="getChat('{{$list->to_user_id}}','{{$list->image}}','{{$list->name}}');">
+                  <span class="chat-img pull-left">
+                     <img src="{{ asset('') }}images/{{$list->image}}" alt="User Avatar" class="img-circle">
+                     </span>
                      <div class="chat-body clearfix">
+                       
                         <div class="header_sec">
-                           <strong class="primary-font">{{$list->to_user_id}}</strong> <strong class="pull-right">
-                           09:45AM</strong>
+                           <strong class="primary-font">{{$list->name}}</strong>
                         </div>
-                        <!-- <div class="contact_sec">
-                           <strong class="primary-font">(123) 123-456</strong> <span class="badge pull-right">3</span>
-                        </div> -->
+                        <div class="contact_sec">
+                           <strong class="primary-font">{{$list->phone}}</strong> <!-- <span class="badge pull-right">3</span> -->
+                        </div>
                      </div>
                   </li>
                   @endforeach
@@ -258,70 +262,39 @@
      
      
          <div class="col-sm-5 message_section">
-     <div class="row">
-     <div class="new_message_head">
-     
-     </div><!--new_message_head-->
-     
-     <div class="chat_area">
-     <ul class="list-unstyled">
-     <li class="left clearfix">
-                     <span class="chat-img1 pull-left">
-                     <img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
-                     </span>
-                     <div class="chat-body1 clearfix">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
-            <div class="chat_time pull-right">09:40PM</div>
-                     </div>
-                  </li>
-           <li class="left clearfix">
-                     <span class="chat-img1 pull-left">
-                     <img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
-                     </span>
-                     <div class="chat-body1 clearfix">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
-            <div class="chat_time pull-right">09:40PM</div>
-                     </div>
-                  </li>
-                     <li class="left clearfix">
-                     <span class="chat-img1 pull-left">
-                     <img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
-                     </span>
-                     <div class="chat-body1 clearfix">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
-              <div class="chat_time pull-right">09:40PM</div>
-                     </div>
-                  </li>
-          <li class="left clearfix admin_chat">
-                     <span class="chat-img1 pull-right">
-                     <img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
-                     </span>
-                     <div class="chat-body1 clearfix">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
-            <div class="chat_time pull-left">09:40PM</div>
-                     </div>
-                  </li>
-                  <li class="left clearfix admin_chat">
-                     <span class="chat-img1 pull-right">
-                     <img src="https://lh6.googleusercontent.com/-y-MY2satK-E/AAAAAAAAAAI/AAAAAAAAAJU/ER_hFddBheQ/photo.jpg" alt="User Avatar" class="img-circle">
-                     </span>
-                     <div class="chat-body1 clearfix">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia.</p>
-              <div class="chat_time pull-left">09:40PM</div>
-                     </div>
-                  </li>
-     
-     </ul>
-     </div><!--chat_area-->
-          <div class="message_write">
-       <textarea class="form-control" placeholder="type a message"></textarea>
-     <div class="clearfix"></div>
-     <div class="chat_bottom"><a href="#" class="pull-left upload_btn"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
- Add Files</a>
- <a href="#" class="pull-right btn btn-success">
- Send</a></div>
-     </div>
-     </div>
+           <div class="row">
+           <div class="new_message_head">
+             <div class="pull-left" id="judul"></div><div class="pull-right">
+               
+             </div>
+             </div><!--new_message_head-->
+           
+           <div class="chat_area" id="doggo">
+           <ul class="list-unstyled" id="loadData">
+           <!-- Isi list -->
+           </ul>
+           </div><!--chat_area-->
+                <div class="message_write">
+                <form id="dataku" name="dataku" action="/message" class="form form-vertical" method="POST" enctype="multipart/form-data">
+             <textarea class="form-control" placeholder="type a message" id="pesanChat" name="pesanChat"></textarea>
+             <input type="hidden" id="untuk" name="untuk">
+             <input type="hidden" id="img" name="img">
+             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <div class="clearfix"></div>
+           <div class="chat_bottom">
+           <div class="row">
+
+             <div class="col-sm-8"> <input type="file" name="images" id="images" style="padding:0;"></div>
+             
+             <div class="col-sm-4"><button class="pull-right btn btn-success" type="submit">
+             Sen</button></div>
+           </div>
+          </form>
+             
+             </div>
+             
+           </div>
+           </div>
          </div> <!--message_section-->
       </div>
    </div>
@@ -334,6 +307,78 @@
 
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
+
+
+function getChat(dt,img,judul){
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+   console.log(dt);
+   $.ajax({
+    type: 'GET',
+    url: '/listChat?untuk='+dt+'&img='+img,
+
+    data: {'idUser':'a', 'kafe':'b'},
+    success: function( data ) {
+      $('#judulku').remove();
+      $('#judul').append('<button id="judulku"><i class="fa fa-plus-square-o" aria-hidden="true"  ></i> '+judul+'</button>');
+      $('#loadData').html(data);
+        $('#untuk').val(dt);
+        $('#img').val(img);
+    }
+   });
+}
+// button send 
+// function kirimpesan(){
+//  //alert("handoko");
+//     console.log("ajax");
+
+
+//    $.ajaxSetup({
+//       headers: {
+//           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//       }
+//   });
+// //var data = new FormData($('#dataku')[0]);
+
+//   //console.log(data);
+//    $.ajax({
+//         url: '/pesan',
+//         type: "POST", 
+//         enctype: 'multipart/form-data',               
+//         data: $('#dataku').serialize(),
+//         contentType: false,       
+//         cache: false,             
+//         processData:false,
+//     success: function( data ) {
+//       console.log(data);
+//     }
+//    });
+
+
+  //  $.ajaxSetup({
+  //     headers: {
+  //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     }
+  // });
+  //  console.log("masuk");
+  //  alert($('#dataku').serialize());
+
+  //  $.ajax({
+  //   type: 'POST',
+  //   url: '/pesan',
+  //   data :$('#dataku').serialize(),
+  //   success: function( data ) {
+  //     alert(data);
+  //   }
+  //  });
+//}
+    
+// end button send
+
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDIRkl1cY2ICLQfdp5ohLziL3brKgJeLoo",
@@ -348,6 +393,31 @@
   var pesan= document.querySelector('#pesanChat');
 hideLoading(); 
   $(document).ready(function() {
+
+    $("#dataku").submit(function(e) {
+        e.preventDefault(); // prevent page refresh
+
+       $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var formdata = new FormData(this);  
+         $.ajax({
+          type: 'POST',
+          url: '/message?status=0',
+          data :formdata, 
+          contentType: false,
+          cache: false,
+          processData: false,
+          success: function( data ) {
+            $("#pesanChat").val("");
+            document.getElementById("images").value = "";
+            $('#loadData').html(data);
+          }
+         });
+    });
+
     hideLoading(); 
      if($("#status").val()==1){
         $('#bookmarks').addClass("marked");

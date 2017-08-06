@@ -20,8 +20,14 @@ class chattingController extends Controller
     public function index()
 
     {
-    $lists=DB::select("select DISTINCT m.to_user_id,m.fr_user_id,m.id,m.images,m.message from cafes c inner join users u on c.user_id = u.id inner join messages m on c.id=m.fr_user_id WHERE m.fr_user_id='".Auth::user()->id."' GROUP BY m.to_user_id");
-    return($lists);
+    $lists=DB::select("select to_user_id, c.name,c.image,c.phone from cafes c inner join (select count(to_user_id),to_user_id from messages m where fr_user_id = '".Auth::user()->id."' or to_user_id = '".Auth::user()->id."' group by to_user_id) m on c.user_id = m.to_user_id ");
+
+     // $lists=DB::table('cafes')
+     //            ->join('messages','cafes.id','=','messages.fr_user_id')
+     //            ->select('messages.to_user_id','messages.fr_user_id','messages.id','messages.images','messages.message')
+     //            ->where('messages.fr_user_id', Auth::user()->id)
+     //            ->distinct()->get(['messages.to_user_id']);
+    //return($lists);
         return view('user.chatting')->with(['lists'=>$lists]);
     }
 
@@ -34,6 +40,7 @@ class chattingController extends Controller
     {
         //
     }
+    
 
     /**
      * Store a newly created resource in storage.
