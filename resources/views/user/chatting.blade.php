@@ -207,7 +207,7 @@
 @section('menu')
 
      <li class=""><a  href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
-     <li class="active"><a  href="{{url('user/chatiing')}}"><i class="fa fa-user"></i> Chatting</a></li>
+     <li class="active"><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Chatting</a></li>
     <li ><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i> Booking Histories</a></li>
     <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
     <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
@@ -287,7 +287,7 @@
              <div class="col-sm-8"> <input type="file" name="images" id="images" style="padding:0;"></div>
              
              <div class="col-sm-4"><button class="pull-right btn btn-success" type="submit">
-             Sen</button></div>
+             Send</button></div>
            </div>
           </form>
              
@@ -380,17 +380,7 @@ function getChat(dt,img,judul){
 
 
   // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDIRkl1cY2ICLQfdp5ohLziL3brKgJeLoo",
-    authDomain: "tenomed-7b6aa.firebaseapp.com",
-    databaseURL: "https://tenomed-7b6aa.firebaseio.com",
-    projectId: "tenomed-7b6aa",
-    storageBucket: "tenomed-7b6aa.appspot.com",
-    messagingSenderId: "214458013786"
-  };
-  firebase.initializeApp(config);
 
-  var pesan= document.querySelector('#pesanChat');
 hideLoading(); 
   $(document).ready(function() {
 

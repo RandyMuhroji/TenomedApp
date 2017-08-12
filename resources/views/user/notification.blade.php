@@ -8,8 +8,9 @@
 
 
 @section('menu')
-     <li ><a href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
-    <li class="active"><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i>Booking Histories</a></li>
+    <li class=""><a  href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
+     <li ><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Chatting</a></li>
+    <li class="active"><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i> Booking Histories</a></li>
     <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
     <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
     <li ><a href="{{url('user/setting')}}"><i class="fa fa-pencil"></i> Setting</a></li>
@@ -121,7 +122,8 @@
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>
   <script>
  $(document).ready(function(){
-    hideLoading();
+  //alert("doko");
+   hideLoading();
   });
     function getProforma(data){
       $.ajaxSetup({
@@ -156,8 +158,7 @@
       //         success: function( data ) {
       //         }
       //        });
-
-window.location.href = "/user/InvoiceDownload/"+data;
+      window.location.href = "/user/InvoiceDownload/"+data;
     }
   </script>
 

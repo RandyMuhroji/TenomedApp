@@ -432,13 +432,12 @@
 
 <script src="{{ asset('') }}assets/js/superlist.js" type="text/javascript"></script>
 <script>
-showLoading();
+    showLoading();
      function showLoading(){
         $("#loader-wrapper").fadeIn(100,0);    
         $("#loader-wrapper").show();
         $("#loader-wrapper").css({visibility:"visible"});
         $("#loader-wrapper").css({display:"block"});
-       
 
         $("#loading-overlay").css({opacity:"0.6"});
         $("#loading-overlay").fadeIn(100,0);    
@@ -448,7 +447,6 @@ showLoading();
     };
     //hide loading bar
     function hideLoading(){
-          
 //        $("#loading2").hide("slow");
 //        $("#loading-overlay").hide("slow");
           $("#loader-wrapper").css({display:"none"});

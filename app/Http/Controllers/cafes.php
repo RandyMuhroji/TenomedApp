@@ -335,7 +335,7 @@ class cafes extends Controller
         //return($request->rate.','.$request->desc.','.$id);
         $data = Review::find($id);
         $data->rate=$request->rate;
-        $data->desc=$request->desc;
+        $data->description=$request->desc;
         $data->save();
         return redirect('user/review');
 

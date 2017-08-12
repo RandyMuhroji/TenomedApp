@@ -28,6 +28,7 @@ class reservationController extends Controller
             'users' => $users,
             'reservations' => $reservations
         ];
+        //return $params;
         return view('owner.reservations.reservation_list')->with($params);
     }
 

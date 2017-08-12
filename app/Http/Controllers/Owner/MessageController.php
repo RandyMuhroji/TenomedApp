@@ -4,6 +4,8 @@ namespace Tenomed\Http\Controllers\owner;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
+use DB;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -17,8 +19,11 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        return view('owner.messages.messages_list');
+        $lists=DB::select("select m.fr_user_id, c.name,c.avatar,c.phone from users c inner join (select count(fr_user_id),fr_user_id from messages m where to_user_id = '".Auth::user()->id."' group by fr_user_id) m on c.id = m.fr_user_id ");
+       //return $lists;
+        return view('owner.messages.messages_list')->with(['lists'=>$lists]);
         
     }
 
