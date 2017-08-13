@@ -21,9 +21,10 @@ class NotificationController extends Controller
         $user = Auth::user()->id;
         //return($user);
         $data= DB::table('reservations')
-                ->select('id','name','email','persons','status',DB::raw('CONCAT(bookingDate, " ", bookingTime) AS bookingDue') )
-                ->where('user_id',$user)
-                ->orderBy('bookingDate', 'desc')
+                ->leftjoin('payments', 'reservations.id','=','payments.reservation_id')
+                ->select('reservations.id','reservations.name','reservations.email','reservations.total','reservations.reserv_code','reservations.persons','reservations.status',DB::raw('CONCAT(reservations.bookingDate, " ", reservations.bookingTime) AS bookingDue'),'payments.id as p_id','payments.pengirim','payments.bank' )
+                ->where('reservations.user_id',$user)
+                ->orderBy('reservations.bookingDate', 'desc')
                 ->paginate(10);   
         //return($data);
 

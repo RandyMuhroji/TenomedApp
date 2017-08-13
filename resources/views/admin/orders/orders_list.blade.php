@@ -51,3 +51,10 @@
     </div>
 </div>
 @stop
+@section('js')
+<script>
+     $(document).ready(function() {
+      hideLoading();
+   });
+</script>
+@endsection

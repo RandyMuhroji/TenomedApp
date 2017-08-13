@@ -50,9 +50,8 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select id="category" name = "category" class="form-control" required>
                                     <option value="">Choose..</option>
-                                    <option value="Kategory 1">Kategory 1</option>
-                                    <option value="Kategory 2">Kategory 2</option>
-                                    <option value="Kategory 3">Kategory 3</option>
+                                    <option value="Makanan">Makanan</option>
+                                    <option value="Minumam">Minumam</option>
                                 </select>
                                 @if ($errors->has('category'))
                                 <span class="help-block">{{ $errors->first('category') }}</span>
@@ -74,8 +73,9 @@
                         <div class="form-group">
                         	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Tags</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-	                          	<input id="tags_1" type="text" class="tags form-control" value="social, adverts, sales" name="tags" data-name="add a tag'/>
-	                          	<div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+	                          	<input id="tags_1" type="text" class="tags form-control" value="breakfast, Bread" name="tags" data-name="add a tag">
+	                          	<div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;">
+                                </div>
 	                        </div>
                         </div>
 

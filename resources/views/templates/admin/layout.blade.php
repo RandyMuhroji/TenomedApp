@@ -25,14 +25,132 @@
   <link href="{{asset('gantella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('gantella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('gantella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+  
+    <script src="{{ asset('') }}assets/js/bootbox.min.js" type="text/javascript"></script>
   <!-- Custom Theme Style -->
   <link href="{{asset('gantella/build/css/custom.min.css')}}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{asset('gantella/build/css/me.css')}}">
 
   @yield('css')
+  <style type="text/css">
+    div#loading2
+        {
+            display: none;
+        /*    width:100px;*/
+            /*height: 100px;*/
+            position: fixed;
+            top: 43%;
+            left: 50%;
+            text-align:center;
+            opacity: 2%;
+            /*margin-left: -50px;*/
+            /*margin-top: -100px;*/
+            text-overflow: ellipsis;
+            z-index:1006;
+            font-size: 16px;
+
+        /*    background-color: orangered;*/
+
+        } 
+
+        #loading-overlay { 
+            background-color: #212121;
+            position:fixed;
+            width:100%;
+            height:100%;
+            top: 0px;
+            padding:70px;
+            z-index:1005;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+        }
+        
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1007;
+            display:none;
+        }
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+            -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #e74c3c;
+            -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #f9c922;
+            -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+              animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        @-webkit-keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+        @keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(0deg);  /* IE 9 */
+                transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+            100% {
+                -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+                -ms-transform: rotate(360deg);  /* IE 9 */
+                transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+  </style>
 </head>
 
 <body class="nav-md">
+<div id="loading-overlay" hidden></div>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col menu_fixed">
@@ -70,7 +188,7 @@
                       <li><a href="{{route('admin')}}"><i class="fa fa-home"></i> Dashboard </a></li>
                       <li><a href="/admin/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                       <li><a href="{{route('cafes.index')}}"><i class="fa fa-coffee"></i> Cafes </a></li>
-                      <li><a href="{{route('admin_reservation')}}"><i class="fa fa-coffee"></i> Reservation   </a></li>
+                      <li><a href="{{route('admin_reservation')}}"><i class="fa fa-coffee"></i> Confirmation Reservation</a></li>
                       <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> @lang('general.nav.users') </a></li>
                       <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
@@ -182,6 +300,27 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   ga('create', 'UA-23581568-13', 'auto');
   ga('send', 'pageview');
 
+  showLoading();
+     function showLoading(){
+        $("#loader-wrapper").fadeIn(100,0);    
+        $("#loader-wrapper").show();
+        $("#loader-wrapper").css({visibility:"visible"});
+        $("#loader-wrapper").css({display:"block"});
+
+        $("#loading-overlay").css({opacity:"0.6"});
+        $("#loading-overlay").fadeIn(100,0);    
+        $("#loading-overlay").css({visibility:"visible"});
+//        $("#loading-overlay").css({display:"block"});
+
+    };
+    //hide loading bar
+    function hideLoading(){
+//        $("#loading2").hide("slow");
+//        $("#loading-overlay").hide("slow");
+          $("#loader-wrapper").css({display:"none"});
+          $("#loading-overlay").fadeTo(0, 1000);
+          $("#loading-overlay").css({display:"none"});
+    };
   </script>
 @yield('js')
 </body>

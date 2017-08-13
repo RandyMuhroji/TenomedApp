@@ -147,10 +147,9 @@ class SettingsController extends Controller
              'password'  => $request->input('password'),
              'email' => $request->input('email')
             ];
-
-        Mail::send(['html' => 'mail.new_cafe'], $data, function($message){
-             $message->to($request->input('email'))->subject('Password Admin Login - TENOMED');
-             $message->from('tenomed@gmail01.com','Tenomed');
+        Mail::send(['html' => 'mail.new_cafe'], $data, function($message) use($user){
+             $message->to($user->email)->subject('Password Admin Login - TENOMED');
+             $message->from('tenomed01@gmail.com','Tenomed');
         });
 
         $role = Role::find(1);

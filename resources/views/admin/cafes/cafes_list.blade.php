@@ -76,7 +76,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Update Status Cafe</h4>
       </div>
-      <form action = '' method="post" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
+      <form method="post" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
             <div class="modal-body">
              <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
              <input type="hidden" name="_method" value="put">
@@ -123,14 +123,18 @@
 @stop
 
 @section('js')
-<script type="text/javascript">
-    var setUpdate = function(name,_id,_status,desc){
+<script>
+     function setUpdate(name,_id,_status,desc){
         console.log(_status);
         $('#update_name').val(name);
         $('#frmUpdate').attr('action', "/admin/cafes/"+_id);
         $("#status").val(_status);
         $("#desc").val(desc);
     }
+    $(document).ready(function() {
+
+      hideLoading();
+   });
 </script>
 
 @if ($errors->has('desc'))

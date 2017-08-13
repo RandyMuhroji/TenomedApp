@@ -708,7 +708,7 @@
 hideLoading(); 
   $(document).ready(function() {
     hideLoading(); 
-          bootbox.alert("Hello world!");
+          //bootbox.alert("Hello world!");
 
      if($("#status").val()==1){
         $('#bookmarks').addClass("marked");

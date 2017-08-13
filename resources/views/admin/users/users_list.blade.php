@@ -50,7 +50,7 @@
                                 @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
+                                    <a data-toggle="modal" data-target="#tampil_user" class="btn btn-info btn-xs" onclick="getProfile('{{$row->name}}','{{$row->bio}}','{{$row->address}}','{{$row->phone}}','{{$row->email}}');"><i class="fa fa-eye" title="View"></i> </a>
                                     <a data-toggle="modal" data-target="#edit_user" 
                                     class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
@@ -117,17 +117,90 @@
 
   </div>
 </div>
+<div id="tampil_user" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="font-size: ">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Detail Users</h4>
+      </div>
+      
+      <div class="modal-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="brief"><i><span id="fr_name" style="text-transform: capitalize;"></span></i></h4>
+          <div class="left col-xs-7">
+            <div class="row">
+              <div class="left col-xs-4">
+              <strong>About </strong>
+              </div>
+              <div class="left col-xs-8">
+              : <span id="fr_bio" style="text-transform: capitalize;"></span>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="left col-xs-4">
+              <strong><i class="fa fa-building"></i> Address </strong>
+              </div>
+              <div class="left col-xs-8">
+              : <span id="fr_address" style="text-transform: capitalize;"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="left col-xs-4">
+              <strong><i class="fa fa-phone"></i> Phone </strong>
+              </div>
+              <div class="left col-xs-8">
+              : <span id="fr_phone" style="text-transform: capitalize;"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="left col-xs-4">
+              <strong><i class="fa fa-envelope"></i> Email </strong>
+              </div>
+              <div class="left col-xs-8">
+              : <span id="fr_email" style="text-transform: capitalize;"></span>
+              </div>
+            </div>
+          </div>
+          <div class="right col-xs-5 text-center">
+            <img src="{{ asset('') }}images/user.png" alt="" class="img-circle img-responsive">
+          </div>
+        </div>
+      </div>
+             
+      </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 @stop
 
 @section('js')
   <script>
+   $(document).ready(function() {
+      hideLoading();
+   });
     var setUpdate = function(name,_id,_status,desc){
       console.log('sukses');
       $('#update_name').val(name);
       $('#frmUpdate').attr('action', "/admin/users/"+_id);
       $("#status").val(_status);
       $("#desc").val(desc);
+    }
+    function getProfile(name,bio,address,phone,email){
+      $('#fr_name').html(name);
+      $('#fr_bio').html(bio);
+      $('#fr_address').html(address);
+      $('#fr_phone').html(phone);
+      $('#fr_email').html(email);
     }
   </script>
 

@@ -227,6 +227,8 @@
 		}
 
 		$(document).ready(function() {
+
+      hideLoading();
 			$('#generatePassword').click(function(){
 					$pass = Math.random().toString(36).slice(-8);
 					$('#password').val($pass);

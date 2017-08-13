@@ -125,4 +125,9 @@
 
 @section('js')
    {{asset('tenomed/js/map_edit.js')}}
+   <script>
+        $(document).ready(function() {
+      hideLoading();
+   });
+   </script>
 @stop

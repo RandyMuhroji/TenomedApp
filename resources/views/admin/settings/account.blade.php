@@ -192,6 +192,11 @@
 @stop
 
 @section('js')
+<script>
+     $(document).ready(function() {
+      hideLoading();
+   });
+</script>
 
      @if (Session::has('errors') or Session::has('current_password'))
         <script type="text/javascript">

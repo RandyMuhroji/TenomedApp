@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin']
 
     Route::group(['prefix' => 'reservation'],function(){
         Route::get('/',"ReservationController@index")->name('admin_reservation');
+
+        Route::post('/confirmPayment',"ReservationController@confirmPayment");
     });
 
     Route::group(['prefix' => 'settings'], function(){
@@ -53,6 +55,8 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
 
     Route::resource('reviews',"ReviewController");
     Route::resource('reservations',"reservationController");
+
+    Route::get('/cekPayment/', 'reservationController@cekPayment');
     Route::resource('messages', 'MessageController');
     Route::group(['prefix' => 'settings'], function(){
         Route::get('/account',"SettingsController@account")->name('owner_account');
@@ -117,6 +121,8 @@ Route::get('/booking/{id}', 'booking@booking');
 Route::get('listChat', 'cafes@listChat');
 
 Route::post('/saveBooking/{id}', 'booking@saveBooking');
+
+Route::post('/savePayment', 'booking@savePayment');
 Route::get('/invoice/{id}', 'booking@invoice');
 
 Route::get('/slots/{id}', 'cafes@slots');

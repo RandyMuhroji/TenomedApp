@@ -151,4 +151,10 @@
 
 @section('js')
  <script src="{{asset('gantella/build/js/maps.js')}}"></script>
+ <script >
+ $(document).ready(function() {
+    hideLoading();
+ });
+     
+ </script>
 @stop

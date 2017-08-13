@@ -82,28 +82,23 @@ class CafesController extends Controller
 
         $kec = $arrAddress[2];
         $kel = $arrAddress[1];
-        $city = $arrAddress[3];
-        $province = $arrAddress[4];
-        $arrProv = explode(' ', $province);
 
-        $province = $arrProv[0];
-
-        $cafe = DB::table('cafes')->insert(
-            [
-                'user_id' => $user->id,
-                'name' => $request->input('name'),
-                'address' => $request->input('address'),
-                'kecamatan' => $kec,
-                'kelurahan' => $kel,
-                'phone' => $request->input('phone'),
-                'lat' => $request->input('lat'),
-                'long' => $request->input('lng')
-            ]
-        );
+        $cafe =  $book= new Cafe;
+    
+        $cafe->user_id = $user->id;
+        $cafe->name = $request->input('name');
+        $cafe->address = $request->input('address');
+        $cafe->kecamatan = $kec;
+        $cafe->kelurahan = $kel;
+        $cafe->phone = $request->input('phone');
+        $cafe->lat = $request->input('lat');
+        $cafe->long = $request->input('lng');
+        $cafe->save();
+       //return $cafe->id;
 
         DB::table('album_gallery')->insert(
             [
-                'cafe_id' => $cafe->id,
+                'user_id' => $user->id,
                 'name' => 'slider'
             ]
         );
@@ -115,9 +110,9 @@ class CafesController extends Controller
                  'email' => $request->input('email')
                 ];
         
-        Mail::send(['html' => 'mail.new_cafe'], $data, function($message){
-             $message->to($request->input('email'))->subject('Password Acount Cafe Login - TENOMED');
-             $message->from('tenomed@gmail01.com','Tenomed');
+        Mail::send(['html' => 'mail.new_cafe'], $data, function($message) use($user){
+             $message->to($user->email)->subject('Password Acount Cafe Login - TENOMED');
+             $message->from('tenomed01@gmail.com','Tenomed');
         });
 
         return redirect()->route('cafes.index')->with('success', trans('general.form.flash.created_cafe',['name'  => $request->input('name'),

@@ -15,8 +15,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Tenomed\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 use Auth;
+use File;
 
 class MenuController extends Controller
 {
@@ -153,7 +155,31 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // generate a pin based on 2 * 7 digits + a random character
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        // shuffle the result
+        $string = str_shuffle($pin);
+        $data = Menu::findOrFail($id);
+        $data->name= $request->dname;
+        $data->price=$request->dprice;
+        //$data->images=$request->
+        $data->tag=$request->tags;
+        $data->category=$request->dkategori;
+        $data->desc=$request->dabout;
+        
+        $file = Input::file('image');
+        if(Input::hasFile('image')){
+           $data->images=$string.'-'.$file->getClientOriginalName();
+           
+            $file->move('images', $string.'-'.$file->getClientOriginalName());
+        }
+        $data->save();
+        return redirect('manage-cafe/menus');
     }
 
     /**

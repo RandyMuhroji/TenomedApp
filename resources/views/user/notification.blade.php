@@ -77,6 +77,9 @@
 
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
+                                    @if($items->p_id=="" and $items->status=="0" )
+                                    <button class="btn btn-sm btn-warning" type="button" onclick="paymentConfirm('{{$items->id}}','{{$items->reserv_code}}','{{$items->total}}')">Confirm Payment</button>
+                                    @endif
                                     <!-- <button class="btn btn-sm btn-info" type="button" onclick="getProforma({{$items->id}})">Bukti Bayar</button> -->
                                     @if($items->status=='1')
                                       <button class="btn btn-sm btn-success" type="button" onclick="downloadPdf('{{ $items->id}}')">
@@ -91,6 +94,8 @@
                     </table>
                     <br>
                     <div class="col-sm-12">{{ $data->links() }}<br></div>
+                    
+
                     </div>
 
 
@@ -124,6 +129,8 @@
  $(document).ready(function(){
   //alert("doko");
    hideLoading();
+  
+
   });
     function getProforma(data){
       $.ajaxSetup({
@@ -143,6 +150,17 @@
               }
              });
     }
+    function paymentConfirm(id,code,data){
+      bootbox.alert({size:"medium",
+                  message:'<h1>Payment Confirmation</h1><p>Sudah ditransfer dana sebesar Rp.'+data+'</p>                    <form class="form form-vertical" action="/savePayment" name="formReport" id="formReport"  method="POST" enctype="multipart/form-data">                      <div class="row">                        <input type="hidden" name="reserv_code" value="'+code+'"><input type="hidden" name="reserv_id" value="'+id+'"><input type="hidden" name="_token" value="{{ csrf_token() }}">                        <div class="col-sm-12">                          <div class="form-group">                            <label for="email">Nama Pengirim<span class="kv-reqd">*</span></label>                            <input type="text" class="form-control" id="nm_pengirim" name="nm_pengirim" required>                          </div>                          <div class="form-group">                            <label for="email">Nama Bank Pengirim<span class="kv-reqd">*</span></label>                            <input type="text" class="form-control" id="nm_bank" name="nm_bank"  required>                          </div> <div class="form-group">                            <label for="email">Image Bukti transfer<span class="kv-reqd">*</span></label>                            <input type="file" name="image" id="image" required>                          </div>                <div class="form-group">                                        <hr>                                        <div class="text-center">                                           <button type="submit" class="btn btn-primary">Submit your payment</button>                                        </div>                                      </div>      </div>                      </div>                      </form>',
+                  buttons: {
+                    ok: {
+                      label: ' Close',
+                      className: 'btn-danger pull-right'
+                    }
+                  }
+     });
+    };
     function downloadPdf(data){
       // $.ajaxSetup({
       //         headers: {

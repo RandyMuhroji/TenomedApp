@@ -15,18 +15,18 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Cafe</th>
-                                <th>Reservation Name</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Total</th>
+                                <th width="150px">Reservation Name</th>
+                                <th width="120px">Reservation Code</th>
+                                <th width="120px">Date</th>
+                                <th width="80px">Status</th>
+                                <th width="80px">Total</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Cafe</th>
                                 <th>Reservation Name</th>
+                                <th>Reservation Code</th>
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th>Total</th>
@@ -37,12 +37,8 @@
                             @if(count($reservations))
                             @foreach ($reservations as $row)
                             <tr>
-                                @foreach($cafes as $c)
-                                    @if($row->cafe_id == $c->id)
-                                    <td>{{$c->name}}</td>
-                                    @endif
-                                @endforeach
                                 <td>{{$row->name}}</td>
+                                <td>{{$row->reserv_code}}</td>
                                 <td>{{$row->bookingDate}} {{$row->bookingTime}}</td>
                                 <td>
                                     @if($row->status == 1)
@@ -53,11 +49,11 @@
                                          <button  type="button" class="btn btn-warning btn-xs">Expired</button>
                                     @endif
                                 </td>
-                                <td>Total</td>
+                                <td>Rp.{{$row->total}}</td>
                                 <td>
+                                    <a data-toggle="modal" data-target="#edit_user" href="#" class="btn btn-info btn-xs" onclick="getDetail('{{$row->name}}','{{$row->pengirim}}','{{$row->bank}}','{{$row->image}}');"><i class="fa fa-eye" title="View"></i> </a>
                                     <a data-toggle="modal" data-target="#update_reservation" 
                                     class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
-                                    <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
                             @endforeach
@@ -79,10 +75,12 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Update Status Reservation</h4>
       </div>
-      <form action = '' method="post" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
+      <form action = '/admin/reservation/confirmPayment/' method="POST" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
             <div class="modal-body">
              <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-             <input type="hidden" name="_method" value="put">
+             <input type="hidden" name="_method" value="post">
+
+             <input type="hidden" id="id_booking" name="id_booking" value=""> 
              <div class="form-group{{''}}">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Name <span class="required">*</span>
               </label>
@@ -119,7 +117,79 @@
         </form>
       </div>
     </div>
+  </div>
+</div>
 
+<div id="edit_user" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bukti Pelunasan Tagihan</h4>
+      </div>
+      <form action = '' method="post" data-parsley-validate class="form-horizontal form-label-left" >
+            <div class="modal-body">
+             <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+             <input type="hidden" name="_method" value="put">
+             <div class="form-group{{''}}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Booking Name <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="lihat_name" disabled class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group{{''}}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Pengirim <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="lihat_pengirim" disabled class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group{{''}}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Kode Bank <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="lihat_bank" disabled class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group{{''}}">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="current_password">Bukti Bayar <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <img alt="img" id="lihat_img">
+              </div>
+            </div>
+          </div>
+
+      <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 @stop
+@section('js')
+<script>
+ $(document).ready(function() {
+      hideLoading();
+   });
+function setUpdate(name,_id,_status,desc){
+      console.log('sukses');
+      $('#update_name').val(name);
+      //$('#frmUpdate').attr('action', "/admin/reservation/confirmPayment/");
+      $("#status").val(_status);
+      $("#desc").val(desc);
+      $("#id_booking").val(_id);
+    }
+  function getDetail(name,an,bk,image){
+    $('#lihat_name').val(name);
+      $("#lihat_pengirim").val(an);
+      $("#lihat_bank").val(bk);
+      $('#lihat_img').attr('src', "{{ asset('') }}images/"+image);      
+      $('#lihat_img').attr('width', "270px;");
+  }
+</script>
+@endsection

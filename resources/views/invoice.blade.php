@@ -368,8 +368,9 @@ div#loading2
                 <div class="col-sm-6">
                     <h4>Payment Details</h4>
 
-                    <strong>Rekeneing :</strong> 10927836<br>
-                    <strong>Atas Nama :</strong> TENOMED BANK<br>
+                    <strong>Booking Code :</strong> {{$detail->reserv_code}}<br>
+                    <strong>Rekening    :</strong> 10927836<br>
+                    <strong>Bank/A.n.    :</strong> MAYBANK / TENOMED BANK<br>
                 </div>
             </div>
         </div><!-- /.invoice-info -->

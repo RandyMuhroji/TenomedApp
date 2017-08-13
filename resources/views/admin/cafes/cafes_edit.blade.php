@@ -134,6 +134,7 @@
 @section('js')
   <script type="text/javascript">
     $(document).ready(function(){
+      hideLoading();
        $("#generatePassword").click(function(){
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

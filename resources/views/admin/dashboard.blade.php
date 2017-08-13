@@ -6,4 +6,14 @@
 
 @section ('css')
 
-@stop('js')
+
+@stop
+
+@section('js')
+<script>
+	showLoading();
+	$(document).ready(function() {
+      hideLoading();
+  });
+</script>
+@endsection

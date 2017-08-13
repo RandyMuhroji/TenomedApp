@@ -5,7 +5,7 @@
 </head>
 <body>
 	<p>
-		Booking Name : {{$book->name}}
+		Booking Name : {{$apa->name}}
 	</p>
 </body>
 </html>

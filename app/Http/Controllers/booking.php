@@ -8,11 +8,13 @@ use Tenomed\Models\Review;
 use Tenomed\Models\Report;
 use Tenomed\Models\bookMenu;
 use Tenomed\Models\Reservation;
-
+use Tenomed\Models\Payment;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Input;
 use DB;
 use \PDF;
 use Auth;
+use Mail;
 
 class booking extends Controller
 {
@@ -43,6 +45,10 @@ class booking extends Controller
                 ->select('name')
                 ->where('cafe_id', $id)
                 ->get();
+
+
+
+
         return view('booking')->with(['detail'=>$detail,'jambuka'=> $jambuka,'recent'=>$recent,'highlight'=>$highlight, 'kategori'=>$kategori, 'menu'=>$menu, 'bookmarks'=>$bookmarks,'test'=>'']);
                 // return($menu);
     }
@@ -65,6 +71,7 @@ class booking extends Controller
         $book->bookingDate=$request->book_tanggal;
         $book->bookingTime=$request->book_jam;
         $book->cafe_id=$id;
+        $book->save();
         $total=0;
         for ($x = 0; $x < sizeof($request->qty); $x++) {
             if($request->qty[$x]!=0){
@@ -76,8 +83,14 @@ class booking extends Controller
                 $total+=$request->qty[$x]*$request->price[$x];
             }
         } 
-        $book->total=$total;
-        $book->save();
+        $apa=Reservation::find($book->id);
+        $apa->total=$total;
+        $apa->save();   
+        // Mail::send(['html' => 'mail.booking'], $apa, function($message) use($apa){
+        //      $message->to($apa->email, $apa->name)->subject('Booking Confirmation - TENOMED');
+        //      $message->from('tenomed01@gmail.com','Tenomed');
+        // });
+     
         return redirect('invoice/'.$book->id);
 
 
@@ -96,4 +109,26 @@ class booking extends Controller
                 ->get();
         return view('invoice')->with(['detail'=>$detail,'recent'=>$recent,'menu'=>$menu,'jambuka'=>$jambuka]);
      }
+     function savePayment(Request $request){
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        // shuffle the result
+        $string = str_shuffle($pin);
+        $book= new Payment;
+        $book->reservation_id=$request->reserv_id;
+        $book->reserv_code=$request->reserv_code;
+        $book->pengirim=$request->nm_pengirim;
+        $book->bank=$request->nm_bank;
+        $file = Input::file('image');
+        if(Input::hasFile('image')){
+            $book->image=$string.'-'.$file->getClientOriginalName();
+            $file->move('images', $string.'-'.$file->getClientOriginalName());
+        }
+        $book->save();
+        return redirect("user/bookingList");
+     }
+     
 }
