@@ -57,6 +57,7 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::resource('reservations',"reservationController");
 
     Route::get('/cekPayment/', 'reservationController@cekPayment');
+    Route::get('/reservvHist/', 'reservationController@reservvHist');
     Route::resource('messages', 'MessageController');
     Route::group(['prefix' => 'settings'], function(){
         Route::get('/account',"SettingsController@account")->name('owner_account');

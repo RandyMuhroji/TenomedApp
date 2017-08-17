@@ -16,6 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('reservation_id')->unsigned();
+            $table->string('reserv_code');
             $table->integer('status')->default(0);
             $table->string('pengirim');
             $table->string('bank');

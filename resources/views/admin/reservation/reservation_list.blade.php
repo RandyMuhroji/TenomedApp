@@ -41,9 +41,9 @@
                                 <td>{{$row->reserv_code}}</td>
                                 <td>{{$row->bookingDate}} {{$row->bookingTime}}</td>
                                 <td>
-                                    @if($row->status == 1)
-                                        <button type="button" class="btn btn-primary btn-xs">Succes</button>
-                                    @elseif($row->status == 0)
+                                    @if($row->pStatus == 1)
+                                        <button type="button" class="btn btn-success btn-xs">Succes</button>
+                                    @elseif($row->pStatus == 0)
                                         <button type="button" class="btn btn-primary btn-xs">Pending</button>
                                     @else
                                          <button  type="button" class="btn btn-warning btn-xs">Expired</button>
@@ -179,7 +179,7 @@
 function setUpdate(name,_id,_status,desc){
       console.log('sukses');
       $('#update_name').val(name);
-      //$('#frmUpdate').attr('action', "/admin/reservation/confirmPayment/");
+      $('#frmUpdate').attr('action', "/admin/reservation/confirmPayment/");
       $("#status").val(_status);
       $("#desc").val(desc);
       $("#id_booking").val(_id);

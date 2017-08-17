@@ -15,8 +15,10 @@ class reservationController extends Controller
      */
     public function index()
     {
-        $reservations = DB::select("select r.id ,r.name ,r.reserv_code ,r.bookingDate ,r.bookingTime ,r.status ,r.total ,c.name ,c.id cafe_id ,c.user_id from reservations r inner join cafes c on r.cafe_id=c.id where c.user_id='".Auth::user()->id."'");
-        //return $reservations;
+        $reservations = DB::select("select r.id ,r.name ,r.reserv_code ,r.bookingDate ,r.bookingTime ,r.status ,r.total ,c.name ,c.id cafe_id ,c.user_id from reservations r inner join cafes c on r.cafe_id=c.id where c.user_id='".Auth::user()->id."' and r.status!='3'");
+
+        //$aku=DB::select("select * from payments p inner join reservations r on r.reserv_code=p.reserv_code INNER JOIN cafes c on c.id=r.cafe_id  where p.reserv_code='KPZS6159717' and c.user_id='".Auth::user()->id."'");
+        //return $aku;
 
          $users = DB::select('select u.* from users u inner join cafes c on u.id = c.user_id');
 
@@ -101,11 +103,23 @@ class reservationController extends Controller
     }
     function cekPayment(){
         $a=($_GET['id']);
-        $cek = DB::select("select * from payments where reserv_code='".$a."'");
+        $cek = DB::select("select *,r.name Bname,p.status as pStatus from payments p inner join reservations r on r.reserv_code=p.reserv_code INNER JOIN cafes c on c.id=r.cafe_id   where p.reserv_code='".$a."' and c.user_id='".Auth::user()->id."'");
         if(count($cek)){
-            return("aada");
+            return($cek);
         }else{
             return("gadak");
+        }
+     }
+     function reservvHist(){
+        $a=($_GET['code']);
+        //return($code);
+        $cek = DB::select("select 1 from payments p inner join reservations r on r.reserv_code=p.reserv_code INNER JOIN cafes c on c.id=r.cafe_id  where p.reserv_code='".$a."' and c.user_id='".Auth::user()->id."'");
+         if(count($cek)){
+            DB::select("Update reservations  set status='3' WHERE reserv_code='".$a."'"); 
+           // DB::select("delete from payments WHERE reserv_code='".$a."'"); 
+            return redirect("/manage-cafe/reservations/")->with('success','Your booking has been confirm');
+        }else{
+            return redirect("/manage-cafe/reservations/")->with('error','Your booking failed confirm');;
         }
      }
 }

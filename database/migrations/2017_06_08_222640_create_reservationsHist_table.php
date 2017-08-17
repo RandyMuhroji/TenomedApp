@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReservationsTable extends Migration
+class CreateReservationsHistTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations',function(Blueprint $table){
+        Schema::create('reservationsHist',function(Blueprint $table){
             $table->increments('id');
             $table->string('reserv_code')->nullable();
             $table->integer('cafe_id')->unsigned();
@@ -42,6 +42,6 @@ class CreateReservationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('reservations');
+        Schema::drop('reservationsHist');
     }
 }

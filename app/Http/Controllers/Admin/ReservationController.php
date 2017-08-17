@@ -20,7 +20,7 @@ class ReservationController extends Controller
 
     public function index()
     {
-         $reservations = DB::select('select r.*,p.pengirim,p.bank,p.image from reservations r inner join payments p on r.id=p.reservation_id where r.status!="1"');
+         $reservations = DB::select('select r.*,p.pengirim,p.bank,p.image,p.status as pStatus from reservations r inner join payments p on r.id=p.reservation_id  where p.status!="1"');
 
          $users = DB::select('select u.* from users u inner join cafes c on u.id = c.user_id');
 
@@ -36,13 +36,9 @@ class ReservationController extends Controller
         return view('admin.reservation.reservation_list')->with($params);
     }
     public function confirmPayment(Request $request){
-        $apa=Reservation::find($request->id_booking);
-        $apa->status=$request->status;
-        $apa->save();
-        if($request->status=='1'){
-            DB::table('payments')->where('reservation_id', '=', $request->id_booking)->delete();
-        }
-        //return($apa);
+        DB::select('update reservations set status="'.$request->status.'" where id="'.$request->id_booking.'"');
+        DB::select('update payments set status="'.$request->status.'" where reservation_id="'.$request->id_booking.'"');
+        //return($request->id_booking);
         return redirect('admin/reservation');
     }
 }

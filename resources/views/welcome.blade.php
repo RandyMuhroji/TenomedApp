@@ -255,7 +255,7 @@
                 </div>
 
 <div class="container">
-    <div class="block background-white fullwidth pt0 pb0">
+    <!-- <div class="block background-white fullwidth pt0 pb0">
         <div class="partners">
 
         <a href="/cari?menu=coffe&location&kata=">
@@ -278,9 +278,8 @@
             <img src="{{ asset('') }}assets/img/luxurydinning.png" alt="">
             Drink
         </a>
-      </div><!-- /.partners -->
-
-    </div>
+      </div>
+    </div> -->
 
     <div class="page-header">
     <h1>A recommended  &amp; Cafe </h1>

@@ -113,7 +113,7 @@ class cafes extends Controller
 
        // return $foto;
      $menu= DB::table('menu_cafe')->where('cafe_id', $id)->get();
-     $kategori = DB::table('menu_cafe')->get();
+     $kategori = DB::table('menu_cafe')->where('cafe_id', $id)->distinct()->get(['category']);;
      
 
         return view('cafeDetail1',array('jambuka'=>$jambuka))->with(['detail'=>$detail,'recent'=>$recent,'highlight'=>$highlight,'foto'=>$foto,'menu'=>$menu,'kategori'=>$kategori, 'review'=>$Reviews,'status'=>'','child'=>$child, 'rates'=>$rates, 'test'=>$test,'cek'=>$cek]);

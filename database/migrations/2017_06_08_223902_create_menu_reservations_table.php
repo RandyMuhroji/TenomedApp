@@ -20,9 +20,6 @@ class CreateMenuReservationsTable extends Migration
             $table->integer('qunatity')->default(1);
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('reservations_id')->references('id')->on('reservations');
-            $table->foreign('menu_cafe_id')->references('id')->on('menu_cafe');
         });
     }
 
