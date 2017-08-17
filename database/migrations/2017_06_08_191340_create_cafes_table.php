@@ -24,6 +24,7 @@ class CreateCafesTable extends Migration
             $table->string('lat');
             $table->string('image')->nullable();
             $table->string('rating')->dafault(0);
+            $table->string('freezTime')->dafault(1);
             $table->string('phone')->nullable();
             $table->string('web')->nullable();
             $table->string('facebook')->nullable();

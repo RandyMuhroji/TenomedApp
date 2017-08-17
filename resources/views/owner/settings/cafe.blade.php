@@ -144,6 +144,23 @@
                   @endif
               </div>
             </div>
+            <div class ="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Freez Time
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <!-- <input type="number" id="seat" name="seat" class="form-control col-md-7 col-xs-12" required min='1' value="{{$cafe->seat}}"> -->
+                <select  name="freezTime" id="freezTime" class="form-control col-md-7 col-xs-12">
+                  <option value="29">30 Minit</option>
+                  <option value="59">1 Hour</option>
+                  <option value="89">1 Hour 30 Minit</option>
+                  <option value="119">32 Hour</option>
+                </select>
+                <span class="help-block">*Available Long booking stay</span>
+                  @if ($errors->has('freezeTime'))
+                <span class="help-block">{{ $errors->first('name') }}</span>
+                  @endif
+              </div>
+            </div>
 
             <div class ="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Highlights

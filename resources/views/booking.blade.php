@@ -382,7 +382,7 @@
             <div class="row">
               <div class="col-sm-8 col-lg-9">
                 <div class="content">
-                  <form method="post" action="/saveBooking/{{ $detail->id }}?id={{Auth::user()->id}}">
+                  <form method="post" id="frmBooking" action="/saveBooking/{{ $detail->id }}?id={{Auth::user()->id}}">
                     <div class="page-title">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <input type="hidden" value="{{ $detail->id }}" name="idKafe" id="idKafe">
@@ -407,8 +407,8 @@
 
                                 <input type="hidden" id="hari" name="">
                                 <input type="hidden" name="kafeSeat" id="kafeSeat" value="{{$detail->seat}}">
+                                <input type="hidden" name="freezTime" id="freezTime" value="{{$detail->freezTime}}">
                             </div>
-                             <span>hakdjfkah</span>
                           </div>
                           <div class="col-sm-6">
                             <div class="input-group">
@@ -416,16 +416,21 @@
                               <input class="form-control" name="book_email" id="book_email" type="text" placeholder="E-mail" required="">
                             </div><!-- /.form-group -->
                             <div class="row">
-                              <div class="col-sm-8">
+                              <div class="col-sm-9">
                                 <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                   <input class="form-control" type="number"  name="book_persons" id="book_persons" min="1"  step="1"   onchange="getSeat(jQuery('#book_persons').val());">
                                 </div>
                               </div>
-                              <div class="col-sm-4" style="height: 100%; padding: 10px;">
+                              <!-- <div class="col-sm-4" style="height: 100%; padding: 10px;">
                                 <span style="line-height: 100%; display: block; font-size: 14; font-weight: 400px;">Persons</span>
                                 <input  type="hidden" name="book_jam" id="book_jam" required="" >
-                              </div><!-- /.form-group -->
+                              </div> --><!-- /.form-group -->
+                              <input  type="hidden" name="book_jam" id="book_jam" required="" >
+                              <input  type="hidden" name="cekAja" id="cekAja" required="" >
+                              <div class="col-sm-3" style="">
+                                <span class="btn btn-sm btn-warning " style="">Check  </span>
+                              </div>
                             </div>
                             <!-- <div class="datepairExample">
                                 <div class="input-group">
@@ -438,9 +443,10 @@
                         <br>
                         <div id="bukaTime" style="display: none;">
                           <h5 class="page-title">Available Booking Time</h5>
-                           <div  id="jamKu" style="overflow-x: scroll; height: 70px; white-space: nowrap;">
+                           <div  id="jamKu" style="overflow-x: scroll; height: 70px; white-space: nowrap; text-align: center;">
                            
                            </div>
+
                         </div>
                       </div>
                       <div class="row">
@@ -489,12 +495,11 @@
                 <div class="widget">
                     <h2 class="widgettitle">Booking rule</h2>
                     <ul class="menu">
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
-                          <li class="yes" style="text-transform: capitalize;"><a href="#">khhbsdi;fbad;ib;oadfasfwe</a></li>
+                          <li class="yes" style="text-transform: capitalize;"><a href="#">Min 1 day before</a></li>
+                          <li class="yes" style="text-transform: capitalize;"><a href="#">Available Seat {{$detail->seat}}</a></li>
+                          <li class="yes" style="text-transform: capitalize;"><a href="#">Fill infomration Book form</a></li>
+                          <li class="yes" style="text-transform: capitalize;"><a href="#">pick available time </a></li>
+                          <li class="yes" style="text-transform: capitalize;"><a href="#">pick A Menu </a></li>
                     </ul><!-- /.menu -->
                   </div>
                   <div class="widget">
@@ -635,6 +640,48 @@
       $( function() {
         $("#datepicker").datepicker({autclose: true});
       });
+
+      $("#frmBooking").submit(function(){
+
+        var fields = $("input[name='qty[]']"); 
+        // alert("doko");
+        // return false;
+        var today = new Date();
+        //tomorrow.setDate(tomorrow.getDate() + 1);
+        var _doko= new Date($("#datepicker").val()+" "+$("#book_jam").val());
+
+        var diffMs = (_doko - today); // milliseconds between now & Christmas
+        var diffDays = Math.floor(diffMs / 86400000); // days
+        //var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
+        
+        //alert("jam : "+diffHrs);
+        if(diffDays<1){
+          bootbox.alert("Booking at least one day before");
+          return false;
+        }
+        if($("#book_jam").val()==""){
+          bootbox.alert("Please Pick your booking Time");
+          return false;
+        }
+        else if($("#qty").val()==""){
+          bootbox.alert("Please Pick your booking Time");
+          return false;
+        }
+        var _dqo=0;
+        // for(var i=0;i<fields.length;i++){
+        //   if($("input[name='qty["+i+"]']").val()!="0"){
+        //     _dqo++;
+        //   }
+        // }
+        //alert($("input[name='qty[0]']").val());
+        if(_dqo==0){
+           bootbox.alert("Please Pick your booking menu");
+           return false;
+        }
+        return false;
+        });
+
+
     });
     function showLoading(){
       $("#loader-wrapper").fadeIn(100,0);    
@@ -694,6 +741,8 @@
        //  }else{
        //    $("#bukaTime").text(" ");
        //  }
+       
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -723,29 +772,42 @@
                 var tmp2=doko["close_hour"].split(":");
                 tmp2=parseInt(tmp2[0]);
                 console.log(tmp,tmp2);
-                for(var i=tmp;i<=tmp2;i++){
+                //alert(($('#freezTime').val()));
+                for(var i=tmp;i<=tmp2;i=i+Number($('#freezTime').val())){
                   var x=i<10?'0'+i:i;
-                  var randy='<button onclick="getJam(\''+x+':00'+'\')" id="jam'+i+'" class="btn btn-sm btn-success tmbl" type="button" >'+x+':00'+'</button>';
+                  var randy;
+                  if (i % 1===0){
+                      randy='<button onclick="getJam(\''+x+':00'+'\','+'\'jam'+i+'\','+'\'jam'+i+'\');" id="jam'+i+'" class="btn btn-sm btn-success tmbl" type="button" >'+x+':00'+'</button>';
+                    }else{
+                       randy='<button onclick="getJam(\''+parseInt(x)+':30'+'\','+'\'jam'+parseInt(i)+'_30\','+'\'jam'+parseInt(i)+'_30\');" id="jam'+parseInt(i)+'_30" class="btn btn-sm btn-success tmbl" type="button" >'+parseInt(x)+':30'+'</button>';
+                    }
                    //console.log(randy);
                    $("#jamKu").append(randy);
                 }
 
              }else{
-                 bootbox.alert("<strong>ERR001</strong> - Booking not not availabe in this date");
-                 $('#datepicker').val(" ");
-
-                 
+                 //bootbox.alert("<strong>ERR001</strong> - Booking not not availabe in this date");
+                 $('#datepicker').val(" ");                 
              }
-
-
           }
       });
     };
-    function getJam(jam) {
+    function getJam(jam,det,_id) {
      // alert(jam);
+
+      
+      $("#"+$("#cekAja").val()).removeClass("btn-danger");
+      $("#"+det).addClass("btn-danger");
       $("#book_jam").val(jam);
+      $("#cekAja").val(_id);
      };
     function getSeat(seat) {
+ 
+        if(seat > parseInt($('#kafeSeat').val())){
+          bootbox.alert("Booking persons over capacity");
+          document.getElementById("bukaTime").style.display='none'; 
+          return false;
+        }
         $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -760,21 +822,33 @@
               success: function( data ) {
                 //alert("doko");
                // document.getElementById("bukaTime").style.display='inherit';
+               console.log(data);
                  var doko=data;
                  console.log("data doko",doko);
                  var i = 0;
                  var jam = [];
-                 //alert(doko.length);
+                 //
+                // alert(doko.length);
+                 if(seat > $('#kafeSeat').val()){
+                  bootbox.alert("Booking persons over capacity");
+                  document.getElementById("bukaTime").style.display='none'; 
+
+                 }else{
 
                 while (i < doko.length) {
                     var total = parseInt(doko[i]['persons']) + parseInt(seat);
+                    console.log("total: "+total);
 
                     var requestSeat = parseInt($('#kafeSeat').val());
                     // console.log("total " + total);
 
-                   console.log("jika"+doko[i]["persons"]);
+                   console.log("jika : "+doko[i]["persons"]);
                     var tmp = doko[i]["bookingTime"].split(":");
-                    tmp     = parseInt(tmp[0]);
+                    if(tmp[1]=="00"){
+                      tmp     = parseInt(tmp[0]);
+                    }else{
+                      tmp     = parseInt(tmp[0])+"_30";
+                    }
                     console.log(tmp);
                     if(total>requestSeat){
                         $('#jam'+tmp).hide();
@@ -784,8 +858,10 @@
                     }
                     i++;
                 }
+                document.getElementById("bukaTime").style.display='inherit'; 
+              }
                 
-                document.getElementById("bukaTime").style.display='inherit';                  
+                                 
               }
              });
     };

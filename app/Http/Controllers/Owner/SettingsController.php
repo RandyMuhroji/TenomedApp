@@ -160,6 +160,7 @@ class SettingsController extends Controller
                         'address' => $request->input('address'),
                         'kecamatan' => $kec,
                         'kelurahan' => $kel,
+                        'freezTime' => $request->input('freezTime'),
                         'phone' => $request->input('phone'),
                         'lat' => $request->input('lat'),
                         'long' => $request->input('lng'),
