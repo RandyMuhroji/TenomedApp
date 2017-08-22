@@ -24,6 +24,7 @@
                                 <th>Owner</th>
                                 <th>Address</th>
                                 <th>Status</th>
+                                <th>Report</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <th>Owner</th>
                                 <th>Address</th>
                                 <th>Status</th>
+                                <th>Report</th>
                                 <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
@@ -51,6 +53,10 @@
                                     @else
                                          <button  type="button" class="btn btn-warning btn-xs">Suspend</button>
                                     @endif
+                                </td>
+
+                                <td>
+                                  <a data-toggle="modal" data-target="#report_show" class="btn btn-danger btn-xs update"><i class="fa fa-angle-double-right" title="Edit" onclick=""></i> 13 Times</a>
                                 </td>
                                 <td>
                                     <a data-toggle="modal" data-target="#update_cafe" class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
@@ -112,6 +118,27 @@
 
       <div class="modal-footer">
             <button type="submit" class="btn btn-success">Save Change</button>
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="report_show" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Report Spam Detail's</h4>
+      </div>
+      <form method="post" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
+            
+
+      <div class="modal-footer">
           <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
         </form>
       </div>

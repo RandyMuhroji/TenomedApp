@@ -56,6 +56,8 @@ Route::group(['prefix' => 'manage-cafe','middleware' => 'auth','namespace' => 'O
     Route::resource('reviews',"ReviewController");
     Route::resource('reservations',"reservationController");
 
+    Route::get('/report', 'reservationController@report');
+    Route::get('/cekReport', 'reservationController@cekReport');
     Route::get('/cekPayment/', 'reservationController@cekPayment');
     Route::get('/reservvHist/', 'reservationController@reservvHist');
     Route::resource('messages', 'MessageController');

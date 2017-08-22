@@ -30,7 +30,7 @@ class ReviewController extends Controller
 
             $idCafe = $cafe[0]->id;
             
-            $reviews = DB::select('select r.id, r.comment, u.name, r.created_at from reviews r join users u on r.user_id = u.id where r.cafe_id = '. $idCafe);
+            $reviews = DB::select('select r.id, r.description, u.name, r.created_at,r.rate from reviews r join users u on r.user_id = u.id where r.parent_id=0 and  r.cafe_id = '. $idCafe);
 
            
             $params = [

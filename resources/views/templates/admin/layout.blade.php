@@ -267,6 +267,13 @@
   <script src="{{asset('gantella/vendors/fastclick/lib/fastclick.js')}}"></script>
   <!-- NProgress -->
   <script src="{{asset('gantella/vendors/nprogress/nprogress.js')}}"></script>
+
+  
+  <script src="{{asset('gantella/vendors/Chart.js/dist/Chart.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/gauge.js/dist/gauge.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/iCheck/icheck.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/skycons/skycons.js')}}"></script>
   <!-- jQuery custom content scroller -->
   <script src="{{asset('gantella/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script>
   <!-- iCheck -->
@@ -300,7 +307,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   ga('create', 'UA-23581568-13', 'auto');
   ga('send', 'pageview');
 
-  showLoading();
+ // showLoading();
      function showLoading(){
         $("#loader-wrapper").fadeIn(100,0);    
         $("#loader-wrapper").show();

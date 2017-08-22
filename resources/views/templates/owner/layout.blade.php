@@ -71,7 +71,8 @@
                 <ul class="nav side-menu">
                      <li><a href="{{route('owner')}}"><i class="fa fa-home"></i> @lang('general.nav.home') </a></li>
                     <li><a href="{{route('menus.index')}}"><i class="fa fa-cutlery"></i>Menu</a></li>
-                    <li><a href="{{route('reservations.index')}}"><i class="fa fa-book"></i>Reservation</a></li>
+                    <li><a href="{{route('reservations.index')}}"><i class="fa fa-book"></i>Monitoring Reservation</a></li>
+                    <li><a href="{{url('manage-cafe/report?reservation=all')}}"><i class="fa fa-book"></i>Report Reservation</a></li>
                     <li><a href="{{route('gallery.index')}}"><i class="fa fa-file-image-o"></i>Gallery</a></li>
                     <li><a href="{{route('messages.index')}}"><i class="fa fa-envelope"></i>Messages</a></li>
                     <li><a href="{{route('reviews.index')}}"><i class="fa fa-comments"></i>Reviews</a></li>
@@ -152,6 +153,16 @@
   <script src="{{asset('gantella/vendors/fastclick/lib/fastclick.js')}}"></script>
   <!-- NProgress -->
   <script src="{{asset('gantella/vendors/nprogress/nprogress.js')}}"></script>
+  <script src="{{asset('gantella/vendors/Chart.js/dist/Chart.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/gauge.js/dist/gauge.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/iCheck/icheck.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/skycons/skycons.js')}}"></script>
+
+
+
+
+
   <!-- jQuery custom content scroller -->
   <script src="{{asset('gantella/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script>
   <!-- iCheck -->
@@ -172,6 +183,9 @@
   <script src="{{asset('gantella/vendors/jszip/dist/jszip.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
   <script src="{{asset('gantella/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+
+  <script src="{{asset('gantella/vendors/moment/min/moment.min.js')}}"></script>
+  <script src="{{asset('gantella/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
 
   <!-- Custom Theme Scripts -->
   <script src="{{asset('gantella/build/js/custom.min.js')}}"></script>

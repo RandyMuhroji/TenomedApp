@@ -5,7 +5,7 @@
                @if($img!="")
              <img src="{{ asset('') }}images/{{$img}}" alt="User Avatar" class="img-circle">
              @else
-             <img src="{{ asset('') }}images/kafe.jpg" alt="User Avatar" class="img-circle">
+             <img src="{{ asset('') }}images/user.png" alt="User Avatar" class="img-circle">
              @endif
              </span>
              <div class="chat-body1 clearfix">

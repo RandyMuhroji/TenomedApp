@@ -194,7 +194,7 @@ class cafes extends Controller
                 ->where('user_id', $request->idUser)
                 ->where('cafe_id', $request->idCafe)
                 ->where('parent_id', '0')
-                ->update(['rate' => $request->rate,'xmlrpc_parse_method_descriptions(xml)'=>$request->desc]);
+                ->update(['rate' => $request->rate,'description'=>$request->desc]);
                 $id=$request->idCafe;
             }
         

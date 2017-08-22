@@ -17,7 +17,7 @@
                                 <th>Name</th>
                                 <th>Review</th>
                                 <th>Date</th>
-                                <th>@lang('users.action')</th>
+                                <th>Rate</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -25,7 +25,7 @@
                                 <th>Name</th>
                                 <th>Desc</th>
                                 <th>Date</th>
-                                <th>@lang('users.action')</th>
+                                <th>Rate</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -33,13 +33,9 @@
                             @foreach ($reviews as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->comment}}</td>
+                                <td>{{$row->description}}</td>
                                 <td>{{$row->created_at}}</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-xs" target="_blank"><i class="fa fa-eye" title="View"></i> </a>
-                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-reply" title="Reply"></i> </a>
-                                    <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
-                                </td>
+                                <td>{{$row->rate}}</td>
                             </tr>
                             @endforeach
                             @endif

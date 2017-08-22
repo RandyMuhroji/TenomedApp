@@ -35,7 +35,7 @@ class reservationController extends Controller
         //return $params;
         return view('owner.reservations.reservation_list')->with($params);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -110,6 +110,11 @@ class reservationController extends Controller
             return("gadak");
         }
      }
+     function cekReport(){
+        $a=($_GET['id']);
+        $cek = DB::select("select mc.*,mr.qunatity,mc.price*mr.qunatity total  from menu_reservations mr inner join menu_cafe mc on mr.menu_cafe_id=mc.id where mr.reservations_id='".$a."'");
+        return $cek;
+     }
      function reservvHist(){
         $a=($_GET['code']);
         //return($code);
@@ -122,4 +127,33 @@ class reservationController extends Controller
             return redirect("/manage-cafe/reservations/")->with('error','Your booking failed confirm');;
         }
      }
+     public function report()
+    {
+         if(request()->reservation=="all"){
+        //return(explode(" ",request()->reservation));
+            $reservations = DB::select("select r.id ,r.name ,r.reserv_code ,r.bookingDate ,r.bookingTime ,r.status ,r.total ,r.phone,r.email,r.persons,c.name ,c.id cafe_id ,c.user_id from reservations r inner join cafes c on r.cafe_id=c.id where c.user_id='".Auth::user()->id."' and r.status='3'");
+        }else{
+            $tgl=explode(" ",request()->reservation);
+            //return($tgl[0]." ".$tgl[2]);
+            $reservations = DB::select("select r.id ,r.name ,r.reserv_code ,r.bookingDate ,r.bookingTime ,r.status ,r.phone,r.total,r.email,r.persons ,c.name ,c.id cafe_id ,c.user_id from reservations r inner join cafes c on r.cafe_id=c.id where c.user_id='".Auth::user()->id."' and r.status='3' and (r.bookingDate>='$tgl[0]' and r.bookingDate<='$tgl[2]')");
+        }
+        //$aku=DB::select("select * from payments p inner join reservations r on r.reserv_code=p.reserv_code INNER JOIN cafes c on c.id=r.cafe_id  where p.reserv_code='KPZS6159717' and c.user_id='".Auth::user()->id."'");
+        //return $aku;
+
+         $users = DB::select('select u.* from users u inner join cafes c on u.id = c.user_id');
+
+         $cafes = DB::select('select c.* from users u inner join cafes c on u.id = c.user_id');
+
+        //return $users;
+
+        $params = [
+            'title' => 'Reservation Listing',
+            'cafes' => $cafes,
+            'users' => $users,
+            'reservations' => $reservations
+        ];
+        //return $params;
+        return view('owner.reservations.report')->with($params);
+    
+    }
 }
