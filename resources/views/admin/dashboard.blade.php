@@ -75,7 +75,7 @@
                   	@foreach($populer as $items)
                     <article class="media event">
                     	<div class="pull-left date">
-	                   		@if($items->name)
+	                   		@if($items->image!="")
 	                    		<img width="100%" src="{{ asset('') }}images/{{$items->image}}" alt="img">
 	                   		@else
 	                    		<img width="100p%" src="{{ asset('') }}images/kafe.jpg" alt="img">
@@ -83,7 +83,7 @@
                    		</div>
                       <div class="media-body">
                         <a class="title" href="#">{{$items->name}}</a>
-                        <p>{{$items->address}}</p>
+                        <p>{{$items->kecamatan}}</p>
                       </div>
                     </article>
                     @endforeach
@@ -105,90 +105,41 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                  
                   <div class="x_content">
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>1.5.2</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>123k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+                  <table class="" style="width:100%">
+                    <tbody>
+                    <tr>
+                      <th>
+                        <p>#</p>
+                      </th>
+                      <th style="width:37%;">
+                        <p>Name</p>
+                      </th>
+                      <th>
+                          <p class="">Address</p>
+                      </th>
+                      <th>
+                          <p class="">Total Transection</p>
+                      </th>
+                    @if(count($topTrans))
+                      @foreach($topTrans as $items1)
+                        <tr>
 
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>1.5.3</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>53k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>1.5.4</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>23k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>1.5.5</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>3k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>0.1.5.6</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>1k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
+                          <td style="padding: 5px;">
+                              <img width="40px" src="{{ asset('') }}images/{{$items1->image or 'kafe.png'}}" alt="img">
+                          </td>
+                          <td><p> {{$items1->name}} </p></td>
+                          <td>{{$items1->kecamatan}}</td>
+                          <td>{{$items1->total}} Times</td>
+                        </tr>
+                      @endforeach
+                    @endif
+                  </tbody></table>
+                </div>
 
-                  </div>
+
+
                 </div>
               </div>
 

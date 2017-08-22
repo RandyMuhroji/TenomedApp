@@ -4,6 +4,8 @@ namespace Tenomed\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use Tenomed\Http\Controllers\Controller;
+use DB;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -14,7 +16,9 @@ class MessageController extends Controller
 
     public function index()
     {
-        return view('admin.messages.messages_list');
+         $lists=DB::select("select m.fr_user_id, c.name,c.avatar,c.phone from users c inner join (select count(fr_user_id),fr_user_id from messages m where to_user_id = '0' group by fr_user_id) m on c.id = m.fr_user_id ");
+       //return $lists;
+        return view('admin.messages.messages_list')->with(['lists'=>$lists]);
     }
 
     /**

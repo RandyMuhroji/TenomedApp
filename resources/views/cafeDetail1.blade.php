@@ -442,6 +442,7 @@
                                     @permission(('user'))
                                     <div class="btn btn-primary btn-book" onclick="location.href='/booking/{{ $detail->id }}?id={{Auth::user()->id}}';"><i class="fa fa-shopping-cart"></i> Book Now</div>
                                     @endpermission
+                                    
                                     @else
                                          <div class="btn btn-primary btn-book" onclick="location.href='/login'"><i class="fa fa-shopping-cart"></i> Book Now</div>
                                     @endif

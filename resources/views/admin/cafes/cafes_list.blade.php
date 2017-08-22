@@ -56,10 +56,10 @@
                                 </td>
 
                                 <td>
-                                  <a data-toggle="modal" data-target="#report_show" class="btn btn-danger btn-xs update"><i class="fa fa-angle-double-right" title="Edit" onclick=""></i> 13 Times</a>
+                                  <a data-toggle="modal" data-target="#report_show" class="btn btn-danger btn-xs update" onclick="getReport('{{$row->id}}');"><i class="fa fa-angle-double-right" title="Edit" ></i> {{$row->jlhReport}} Times</a>
                                 </td>
                                 <td>
-                                    <a data-toggle="modal" data-target="#update_cafe" class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->desc}}')"></i> </a>
+                                    <a data-toggle="modal" data-target="#update_cafe" class="btn btn-warning btn-xs update"><i class="fa fa-pencil" title="Edit" onclick="setUpdate('{{$row->name}}','{{$row->id}}','{{$row->status}}','{{$row->rDesc}}')"></i> </a>
                                     <a href="{{ route('cafes.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
@@ -137,7 +137,35 @@
       </div>
       <form method="post" data-parsley-validate class="form-horizontal form-label-left" id = "frmUpdate">
             
+        <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Report List</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>User Name</th>
+                          <th>Report Description</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody id="reportList23">
+                        
+                      </tbody>
+                    </table>
 
+                  </div>
+                </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
         </form>
@@ -157,6 +185,25 @@
         $('#frmUpdate').attr('action', "/admin/cafes/"+_id);
         $("#status").val(_status);
         $("#desc").val(desc);
+    }
+    function getReport(id){
+      $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+      });
+      console.log('masuk');
+      //alert('/reportList?id='+id);
+       $.ajax({
+        type: 'GET',
+        url: 'admin/reportList?id='+id,
+
+        data: {'idUser':'a', 'kafe':'b'},
+        success: function( data ) {
+          //alert(data);
+          $('#reportList23').html(data);
+        }
+       });
     }
     $(document).ready(function() {
 

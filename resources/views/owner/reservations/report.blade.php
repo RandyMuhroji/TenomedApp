@@ -172,7 +172,7 @@
 
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Hover rows <small>Try hovering over the rows</small></h2>
+                    <h2>Detail Reservation Menu</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

@@ -135,7 +135,7 @@
       <!-- /page content -->
 
      <!-- footer content -->
-      <footer>
+      <footer style="margin-left: 0px;">
           <div class="pull-right">
               Tenomed 2017 - Manage Cafe
           </div>

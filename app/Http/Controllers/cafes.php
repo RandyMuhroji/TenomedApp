@@ -125,6 +125,13 @@ class cafes extends Controller
         return view('user.listChat')->with(['lists'=>$lists,'img'=>request()->img]);
         
     }
+    public function listChatAdmin()
+    {
+         $lists=DB::select("select * from messages where (fr_user_id='0' and to_user_id='".request()->untuk."') or (fr_user_id='".request()->untuk."' and to_user_id='0')");
+         //return($lists);
+        return view('user.listChat')->with(['lists'=>$lists,'img'=>request()->img]);
+        
+    }
      public function pesan()
     {
         return("handoko");

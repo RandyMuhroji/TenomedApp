@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin']
     Route::get('/',"DashboardController@index")->name('admin');
     Route::resource('users', 'UsersController');
     Route::resource('cafes', 'CafesController');
+    Route::get('admin/reportList', 'CafesController@reportList');
     Route::resource('messages', 'MessageController');
 
     Route::group(['prefix' => 'reservation'],function(){
@@ -122,6 +123,8 @@ Route::get('/cari', 'cafes@cari');
 Route::get('/cekPass', 'cafes@cekEmail');
 Route::get('/booking/{id}', 'booking@booking');
 Route::get('listChat', 'cafes@listChat');
+
+Route::get('listChatAdmin', 'cafes@listChatAdmin');
 
 Route::post('/saveBooking/{id}', 'booking@saveBooking');
 

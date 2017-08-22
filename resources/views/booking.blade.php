@@ -469,7 +469,7 @@
                                                 <input type="hidden" name="menu_id[]" value="{{$menus->id}}">
                                                 <input type="hidden" name="price[]" value="{{$menus->price}}">
                                                 <div class="quantity" style="margin-bottom: 20px;">
-                                                  <input type="number" name="qty[]" min="0"  step="1" value="0">
+                                                  <input type="number" id="qty" name="qty[]" min="0"  step="1" value="0">
                                                 </div>
                                             </div><!-- /.statusbox-content -->                                    
                                           </div><!-- /.statusbox -->
@@ -656,29 +656,27 @@
         
         //alert("jam : "+diffHrs);
         if(diffDays<1){
-          bootbox.alert("Booking at least one day before");
+          bootbox.alert("ER001-Pemesanan wajib satu hari sebelumnya");
           return false;
         }
         if($("#book_jam").val()==""){
-          bootbox.alert("Please Pick your booking Time");
+          bootbox.alert("ER002-Wajib memilih waktu booking");
           return false;
         }
-        else if($("#qty").val()==""){
-          bootbox.alert("Please Pick your booking Time");
+        var element = document.getElementsByName("qty[]");
+        console.log(element[0].value);
+        var total=0;
+        for (var i=0;i<element.length;i++){
+          total=total+parseInt(element[i].value);
+        }
+        if(total==0){
+          bootbox.alert("ER004-Menu reservasi wajib diisi");
           return false;
         }
-        var _dqo=0;
-        // for(var i=0;i<fields.length;i++){
-        //   if($("input[name='qty["+i+"]']").val()!="0"){
-        //     _dqo++;
-        //   }
-        // }
-        //alert($("input[name='qty[0]']").val());
-        if(_dqo==0){
-           bootbox.alert("Please Pick your booking menu");
-           return false;
+        if(total<parseInt($('#book_persons').val())){
+          bootbox.alert("ER005-Satu orang wajib memesan 1 menu");
+          return false;
         }
-        return false;
         });
 
 

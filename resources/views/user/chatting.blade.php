@@ -236,7 +236,21 @@
             
             <div class="member_list">
 
-               <ul class="list-unstyled">
+              <ul class="list-unstyled col-md-12" style="padding: 0;">
+               <li class="left clearfix col-md-12" style="display: block;" onclick="getChat('0','admin.png','TENOMED-Admin');">
+                  <span class="chat-img pull-left">
+                     <img src="{{ asset('') }}images/admin.png" alt="img" class="img-circle">
+                     </span>
+                     <div class="chat-body clearfix">
+                       
+                        <div class="header_sec">
+                           <strong class="primary-font">TENOMED-Admin</strong>
+                        </div>
+                        <div class="contact_sec">
+                           <strong class="primary-font"></strong> 
+                        </div>
+                     </div>
+                  </li>
                 @if(count($lists))
                   @foreach($lists as $list)
                   <li class="left clearfix" onclick="getChat('{{$list->to_user_id}}','{{$list->image}}','{{$list->name}}');">
@@ -255,6 +269,7 @@
                   </li>
                   @endforeach
                 @endif
+                </ul>
             </div>
           </div>
          </div>

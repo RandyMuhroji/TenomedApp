@@ -30,7 +30,7 @@ class CafesController extends Controller
 
     public function index()
     {
-        $cafes = DB::select('select c.id, c.name as name, u.name as owner, c.address, c.status, u.desc  from cafes c inner join users u on c.user_id = u.id');
+        $cafes = DB::select('select x.* ,COUNT(r.id) jlhReport from (select c.id, c.name as name, u.name as owner, c.address, c.status, u.desc as rDesc from cafes c inner join users u on c.user_id = u.id) x LEFT JOIN report r on x.id=r.cafe_id GROUP BY x.id,x.name, x.owner, x.address, x.status,x.rDesc');
 
         $params = [
             'title' => 'Cafes Listing',
@@ -38,6 +38,7 @@ class CafesController extends Controller
         ];
         return view('admin.cafes.cafes_list')->with($params);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -237,5 +238,11 @@ class CafesController extends Controller
                 return response()->view('errors.'.'404');
             }
         }
+    }
+    function reportList(){
+        $id=request()->id;
+        $cek=DB::select('select COUNT(r.desc) total,r.desc,s.name,s.avatar from report r inner join users s on r.user_id=s.id    where r.cafe_id='.$id.' GROUP BY r.desc,s.name,s.avatar');
+
+        return view('admin.cafes.reportList')->with(['cek'=>$cek]);
     }
 }
