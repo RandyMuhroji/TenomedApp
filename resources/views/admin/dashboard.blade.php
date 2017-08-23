@@ -96,7 +96,7 @@
               <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="x_panel fixed_height_320">
                   <div class="x_title">
-                    <h2>Top Transaction</h2>
+                    <h2>TENOMED-Top Transaction</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>

@@ -249,6 +249,7 @@ div#loading2
 
                                     <ul class="sub-menu">
                                         <li><a href="{{url('user/profile')}}">Profile</a></li>
+                                        <li><a href="{{url('user/chatting')}}">Message</a></li>
                                         <li><a href="{{url('user/bookingList')}}">Booking Histories</a></li>
                                         <li><a href="{{url('user/bookmarks')}}">Bookmarks</a></li>
                                         <li><a href="{{url('user/review')}}">Review</a></li>

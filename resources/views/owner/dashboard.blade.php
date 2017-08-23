@@ -111,7 +111,7 @@
                 </div>
               </div>
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
                   <h2>Popular Food's</h2>
@@ -181,10 +181,10 @@
                   </tbody></table>
                 </div>
               </div>
-            </div>
+            </div> -->
 
 
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320 overflow_hidden">
                 <div class="x_title">
                   <h2>Popular Drink's</h2>
@@ -254,7 +254,56 @@
                   </tbody></table>
                 </div>
               </div>
-            </div>
+            </div> -->
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="x_panel fixed_height_320">
+                  <div class="x_title">
+                    <h2>TENOMED-Top Transaction</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  
+                  <div class="x_content">
+                  <table class="" style="width:100%">
+                    <tbody>
+                    <tr>
+                      <th>
+                        <p>#</p>
+                      </th>
+                      <th style="width:37%;">
+                        <p>Name</p>
+                      </th>
+                      <th>
+                          <p class="">Address</p>
+                      </th>
+                      <th>
+                          <p class="">Total Transection</p>
+                      </th>
+                    @if(count($topTrans))
+                      @foreach($topTrans as $items1)
+                        <tr>
+
+                          <td style="padding: 5px;">
+                              <img width="40px" src="{{ asset('') }}images/{{$items1->image or 'kafe.png'}}" alt="img">
+                          </td>
+                          <td><p> {{$items1->name}} </p></td>
+                          <td>{{$items1->kecamatan}}</td>
+                          <td>{{$items1->total}} Times</td>
+                        </tr>
+                      @endforeach
+                    @endif
+                  </tbody></table>
+                </div>
+
+
+
+                </div>
+              </div>
 
           </div>
 

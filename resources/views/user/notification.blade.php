@@ -9,7 +9,7 @@
 
 @section('menu')
     <li class=""><a  href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
-     <li ><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Chatting</a></li>
+     <li ><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Message</a></li>
     <li class="active"><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i> Booking Histories</a></li>
     <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
     <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
@@ -77,7 +77,7 @@
 
                                 <td>
                                     <button class="btn btn-sm btn-primary" type="button" onclick="getProforma({{$items->id}})">Proforma</button>
-                                    @if($items->p_id=="" and $items->status=="0" )
+                                    @if($items->status=="0" )
                                     <button class="btn btn-sm btn-warning" type="button" onclick="paymentConfirm('{{$items->id}}','{{$items->reserv_code}}','{{$items->total}}')">Confirm Payment</button>
                                     @endif
                                     <!-- <button class="btn btn-sm btn-info" type="button" onclick="getProforma({{$items->id}})">Bukti Bayar</button> -->

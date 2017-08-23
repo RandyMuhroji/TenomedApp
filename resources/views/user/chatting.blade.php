@@ -207,7 +207,7 @@
 @section('menu')
 
      <li class=""><a  href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
-     <li class="active"><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Chatting</a></li>
+     <li class="active"><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Message</a></li>
     <li ><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i> Booking Histories</a></li>
     <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
     <li ><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
@@ -220,7 +220,7 @@
     <div class="col-sm-8 col-lg-9">
         <div class="content">
             <div class="page-title">
-              <h1> Chatting List</h1>
+              <h1> Message List</h1>
             </div><!-- /.page-title -->
             <div class="background-white p20 mb30" >
               <div class="main_section">

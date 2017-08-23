@@ -10,7 +10,7 @@
 
 
      <li class=""><a  href="{{url('user/profile')}}"><i class="fa fa-user"></i> Profile</a></li>
-     <li ><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Chatting</a></li>
+     <li ><a  href="{{url('user/chatting')}}"><i class="fa fa-user"></i> Message</a></li>
     <li ><a href="{{url('user/bookingList')}}"><i class="fa fa-envelope-o"></i> Booking Histories</a></li>
     <li ><a href="{{url('user/bookmarks')}}"><i class="fa fa-bars"></i> Bookmarks</a></li>
     <li class="active"><a href="{{url('user/review')}}"><i class="fa fa-bars"></i> Review</a></li>
